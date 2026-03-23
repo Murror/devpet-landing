@@ -13,7 +13,7 @@ export default function FinalCTA() {
           <div className="text-5xl mb-4">😺</div>
           <h2 className="text-3xl md:text-[42px] font-black tracking-[-1.5px] mb-4">
             {t.finalCTA.title}{' '}
-            <em className="text-mint not-italic">{t.finalCTA.titleAccent}</em>
+            <em className="text-mint italic">{t.finalCTA.titleAccent}</em>
             {t.finalCTA.titleEnd}
           </h2>
           <p className="text-base text-muted leading-relaxed mb-8">{t.finalCTA.subtitle}</p>
