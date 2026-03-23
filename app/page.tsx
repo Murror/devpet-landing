@@ -1,10 +1,11 @@
 import Nav from '@/components/Nav'
+import Hero from '@/components/Hero'
 
 export default function Home() {
   return (
     <main>
       <Nav />
-      <p className="p-8 text-muted">DevPet landing — coming soon</p>
+      <Hero />
     </main>
   )
 }
