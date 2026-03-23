@@ -1,104 +1,104 @@
 {
   "nav": {
-    "features": "[VI] Features",
-    "howItWorks": "[VI] How it works",
-    "pricing": "[VI] Pricing",
-    "joinWaitlist": "[VI] Join waitlist",
+    "features": "Tính năng",
+    "howItWorks": "Cách hoạt động",
+    "pricing": "Bảng giá",
+    "joinWaitlist": "Trải nghiệm sớm",
     "langEN": "EN",
     "langVI": "VI"
   },
   "hero": {
-    "badge": "[VI] Now accepting early access",
-    "title": "[VI] Level up your",
-    "titleAccent": "[VI] vibe coding",
-    "subtitle": "[VI] DevPet watches your sessions, coaches you through mistakes, and grows alongside you — from first prompt to seasoned builder.",
-    "trustMeta": "🔒 No spam · macOS · Free beta · 2,400+ waiting"
+    "badge": "Early access giới hạn — đang đầy dần",
+    "title": "Vibe coder giỏi nhất đều biết",
+    "titleAccent": "điểm yếu của mình",
+    "subtitle": "Bạn code với AI mỗi ngày. Nhưng bạn có biết prompt nào đang lãng phí thời gian, chỗ nào bạn bị lặp lỗi, hay bạn đang tiến bộ nhanh cỡ nào không? DevPet biết.",
+    "trustMeta": "Beta miễn phí · macOS · Không cần thẻ · Dev khắp nơi tin dùng"
   },
   "form": {
-    "placeholder": "[VI] your@email.com",
-    "submit": "[VI] Join waitlist →",
-    "loading": "[VI] Joining...",
-    "success": "✅ [VI] You're on the list! We'll email you when DevPet launches.",
-    "errorDuplicate": "😺 [VI] You're already on the list! We'll be in touch.",
-    "errorValidation": "[VI] Please enter a valid email address.",
-    "errorServer": "[VI] Something went wrong. Please try again."
+    "placeholder": "email@cuaban.com",
+    "submit": "Trải nghiệm sớm →",
+    "loading": "Đang đăng ký...",
+    "success": "Bạn đã vào! Check inbox — chúng tôi sẽ báo trước khi ra mắt công khai.",
+    "errorDuplicate": "Bạn đã trong danh sách rồi — sẽ liên hệ sớm.",
+    "errorValidation": "Vui lòng nhập địa chỉ email hợp lệ.",
+    "errorServer": "Đã xảy ra lỗi. Vui lòng thử lại."
   },
   "howItWorks": {
-    "eyebrow": "[VI] How it works",
-    "title": "[VI] Your session, understood.",
-    "subtitle": "[VI] DevPet runs quietly in the background, turning your coding workflow into meaningful growth.",
+    "eyebrow": "Cách hoạt động",
+    "title": "Không cần cài đặt. Hiểu ngay lập tức.",
+    "subtitle": "Hầu hết dev không biết mình thực sự code với AI như thế nào. DevPet thay đổi điều đó trong 30 giây.",
     "steps": [
       {
         "num": "01",
-        "icon": "🔍",
-        "title": "[VI] DevPet detects your session",
-        "desc": "[VI] Open Cursor, VS Code, or Claude Code — DevPet automatically starts tracking. No setup needed."
+        "icon": "scan-search",
+        "title": "Mở editor. Xong.",
+        "desc": "Cursor, VS Code, Claude Code — DevPet tự phát hiện phiên code. Không config, không plugin, không rào cản."
       },
       {
         "num": "02",
-        "icon": "📖",
-        "title": "[VI] Your pet tells the story",
-        "desc": "[VI] Every prompt, error, and win gets narrated in plain language. Your session becomes a story, not a log."
+        "icon": "book-open",
+        "title": "Thấy những gì bạn không thể tự thấy",
+        "desc": "Pattern prompt, vòng lặp lỗi, thời gian lãng phí — DevPet biến thói quen vô hình thành câu chuyện rõ ràng để bạn học từ đó."
       },
       {
         "num": "03",
-        "icon": "🌱",
-        "title": "[VI] You level up over time",
-        "desc": "[VI] Skills unlock, XP accumulates, and weekly insights show exactly how your vibe coding is improving."
+        "icon": "sprout",
+        "title": "Nhìn bản thân tiến bộ từng ngày",
+        "desc": "Báo cáo kỹ năng hàng tuần cho thấy chính xác bạn giỏi lên ở đâu và đang bỏ lỡ gì."
       }
     ]
   },
   "features": {
-    "eyebrow": "[VI] Features",
-    "title": "[VI] Everything you need to grow.",
-    "subtitle": "[VI] Built for solo developers who want to understand their workflow, not just track it.",
+    "eyebrow": "Tính năng",
+    "title": "Công cụ mà top vibe coder đang dùng.",
+    "subtitle": "Khác biệt giữa dev AI giỏi và xuất sắc? Hiểu rõ pattern của chính mình.",
     "cards": [
       {
-        "icon": "📡",
-        "title": "[VI] Auto Session Tracking",
-        "desc": "[VI] Detects Cursor, VS Code, Claude Code, and Ollama automatically. No manual logging.",
-        "bullets": ["[VI] Prompt counts & session duration", "[VI] Error detection & resolution tracking", "[VI] Tool switching awareness"]
+        "icon": "activity",
+        "title": "Theo dõi phiên tự động",
+        "desc": "Chạy ngầm trên Cursor, VS Code, Claude Code và Ollama. Bạn code — nó học.",
+        "bullets": ["Chấm điểm hiệu quả prompt", "Phát hiện vòng lặp lỗi real-time", "Phân tích pattern chuyển đổi context"]
       },
       {
-        "icon": "⭐",
-        "title": "[VI] Skill Tree & XP",
-        "desc": "[VI] 16 vibe coding skills across four tiers. Earn XP by coding, not by watching tutorials.",
-        "bullets": ["[VI] Prompt clarity, context setting & more", "[VI] Visual skill tree progression", "[VI] Weekly focus recommendations"]
+        "icon": "trophy",
+        "title": "Cây kỹ năng & XP",
+        "desc": "16 kỹ năng vibe coding đo lường được. Cuối cùng cũng có cách chứng minh bạn đang giỏi lên — chứ không chỉ bận hơn.",
+        "bullets": ["Mở khóa bằng cách ship, không phải xem video", "Tiến trình trực quan có thể chia sẻ", "Gợi ý trọng tâm cá nhân hàng tuần"]
       },
       {
-        "icon": "😺",
-        "title": "[VI] AI Mentor Chat",
-        "desc": "[VI] Your pet knows your session history and skill level. Ask anything — get advice that actually fits.",
-        "bullets": ["[VI] Powered by Claude Sonnet", "[VI] Context-aware responses", "[VI] Weekly narrative summaries"]
+        "icon": "message-circle",
+        "title": "AI Mentor hiểu bạn",
+        "desc": "Không phải chatbot chung chung. Pet đã thấy mọi phiên code, mọi lỗi, mọi thành công. Lời khuyên của nó là dành riêng cho bạn.",
+        "bullets": ["Hỗ trợ bởi Claude Sonnet", "Nhớ lịch sử & điểm yếu của bạn", "\"Tại sao tôi bị kẹt?\" — trả lời ngay"]
       }
     ]
   },
   "meetYourPet": {
-    "eyebrow": "[VI] Meet your pet",
-    "title": "[VI] Your pet feels what you feel.",
-    "body": "[VI] DevPet isn't just a dashboard — it's a companion. Your pet reacts to every moment of your session, celebrating wins and supporting you through the tough parts.",
-    "growthNote": "[VI] The pet grows as you grow — starting as a kitten, evolving as your skills level up.",
+    "eyebrow": "Gặp gỡ pet của bạn",
+    "title": "Người bạn code thực sự hiểu bạn.",
+    "body": "Pet không phải trang trí — nó phản chiếu trạng thái code thật của bạn. Khi bạn trong flow, nó ăn mừng. Khi bạn bị kẹt vòng lặp, nó nhận ra trước cả bạn. Các dev trong beta nói đây là tool đầu tiên khiến code với AI bớt cô đơn.",
+    "growthNote": "Pet tiến hóa cùng kỹ năng của bạn — từ mèo con tò mò đến mentor dày dạn.",
     "moods": [
-      { "emoji": "😸", "label": "[VI] Flow state", "desc": "[VI] Prompts clicking, builds passing" },
-      { "emoji": "😰", "label": "[VI] Stuck loop", "desc": "[VI] Same error three times in a row" },
-      { "emoji": "🎉", "label": "[VI] Milestone!", "desc": "[VI] Build success or skill unlocked" },
-      { "emoji": "🤔", "label": "[VI] Thinking...", "desc": "[VI] Analyzing your session patterns" }
+      { "icon": "zap", "label": "Deep flow", "desc": "Prompt sạch, iteration nhanh" },
+      { "icon": "rotate-ccw", "label": "Bị kẹt", "desc": "Cùng lỗi 3 lần — pet cảnh báo" },
+      { "icon": "sparkles", "label": "Đột phá!", "desc": "Skill mới hoặc PR merged" },
+      { "icon": "brain", "label": "Đang phân tích...", "desc": "Tìm pattern bạn bỏ lỡ" }
     ]
   },
   "finalCTA": {
-    "title": "[VI] Ready to level up your",
-    "titleAccent": "[VI] vibe coding",
-    "titleEnd": "?",
-    "subtitle": "[VI] Join 2,400+ developers on the waitlist. Free beta shipping for macOS in Week 1.",
-    "trustMeta": "🔒 No spam · Unsubscribe anytime · macOS first"
+    "title": "Đừng chỉ code với AI.",
+    "titleAccent": "Làm chủ nó",
+    "titleEnd": ".",
+    "subtitle": "Early access giới hạn. Đăng ký ngay để là người đầu tiên xem điểm vibe coding của bạn.",
+    "trustMeta": "Không spam · Hủy bất cứ lúc nào · macOS trước tiên"
   },
   "footer": {
-    "tagline": "[VI] DevPet",
+    "tagline": "DevPet",
     "links": {
-      "twitter": "[VI] Twitter / X",
-      "github": "[VI] GitHub",
-      "privacy": "[VI] Privacy Policy"
+      "twitter": "Twitter / X",
+      "github": "GitHub",
+      "privacy": "Chính sách bảo mật"
     },
-    "copyright": "[VI] © 2026 DevPet. Built for vibe coders."
+    "copyright": "© 2026 DevPet. Dành cho dev muốn giỏi hơn, không chỉ nhanh hơn."
   }
 }

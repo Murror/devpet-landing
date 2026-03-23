@@ -2,9 +2,10 @@
 
 import { useState } from 'react'
 import { useLocale } from '@/lib/LocaleProvider'
+import { Cat } from 'lucide-react'
 
 export default function Nav() {
-  const { t, locale, toggleLocale } = useLocale()
+  const { t } = useLocale()
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
@@ -12,39 +13,22 @@ export default function Nav() {
       <div className="mx-auto max-w-[1100px] px-6 h-[60px] flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 bg-mint rounded-sm flex items-center justify-center text-base">😺</div>
+          <div className="w-8 h-8 bg-mint rounded-sm flex items-center justify-center"><Cat className="w-4 h-4 text-white" /></div>
           <span className="text-[17px] font-extrabold tracking-[-0.5px] text-text">DevPet</span>
         </div>
 
         {/* Desktop nav links */}
         <div className="hidden md:flex gap-7">
-          {[t.nav.features, t.nav.howItWorks, t.nav.pricing].map(link => (
-            <a key={link} href="#" className="text-sm font-medium text-muted hover:text-text transition-colors cursor-pointer">
-              {link}
+          {([{ label: t.nav.howItWorks, href: '#how-it-works' }, { label: t.nav.features, href: '#features' }, { label: t.meetYourPet.eyebrow, href: '#meet-your-pet' }]).map(link => (
+            <a key={link.href} href={link.href} className="text-sm font-medium text-muted hover:text-text transition-colors cursor-pointer">
+              {link.label}
             </a>
           ))}
         </div>
 
         {/* Right: lang toggle + CTA + hamburger */}
         <div className="flex items-center gap-3">
-          {/* Language toggle */}
-          <div className="bg-border rounded-pill p-0.5 flex gap-0.5">
-            {(['en', 'vi'] as const).map(l => (
-              <button
-                key={l}
-                onClick={() => { if (locale !== l) toggleLocale() }}
-                className={`text-[11px] font-semibold px-2.5 py-1 rounded-pill transition-all ${
-                  locale === l
-                    ? 'bg-card-bg text-text shadow-card'
-                    : 'text-muted bg-transparent'
-                }`}
-              >
-                {l.toUpperCase()}
-              </button>
-            ))}
-          </div>
-
-          {/* CTA */}
+{/* CTA */}
           <a href="#waitlist" className="hidden sm:block bg-mint hover:bg-mint-dark text-white text-sm font-bold px-4 py-2 rounded-pill transition-colors">
             {t.nav.joinWaitlist}
           </a>
@@ -63,9 +47,9 @@ export default function Nav() {
       {/* Mobile dropdown */}
       {menuOpen && (
         <div className="md:hidden border-t border-border bg-warm-bg px-6 py-4 flex flex-col gap-4">
-          {[t.nav.features, t.nav.howItWorks, t.nav.pricing].map(link => (
-            <a key={link} href="#" className="text-sm font-medium text-muted" onClick={() => setMenuOpen(false)}>
-              {link}
+          {([{ label: t.nav.howItWorks, href: '#how-it-works' }, { label: t.nav.features, href: '#features' }, { label: t.meetYourPet.eyebrow, href: '#meet-your-pet' }]).map(link => (
+            <a key={link.href} href={link.href} className="text-sm font-medium text-muted" onClick={() => setMenuOpen(false)}>
+              {link.label}
             </a>
           ))}
           <a href="#waitlist" className="bg-mint text-white text-sm font-bold px-4 py-2 rounded-pill text-center" onClick={() => setMenuOpen(false)}>

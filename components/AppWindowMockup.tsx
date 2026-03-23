@@ -1,3 +1,5 @@
+import { Home, BookOpen, Star, BarChart3, User, Cat, Diamond } from 'lucide-react'
+
 export default function AppWindowMockup() {
   return (
     <div className="bg-card-bg border border-border rounded-lg shadow-app overflow-hidden hidden md:block">
@@ -14,25 +16,29 @@ export default function AppWindowMockup() {
         {/* Sidebar */}
         <div className="w-14 border-r border-border bg-[#F9F7F4] flex flex-col items-center py-3 gap-2">
           {[
-            { icon: '🏠', active: true },
-            { icon: '📖', active: false },
-            { icon: '⭐', active: false },
-            { icon: '📊', active: false },
-          ].map(({ icon, active }) => (
+            { icon: Home, active: true },
+            { icon: BookOpen, active: false },
+            { icon: Star, active: false },
+            { icon: BarChart3, active: false },
+          ].map(({ icon: IconComp, active }, i) => (
             <div
-              key={icon}
-              className={`w-9 h-9 rounded-sm flex items-center justify-center text-base
+              key={i}
+              className={`w-9 h-9 rounded-sm flex items-center justify-center
                 ${active ? 'bg-mint-light' : ''}`}
             >
-              {icon}
+              <IconComp className={`w-4 h-4 ${active ? 'text-mint-dark' : 'text-muted'}`} />
             </div>
           ))}
-          <div className="mt-auto w-9 h-9 flex items-center justify-center text-base">👤</div>
+          <div className="mt-auto w-9 h-9 flex items-center justify-center">
+            <User className="w-4 h-4 text-muted" />
+          </div>
         </div>
 
         {/* Main */}
         <div className="flex-1 p-4 overflow-hidden flex flex-col gap-3">
-          <p className="text-[10px] font-bold text-mint tracking-widest uppercase">◆ Today's Session</p>
+          <p className="text-[10px] font-bold text-mint tracking-widest uppercase flex items-center gap-1">
+            <Diamond className="w-2.5 h-2.5" /> Today&apos;s Session
+          </p>
 
           {/* Session card */}
           <div className="bg-warm-bg border border-border rounded-sm p-3">
@@ -52,9 +58,11 @@ export default function AppWindowMockup() {
 
           {/* Pet bubble */}
           <div className="bg-card-bg border border-border rounded-sm p-3 flex gap-2.5 items-start">
-            <span className="text-xl flex-shrink-0">😺</span>
+            <div className="w-7 h-7 bg-mint-light rounded-md flex items-center justify-center flex-shrink-0">
+              <Cat className="w-4 h-4 text-mint-dark" />
+            </div>
             <p className="text-xs text-muted leading-relaxed italic">
-              "Great debugging session! You're getting better at reading error messages. Try breaking your next prompt into smaller steps."
+              &quot;Great debugging session! You&apos;re getting better at reading error messages. Try breaking your next prompt into smaller steps.&quot;
             </p>
           </div>
         </div>
@@ -63,13 +71,13 @@ export default function AppWindowMockup() {
         <div className="w-[180px] border-l border-border flex flex-col p-3 gap-2">
           <p className="text-[10px] font-bold text-muted uppercase tracking-wider">Ask your pet</p>
           <div className="bg-warm-bg border border-border rounded-sm px-2.5 py-2 text-[11px] text-muted italic leading-relaxed">
-            "You've improved your prompt clarity by 40% this week! 🎉"
+            &quot;You&apos;ve improved your prompt clarity by 40% this week!&quot;
           </div>
           <div className="bg-mint rounded-sm px-2.5 py-2 text-[11px] text-white ml-4">
             Why does my auth keep failing?
           </div>
           <div className="bg-warm-bg border border-border rounded-sm px-2.5 py-2 text-[11px] text-muted italic leading-relaxed">
-            "Check your JWT expiry — it's usually set too short by default."
+            &quot;Check your JWT expiry — it&apos;s usually set too short by default.&quot;
           </div>
           <div className="mt-auto bg-warm-bg border border-border rounded-sm px-2.5 py-2 text-[11px] text-muted-light">
             Ask anything…

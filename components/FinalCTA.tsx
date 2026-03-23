@@ -2,6 +2,8 @@
 
 import { useLocale } from '@/lib/LocaleProvider'
 import WaitlistForm from './WaitlistForm'
+import ScrollReveal from './ScrollReveal'
+import { Cat } from 'lucide-react'
 
 export default function FinalCTA() {
   const { t } = useLocale()
@@ -9,19 +11,23 @@ export default function FinalCTA() {
   return (
     <>
       <section className="py-20 md:py-24">
-        <div className="mx-auto max-w-[640px] px-6 text-center">
-          <div className="text-5xl mb-4">😺</div>
-          <h2 className="text-3xl md:text-[42px] font-black tracking-[-1.5px] mb-4">
-            {t.finalCTA.title}{' '}
-            <em className="text-mint italic">{t.finalCTA.titleAccent}</em>
-            {t.finalCTA.titleEnd}
-          </h2>
-          <p className="text-base text-muted leading-relaxed mb-8">{t.finalCTA.subtitle}</p>
-          <div className="mb-4">
-            <WaitlistForm />
+        <ScrollReveal>
+          <div className="mx-auto max-w-[640px] px-6 text-center">
+            <div className="w-14 h-14 bg-mint-light rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <Cat className="w-7 h-7 text-mint-dark" />
+            </div>
+            <h2 className="text-3xl md:text-[42px] font-black tracking-[-1.5px] mb-4">
+              {t.finalCTA.title}{' '}
+              <em className="text-mint italic">{t.finalCTA.titleAccent}</em>
+              {t.finalCTA.titleEnd}
+            </h2>
+            <p className="text-base text-muted leading-relaxed mb-8">{t.finalCTA.subtitle}</p>
+            <div className="mb-4">
+              <WaitlistForm />
+            </div>
+            <p className="text-xs text-muted-light">{t.finalCTA.trustMeta}</p>
           </div>
-          <p className="text-xs text-muted-light">{t.finalCTA.trustMeta}</p>
-        </div>
+        </ScrollReveal>
       </section>
 
       <footer className="border-t border-border">

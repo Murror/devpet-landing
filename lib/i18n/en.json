@@ -3,94 +3,94 @@
     "features": "Features",
     "howItWorks": "How it works",
     "pricing": "Pricing",
-    "joinWaitlist": "Join waitlist",
+    "joinWaitlist": "Get early access",
     "langEN": "EN",
     "langVI": "VI"
   },
   "hero": {
-    "badge": "Now accepting early access",
-    "title": "Level up your",
-    "titleAccent": "vibe coding",
-    "subtitle": "DevPet watches your sessions, coaches you through mistakes, and grows alongside you — from first prompt to seasoned builder.",
-    "trustMeta": "🔒 No spam · macOS · Free beta · 2,400+ waiting"
+    "badge": "Limited early access — spots filling fast",
+    "title": "The best vibe coders know their",
+    "titleAccent": "weak spots",
+    "subtitle": "You ship with AI every day. But do you know which prompts waste time, where you get stuck in loops, or how fast you're actually improving? DevPet does.",
+    "trustMeta": "Free beta · macOS · No credit card · Backed by solo devs worldwide"
   },
   "form": {
     "placeholder": "your@email.com",
-    "submit": "Join waitlist →",
+    "submit": "Get early access →",
     "loading": "Joining...",
-    "success": "✅ You're on the list! We'll email you when DevPet launches.",
-    "errorDuplicate": "😺 You're already on the list! We'll be in touch.",
+    "success": "You're in! Check your inbox — we'll notify you before public launch.",
+    "errorDuplicate": "You're already on the list — we'll reach out soon.",
     "errorValidation": "Please enter a valid email address.",
     "errorServer": "Something went wrong. Please try again."
   },
   "howItWorks": {
     "eyebrow": "How it works",
-    "title": "Your session, understood.",
-    "subtitle": "DevPet runs quietly in the background, turning your coding workflow into meaningful growth.",
+    "title": "Zero setup. Instant clarity.",
+    "subtitle": "Most devs have no idea how they actually code with AI. DevPet changes that in 30 seconds.",
     "steps": [
       {
         "num": "01",
-        "icon": "🔍",
-        "title": "DevPet detects your session",
-        "desc": "Open Cursor, VS Code, or Claude Code — DevPet automatically starts tracking. No setup needed."
+        "icon": "scan-search",
+        "title": "Open your editor. That's it.",
+        "desc": "Cursor, VS Code, Claude Code — DevPet detects your session automatically. No config, no plugins, no friction."
       },
       {
         "num": "02",
-        "icon": "📖",
-        "title": "Your pet tells the story",
-        "desc": "Every prompt, error, and win gets narrated in plain language. Your session becomes a story, not a log."
+        "icon": "book-open",
+        "title": "See what you can't see alone",
+        "desc": "Prompt patterns, error loops, time sinks — DevPet turns your invisible habits into a clear narrative you can actually learn from."
       },
       {
         "num": "03",
-        "icon": "🌱",
-        "title": "You level up over time",
-        "desc": "Skills unlock, XP accumulates, and weekly insights show exactly how your vibe coding is improving."
+        "icon": "sprout",
+        "title": "Watch yourself get sharper",
+        "desc": "Weekly skill reports show exactly where you improved and where you're still leaving performance on the table."
       }
     ]
   },
   "features": {
     "eyebrow": "Features",
-    "title": "Everything you need to grow.",
-    "subtitle": "Built for solo developers who want to understand their workflow, not just track it.",
+    "title": "What top vibe coders use to stay ahead.",
+    "subtitle": "The difference between a good AI coder and a great one? Knowing your own patterns.",
     "cards": [
       {
-        "icon": "📡",
-        "title": "Auto Session Tracking",
-        "desc": "Detects Cursor, VS Code, Claude Code, and Ollama automatically. No manual logging.",
-        "bullets": ["Prompt counts & session duration", "Error detection & resolution tracking", "Tool switching awareness"]
+        "icon": "activity",
+        "title": "Invisible Session Tracking",
+        "desc": "Works silently across Cursor, VS Code, Claude Code, and Ollama. You code — it learns.",
+        "bullets": ["Prompt efficiency scoring", "Error loop detection in real-time", "Context switching patterns"]
       },
       {
-        "icon": "⭐",
-        "title": "Skill Tree & XP",
-        "desc": "16 vibe coding skills across four tiers. Earn XP by coding, not by watching tutorials.",
-        "bullets": ["Prompt clarity, context setting & more", "Visual skill tree progression", "Weekly focus recommendations"]
+        "icon": "trophy",
+        "title": "Skill Tree & XP System",
+        "desc": "16 measurable vibe coding skills. Finally, a way to prove you're getting better — not just busier.",
+        "bullets": ["Unlock skills by shipping, not watching", "Visual progression you can share", "Personalized weekly focus areas"]
       },
       {
-        "icon": "😺",
-        "title": "AI Mentor Chat",
-        "desc": "Your pet knows your session history and skill level. Ask anything — get advice that actually fits.",
-        "bullets": ["Powered by Claude Sonnet", "Context-aware responses", "Weekly narrative summaries"]
+        "icon": "message-circle",
+        "title": "AI Mentor That Knows You",
+        "desc": "Not a generic chatbot. Your pet has seen every session, every mistake, every win. Its advice is personal.",
+        "bullets": ["Powered by Claude Sonnet", "Remembers your history & skill gaps", "\"Why did I get stuck?\" — answered instantly"]
       }
     ]
   },
   "meetYourPet": {
     "eyebrow": "Meet your pet",
-    "title": "Your pet feels what you feel.",
-    "body": "DevPet isn't just a dashboard — it's a companion. Your pet reacts to every moment of your session, celebrating wins and supporting you through the tough parts.",
-    "growthNote": "The pet grows as you grow — starting as a kitten, evolving as your skills level up.",
+    "title": "A coding companion that actually gets you.",
+    "body": "Your pet isn't decoration — it mirrors your real coding state. When you're in flow, it celebrates. When you're stuck in a loop, it notices before you do. The devs in our beta say it's the first tool that made coding with AI feel less lonely.",
+    "growthNote": "Your pet evolves as your skills grow — from curious kitten to seasoned mentor.",
     "moods": [
-      { "emoji": "😸", "label": "Flow state", "desc": "Prompts clicking, builds passing" },
-      { "emoji": "😰", "label": "Stuck loop", "desc": "Same error three times in a row" },
-      { "emoji": "🎉", "label": "Milestone!", "desc": "Build success or skill unlocked" },
-      { "emoji": "🤔", "label": "Thinking...", "desc": "Analyzing your session patterns" }
+      { "icon": "zap", "label": "Deep flow", "desc": "Clean prompts, fast iterations" },
+      { "icon": "rotate-ccw", "label": "Stuck loop", "desc": "Same error 3x — pet flags it" },
+      { "icon": "sparkles", "label": "Breakthrough!", "desc": "New skill unlocked or PR merged" },
+      { "icon": "brain", "label": "Analyzing...", "desc": "Finding patterns you missed" }
     ]
   },
   "finalCTA": {
-    "title": "Ready to level up your",
-    "titleAccent": "vibe coding",
-    "titleEnd": "?",
-    "subtitle": "Join 2,400+ developers on the waitlist. Free beta shipping for macOS in Week 1.",
-    "trustMeta": "🔒 No spam · Unsubscribe anytime · macOS first"
+    "title": "Don't just code with AI.",
+    "titleAccent": "Master it",
+    "titleEnd": ".",
+    "subtitle": "Early access is limited. Join now and be the first to see your vibe coding score.",
+    "trustMeta": "No spam · Unsubscribe anytime · macOS first"
   },
   "footer": {
     "tagline": "DevPet",
@@ -99,6 +99,6 @@
       "github": "GitHub",
       "privacy": "Privacy Policy"
     },
-    "copyright": "© 2026 DevPet. Built for vibe coders."
+    "copyright": "© 2026 DevPet. Built for developers who want to get better, not just faster."
   }
 }
