@@ -1,0 +1,104 @@
+{
+  "nav": {
+    "features": "Features",
+    "howItWorks": "How it works",
+    "pricing": "Pricing",
+    "joinWaitlist": "Join waitlist",
+    "langEN": "EN",
+    "langVI": "VI"
+  },
+  "hero": {
+    "badge": "Now accepting early access",
+    "title": "Level up your",
+    "titleAccent": "vibe coding",
+    "subtitle": "DevPet watches your sessions, coaches you through mistakes, and grows alongside you — from first prompt to seasoned builder.",
+    "trustMeta": "🔒 No spam · macOS · Free beta · 2,400+ waiting"
+  },
+  "form": {
+    "placeholder": "your@email.com",
+    "submit": "Join waitlist →",
+    "loading": "Joining...",
+    "success": "✅ You're on the list! We'll email you when DevPet launches.",
+    "errorDuplicate": "😺 You're already on the list! We'll be in touch.",
+    "errorValidation": "Please enter a valid email address.",
+    "errorServer": "Something went wrong. Please try again."
+  },
+  "howItWorks": {
+    "eyebrow": "How it works",
+    "title": "Your session, understood.",
+    "subtitle": "DevPet runs quietly in the background, turning your coding workflow into meaningful growth.",
+    "steps": [
+      {
+        "num": "01",
+        "icon": "🔍",
+        "title": "DevPet detects your session",
+        "desc": "Open Cursor, VS Code, or Claude Code — DevPet automatically starts tracking. No setup needed."
+      },
+      {
+        "num": "02",
+        "icon": "📖",
+        "title": "Your pet tells the story",
+        "desc": "Every prompt, error, and win gets narrated in plain language. Your session becomes a story, not a log."
+      },
+      {
+        "num": "03",
+        "icon": "🌱",
+        "title": "You level up over time",
+        "desc": "Skills unlock, XP accumulates, and weekly insights show exactly how your vibe coding is improving."
+      }
+    ]
+  },
+  "features": {
+    "eyebrow": "Features",
+    "title": "Everything you need to grow.",
+    "subtitle": "Built for solo developers who want to understand their workflow, not just track it.",
+    "cards": [
+      {
+        "icon": "📡",
+        "title": "Auto Session Tracking",
+        "desc": "Detects Cursor, VS Code, Claude Code, and Ollama automatically. No manual logging.",
+        "bullets": ["Prompt counts & session duration", "Error detection & resolution tracking", "Tool switching awareness"]
+      },
+      {
+        "icon": "⭐",
+        "title": "Skill Tree & XP",
+        "desc": "16 vibe coding skills across four tiers. Earn XP by coding, not by watching tutorials.",
+        "bullets": ["Prompt clarity, context setting & more", "Visual skill tree progression", "Weekly focus recommendations"]
+      },
+      {
+        "icon": "😺",
+        "title": "AI Mentor Chat",
+        "desc": "Your pet knows your session history and skill level. Ask anything — get advice that actually fits.",
+        "bullets": ["Powered by Claude Sonnet", "Context-aware responses", "Weekly narrative summaries"]
+      }
+    ]
+  },
+  "meetYourPet": {
+    "eyebrow": "Meet your pet",
+    "title": "Your pet feels what you feel.",
+    "body": "DevPet isn't just a dashboard — it's a companion. Your pet reacts to every moment of your session, celebrating wins and supporting you through the tough parts.",
+    "growthNote": "The pet grows as you grow — starting as a kitten, evolving as your skills level up.",
+    "moods": [
+      { "emoji": "😸", "label": "Flow state", "desc": "Prompts clicking, builds passing" },
+      { "emoji": "😰", "label": "Stuck loop", "desc": "Same error three times in a row" },
+      { "emoji": "🎉", "label": "Milestone!", "desc": "Build success or skill unlocked" },
+      { "emoji": "🤔", "label": "Thinking...", "desc": "Analyzing your session patterns" }
+    ]
+  },
+  "finalCTA": {
+    "title": "Ready to level up your",
+    "titleAccent": "vibe coding",
+    "titleEnd": "?",
+    "subtitle": "Join 2,400+ developers on the waitlist. Free beta shipping for macOS in Week 1.",
+    "trustMeta": "🔒 No spam · Unsubscribe anytime · macOS first"
+  },
+  "footer": {
+    "tagline": "DevPet",
+    "links": {
+      "twitter": "Twitter / X",
+      "github": "GitHub",
+      "privacy": "Privacy Policy"
+    },
+    "copyright": "© 2026 DevPet. Built for vibe coders."
+  }
+}
