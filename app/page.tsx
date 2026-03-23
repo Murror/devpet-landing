@@ -1,3 +1,7 @@
 export default function Home() {
-  return <div className="bg-mint text-card-bg p-8 rounded-lg">Token test</div>
+  return (
+    <main>
+      <p className="p-8 text-muted">DevPet landing — coming soon</p>
+    </main>
+  )
 }
