@@ -3,10 +3,10 @@
 import { useLocale } from '@/lib/LocaleProvider'
 
 const moodBorderBg = [
-  'border-mood-flow bg-[#F5FFFB]',
-  'border-mood-stuck bg-[#FFFBF5]',
-  'border-mood-milestone bg-[#FAFAFF]',
-  'border-mood-thinking bg-[#FAFAFA]',
+  'border-mood-flow bg-mint-light',
+  'border-mood-stuck bg-yellow-bg',
+  'border-mood-milestone bg-purple-bg',
+  'border-mood-thinking bg-warm-bg',
 ]
 
 export default function MeetYourPet() {
@@ -14,10 +14,7 @@ export default function MeetYourPet() {
   const { moods } = t.meetYourPet
 
   return (
-    <section
-      className="border-t border-b border-border py-16 md:py-20"
-      style={{ background: 'linear-gradient(135deg, #F0FAF6 0%, #FAF8F4 40%, #F4F0FF 100%)' }}
-    >
+    <section className="bg-meet-gradient border-t border-b border-border py-16 md:py-20">
       <div className="mx-auto max-w-[1100px] px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
         <div>
           <p className="text-xs font-bold text-mint uppercase tracking-[0.12em] mb-3">{t.meetYourPet.eyebrow}</p>

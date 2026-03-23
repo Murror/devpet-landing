@@ -7,3 +7,9 @@
     @apply bg-warm-bg text-text font-sans antialiased;
   }
 }
+
+@layer utilities {
+  .bg-meet-gradient {
+    background: linear-gradient(135deg, #F0FAF6 0%, #FAF8F4 40%, #F4F0FF 100%);
+  }
+}

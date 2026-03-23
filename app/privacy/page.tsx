@@ -1,3 +1,10 @@
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy — DevPet',
+  description: 'DevPet privacy policy. We collect only your email for the waitlist and never sell your data.',
+}
+
 export default function Privacy() {
   return (
     <main className="mx-auto max-w-[640px] px-6 py-20">
