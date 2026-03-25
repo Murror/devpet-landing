@@ -6,8 +6,8 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 export const metadata: Metadata = {
-  title: 'DevPet — Level up your vibe coding',
-  description: 'Your AI coding companion that tracks sessions, grows skills, and turns mistakes into lessons.',
+  title: 'VibeMon — Theo dõi và nâng cao kỹ năng lập trình AI',
+  description: 'Bạn đồng hành AI giúp theo dõi phiên lập trình, phát triển kỹ năng, và biến sai lầm thành bài học.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
