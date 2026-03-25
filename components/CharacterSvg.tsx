@@ -2,15 +2,17 @@
 
 import { useEffect, useRef } from 'react'
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
+
 const charFiles: Record<string, string> = {
-  Byte: '/characters/byte.svg',
-  Nova: '/characters/nova.svg',
-  Sage: '/characters/sage.svg',
-  Glitch: '/characters/glitch.svg',
-  Crash: '/characters/crash.svg',
-  Zero: '/characters/zero.svg',
-  Luna: '/characters/luna.svg',
-  Null: '/characters/null.svg',
+  Byte: `${basePath}/characters/byte.svg`,
+  Nova: `${basePath}/characters/nova.svg`,
+  Sage: `${basePath}/characters/sage.svg`,
+  Glitch: `${basePath}/characters/glitch.svg`,
+  Crash: `${basePath}/characters/crash.svg`,
+  Zero: `${basePath}/characters/zero.svg`,
+  Luna: `${basePath}/characters/luna.svg`,
+  Null: `${basePath}/characters/null.svg`,
 }
 
 export default function CharacterSvg({ name, className }: { name: string; className?: string }) {
@@ -24,10 +26,8 @@ export default function CharacterSvg({ name, className }: { name: string; classN
       .then(res => res.text())
       .then(svgText => {
         if (!ref.current) return
-        // Strip XML declaration
         const clean = svgText.replace(/<\?xml[^?]*\?>/, '').trim()
         ref.current.innerHTML = clean
-        // Make SVG responsive
         const svg = ref.current.querySelector('svg')
         if (svg) {
           svg.removeAttribute('width')
