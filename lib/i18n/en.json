@@ -3,102 +3,187 @@
     "features": "Features",
     "howItWorks": "How it works",
     "pricing": "Pricing",
-    "joinWaitlist": "Get early access",
+    "joinWaitlist": "Join 1,504+ builders",
     "langEN": "EN",
     "langVI": "VI"
   },
   "hero": {
-    "badge": "Limited early access — spots filling fast",
-    "title": "The best vibe coders know their",
-    "titleAccent": "weak spots",
-    "subtitle": "You ship with AI every day. But do you know which prompts waste time, where you get stuck in loops, or how fast you're actually improving? DevPet does.",
-    "trustMeta": "Free beta · macOS · No credit card · Backed by solo devs worldwide"
+    "badge": "🐱 Your AI coding companion",
+    "title": "You retried the same prompt 5 times yesterday.",
+    "titleAccent": "VibeMon noticed.",
+    "subtitle": "You vibe code every day — but you can't see your own patterns. The error loops. The wasted prompts. The skills you're not building. VibeMon tracks it all, so you actually get better.",
+    "trustMeta": "Free beta · Cursor · VS Code · Claude Code",
+    "proofStats": [
+      { "value": "1,504+", "label": "builders joined" },
+      { "value": "70%", "label": "success rate" },
+      { "value": "2×", "label": "faster debugging" }
+    ]
   },
   "form": {
     "placeholder": "your@email.com",
-    "submit": "Get early access →",
+    "submit": "Join 1,504+ builders →",
     "loading": "Joining...",
     "success": "You're in! Check your inbox — we'll notify you before public launch.",
     "errorDuplicate": "You're already on the list — we'll reach out soon.",
     "errorValidation": "Please enter a valid email address.",
-    "errorServer": "Something went wrong. Please try again."
+    "errorServer": "Something went wrong. Please try again.",
+    "spotsLeft": "Only 16 spots left in beta"
   },
   "howItWorks": {
     "eyebrow": "How it works",
-    "title": "Zero setup. Instant clarity.",
-    "subtitle": "Most devs have no idea how they actually code with AI. DevPet changes that in 30 seconds.",
+    "title": "Code with AI. We handle the rest.",
+    "subtitle": "VibeMon runs quietly in the background. You code — it learns, tracks, and coaches.",
     "steps": [
       {
         "num": "01",
         "icon": "scan-search",
-        "title": "Open your editor. That's it.",
-        "desc": "Cursor, VS Code, Claude Code — DevPet detects your session automatically. No config, no plugins, no friction."
+        "title": "Open your editor. Done.",
+        "desc": "Cursor, VS Code, Claude Code — VibeMon auto-detects your session. No setup, no plugins, no friction."
       },
       {
         "num": "02",
         "icon": "book-open",
-        "title": "See what you can't see alone",
-        "desc": "Prompt patterns, error loops, time sinks — DevPet turns your invisible habits into a clear narrative you can actually learn from."
+        "title": "See your invisible habits",
+        "desc": "How many prompts worked? Where did you loop? Which tool saved time? VibeMon turns your sessions into a story you can learn from."
       },
       {
         "num": "03",
-        "icon": "sprout",
-        "title": "Watch yourself get sharper",
-        "desc": "Weekly skill reports show exactly where you improved and where you're still leaving performance on the table."
+        "icon": "trophy",
+        "title": "Level up for real",
+        "desc": "Earn XP, unlock skills, track your streak. Weekly reports show exactly where you improved — with data, not vibes."
       }
     ]
   },
   "features": {
     "eyebrow": "Features",
-    "title": "What top vibe coders use to stay ahead.",
-    "subtitle": "The difference between a good AI coder and a great one? Knowing your own patterns.",
+    "title": "Everything you need to stop guessing and start growing.",
+    "subtitle": "Most vibe coders have no idea if they're getting better. VibeMon fixes that.",
     "cards": [
       {
         "icon": "activity",
-        "title": "Invisible Session Tracking",
-        "desc": "Works silently across Cursor, VS Code, Claude Code, and Ollama. You code — it learns.",
-        "bullets": ["Prompt efficiency scoring", "Error loop detection in real-time", "Context switching patterns"]
+        "title": "Session Tracker",
+        "desc": "Every coding session logged automatically. Prompts, wins, errors, duration — all captured without you lifting a finger.",
+        "bullets": ["See which prompts actually worked", "Catch error loops before they eat your day", "Know your most productive hours"]
       },
       {
         "icon": "trophy",
-        "title": "Skill Tree & XP System",
-        "desc": "16 measurable vibe coding skills. Finally, a way to prove you're getting better — not just busier.",
-        "bullets": ["Unlock skills by shipping, not watching", "Visual progression you can share", "Personalized weekly focus areas"]
+        "title": "Skill Tree & XP",
+        "desc": "16 real vibe coding skills across 4 tiers. From prompt clarity to AI architecture — tracked with XP, not opinions.",
+        "bullets": ["Level up by shipping, not watching", "See exactly what to learn next", "Share your progress"]
       },
       {
-        "icon": "message-circle",
-        "title": "AI Mentor That Knows You",
-        "desc": "Not a generic chatbot. Your pet has seen every session, every mistake, every win. Its advice is personal.",
-        "bullets": ["Powered by Claude Sonnet", "Remembers your history & skill gaps", "\"Why did I get stuck?\" — answered instantly"]
+        "icon": "cat",
+        "title": "AI Cat Coach",
+        "desc": "Not a generic chatbot. Your cat has seen every session, every mistake, every win. Its advice is personal.",
+        "bullets": ["\"Why did I get stuck?\" — answered instantly", "Remembers your history & weak spots", "Context-aware per tab"]
+      },
+      {
+        "icon": "bar-chart",
+        "title": "Weekly Insights",
+        "desc": "Success rate, cost per session, error patterns, streaks — the numbers that show if you're actually improving.",
+        "bullets": ["AI-generated weekly summary", "Lessons you actually learned", "Progress you can feel"]
       }
     ]
   },
+  "midCTA": {
+    "title": "Sounds like you?",
+    "subtitle": "Join 1,504+ vibe coders already tracking their progress.",
+    "spotsLeft": "16 beta spots remaining"
+  },
+  "testimonials": {
+    "eyebrow": "From the beta",
+    "title": "Real builders. Real results.",
+    "items": [
+      {
+        "name": "Minh T.",
+        "role": "13 years old · learning to build products",
+        "avatar": "🧒",
+        "quote": "I'm only 13 and I didn't know anything about coding. VibeMon showed me where I keep making the same mistakes, and now I can fix them myself. So fun!",
+        "stat": "11 retries → 2",
+        "statLabel": "per week"
+      },
+      {
+        "name": "Sarah K.",
+        "role": "Product designer who codes",
+        "avatar": "👩‍🎨",
+        "quote": "I had no idea I was spending 40% of my time on prompts that never worked. Seeing that number made me change my whole approach.",
+        "stat": "40% waste → 12%",
+        "statLabel": "prompt efficiency"
+      },
+      {
+        "name": "Alex R.",
+        "role": "Solo founder",
+        "avatar": "🚀",
+        "quote": "The cat coach told me to switch from Cursor to Claude Code for auth — solved it in 1 prompt instead of 6. That one tip saved me hours.",
+        "stat": "6 prompts → 1",
+        "statLabel": "for auth flow"
+      }
+    ]
+  },
+  "skillTree": {
+    "eyebrow": "Skill tree",
+    "title": "16 skills. 4 tiers. Zero guessing.",
+    "subtitle": "Finally know exactly where you stand — and what to work on next.",
+    "tiers": [
+      { "name": "Foundations", "color": "#6BCB77", "skills": ["Prompt Clarity", "Error Reading", "Tool Basics", "Code Judgment"] },
+      { "name": "Context & Structure", "color": "#D89840", "skills": ["Context Setting", "AI Rules Files", "Documentation", "Project Structure"] },
+      { "name": "Advanced", "color": "#7B8CE0", "skills": ["Tool Switching", "Scope Mgmt", "Design System", "Prompt Iteration"] },
+      { "name": "Expert", "color": "#C07AB8", "skills": ["User Personas", "Context Windows", "AI Architecture", "Second Brain"] }
+    ]
+  },
   "meetYourPet": {
-    "eyebrow": "Meet your pet",
-    "title": "A coding companion that actually gets you.",
-    "body": "Your pet isn't decoration — it mirrors your real coding state. When you're in flow, it celebrates. When you're stuck in a loop, it notices before you do. The devs in our beta say it's the first tool that made coding with AI feel less lonely.",
-    "growthNote": "Your pet evolves as your skills grow — from curious kitten to seasoned mentor.",
-    "moods": [
-      { "icon": "zap", "label": "Deep flow", "desc": "Clean prompts, fast iterations" },
-      { "icon": "rotate-ccw", "label": "Stuck loop", "desc": "Same error 3x — pet flags it" },
-      { "icon": "sparkles", "label": "Breakthrough!", "desc": "New skill unlocked or PR merged" },
-      { "icon": "brain", "label": "Analyzing...", "desc": "Finding patterns you missed" }
+    "eyebrow": "Meet your crew",
+    "title": "8 friends. Each with their own personality.",
+    "body": "Every character in VibeMon has their own story, personality, and way of helping you learn. They live in the DevRealm — a digital universe inside every computer — and they're waiting for you to join the crew.",
+    "growthNote": "Each pet evolves as your skills grow",
+    "characters": [
+      { "name": "Byte", "species": "Spirit blob · Unknown origin", "badge": "The Chaotic Core", "color": "#534AB7", "quote": "I've been here longer than the logs remember.", "role": "Your main companion. Reacts to all your coding activity in real-time." },
+      { "name": "Nova", "species": "Fire fox · Star system refugee", "badge": "The Genius Mentor", "color": "#BA7517", "quote": "I know 17 ways. Let's start with the weirdest.", "role": "Your primary tutor. Appears during lessons with deep explanations." },
+      { "name": "Sage", "species": "Teal owl · Ancient archivist", "badge": "The Wise Guide", "color": "#085041", "quote": "There is no shortcut. Only the path.", "role": "Hosts deep-dive learning paths and provides lore entries." },
+      { "name": "Glitch", "species": "Pink cat · Rogue engineer", "badge": "The Hacker Rebel", "color": "#993556", "quote": "Rules are suggestions the compiler hasn't rejected yet.", "role": "Appears when you hit errors. Frames bugs as features." },
+      { "name": "Crash", "species": "Red bear · Fearless builder", "badge": "The Brute Force Hero", "color": "#A32D2D", "quote": "Ship it. Fix it. Ship it again.", "role": "Speed build events and hackathon mode. Celebrates every ship." },
+      { "name": "Zero", "species": "Code wraith · Forgotten process", "badge": "The Silent Optimiser", "color": "#444441", "quote": "The fastest code is code that doesn't run.", "role": "Appears when code is inefficient. Silent refactor nudges." },
+      { "name": "Luna", "species": "Indie dreamer · Human", "badge": "The Creative Builder", "color": "#534AB7", "quote": "No idea what I'm doing. Shipped 7 things this month.", "role": "Peer companion. Co-builds in collaborative challenges." },
+      { "name": "Null", "species": "Slime · Uninitialized entity", "badge": "The Wild Card", "color": "#3B6D11", "quote": "???", "role": "Random event character. Appears unexpectedly with secret content." }
     ]
   },
   "finalCTA": {
-    "title": "Don't just code with AI.",
-    "titleAccent": "Master it",
-    "titleEnd": ".",
-    "subtitle": "Early access is limited. Join now and be the first to see your vibe coding score.",
-    "trustMeta": "No spam · Unsubscribe anytime · macOS first"
+    "title": "Stop guessing.",
+    "titleAccent": "Start growing.",
+    "titleEnd": "",
+    "subtitle": "1,504+ builders already tracking their patterns. Beta closes when spots fill up.",
+    "trustMeta": "Free beta · No credit card · Cancel anytime",
+    "spotsLeft": "16 spots remaining"
+  },
+  "mockup": {
+    "greeting": "Good afternoon!",
+    "sessionLabel": "Session in progress",
+    "sessionTime": "14m",
+    "tool1": "Cursor",
+    "tool1Detail": "page.tsx",
+    "tool2": "Claude",
+    "tool2Detail": "active",
+    "streak": "7",
+    "streakLabel": "Day streak",
+    "goal": "2/3",
+    "goalLabel": "Daily goal",
+    "goalSub": "1 left",
+    "focusTitle": "Today's focus",
+    "focus1": "Create .cursorrules",
+    "focus1Why": "Corrected Cursor 6× this week",
+    "focus2": "Write a README",
+    "focus2Why": "No project description found",
+    "lessonTitle": "Yesterday you learned",
+    "lessonSkill": "Context Setting",
+    "lessonText": "Tell AI your tools before asking for code"
   },
   "footer": {
-    "tagline": "DevPet",
+    "tagline": "VibeMon",
     "links": {
       "twitter": "Twitter / X",
       "github": "GitHub",
       "privacy": "Privacy Policy"
     },
-    "copyright": "© 2026 DevPet. Built for developers who want to get better, not just faster."
+    "copyright": "© 2026 VibeMon. Built for builders who want to get better, not just faster."
   }
 }

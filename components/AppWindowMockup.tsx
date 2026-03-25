@@ -1,6 +1,11 @@
-import { Home, BookOpen, Star, BarChart3, User, Cat, Diamond } from 'lucide-react'
+'use client'
+
+import { useLocale } from '@/lib/LocaleProvider'
 
 export default function AppWindowMockup() {
+  const { t } = useLocale()
+  const m = t.mockup
+
   return (
     <div className="bg-card-bg border border-border rounded-lg shadow-app overflow-hidden hidden md:block">
       {/* Title bar */}
@@ -8,79 +13,98 @@ export default function AppWindowMockup() {
         <div className="w-2.5 h-2.5 rounded-full bg-[#FF6058]" />
         <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
         <div className="w-2.5 h-2.5 rounded-full bg-[#28CA41]" />
-        <span className="mx-auto text-xs text-muted font-medium">DevPet — Home</span>
+        <span className="mx-auto text-xs text-muted font-medium">VibeMon</span>
       </div>
 
-      {/* Body */}
-      <div className="flex h-[320px]">
-        {/* Sidebar */}
-        <div className="w-14 border-r border-border bg-[#F9F7F4] flex flex-col items-center py-3 gap-2">
-          {[
-            { icon: Home, active: true },
-            { icon: BookOpen, active: false },
-            { icon: Star, active: false },
-            { icon: BarChart3, active: false },
-          ].map(({ icon: IconComp, active }, i) => (
-            <div
-              key={i}
-              className={`w-9 h-9 rounded-sm flex items-center justify-center
-                ${active ? 'bg-mint-light' : ''}`}
-            >
-              <IconComp className={`w-4 h-4 ${active ? 'text-mint-dark' : 'text-muted'}`} />
+      <div className="p-4 flex flex-col gap-3">
+        {/* Greeting */}
+        <div>
+          <p className="text-[10px] font-bold text-mint tracking-widest uppercase">◆ VibeMon</p>
+          <p className="text-lg font-extrabold text-text mt-0.5">{m.greeting}</p>
+        </div>
+
+        {/* Live session */}
+        <div className="bg-[#F0FAF4] border border-[rgba(107,203,119,0.2)] rounded-lg px-3 py-2.5">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#6BCB77] animate-pulse" />
+              <span className="text-[11px] font-semibold text-[#2E7D32]">{m.sessionLabel}</span>
             </div>
-          ))}
-          <div className="mt-auto w-9 h-9 flex items-center justify-center">
-            <User className="w-4 h-4 text-muted" />
+            <span className="text-[10px] font-mono text-[#6BCB77]">{m.sessionTime}</span>
+          </div>
+          <div className="flex gap-1.5 mt-2">
+            <span className="text-[10px] bg-white border border-border rounded px-1.5 py-0.5 flex items-center gap-1">
+              ⌨️ <strong>{m.tool1}</strong> <span className="text-muted">{m.tool1Detail}</span>
+              <span className="w-1 h-1 rounded-full bg-[#6BCB77]" />
+            </span>
+            <span className="text-[10px] bg-white border border-border rounded px-1.5 py-0.5 flex items-center gap-1">
+              🤖 <strong>{m.tool2}</strong> <span className="text-muted">{m.tool2Detail}</span>
+              <span className="w-1 h-1 rounded-full bg-[#D89840]" />
+            </span>
           </div>
         </div>
 
-        {/* Main */}
-        <div className="flex-1 p-4 overflow-hidden flex flex-col gap-3">
-          <p className="text-[10px] font-bold text-mint tracking-widest uppercase flex items-center gap-1">
-            <Diamond className="w-2.5 h-2.5" /> Today&apos;s Session
-          </p>
-
-          {/* Session card */}
-          <div className="bg-warm-bg border border-border rounded-sm p-3">
-            <div className="flex justify-between items-start mb-2">
-              <span className="text-[13px] font-bold text-text">Building auth flow in Cursor</span>
-              <span className="text-[11px] text-muted">45 min</span>
-            </div>
-            <div className="h-1 bg-border rounded-full overflow-hidden">
-              <div className="h-full w-[68%] bg-mint rounded-full" />
-            </div>
-            <div className="flex gap-1.5 mt-2">
-              <span className="text-[10px] font-semibold bg-mint-light text-mint-dark px-2 py-0.5 rounded-sm">12 prompts</span>
-              <span className="text-[10px] font-semibold bg-yellow-bg text-yellow px-2 py-0.5 rounded-sm">3 errors fixed</span>
-              <span className="text-[10px] font-semibold bg-purple-bg text-purple px-2 py-0.5 rounded-sm">+120 XP</span>
+        {/* Stats row */}
+        <div className="grid grid-cols-2 gap-2">
+          <div className="bg-white border border-border rounded-lg px-3 py-2.5 flex items-center gap-2.5">
+            <span className="text-xl">🔥</span>
+            <div>
+              <p className="text-xl font-extrabold font-mono leading-none">{m.streak}</p>
+              <p className="text-[9px] text-muted mt-0.5">{m.streakLabel}</p>
             </div>
           </div>
-
-          {/* Pet bubble */}
-          <div className="bg-card-bg border border-border rounded-sm p-3 flex gap-2.5 items-start">
-            <div className="w-7 h-7 bg-mint-light rounded-md flex items-center justify-center flex-shrink-0">
-              <Cat className="w-4 h-4 text-mint-dark" />
+          <div className="bg-white border border-border rounded-lg px-3 py-2.5 flex items-center gap-2.5">
+            <div className="relative w-10 h-10">
+              <svg width="40" height="40" className="-rotate-90">
+                <circle cx="20" cy="20" r="16" fill="none" stroke="#EBE8DF" strokeWidth="3" />
+                <circle cx="20" cy="20" r="16" fill="none" stroke="#6BCB77" strokeWidth="3"
+                  strokeDasharray="100.5" strokeDashoffset="33.5" strokeLinecap="round" />
+              </svg>
+              <span className="absolute inset-0 flex items-center justify-center text-[10px] font-extrabold font-mono">{m.goal}</span>
             </div>
-            <p className="text-xs text-muted leading-relaxed italic">
-              &quot;Great debugging session! You&apos;re getting better at reading error messages. Try breaking your next prompt into smaller steps.&quot;
-            </p>
+            <div>
+              <p className="text-[11px] font-semibold">{m.goalLabel}</p>
+              <p className="text-[9px] text-muted">{m.goalSub}</p>
+            </div>
           </div>
         </div>
 
-        {/* Chat panel */}
-        <div className="w-[180px] border-l border-border flex flex-col p-3 gap-2">
-          <p className="text-[10px] font-bold text-muted uppercase tracking-wider">Ask your pet</p>
-          <div className="bg-warm-bg border border-border rounded-sm px-2.5 py-2 text-[11px] text-muted italic leading-relaxed">
-            &quot;You&apos;ve improved your prompt clarity by 40% this week!&quot;
+        {/* Today's focus */}
+        <div>
+          <p className="text-xs font-extrabold mb-2">{m.focusTitle}</p>
+          <div className="flex flex-col gap-1.5">
+            <div className="bg-white border border-border rounded-lg px-3 py-2 flex items-center gap-2.5">
+              <span className="text-sm">📏</span>
+              <div className="flex-1">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[11px] font-semibold">{m.focus1}</span>
+                  <span className="text-[8px] font-bold text-[#E06050] bg-[#FEF0EE] px-1 py-px rounded">HIGH</span>
+                </div>
+                <p className="text-[9px] text-muted">{m.focus1Why}</p>
+              </div>
+            </div>
+            <div className="bg-white border border-border rounded-lg px-3 py-2 flex items-center gap-2.5">
+              <span className="text-sm">📄</span>
+              <div className="flex-1">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[11px] font-semibold">{m.focus2}</span>
+                  <span className="text-[8px] font-bold text-[#E06050] bg-[#FEF0EE] px-1 py-px rounded">HIGH</span>
+                </div>
+                <p className="text-[9px] text-muted">{m.focus2Why}</p>
+              </div>
+            </div>
           </div>
-          <div className="bg-mint rounded-sm px-2.5 py-2 text-[11px] text-white ml-4">
-            Why does my auth keep failing?
-          </div>
-          <div className="bg-warm-bg border border-border rounded-sm px-2.5 py-2 text-[11px] text-muted italic leading-relaxed">
-            &quot;Check your JWT expiry — it&apos;s usually set too short by default.&quot;
-          </div>
-          <div className="mt-auto bg-warm-bg border border-border rounded-sm px-2.5 py-2 text-[11px] text-muted-light">
-            Ask anything…
+        </div>
+
+        {/* Yesterday's lesson */}
+        <div className="bg-white border border-border rounded-lg px-3 py-2.5 relative overflow-hidden">
+          <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#6BCB77] to-transparent" />
+          <div className="flex items-center gap-2.5">
+            <span className="text-lg">🎯</span>
+            <div>
+              <p className="text-[8px] font-bold text-[#6BCB77] uppercase">{m.lessonSkill}</p>
+              <p className="text-[12px] font-semibold">{m.lessonText}</p>
+            </div>
           </div>
         </div>
       </div>

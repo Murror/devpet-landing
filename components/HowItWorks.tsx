@@ -1,6 +1,7 @@
 'use client'
 
 import { useLocale } from '@/lib/LocaleProvider'
+import { motion } from 'framer-motion'
 import SectionHeader from './SectionHeader'
 import ScrollReveal from './ScrollReveal'
 import Icon from './Icon'
@@ -21,7 +22,11 @@ export default function HowItWorks() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {steps.map((step, i) => (
           <ScrollReveal key={step.num} delay={i * 150}>
-            <div className="relative bg-card-bg border border-border rounded-lg p-7 shadow-card hover:shadow-hover transition-shadow h-full">
+            <motion.div
+              whileHover={{ y: -4, boxShadow: '0 4px 20px rgba(45,42,38,0.12)' }}
+              transition={{ duration: 0.2 }}
+              className="relative bg-card-bg border border-border rounded-lg p-7 shadow-card h-full"
+            >
               <div className="w-9 h-9 bg-mint-light rounded-sm flex items-center justify-center text-sm font-extrabold text-mint-dark mb-4">
                 {step.num}
               </div>
@@ -33,7 +38,7 @@ export default function HowItWorks() {
                   →
                 </div>
               )}
-            </div>
+            </motion.div>
           </ScrollReveal>
         ))}
       </div>

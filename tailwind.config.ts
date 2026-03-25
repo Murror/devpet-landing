@@ -9,9 +9,9 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        mint:        '#49DCB1',
-        'mint-light':'#E8F9F4',
-        'mint-dark': '#3DB794',
+        mint:        '#C87137',
+        'mint-light':'#FDF2E8',
+        'mint-dark': '#A85E2D',
         'warm-bg':   '#FAF8F4',
         'card-bg':   '#FFFFFF',
         border:      '#EEE9E0',
@@ -22,7 +22,7 @@ const config: Config = {
         yellow:      '#D89840',
         'purple-bg': '#F0EEFF',
         purple:      '#8C39AA',
-        'mood-flow':      '#49DCB1',
+        'mood-flow':      '#C87137',
         'mood-stuck':     '#F5A623',
         'mood-milestone': '#A855F7',
         'mood-thinking':  '#A09B8E',

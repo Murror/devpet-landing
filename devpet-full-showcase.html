@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevPet — Full Design System</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;1,9..144,400&family=Anybody:wght@400;500;600;700&family=Overpass+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--bg:#F5F2E8;--white:#fff;--ink:#1C1A12;--ink2:#555;--muted:#999;--amber:#D4960A;}
+html,body{background:var(--bg);font-family:'Anybody',sans-serif;color:var(--ink);min-height:100vh;}
+.page{max-width:1140px;margin:0 auto;padding:0 24px 80px;}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:20px 0 16px;margin-bottom:8px;border-bottom:1px solid rgba(0,0,0,0.07);position:sticky;top:0;background:var(--bg);z-index:100;}
+.nav-logo{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--ink);}
+.nav-logo em{font-style:italic;color:var(--amber);}
+.nav-links{display:flex;gap:4px;}
+.nav-link{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;color:var(--ink2);cursor:pointer;transition:all .12s;border:none;background:none;font-family:'Anybody',sans-serif;}
+.nav-link:hover{background:rgba(0,0,0,0.05);}
+.nav-link.on{background:var(--ink);color:#fff;}
+.section{display:none;padding-top:36px;}
+.section.on{display:block;}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;padding:48px 0 56px;border-bottom:1px solid rgba(0,0,0,0.07);margin-bottom:48px;}
+.hero-text h1{font-family:'Fraunces',serif;font-size:48px;font-weight:700;line-height:1.1;margin-bottom:16px;}
+.hero-text h1 em{font-style:italic;color:var(--amber);}
+.hero-text p{font-size:15px;line-height:1.8;color:var(--ink2);margin-bottom:24px;max-width:420px;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:8px;}
+.chip{padding:5px 14px;border-radius:20px;font-size:11px;font-weight:600;background:rgba(0,0,0,0.06);color:var(--ink2);}
+.hero-chars{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
+.hero-char-card{background:var(--white);border-radius:16px;padding:12px 8px 10px;width:72px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,0.06);cursor:pointer;transition:transform .1s;}
+.hero-char-card:hover{transform:translateY(-3px);}
+.hero-char-card svg{display:block;margin:0 auto 6px;overflow:visible;}
+.hero-char-card .hcn{font-size:10px;font-weight:700;}
+.sh{margin-bottom:28px;}
+.sh h2{font-family:'Fraunces',serif;font-size:28px;font-weight:700;margin-bottom:6px;}
+.sh p{font-size:13px;color:var(--muted);line-height:1.7;}
+.sh-rule{width:40px;height:3px;border-radius:2px;margin-top:10px;}
+.lore-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:40px;}
+.lore-card{background:var(--white);border-radius:18px;padding:22px;box-shadow:0 2px 10px rgba(0,0,0,0.05);}
+.lore-icon{font-size:28px;margin-bottom:12px;}
+.lore-card h3{font-size:14px;font-weight:700;margin-bottom:8px;}
+.lore-card p{font-size:12px;color:var(--ink2);line-height:1.75;}
+.timeline{position:relative;padding-left:28px;}
+.timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:rgba(0,0,0,0.08);border-radius:2px;}
+.week-block{margin-bottom:36px;}
+.week-label{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;color:var(--ink2);}
+.week-dot{width:10px;height:10px;border-radius:50%;margin-left:-33px;margin-right:11px;flex-shrink:0;}
+.mission-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;}
+.mission-tag{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;background:rgba(0,0,0,0.05);color:var(--ink2);}
+.mission-tag.story{background:#E8F4FF;color:#185FA5;}
+.mission-tag.skill{background:#FFF3CD;color:#854F0B;}
+.mission-tag.speed{background:#FFE8E8;color:#A32D2D;}
+.mission-tag.debug{background:#F3E8FF;color:#5C3489;}
+.mission-tag.deep{background:#E3F5EF;color:#085041;}
+.mission-tag.boss{background:#1C1A12;color:#FCDE5A;}
+.week-desc{font-size:12px;color:var(--ink2);line-height:1.75;margin-top:6px;}
+.week-unlocks{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
+.unlock-badge{padding:3px 10px;border-radius:12px;font-size:10px;font-weight:600;border:1.5px solid currentColor;}
+.profiles-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.profile-card{background:var(--white);border-radius:20px;padding:22px;box-shadow:0 2px 12px rgba(0,0,0,0.06);display:flex;gap:18px;align-items:flex-start;}
+.profile-avatar{flex-shrink:0;width:80px;height:100px;background:var(--bg);border-radius:14px;display:flex;align-items:center;justify-content:center;}
+.profile-avatar svg{display:block;overflow:visible;}
+.profile-info{flex:1;min-width:0;}
+.profile-name{font-family:'Fraunces',serif;font-size:18px;font-weight:700;margin-bottom:2px;}
+.profile-species{font-size:10px;color:var(--muted);margin-bottom:8px;}
+.profile-badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:10px;font-weight:700;margin-bottom:10px;}
+.profile-quote{font-family:'Fraunces',serif;font-size:12px;font-style:italic;color:var(--ink2);line-height:1.65;margin-bottom:10px;padding-left:10px;border-left:2px solid currentColor;}
+.profile-row{display:flex;justify-content:space-between;align-items:flex-start;padding:4px 0;font-size:11px;border-bottom:1px solid rgba(0,0,0,0.05);}
+.profile-row:last-child{border:none;}
+.pr-label{color:var(--muted);flex-shrink:0;margin-right:8px;}
+.pr-val{font-weight:600;color:var(--ink);text-align:right;line-height:1.4;}
+.pal-strip{display:flex;gap:3px;margin-top:8px;}
+.pal-sq{width:16px;height:16px;border-radius:4px;border:1px solid rgba(0,0,0,0.08);}
+.loop-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:40px;}
+.loop-step{background:var(--white);border-radius:16px;padding:18px 14px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.05);position:relative;}
+.loop-step::after{content:'→';position:absolute;right:-10px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--muted);}
+.loop-step:last-child::after{display:none;}
+.loop-num{width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;}
+.loop-step h4{font-size:12px;font-weight:700;margin-bottom:4px;}
+.loop-step p{font-size:10px;color:var(--muted);line-height:1.5;}
+.ds-section{margin-bottom:36px;}
+.ds-section h3{font-size:13px;font-weight:700;margin-bottom:12px;color:var(--ink2);text-transform:uppercase;letter-spacing:.06em;}
+.palette-row{display:flex;gap:8px;flex-wrap:wrap;}
+.swatch{border-radius:12px;padding:12px 10px 10px;min-width:76px;text-align:center;}
+.swatch-label{font-size:9px;font-weight:600;margin-top:6px;font-family:'Overpass Mono',monospace;line-height:1.5;}
+.char-pal-card{background:var(--white);border-radius:14px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,0.05);}
+.char-pal-card .cpn{font-size:12px;font-weight:700;margin-bottom:8px;}
+.char-pal-swatches{display:flex;gap:4px;}
+.char-pal-sw{width:20px;height:20px;border-radius:6px;border:1px solid rgba(0,0,0,0.08);}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{background:#F5F2E8;font-family:'Anybody',sans-serif;min-height:100vh;}
+.page{max-width:1100px;margin:0 auto;padding:32px 24px 60px;}
+.header{margin-bottom:32px;}
+.header h1{font-family:'Fraunces',serif;font-size:32px;font-weight:700;color:#1C1A12;letter-spacing:-.5px;margin-bottom:6px;}
+.header h1 em{font-style:italic;color:#D4960A;}
+.header p{font-size:13px;color:#888;line-height:1.6;}
+.roster-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px;}
+.char-card{
+  background:#fff;border-radius:20px;padding:20px 12px 16px;
+  text-align:center;cursor:pointer;
+  border:2px solid transparent;
+  transition:transform .12s,box-shadow .12s,border-color .12s;
+  box-shadow:0 2px 10px rgba(0,0,0,0.05);
+  position:relative; overflow:hidden;
+}
+.char-card:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,0,0,0.12);}
+.char-card.active{border-color:var(--c);box-shadow:0 8px 28px rgba(0,0,0,0.14);}
+.char-card svg{display:block;margin:0 auto 10px;overflow:visible;}
+.cn{font-size:14px;font-weight:700;margin-bottom:2px;}
+.cs{font-size:10px;color:#999;margin-bottom:8px;}
+.cbadge{display:inline-block;padding:3px 11px;border-radius:20px;font-size:10px;font-weight:600;}
+.anim-label{
+  position:absolute;top:8px;right:8px;
+  font-size:8px;font-weight:700;letter-spacing:.06em;
+  background:rgba(0,0,0,0.06);color:#999;
+  border-radius:6px;padding:2px 6px;
+  text-transform:uppercase;
+}
+.detail-panel{
+  background:#fff;border-radius:24px;padding:28px;
+  box-shadow:0 4px 24px rgba(0,0,0,0.07);
+  display:none;gap:28px;align-items:flex-start;
+}
+.detail-panel.show{display:flex;flex-wrap:wrap;}
+.d-left{flex-shrink:0;width:220px;text-align:center;}
+.d-stage{
+  background:#F5F2E8;border-radius:18px;
+  width:200px;height:250px;margin:0 auto 16px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.d-stage svg{display:block;overflow:visible;}
+.d-name{font-family:'Fraunces',serif;font-size:22px;font-weight:700;margin-bottom:3px;}
+.d-species{font-size:11px;color:#999;margin-bottom:12px;}
+.mood-row{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:10px;}
+.mbtn{
+  padding:4px 11px;border-radius:20px;font-size:10px;font-weight:600;
+  background:#F5F2E8;border:1.5px solid rgba(0,0,0,0.1);
+  cursor:pointer;color:#666;transition:all .1s;font-family:'Anybody',sans-serif;
+}
+.mbtn.on{color:#fff;border-color:transparent;}
+.d-right{flex:1;min-width:240px;}
+.d-quote{
+  font-family:'Fraunces',serif;font-size:14px;font-style:italic;
+  color:#444;line-height:1.7;padding:12px 16px;
+  border-radius:12px;margin-bottom:16px;
+  border-left:3px solid currentColor;background:#F5F2E8;
+}
+.info-block{margin-bottom:14px;}
+.info-label{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#bbb;margin-bottom:6px;}
+.info-text{font-size:12px;color:#444;line-height:1.75;}
+.pal-row{display:flex;gap:5px;margin-top:8px;justify-content:center;}
+.pal-dot{width:22px;height:22px;border-radius:7px;border:1.5px solid rgba(0,0,0,0.08);}
+.anim-chip{
+  display:inline-flex;align-items:center;gap:4px;
+  background:#F5F2E8;border-radius:8px;
+  padding:5px 10px;font-size:11px;color:#555;
+  margin-top:8px;font-family:'Anybody',sans-serif;
+}
+.anim-chip::before{content:'▶';font-size:8px;opacity:.5;}
+@media(max-width:700px){
+  .roster-grid{grid-template-columns:repeat(2,1fr);}
+  .detail-panel{flex-direction:column;}
+  .d-left{width:100%;}
+}
+
+/* ── CARD ANIMATIONS ── all via CSS keyframes on SVG group IDs */
+
+/* Byte: glitch STORM — screen-tear slices + chromatic aberration + pixel scatter */
+@keyframes byte-storm-body {
+  0%,78%,100%{transform:translate(0,0)}
+  80%{transform:translate(-5px,0)}
+  81%{transform:translate(4px,1px)}
+  82%{transform:translate(-3px,-1px)}
+  83%{transform:translate(5px,0)}
+  84%{transform:translate(0,2px)}
+  85%{transform:translate(-4px,0)}
+  86%{transform:translate(3px,-1px)}
+  87%{transform:translate(0,0)}
+}
+@keyframes byte-tear-1 {
+  0%,78%,100%{transform:translateX(0);opacity:0}
+  80%,86%{opacity:1}
+  80%{transform:translateX(-8px)}
+  82%{transform:translateX(6px)}
+  84%{transform:translateX(-4px)}
+  86%{transform:translateX(2px)}
+  87%{transform:translateX(0);opacity:0}
+}
+@keyframes byte-tear-2 {
+  0%,78%,100%{transform:translateX(0);opacity:0}
+  80%,86%{opacity:0.85}
+  80%{transform:translateX(7px)}
+  82%{transform:translateX(-5px)}
+  84%{transform:translateX(3px)}
+  86%{transform:translateX(-2px)}
+  87%{transform:translateX(0);opacity:0}
+}
+@keyframes byte-rgb-r {
+  0%,78%,100%{transform:translateX(0);opacity:0}
+  80%,87%{opacity:0.5}
+  80%{transform:translateX(6px)}
+  83%{transform:translateX(-4px)}
+  87%{transform:translateX(0);opacity:0}
+}
+@keyframes byte-rgb-b {
+  0%,78%,100%{transform:translateX(0);opacity:0}
+  80%,87%{opacity:0.5}
+  80%{transform:translateX(-6px)}
+  83%{transform:translateX(4px)}
+  87%{transform:translateX(0);opacity:0}
+}
+@keyframes byte-px-scatter {
+  0%,75%,100%{transform:translate(0,0) scale(1);opacity:0}
+  77%{opacity:1;transform:translate(0,0) scale(1)}
+  80%{transform:translate(-12px,-8px) scale(0.5);opacity:0.8}
+  83%{transform:translate(10px,-14px) scale(0.3);opacity:0.5}
+  86%{transform:translate(-6px,-18px) scale(0.1);opacity:0}
+}
+@keyframes byte-px-scatter2 {
+  0%,77%,100%{transform:translate(0,0) scale(1);opacity:0}
+  79%{opacity:1;transform:translate(0,0) scale(1)}
+  82%{transform:translate(14px,-6px) scale(0.4);opacity:0.9}
+  85%{transform:translate(18px,-12px) scale(0.2);opacity:0.4}
+  88%{transform:translate(20px,-16px) scale(0);opacity:0}
+}
+@keyframes byte-px-scatter3 {
+  0%,76%,100%{transform:translate(0,0) scale(1);opacity:0}
+  78%{opacity:0.9;transform:translate(0,0) scale(1)}
+  81%{transform:translate(-16px,4px) scale(0.6);opacity:0.7}
+  84%{transform:translate(-20px,8px) scale(0.2);opacity:0.3}
+  87%{transform:translate(-22px,12px) scale(0);opacity:0}
+}
+@keyframes tip-strobe {
+  0%,70%,100%{opacity:1;transform:scale(1)}
+  71%{opacity:0.1;transform:scale(0.7)}
+  72%{opacity:1;transform:scale(1.4)}
+  73%{opacity:0.2;transform:scale(0.8)}
+  74%{opacity:1;transform:scale(1.2)}
+  75%{opacity:0.05;transform:scale(0.6)}
+  76%{opacity:1;transform:scale(1.5)}
+  77%{opacity:0.3;transform:scale(0.9)}
+  78%{opacity:1;transform:scale(1)}
+  79%{opacity:0.15;transform:scale(0.7)}
+  80%{opacity:1;transform:scale(1)}
+}
+@keyframes byte-eye-flash {
+  0%,78%,100%{fill:#26215C}
+  80%{fill:#E24B4A}
+  81%{fill:#FCDE5A}
+  82%{fill:#E24B4A}
+  84%{fill:#26215C}
+  85%{fill:#9FE1CB}
+  87%{fill:#26215C}
+}
+
+/* Sage: owl head scan — rotates left → pause → right → pause → center */
+@keyframes sage-head-scan {
+  0%{transform:rotate(0deg)}
+  15%{transform:rotate(-18deg)}
+  30%{transform:rotate(-18deg)}
+  50%{transform:rotate(18deg)}
+  65%{transform:rotate(18deg)}
+  80%{transform:rotate(0deg)}
+  100%{transform:rotate(0deg)}
+}
+@keyframes sage-eye-track-l {
+  0%{transform:translateX(0)}
+  15%{transform:translateX(-2px)}
+  30%{transform:translateX(-2px)}
+  50%{transform:translateX(2px)}
+  65%{transform:translateX(2px)}
+  80%,100%{transform:translateX(0)}
+}
+@keyframes scroll-hold {
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  15%,30%{transform:translateY(-1px) rotate(-1deg)}
+  50%,65%{transform:translateY(-1px) rotate(1deg)}
+}
+
+/* Nova: tail wag + float */
+@keyframes nova-float  {0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)}}
+@keyframes tail-wag    {0%,100%{transform:rotate(0deg) translateX(0)} 25%{transform:rotate(8deg) translateX(2px)} 75%{transform:rotate(-5deg) translateX(-1px)}}
+@keyframes star-pulse  {0%,100%{opacity:.8;transform:scale(1)} 50%{opacity:1;transform:scale(1.4)}}
+
+/* Glitch: twitch + pixel chaos */
+@keyframes glitch-twitch {0%,85%,100%{transform:translate(0,0)} 87%{transform:translate(-4px,1px)} 89%{transform:translate(3px,-1px)} 91%{transform:translate(-2px,2px)} 93%{transform:translate(0,0)}}
+@keyframes px-chaos   {0%,100%{opacity:.45} 50%{opacity:0} 70%{opacity:.7}}
+@keyframes eye-glow   {0%,100%{opacity:.7} 50%{opacity:1;transform:scale(1.1)}}
+@keyframes whisker-twitch {0%,90%,100%{transform:translateX(0)} 92%{transform:translateX(2px)} 95%{transform:translateX(-1px)}}
+
+/* Crash: power bounce + fist pump */
+@keyframes crash-bounce {0%,100%{transform:translateY(0) scaleX(1)} 30%{transform:translateY(-8px) scaleX(0.96)} 60%{transform:translateY(-2px) scaleX(1.02)}}
+@keyframes fist-pump-l {0%,100%{transform:translateY(0) rotate(0deg)} 40%{transform:translateY(-10px) rotate(-15deg)}}
+@keyframes fist-pump-r {0%,100%{transform:translateY(0) rotate(0deg)} 40%{transform:translateY(-10px) rotate(15deg)}}
+@keyframes crash-squish{0%,100%{transform:scaleX(1) scaleY(1)} 30%{transform:scaleX(0.95) scaleY(1.06)} 60%{transform:scaleX(1.03) scaleY(0.98)}}
+
+/* Zero: ghost float + code particle drift */
+@keyframes zero-float  {0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)}}
+@keyframes zero-sway   {0%,100%{transform:rotate(0deg)} 33%{transform:rotate(1.5deg)} 66%{transform:rotate(-1.5deg)}}
+@keyframes particle-l  {0%{transform:translate(0,0);opacity:.45} 100%{transform:translate(-8px,-14px);opacity:0}}
+@keyframes particle-r  {0%{transform:translate(0,0);opacity:.35} 100%{transform:translate(10px,-18px);opacity:0}}
+@keyframes hand-float  {0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-4px) rotate(4deg)}}
+@keyframes eye-pulse   {0%,100%{opacity:.7} 50%{opacity:1}}
+
+/* Luna: head bop + headphone glow + star twinkle */
+@keyframes luna-bop    {0%,100%{transform:translateY(0) rotate(0deg)} 25%{transform:translateY(-4px) rotate(-2deg)} 75%{transform:translateY(-2px) rotate(1.5deg)}}
+@keyframes hp-pulse    {0%,100%{opacity:1;transform:scaleX(1)} 50%{opacity:.7;transform:scaleX(1.04)}}
+@keyframes star-twinkle{0%,100%{opacity:.35;transform:scale(1)} 50%{opacity:.7;transform:scale(1.5)}}
+@keyframes phone-tilt  {0%,100%{transform:rotate(0deg)} 50%{transform:rotate(8deg)}}
+
+/* Null: jester idle — bounce + coin spin + chaos sparkle */
+@keyframes null-idle    {0%,100%{transform:translateY(0)} 45%{transform:translateY(-7px)} 65%{transform:translateY(-2px)}}
+@keyframes null-lean    {0%,100%{transform:rotate(0deg)} 30%{transform:rotate(-3deg)} 70%{transform:rotate(2deg)}}
+@keyframes jester-bell  {0%,100%{transform:rotate(0deg)} 20%{transform:rotate(-18deg)} 40%{transform:rotate(14deg)} 60%{transform:rotate(-10deg)} 80%{transform:rotate(6deg)}}
+@keyframes jester-coin  {0%,100%{transform:scaleX(1)} 25%{transform:scaleX(0.1)} 50%{transform:scaleX(1)} 75%{transform:scaleX(0.1)}}
+@keyframes q-bounce     {0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-2px) scale(1.15)}}
+@keyframes chaos-px     {0%,100%{opacity:0;transform:translate(0,0)} 10%{opacity:.8} 60%{opacity:.4;transform:translate(var(--tx),var(--ty))} 100%{opacity:0}}
+@keyframes arm-l-swing  {0%,100%{transform:rotate(0deg)} 40%{transform:rotate(-20deg)} 70%{transform:rotate(8deg)}}
+@keyframes arm-r-swing  {0%,100%{transform:rotate(0deg)} 40%{transform:rotate(15deg)} 70%{transform:rotate(-10deg)}}
+@keyframes leg-l-step   {0%,100%{transform:rotate(0deg)} 45%{transform:rotate(-8deg)}}
+@keyframes leg-r-step   {0%,100%{transform:rotate(0deg)} 45%{transform:rotate(8deg)}}
+
+@media(max-width:800px){.hero{grid-template-columns:1fr;}.lore-grid{grid-template-columns:1fr 1fr;}.profiles-grid{grid-template-columns:1fr;}.loop-steps{grid-template-columns:repeat(3,1fr);}.roster-grid{grid-template-columns:repeat(2,1fr);}nav .nav-links{gap:2px;}.nav-link{padding:5px 10px;font-size:11px;}}
+</style>
+</head>
+<body>
+<div class="page">
+<nav class="nav">
+  <div class="nav-logo">Dev<em>Pet</em></div>
+  <div class="nav-links">
+    <button class="nav-link on" onclick="showSection('home')">Overview</button>
+    <button class="nav-link" onclick="showSection('roster')">Characters</button>
+    <button class="nav-link" onclick="showSection('world')">World</button>
+    <button class="nav-link" onclick="showSection('missions')">Missions</button>
+    <button class="nav-link" onclick="showSection('profiles')">Profiles</button>
+    <button class="nav-link" onclick="showSection('design')">Design</button>
+  </div>
+</nav>
+
+<section class="section on" id="sec-home">
+  <div class="hero">
+    <div class="hero-text">
+      <h1>Learn to code.<br>Grow your <em>crew.</em></h1>
+      <p>DevPet is a vibe coding learning platform where 8 companion characters react to your coding activity, guide you through missions, and evolve as you build real projects in the DevRealm.</p>
+      <div class="hero-chips">
+        <span class="chip">28-day mission arc</span>
+        <span class="chip">8 unique characters</span>
+        <span class="chip">Duolingo-inspired design</span>
+        <span class="chip">Real project outcomes</span>
+        <span class="chip">DevRealm lore</span>
+      </div>
+    </div>
+    <div class="hero-chars" id="hero-chars"></div>
+  </div>
+  <div class="lore-grid" style="margin-bottom:0;">
+    <div class="lore-card"><div class="lore-icon">⚡</div><h3>Daily coding loop</h3><p>Check in with Byte → accept a mission → build something → ship it → grow. Every action feeds back into the characters and the world state.</p></div>
+    <div class="lore-card"><div class="lore-icon">🌍</div><h3>The DevRealm</h3><p>A digital universe inside every computer, held together by The Source. A Null Cascade is spreading corruption — only real shipped projects can restore it.</p></div>
+    <div class="lore-card"><div class="lore-icon">🗝</div><h3>Unlock your crew</h3><p>Start with Byte. Unlock Nova, Sage, Glitch, Crash, Zero, and Luna over 4 weeks through specific actions. Null appears when you least expect it.</p></div>
+  </div>
+</section>
+
+<section class="section" id="sec-roster">
+  <div class="sh"><h2>Animated Character Roster</h2><p>All 8 characters · Unique idle animations · Click to explore moods and lore</p><div class="sh-rule" style="background:#534AB7;"></div></div>
+  <div class="roster-grid" id="roster"></div>
+  <div class="detail-panel" id="detail">
+    <div class="d-left">
+      <div class="d-stage" id="d-stage"></div>
+      <div class="d-name" id="d-name"></div>
+      <div class="d-species" id="d-species"></div>
+      <div class="pal-row" id="d-pal"></div>
+      <div class="mood-row" id="mood-row"></div>
+    </div>
+    <div class="d-right">
+      <div class="d-quote" id="d-quote"></div>
+      <div class="info-block"><div class="info-label">Design concept</div><div class="info-text" id="d-design"></div></div>
+      <div class="info-block"><div class="info-label">Signature feature</div><div class="info-text" id="d-sig"></div></div>
+      <div class="info-block"><div class="info-label">Role in app</div><div class="info-text" id="d-role"></div></div>
+      <div class="info-block"><div class="info-label">Idle animation</div><div class="info-text" id="d-anim"></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="sec-world">
+  <div class="sh"><h2>The DevRealm</h2><p>The world that lives inside every computer — and the story Null is trying to corrupt.</p><div class="sh-rule" style="background:#BA7517;"></div></div>
+  <div class="lore-grid">
+    <div class="lore-card"><div class="lore-icon">💾</div><h3>The Source</h3><p>The original codebase that holds the DevRealm together. Ancient, stable, and deeply documented. No one fully understands it anymore — not even Sage.</p></div>
+    <div class="lore-card"><div class="lore-icon">🌀</div><h3>The Null Cascade</h3><p>A spreading void of undefined, uninitialized data. Where it spreads, logic breaks down and characters lose coherence. The player's shipped projects are the only patch.</p></div>
+    <div class="lore-card"><div class="lore-icon">🧬</div><h3>Character Origins</h3><p>Each character emerged from a different layer of The Source — Byte from the core runtime, Nova from the star-indexed search layer, Zero from a deleted process that refused to end.</p></div>
+    <div class="lore-card"><div class="lore-icon">🏗</div><h3>The Four Zones</h3><p>Boot Sector (week 1) → Fracture Line (week 2) → Deep Stack (week 3) → Source Core (week 4). Each zone has its own visual palette, enemy type, and dominant character.</p></div>
+    <div class="lore-card"><div class="lore-icon">👤</div><h3>The Player</h3><p>An outsider — a vibe coder who arrived through an undefined entry point. Your shipped code earns trust from the crew. Your abandoned projects lose it.</p></div>
+    <div class="lore-card"><div class="lore-icon">🎭</div><h3>Null's Role</h3><p>Not a villain. Not an ally. An uninitialized entity that predates The Source itself. Appears at random, breaks the fourth wall, and sometimes helps — on its own terms.</p></div>
+  </div>
+  <div class="sh" style="margin-top:12px;"><h2>Daily App Loop</h2><p>The core cycle that repeats every day.</p><div class="sh-rule" style="background:#1D9E75;"></div></div>
+  <div class="loop-steps">
+    <div class="loop-step"><div class="loop-num">1</div><h4>Check-in</h4><p>Byte reacts to your streak. The DevRealm reflects your recent activity.</p></div>
+    <div class="loop-step"><div class="loop-num">2</div><h4>Accept mission</h4><p>Pick from Story, Skill, Speed Build, Debug Run, or Deep Dive.</p></div>
+    <div class="loop-step"><div class="loop-num">3</div><h4>Build</h4><p>Write real code. The app reads your actual activity — no checkbox cheating.</p></div>
+    <div class="loop-step"><div class="loop-num">4</div><h4>Ship it</h4><p>Push, deploy, or share. Crash throws a party. The Source gets stronger.</p></div>
+    <div class="loop-step"><div class="loop-num">5</div><h4>Grow</h4><p>Characters evolve. New dialogue unlocks. Next mission arc opens.</p></div>
+  </div>
+</section>
+
+<section class="section" id="sec-missions">
+  <div class="sh"><h2>28-Day Mission Arc</h2><p>Four weeks. Eight characters. One restored Source.</p><div class="sh-rule" style="background:#A32D2D;"></div></div>
+  <div class="timeline">
+    <div class="week-block">
+      <div class="week-label"><span class="week-dot" style="background:#534AB7;"></span>Week 1 — Arrival · Days 1–7</div>
+      <div class="mission-row"><span class="mission-tag story">Story: Boot sequence</span><span class="mission-tag skill">Skill: HTML + CSS</span><span class="mission-tag debug">Debug Run: Fix broken homepage</span><span class="mission-tag boss">Boss: Contain Null Cascade Zone 1</span></div>
+      <div class="week-unlocks"><span class="unlock-badge" style="color:#534AB7;">Byte — Day 1</span><span class="unlock-badge" style="color:#BA7517;">Nova — Day 2</span><span class="unlock-badge" style="color:#085041;">Sage — Day 4</span></div>
+      <p class="week-desc">The player arrives in the DevRealm with no context. Byte is the only character present. The first mission is just to build a working webpage — any webpage.</p>
+    </div>
+    <div class="week-block">
+      <div class="week-label"><span class="week-dot" style="background:#993556;"></span>Week 2 — Fracture · Days 8–14</div>
+      <div class="mission-row"><span class="mission-tag story">Story: The Fracture Line</span><span class="mission-tag skill">Skill: JavaScript</span><span class="mission-tag speed">Speed Build: Landing page in 30 min</span><span class="mission-tag debug">Debug Run: 3 JS errors</span><span class="mission-tag boss">Boss: Full response app</span></div>
+      <div class="week-unlocks"><span class="unlock-badge" style="color:#993556;">Glitch — on 3rd error</span><span class="unlock-badge" style="color:#A32D2D;">Crash — after first speed build</span></div>
+      <p class="week-desc">The Null Cascade pushes into Zone 2. Glitch appears when you hit your first error streak — she frames it as a feature. Crash unlocks after your first speed build and immediately wants another one.</p>
+    </div>
+    <div class="week-block">
+      <div class="week-label"><span class="week-dot" style="background:#444441;"></span>Week 3 — Depth · Days 15–21</div>
+      <div class="mission-row"><span class="mission-tag story">Story: The Deep Stack</span><span class="mission-tag skill">Skill: APIs + backend basics</span><span class="mission-tag deep">Deep Dive: System design</span><span class="mission-tag speed">Speed Build: CLI tool in 20 min</span><span class="mission-tag boss">Boss: Command centre app</span></div>
+      <div class="week-unlocks"><span class="unlock-badge" style="color:#444441;">Zero — Day 15</span><span class="unlock-badge" style="color:#534AB7;">Luna — Day 15</span></div>
+      <p class="week-desc">Zero appears after the Week 2 boss — he was there all along, silently watching your code for inefficiencies. Luna shows up the same day, having heard about you from someone she won't name.</p>
+    </div>
+    <div class="week-block">
+      <div class="week-label"><span class="week-dot" style="background:#3B6D11;"></span>Week 4 — The Source · Days 22–28</div>
+      <div class="mission-row"><span class="mission-tag story">Story: Byte's origin revealed</span><span class="mission-tag deep">Deep Dive: Architecture review</span><span class="mission-tag speed">Speed Build: Deploy in 15 min</span><span class="mission-tag boss">Boss: Capstone — restore The Source</span></div>
+      <div class="week-unlocks"><span class="unlock-badge" style="color:#3B6D11;">Null — Day 22 (cannot be unlocked)</span></div>
+      <p class="week-desc">Null begins appearing on Day 22 — it cannot be unlocked or added to your crew, it just shows up. The capstone project is a real deployable app that patches The Source and ends the Null Cascade.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="sec-profiles">
+  <div class="sh"><h2>Character Profiles</h2><p>Full character sheets — design, lore, mechanics, and palette.</p><div class="sh-rule" style="background:#993556;"></div></div>
+  <div class="profiles-grid" id="profiles-grid"></div>
+</section>
+
+<section class="section" id="sec-design">
+  <div class="sh"><h2>Design System</h2><p>Tokens, typography, and color palette for DevPet.</p><div class="sh-rule" style="background:#085041;"></div></div>
+  <div class="ds-section">
+    <h3>App background &amp; surface</h3>
+    <div class="palette-row">
+      <div class="swatch" style="background:#F5F2E8;border:1px solid rgba(0,0,0,0.1);"><div class="swatch-label" style="color:#1C1A12;">#F5F2E8<br>App BG</div></div>
+      <div class="swatch" style="background:#FFFFFF;border:1px solid rgba(0,0,0,0.1);"><div class="swatch-label" style="color:#1C1A12;">#FFFFFF<br>Card</div></div>
+      <div class="swatch" style="background:#1C1A12;"><div class="swatch-label" style="color:#F5F2E8;">#1C1A12<br>Ink</div></div>
+      <div class="swatch" style="background:#E8A800;"><div class="swatch-label" style="color:#1C1A12;">#E8A800<br>Accent amber</div></div>
+      <div class="swatch" style="background:#888780;"><div class="swatch-label" style="color:#fff;">#888780<br>Muted</div></div>
+    </div>
+  </div>
+  <div class="ds-section"><h3>Character palettes</h3><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;" id="char-palettes"></div></div>
+  <div class="ds-section">
+    <h3>Typography</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+      <div class="lore-card"><p style="font-family:'Fraunces',serif;font-size:26px;font-weight:700;margin-bottom:8px;">Fraunces</p><p style="font-size:11px;color:#888;">Display serif — hero text, character names, pull quotes.</p></div>
+      <div class="lore-card"><p style="font-family:'Anybody',sans-serif;font-size:20px;font-weight:600;margin-bottom:8px;">Anybody</p><p style="font-size:11px;color:#888;">Variable sans — all UI labels, badges, body text, buttons.</p></div>
+      <div class="lore-card"><p style="font-family:'Overpass Mono',monospace;font-size:17px;font-weight:400;margin-bottom:8px;">Overpass Mono</p><p style="font-size:11px;color:#888;">Monospace — code snippets, mission IDs, technical labels.</p></div>
+    </div>
+  </div>
+  <div class="ds-section">
+    <h3>Mission type tags</h3>
+    <div class="mission-row">
+      <span class="mission-tag story">Story mission</span><span class="mission-tag skill">Skill mission</span><span class="mission-tag speed">Speed build</span><span class="mission-tag debug">Debug run</span><span class="mission-tag deep">Deep dive</span><span class="mission-tag boss">Boss mission</span>
+    </div>
+  </div>
+</section>
+</div>
+<script>
+
+const CHARS = {
+  byte:{name:'Byte',species:'Spirit blob · Unknown origin',color:'#534AB7',badgeBg:'#EEEDFE',badgeColor:'#534AB7',badge:'The Chaotic Core',animLabel:'Glitch storm',quote:'"I\'ve been here longer than the logs remember."',design:'Square blob body with horizontal stripe detail lines — reads like a little server/terminal box. Detached arm stubs. No neck. Antenna tips are the soul.',sig:'Twin amber antenna tips. Flicker constantly. Glow white on level-up.',role:'Main home screen companion. Reacts to all coding activity in real-time.',anim:'Rapid screen-tear glitch storm — body slices split horizontally and shift at different offsets, RGB chromatic aberration layers flash, pixel scatter fragments scatter across the body, antenna tips strobe. Far more intense than a twitch.',palette:['#7F77DD','#534AB7','#3C3489','#26215C','#FCDE5A','#AFA9EC']},
+  nova:{name:'Nova',species:'Fire fox · Star system refugee',color:'#BA7517',badgeBg:'#FAEEDA',badgeColor:'#854F0B',badge:'The Genius Mentor',animLabel:'Tail wag',quote:'"I know 17 ways. Let\'s start with the weirdest."',design:'Fox with pointed triangular ears. Big chunky tail as a separate path. White chest patch + star badge. Eyes look up-right = curiosity.',sig:'Star sparkle pixel in each eye. Tail wags while thinking.',role:'Primary tutor. Appears during lessons with deep explanations.',anim:'Gentle float up-down. Tail wags with a slight delay, creating a secondary motion. Star sparkles in eyes pulse.',palette:['#BA7517','#D4820A','#EF9F27','#FCDE5A','#633806','#FAEEDA']},
+  glitch:{name:'Glitch',species:'Pink cat · Rogue engineer',color:'#993556',badgeBg:'#FBEAF0',badgeColor:'#993556',badge:'The Hacker Rebel',animLabel:'Glitch twitch',quote:'"Rules are suggestions the compiler hasn\'t rejected yet."',design:'Pink cat with hoodie. Left eye is a dark patch with red glow inside — hacker asymmetry. Whisker lines. Glitch pixels scattered on body.',sig:'Eye patch with red glow. Tail behind body. Asymmetric smirk.',role:'Appears when you hit errors. Frames bugs as features.',anim:'Periodic glitch twitch — entire body shifts 3px and snaps back. Chaos pixels on body flicker in/out. Red eye behind patch glows.',palette:['#D4537E','#ED93B1','#993556','#2C2C2A','#E24B4A','#F4C0D1']},
+  sage:{name:'Sage',species:'Teal owl · Ancient archivist',color:'#085041',badgeBg:'#E1F5EE',badgeColor:'#085041',badge:'The Wise Guide',animLabel:'Owl scan',quote:'"There is no shortcut. Only the path."',design:'Wide round head with dark brow tufts. Feather-striped body, slab wings. Triangle beak. Eyes are larger than any other character. Holds a scroll.',sig:'Enormous eyes. Tiny triangle beak. Scroll in wing with text lines.',role:'Hosts deep-dive learning paths. Provides lore entries.',anim:'Owl head rotates side to side — left, pause, right, pause, center — like a real owl scanning. Body stays perfectly still while only the head moves. Eerie and watchful.',palette:['#1D9E75','#0F6E56','#085041','#04342C','#EF9F27','#9FE1CB']},
+  crash:{name:'Crash',species:'Red bear · Fearless builder',color:'#A32D2D',badgeBg:'#FCEBEB',badgeColor:'#A32D2D',badge:'The Brute Force Hero',animLabel:'Power bounce',quote:'"Ship it. Fix it. Ship it again."',design:'Widest character. Round bear ears on top corners. Chunky square arms. Engineer badge on chest. Thick dark brows. Muzzle patch + grin.',sig:'Width + round bear ears. Fist hands. Engineer chest badge.',role:'Speed build events, hackathon mode. Celebrates every ship.',anim:'Energetic bounce with body squish on landing. Arms pump alternately. The most kinetic character — rarely still.',palette:['#E24B4A','#F09595','#A32D2D','#791F1F','#501313','#FCEBEB']},
+  zero:{name:'Zero',species:'Code wraith · Forgotten process',color:'#444441',badgeBg:'#F1EFE8',badgeColor:'#5F5E5A',badge:'The Silent Optimiser',animLabel:'Ghost float',quote:'"The fastest code is code that doesn\'t run."',design:'Ghost/wraith with NO legs — robe tapers to floating bottom. Deep dark hood. Layered blue glow eyes. Floating disconnected hands. Code particle dashes orbit.',sig:'Blue layered glow eyes. Ghost taper at bottom. Floats above shadow.',role:'Appears when code is inefficient. Silent refactor nudges.',anim:'Slow ethereal float with a subtle sway. Hands drift independently. Code particle dashes drift upward and fade. Eye glow pulses.',palette:['#D3D1C7','#888780','#5F5E5A','#444441','#2C2C2A','#378ADD']},
+  luna:{name:'Luna',species:'Indie dreamer · Human',color:'#534AB7',badgeBg:'#EEEDFE',badgeColor:'#534AB7',badge:'The Creative Builder',animLabel:'Head bop',quote:'"No idea what I\'m doing. Shipped 7 things this month."',design:'Human with dark hair. Headphone arc over head. Purple jacket with zip. Star detail in eyes. Holds a phone in right hand.',sig:'Headphone arc — only human. Right hand holds phone.',role:'Peer companion. Co-builds in collaborative challenges.',anim:'Rhythmic head bop (vibing to music). Headphone pads pulse. Star eye details twinkle. Phone tilts slightly as if reading.',palette:['#534AB7','#7F77DD','#3C3489','#26215C','#FAEEDA','#AFA9EC']},
+  null:{name:'Null',species:'Slime · Uninitialized entity',color:'#3B6D11',badgeBg:'#EAF3DE',badgeColor:'#3B6D11',badge:'The Wild Card',animLabel:'Jester bounce',quote:'"???"',design:'Wild card jester with human proportions. Intentionally asymmetric outfit — left side green, right side purple, nothing matches. Two-pronged jester hat with gold bell tips, different heights. Holds a ? card in right hand. Single blush on one cheek only. Eyebrows don\'t match.',sig:'Split green/purple outfit. Asymmetric jester hat with bells. ? pupils.',role:'Random event character. Appears unexpectedly with secret content and chaos missions.',anim:'Body bounces with alternating lean. Bells swing on hat tips. Arms swing out of phase. ? pupils bob. Coin spins on left shoulder. Chaos sparkles orbit.',palette:['#639922','#7F77DD','#FCDE5A','#C8A87A','#27500A','#3C3489']},
+};
+const MOODS=['Idle','Happy','Worried','Legendary'];
+let activeId=null,activeMood='Idle';
+
+/* ─── SVG ELEMENT FACTORY ─── */
+const ns='http://www.w3.org/2000/svg';
+const e=(tag,a={})=>{const el=document.createElementNS(ns,tag);Object.entries(a).forEach(([k,v])=>el.setAttribute(k,v));return el;};
+const g=(a={})=>e('g',a);
+
+/* ─── ANIMATION INJECT ─── */
+function addAnim(el,name,dur,delay='0s',ease='ease-in-out',iter='infinite',origin='center bottom'){
+  el.style.animation=`${name} ${dur} ${ease} ${delay} ${iter}`;
+  el.style.transformOrigin=origin;
+  return el;
+}
+
+/* ─── BYTE ─── */
+function drawByte(svg,mood,scale){
+  const happy=mood==='Happy'||mood==='Legendary',worried=mood==='Worried',legend=mood==='Legendary';
+  const S=scale, irisC=worried?'#E24B4A':legend?'#FCDE5A':'#26215C';
+
+  svg.appendChild(e('ellipse',{cx:62*S,cy:228*S,rx:38*S,ry:7*S,fill:'#26215C',opacity:'0.10'}));
+
+  const legsGroup=g();
+  [['36','168','20','36','3','#3C3489'],['62','168','20','36','3','#3C3489']].forEach(([x,y,w,h,rx,f])=>legsGroup.appendChild(e('rect',{x:x*S,y:y*S,width:w*S,height:h*S,rx:rx*S,fill:f})));
+  [['28','195','30','14','4','#26215C'],['58','195','30','14','4','#26215C']].forEach(([x,y,w,h,rx,f])=>legsGroup.appendChild(e('rect',{x:x*S,y:y*S,width:w*S,height:h*S,rx:rx*S,fill:f})));
+  [['33','198','7','5','1','#534AB7','0.6'],['43','198','7','5','1','#534AB7','0.6'],['63','198','7','5','1','#534AB7','0.6'],['73','198','7','5','1','#534AB7','0.6']].forEach(([x,y,w,h,rx,f,op])=>legsGroup.appendChild(e('rect',{x:x*S,y:y*S,width:w*S,height:h*S,rx:rx*S,fill:f,opacity:op})));
+  svg.appendChild(legsGroup);
+
+  const rootG=g();
+  addAnim(rootG,'byte-storm-body','3.4s','0s','steps(1)','infinite','center');
+
+  const bodyG=g();
+
+  bodyG.appendChild(e('rect',{x:22*S,y:95*S,width:80*S,height:80*S,rx:6*S,fill:'#7F77DD'}));
+  [[22,105],[22,113],[22,121],[22,129],[22,137]].forEach(([x,y])=>bodyG.appendChild(e('rect',{x:x*S,y:y*S,width:80*S,height:2*S,fill:'#3C3489',opacity:'0.35'})));
+  bodyG.appendChild(e('rect',{x:38*S,y:138*S,width:48*S,height:28*S,rx:4*S,fill:'#3C3489',opacity:'0.5'}));
+  bodyG.appendChild(e('rect',{x:46*S,y:143*S,width:14*S,height:3*S,rx:1*S,fill:'#AFA9EC',opacity:'0.7'}));
+  bodyG.appendChild(e('rect',{x:46*S,y:149*S,width:10*S,height:3*S,rx:1*S,fill:'#AFA9EC',opacity:'0.5'}));
+  bodyG.appendChild(e('rect',{x:2*S,y:105*S,width:22*S,height:16*S,rx:5*S,fill:'#7F77DD'}));
+  bodyG.appendChild(e('rect',{x:0*S,y:116*S,width:16*S,height:14*S,rx:4*S,fill:'#534AB7'}));
+  bodyG.appendChild(e('rect',{x:100*S,y:105*S,width:22*S,height:16*S,rx:5*S,fill:'#7F77DD'}));
+  bodyG.appendChild(e('rect',{x:108*S,y:116*S,width:16*S,height:14*S,rx:4*S,fill:'#534AB7'}));
+
+  const antG=g();
+  antG.appendChild(e('rect',{x:40*S,y:28*S,width:5*S,height:20*S,rx:2*S,fill:'#534AB7'}));
+  antG.appendChild(e('rect',{x:79*S,y:28*S,width:5*S,height:20*S,rx:2*S,fill:'#534AB7'}));
+  const tipL=e('rect',{x:38*S,y:20*S,width:9*S,height:9*S,rx:2*S,fill:legend?'white':'#FCDE5A'});
+  const tipR=e('rect',{x:77*S,y:20*S,width:9*S,height:9*S,rx:2*S,fill:legend?'white':'#FCDE5A'});
+  addAnim(tipL,'tip-strobe','3.4s','0s','steps(1)','infinite',`${42*S}px ${24*S}px`);
+  addAnim(tipR,'tip-strobe','3.4s','0.15s','steps(1)','infinite',`${81*S}px ${24*S}px`);
+  antG.appendChild(tipL); antG.appendChild(tipR);
+  bodyG.appendChild(antG);
+
+  bodyG.appendChild(e('rect',{x:18*S,y:40*S,width:88*S,height:62*S,rx:10*S,fill:'#7F77DD'}));
+  bodyG.appendChild(e('rect',{x:18*S,y:40*S,width:3*S,height:62*S,fill:'#AFA9EC',opacity:'0.3'}));
+  bodyG.appendChild(e('rect',{x:28*S,y:52*S,width:24*S,height:18*S,rx:3*S,fill:'white',opacity:'0.95'}));
+  bodyG.appendChild(e('rect',{x:72*S,y:52*S,width:24*S,height:18*S,rx:3*S,fill:'white',opacity:'0.95'}));
+
+  const irisL=e('rect',{x:29*S,y:52*S,width:22*S,height:8*S,rx:2*S,fill:irisC});
+  const irisR=e('rect',{x:73*S,y:52*S,width:22*S,height:8*S,rx:2*S,fill:irisC});
+  addAnim(irisL,'byte-eye-flash','3.4s','0s','steps(1)','infinite');
+  addAnim(irisR,'byte-eye-flash','3.4s','0.05s','steps(1)','infinite');
+  bodyG.appendChild(irisL); bodyG.appendChild(irisR);
+  bodyG.appendChild(e('rect',{x:32*S,y:54*S,width:14*S,height:12*S,fill:irisC}));
+  bodyG.appendChild(e('rect',{x:76*S,y:54*S,width:14*S,height:12*S,fill:irisC}));
+  bodyG.appendChild(e('rect',{x:34*S,y:56*S,width:5*S,height:4*S,rx:1*S,fill:'white',opacity:'0.9'}));
+  bodyG.appendChild(e('rect',{x:78*S,y:56*S,width:5*S,height:4*S,rx:1*S,fill:'white',opacity:'0.9'}));
+
+  if(happy){bodyG.appendChild(e('path',{d:`M${44*S} ${82*S} Q${62*S} ${92*S} ${80*S} ${82*S}`,fill:'none',stroke:'#26215C','stroke-width':2.5*S,'stroke-linecap':'round'}));}
+  else if(worried){bodyG.appendChild(e('path',{d:`M${44*S} ${86*S} Q${62*S} ${80*S} ${80*S} ${86*S}`,fill:'none',stroke:'#26215C','stroke-width':2*S,'stroke-linecap':'round'}));}
+  else{bodyG.appendChild(e('rect',{x:44*S,y:82*S,width:36*S,height:6*S,rx:3*S,fill:'#3C3489',opacity:'0.6'}));bodyG.appendChild(e('rect',{x:54*S,y:78*S,width:6*S,height:4*S,rx:1*S,fill:'#3C3489',opacity:'0.4'}));}
+
+  rootG.appendChild(bodyG);
+
+  /* — Screen-tear slice 1: upper body strip, offset left — */
+  const tear1=e('rect',{x:18*S,y:50*S,width:88*S,height:18*S,rx:0,fill:'#7F77DD'});
+  addAnim(tear1,'byte-tear-1','3.4s','0s','steps(1)','infinite',`${62*S}px ${59*S}px`);
+  rootG.appendChild(tear1);
+  const tear1face=e('rect',{x:18*S,y:52*S,width:88*S,height:14*S,rx:0,fill:'#7F77DD',opacity:'0.9'});
+  addAnim(tear1face,'byte-tear-1','3.4s','0.04s','steps(1)','infinite',`${62*S}px ${59*S}px`);
+  rootG.appendChild(tear1face);
+
+  /* — Screen-tear slice 2: mid-body strip, offset right — */
+  const tear2=e('rect',{x:22*S,y:105*S,width:80*S,height:16*S,rx:0,fill:'#7F77DD'});
+  addAnim(tear2,'byte-tear-2','3.4s','0.02s','steps(1)','infinite',`${62*S}px ${113*S}px`);
+  rootG.appendChild(tear2);
+
+  /* — RGB chromatic aberration: red ghost — */
+  const rgbR=e('rect',{x:18*S,y:40*S,width:88*S,height:62*S,rx:10*S,fill:'#E24B4A',opacity:'0.35'});
+  addAnim(rgbR,'byte-rgb-r','3.4s','0.01s','steps(1)','infinite','center');
+  rootG.appendChild(rgbR);
+
+  /* — RGB chromatic aberration: blue ghost — */
+  const rgbB=e('rect',{x:18*S,y:40*S,width:88*S,height:62*S,rx:10*S,fill:'#378ADD',opacity:'0.35'});
+  addAnim(rgbB,'byte-rgb-b','3.4s','0.03s','steps(1)','infinite','center');
+  rootG.appendChild(rgbB);
+
+  /* — Pixel scatter fragments — */
+  const px1=e('rect',{x:40*S,y:65*S,width:8*S,height:5*S,rx:1*S,fill:'#FCDE5A'});
+  const px2=e('rect',{x:70*S,y:58*S,width:6*S,height:4*S,rx:1*S,fill:'#9FE1CB'});
+  const px3=e('rect',{x:30*S,y:108*S,width:5*S,height:5*S,rx:1*S,fill:'#F09595'});
+  const px4=e('rect',{x:85*S,y:118*S,width:7*S,height:4*S,rx:1*S,fill:'#FCDE5A'});
+  const px5=e('rect',{x:55*S,y:88*S,width:10*S,height:4*S,rx:1*S,fill:'#AFA9EC'});
+  addAnim(px1,'byte-px-scatter','3.4s','0s','ease-out','infinite',`${44*S}px ${67*S}px`);
+  addAnim(px2,'byte-px-scatter2','3.4s','0.06s','ease-out','infinite',`${73*S}px ${60*S}px`);
+  addAnim(px3,'byte-px-scatter3','3.4s','0.02s','ease-out','infinite',`${32*S}px ${110*S}px`);
+  addAnim(px4,'byte-px-scatter','3.4s','0.08s','ease-out','infinite',`${88*S}px ${120*S}px`);
+  addAnim(px5,'byte-px-scatter2','3.4s','0.04s','ease-out','infinite',`${60*S}px ${90*S}px`);
+  rootG.appendChild(px1);rootG.appendChild(px2);rootG.appendChild(px3);rootG.appendChild(px4);rootG.appendChild(px5);
+
+  svg.appendChild(rootG);
+}
+
+/* ─── NOVA ─── */
+function drawNova(svg,mood,scale){
+  const happy=mood==='Happy'||mood==='Legendary',worried=mood==='Worried',legend=mood==='Legendary';
+  const S=scale, niC=worried?'#7A2800':'#412402';
+
+  svg.appendChild(e('ellipse',{cx:62*S,cy:225*S,rx:38*S,ry:7*S,fill:'#412402',opacity:'0.10'}));
+  svg.appendChild(e('rect',{x:36*S,y:170*S,width:20*S,height:34*S,rx:3*S,fill:'#854F0B'}));
+  svg.appendChild(e('rect',{x:62*S,y:170*S,width:20*S,height:34*S,rx:3*S,fill:'#854F0B'}));
+  svg.appendChild(e('rect',{x:29*S,y:196*S,width:30*S,height:14*S,rx:5*S,fill:'#633806'}));
+  svg.appendChild(e('rect',{x:59*S,y:196*S,width:30*S,height:14*S,rx:5*S,fill:'#633806'}));
+
+  const tailG=g();
+  addAnim(tailG,'tail-wag','1.6s','0.2s','ease-in-out','infinite',`${102*S}px ${182*S}px`);
+  tailG.appendChild(e('path',{d:`M${102*S},${182*S} Q${130*S},${157*S} ${128*S},${192*S} Q${126*S},${217*S} ${112*S},${212*S}`,fill:'none',stroke:legend?'#FCDE5A':'#BA7517','stroke-width':happy?16*S:14*S,'stroke-linecap':'round'}));
+  if(happy||legend)tailG.appendChild(e('path',{d:`M${112*S},${193*S} Q${128*S},${177*S} ${126*S},${199*S}`,fill:'none',stroke:'#FCDE5A','stroke-width':5*S,'stroke-linecap':'round',opacity:'0.8'}));
+  svg.appendChild(tailG);
+
+  const floatG=g();
+  addAnim(floatG,'nova-float','2.2s','0s','ease-in-out','infinite',`${62*S}px ${120*S}px`);
+  floatG.appendChild(e('rect',{x:22*S,y:97*S,width:80*S,height:78*S,rx:6*S,fill:'#BA7517'}));
+  floatG.appendChild(e('rect',{x:38*S,y:103*S,width:48*S,height:50*S,rx:4*S,fill:'#FAEEDA',opacity:'0.5'}));
+  floatG.appendChild(e('rect',{x:50*S,y:118*S,width:24*S,height:20*S,rx:3*S,fill:'#EF9F27',opacity:'0.7'}));
+  floatG.appendChild(e('rect',{x:56*S,y:122*S,width:12*S,height:3*S,rx:1*S,fill:'#FCDE5A',opacity:'0.9'}));
+  floatG.appendChild(e('rect',{x:58*S,y:128*S,width:8*S,height:3*S,rx:1*S,fill:'#FCDE5A',opacity:'0.7'}));
+  floatG.appendChild(e('rect',{x:2*S,y:106*S,width:22*S,height:16*S,rx:5*S,fill:'#BA7517'}));
+  floatG.appendChild(e('rect',{x:0*S,y:118*S,width:16*S,height:14*S,rx:5*S,fill:'#EF9F27'}));
+  floatG.appendChild(e('rect',{x:100*S,y:106*S,width:22*S,height:16*S,rx:5*S,fill:'#BA7517'}));
+  floatG.appendChild(e('rect',{x:108*S,y:112*S,width:18*S,height:14*S,rx:5*S,fill:'#EF9F27'}));
+  floatG.appendChild(e('rect',{x:120*S,y:100*S,width:8*S,height:14*S,rx:3*S,fill:'#EF9F27'}));
+  floatG.appendChild(e('polygon',{points:`${28*S},${44*S} ${14*S},${10*S} ${48*S},${36*S}`,fill:'#BA7517'}));
+  floatG.appendChild(e('polygon',{points:`${32*S},${42*S} ${20*S},${13*S} ${46*S},${36*S}`,fill:'#EF9F27'}));
+  floatG.appendChild(e('polygon',{points:`${96*S},${44*S} ${110*S},${10*S} ${76*S},${36*S}`,fill:'#BA7517'}));
+  floatG.appendChild(e('polygon',{points:`${92*S},${42*S} ${104*S},${13*S} ${78*S},${36*S}`,fill:'#EF9F27'}));
+  floatG.appendChild(e('rect',{x:18*S,y:36*S,width:88*S,height:66*S,rx:10*S,fill:'#BA7517'}));
+  floatG.appendChild(e('rect',{x:36*S,y:72*S,width:52*S,height:22*S,rx:8*S,fill:'#FAEEDA',opacity:'0.7'}));
+  floatG.appendChild(e('rect',{x:26*S,y:48*S,width:26*S,height:20*S,rx:4*S,fill:'white',opacity:'0.95'}));
+  floatG.appendChild(e('rect',{x:72*S,y:48*S,width:26*S,height:20*S,rx:4*S,fill:'white',opacity:'0.95'}));
+  floatG.appendChild(e('rect',{x:27*S,y:48*S,width:24*S,height:9*S,rx:2*S,fill:niC}));
+  floatG.appendChild(e('rect',{x:73*S,y:48*S,width:24*S,height:9*S,rx:2*S,fill:niC}));
+  floatG.appendChild(e('rect',{x:30*S,y:50*S,width:18*S,height:15*S,fill:niC}));
+  floatG.appendChild(e('rect',{x:76*S,y:50*S,width:18*S,height:15*S,fill:niC}));
+  floatG.appendChild(e('rect',{x:32*S,y:52*S,width:6*S,height:5*S,rx:1*S,fill:'white',opacity:'0.9'}));
+  floatG.appendChild(e('rect',{x:78*S,y:52*S,width:6*S,height:5*S,rx:1*S,fill:'white',opacity:'0.9'}));
+  const sL=e('rect',{x:42*S,y:52*S,width:4*S,height:4*S,rx:1*S,fill:'#FCDE5A',opacity:'0.8'});
+  const sR=e('rect',{x:88*S,y:52*S,width:4*S,height:4*S,rx:1*S,fill:'#FCDE5A',opacity:'0.8'});
+  addAnim(sL,'star-pulse','1.4s','0s','ease-in-out','infinite',`${44*S}px ${54*S}px`);
+  addAnim(sR,'star-pulse','1.4s','0.5s','ease-in-out','infinite',`${90*S}px ${54*S}px`);
+  floatG.appendChild(sL); floatG.appendChild(sR);
+  floatG.appendChild(e('rect',{x:52*S,y:76*S,width:20*S,height:10*S,rx:4*S,fill:'#633806',opacity:'0.8'}));
+  const mouth=happy||legend ? e('path',{d:`M${36*S} ${88*S} Q${62*S} ${100*S} ${88*S} ${88*S}`,fill:'none',stroke:'#633806','stroke-width':2.5*S,'stroke-linecap':'round'}) : worried ? e('path',{d:`M${40*S} ${91*S} Q${62*S} ${85*S} ${84*S} ${91*S}`,fill:'none',stroke:'#633806','stroke-width':2*S,'stroke-linecap':'round'}) : e('path',{d:`M${42*S} ${88*S} Q${62*S} ${96*S} ${82*S} ${88*S}`,fill:'none',stroke:'#633806','stroke-width':2*S,'stroke-linecap':'round'});
+  floatG.appendChild(mouth);
+  const starF=e('rect',{x:6*S,y:16*S,width:8*S,height:8*S,rx:2*S,fill:'#FCDE5A',opacity:legend?'0.8':'0.5'});
+  addAnim(starF,'star-twinkle','1.8s','0.3s','ease-in-out','infinite',`${10*S}px ${20*S}px`);
+  floatG.appendChild(starF);
+  svg.appendChild(floatG);
+}
+
+/* ─── GLITCH ─── */
+function drawGlitch(svg,mood,scale){
+  const happy=mood==='Happy'||mood==='Legendary',worried=mood==='Worried',legend=mood==='Legendary';
+  const S=scale, riC=worried?'#7A1F44':legend?'#D4537E':'#4B1528';
+  svg.appendChild(e('ellipse',{cx:62*S,cy:225*S,rx:38*S,ry:7*S,fill:'#4B1528',opacity:'0.10'}));
+  svg.appendChild(e('rect',{x:36*S,y:170*S,width:20*S,height:36*S,rx:3*S,fill:'#2C2C2A'}));
+  svg.appendChild(e('rect',{x:62*S,y:170*S,width:20*S,height:36*S,rx:3*S,fill:'#2C2C2A'}));
+  svg.appendChild(e('rect',{x:28*S,y:197*S,width:32*S,height:14*S,rx:4*S,fill:'#1a1a1a'}));
+  svg.appendChild(e('rect',{x:58*S,y:197*S,width:32*S,height:14*S,rx:4*S,fill:'#1a1a1a'}));
+  const tailG=g();
+  tailG.appendChild(e('path',{d:`M${102*S},${175*S} Q${132*S},${155*S} ${130*S},${188*S} Q${128*S},${212*S} ${114*S},${208*S}`,fill:'none',stroke:'#D4537E','stroke-width':13*S,'stroke-linecap':'round'}));
+  svg.appendChild(tailG);
+
+  const twitchG=g();
+  addAnim(twitchG,'glitch-twitch','4s','0.5s','ease-in-out','infinite','center');
+  twitchG.appendChild(e('rect',{x:22*S,y:97*S,width:80*S,height:78*S,rx:6*S,fill:'#2C2C2A'}));
+  twitchG.appendChild(e('rect',{x:59*S,y:97*S,width:6*S,height:78*S,fill:'#1a1a1a',opacity:'0.5'}));
+  const gpx1=e('rect',{x:30*S,y:108*S,width:14*S,height:3*S,rx:1*S,fill:'#E24B4A',opacity:'0.5'});
+  const gpx2=e('rect',{x:76*S,y:118*S,width:10*S,height:3*S,rx:1*S,fill:'#E24B4A',opacity:'0.4'});
+  const gpx3=e('rect',{x:28*S,y:128*S,width:8*S,height:3*S,rx:1*S,fill:'#F4C0D1',opacity:'0.4'});
+  addAnim(gpx1,'px-chaos','2.3s','0.2s','ease-in-out','infinite');
+  addAnim(gpx2,'px-chaos','3.1s','1.1s','ease-in-out','infinite');
+  addAnim(gpx3,'px-chaos','2.7s','0.7s','ease-in-out','infinite');
+  twitchG.appendChild(gpx1);twitchG.appendChild(gpx2);twitchG.appendChild(gpx3);
+  twitchG.appendChild(e('rect',{x:38*S,y:142*S,width:48*S,height:24*S,rx:4*S,fill:'#3d3d3a'}));
+  twitchG.appendChild(e('rect',{x:46*S,y:147*S,width:16*S,height:2*S,rx:1*S,fill:'#E24B4A',opacity:'0.6'}));
+  twitchG.appendChild(e('rect',{x:46*S,y:152*S,width:11*S,height:2*S,rx:1*S,fill:'#E24B4A',opacity:'0.4'}));
+  twitchG.appendChild(e('rect',{x:2*S,y:106*S,width:22*S,height:16*S,rx:5*S,fill:'#2C2C2A'}));
+  twitchG.appendChild(e('rect',{x:0*S,y:118*S,width:16*S,height:14*S,rx:4*S,fill:'#D4537E'}));
+  twitchG.appendChild(e('rect',{x:100*S,y:106*S,width:22*S,height:16*S,rx:5*S,fill:'#2C2C2A'}));
+  twitchG.appendChild(e('rect',{x:108*S,y:118*S,width:16*S,height:14*S,rx:4*S,fill:'#D4537E'}));
+  twitchG.appendChild(e('polygon',{points:`${28*S},${42*S} ${14*S},${8*S} ${46*S},${34*S}`,fill:'#D4537E'}));
+  twitchG.appendChild(e('polygon',{points:`${33*S},${40*S} ${20*S},${11*S} ${46*S},${34*S}`,fill:'#ED93B1',opacity:'0.7'}));
+  twitchG.appendChild(e('polygon',{points:`${96*S},${42*S} ${110*S},${8*S} ${78*S},${34*S}`,fill:'#D4537E'}));
+  twitchG.appendChild(e('polygon',{points:`${91*S},${40*S} ${104*S},${11*S} ${78*S},${34*S}`,fill:'#ED93B1',opacity:'0.7'}));
+  twitchG.appendChild(e('rect',{x:18*S,y:36*S,width:88*S,height:66*S,rx:10*S,fill:'#D4537E'}));
+  const patchC=legend?'#D4537E':'#2C2C2A';
+  twitchG.appendChild(e('rect',{x:22*S,y:48*S,width:28*S,height:20*S,rx:4*S,fill:patchC,opacity:'0.9'}));
+  twitchG.appendChild(e('rect',{x:25*S,y:51*S,width:22*S,height:14*S,rx:2*S,fill:'#E24B4A',opacity:'0.4'}));
+  const eyeGlow=e('rect',{x:28*S,y:54*S,width:12*S,height:8*S,rx:2*S,fill:'#E24B4A',opacity:legend?'0.9':'0.7'});
+  addAnim(eyeGlow,'eye-glow','1.8s','0s','ease-in-out','infinite',`${34*S}px ${58*S}px`);
+  twitchG.appendChild(eyeGlow);
+  twitchG.appendChild(e('rect',{x:74*S,y:48*S,width:26*S,height:20*S,rx:4*S,fill:'white',opacity:'0.95'}));
+  twitchG.appendChild(e('rect',{x:75*S,y:48*S,width:24*S,height:9*S,rx:2*S,fill:riC}));
+  twitchG.appendChild(e('rect',{x:78*S,y:50*S,width:18*S,height:14*S,fill:riC}));
+  twitchG.appendChild(e('rect',{x:80*S,y:52*S,width:6*S,height:4*S,rx:1*S,fill:'white',opacity:'0.9'}));
+  twitchG.appendChild(e('rect',{x:52*S,y:76*S,width:20*S,height:8*S,rx:4*S,fill:'#993556',opacity:'0.7'}));
+  const mouth=happy||legend?e('path',{d:`M${40*S} ${87*S} Q${62*S} ${98*S} ${84*S} ${87*S}`,fill:'none',stroke:'#993556','stroke-width':2*S,'stroke-linecap':'round'}):worried?e('path',{d:`M${50*S} ${89*S} Q${62*S} ${84*S} ${74*S} ${89*S}`,fill:'none',stroke:'#993556','stroke-width':2*S,'stroke-linecap':'round'}):e('path',{d:`M${50*S} ${87*S} Q${62*S} ${93*S} ${72*S} ${84*S}`,fill:'none',stroke:'#993556','stroke-width':2*S,'stroke-linecap':'round'});
+  twitchG.appendChild(mouth);
+  const wL1=e('line',{x1:20*S,y1:78*S,x2:46*S,y2:80*S,stroke:'#993556','stroke-width':1*S,opacity:'0.4'});
+  const wL2=e('line',{x1:20*S,y1:84*S,x2:46*S,y2:84*S,stroke:'#993556','stroke-width':1*S,opacity:'0.4'});
+  const wR1=e('line',{x1:78*S,y1:80*S,x2:104*S,y2:78*S,stroke:'#993556','stroke-width':1*S,opacity:'0.4'});
+  const wR2=e('line',{x1:78*S,y1:84*S,x2:104*S,y2:84*S,stroke:'#993556','stroke-width':1*S,opacity:'0.4'});
+  addAnim(wL1,'whisker-twitch','2s','0s','ease-in-out','infinite',`${20*S}px ${81*S}px`);
+  addAnim(wR1,'whisker-twitch','2s','0.3s','ease-in-out','infinite',`${104*S}px ${79*S}px`);
+  twitchG.appendChild(wL1);twitchG.appendChild(wL2);twitchG.appendChild(wR1);twitchG.appendChild(wR2);
+  twitchG.appendChild(e('rect',{x:4*S,y:60*S,width:6*S,height:3*S,rx:1*S,fill:'#E24B4A',opacity:'0.45'}));
+  twitchG.appendChild(e('rect',{x:112*S,y:44*S,width:5*S,height:3*S,rx:1*S,fill:'#F4C0D1',opacity:'0.5'}));
+  svg.appendChild(twitchG);
+}
+
+/* ─── SAGE ─── */
+function drawSage(svg,mood,scale){
+  const happy=mood==='Happy'||mood==='Legendary',worried=mood==='Worried',legend=mood==='Legendary';
+  const S=scale, siC=worried?'#032016':legend?'#EF9F27':'#085041';
+
+  svg.appendChild(e('ellipse',{cx:62*S,cy:225*S,rx:38*S,ry:7*S,fill:'#04342C',opacity:'0.10'}));
+
+  /* BODY — perfectly still while head scans */
+  const bodyG=g();
+  bodyG.appendChild(e('rect',{x:40*S,y:170*S,width:18*S,height:34*S,rx:3*S,fill:'#085041'}));
+  bodyG.appendChild(e('rect',{x:64*S,y:170*S,width:18*S,height:34*S,rx:3*S,fill:'#085041'}));
+  bodyG.appendChild(e('rect',{x:32*S,y:196*S,width:28*S,height:12*S,rx:4*S,fill:'#04342C'}));
+  bodyG.appendChild(e('rect',{x:62*S,y:196*S,width:28*S,height:12*S,rx:4*S,fill:'#04342C'}));
+  bodyG.appendChild(e('rect',{x:22*S,y:97*S,width:80*S,height:78*S,rx:6*S,fill:'#1D9E75'}));
+  bodyG.appendChild(e('rect',{x:22*S,y:106*S,width:80*S,height:2*S,fill:'#085041',opacity:'0.3'}));
+  bodyG.appendChild(e('rect',{x:22*S,y:114*S,width:80*S,height:2*S,fill:'#085041',opacity:'0.3'}));
+  bodyG.appendChild(e('rect',{x:22*S,y:122*S,width:80*S,height:2*S,fill:'#085041',opacity:'0.3'}));
+  bodyG.appendChild(e('rect',{x:22*S,y:130*S,width:80*S,height:2*S,fill:'#085041',opacity:'0.3'}));
+  bodyG.appendChild(e('rect',{x:2*S,y:100*S,width:22*S,height:60*S,rx:6*S,fill:'#0F6E56'}));
+  bodyG.appendChild(e('rect',{x:100*S,y:100*S,width:22*S,height:60*S,rx:6*S,fill:'#0F6E56'}));
+  bodyG.appendChild(e('rect',{x:4*S,y:108*S,width:18*S,height:2*S,fill:'#085041',opacity:'0.4'}));
+  bodyG.appendChild(e('rect',{x:4*S,y:116*S,width:18*S,height:2*S,fill:'#085041',opacity:'0.4'}));
+  bodyG.appendChild(e('rect',{x:4*S,y:124*S,width:18*S,height:2*S,fill:'#085041',opacity:'0.4'}));
+
+  /* SCROLL — held by right wing, tilts subtly opposite to head */
+  const scrollG=g();
+  addAnim(scrollG,'scroll-hold','4.8s','0s','ease-in-out','infinite',`${109*S}px ${155*S}px`);
+  scrollG.appendChild(e('rect',{x:96*S,y:120*S,width:26*S,height:36*S,rx:4*S,fill:'#FAEEDA'}));
+  scrollG.appendChild(e('rect',{x:100*S,y:126*S,width:16*S,height:2*S,rx:1*S,fill:'#BA7517',opacity:'0.5'}));
+  scrollG.appendChild(e('rect',{x:100*S,y:131*S,width:16*S,height:2*S,rx:1*S,fill:'#BA7517',opacity:'0.5'}));
+  scrollG.appendChild(e('rect',{x:100*S,y:136*S,width:11*S,height:2*S,rx:1*S,fill:'#BA7517',opacity:'0.4'}));
+  bodyG.appendChild(scrollG);
+  svg.appendChild(bodyG);
+
+  /* NECK STUB — connects body to head */
+  svg.appendChild(e('rect',{x:52*S,y:92*S,width:20*S,height:12*S,rx:4*S,fill:'#1D9E75'}));
+
+  /* HEAD GROUP — this rotates side to side */
+  const headG=g();
+  addAnim(headG,'sage-head-scan','4.8s','0s','ease-in-out','infinite',`${62*S}px ${100*S}px`);
+
+  headG.appendChild(e('rect',{x:14*S,y:30*S,width:96*S,height:72*S,rx:14*S,fill:'#1D9E75'}));
+  headG.appendChild(e('ellipse',{cx:62*S,cy:64*S,rx:36*S,ry:30*S,fill:'#9FE1CB',opacity:'0.35'}));
+  headG.appendChild(e('rect',{x:26*S,y:32*S,width:18*S,height:8*S,rx:3*S,fill:'#085041'}));
+  headG.appendChild(e('rect',{x:80*S,y:32*S,width:18*S,height:8*S,rx:3*S,fill:'#085041'}));
+
+  /* Eyes — white base */
+  headG.appendChild(e('rect',{x:26*S,y:44*S,width:28*S,height:24*S,rx:6*S,fill:'white',opacity:'0.95'}));
+  headG.appendChild(e('rect',{x:70*S,y:44*S,width:28*S,height:24*S,rx:6*S,fill:'white',opacity:'0.95'}));
+
+  /* Iris + pupil — track opposite direction of head for the eerie "fixed on you" effect */
+  const eyeTrackL=g();
+  const eyeTrackR=g();
+  addAnim(eyeTrackL,'sage-eye-track-l','4.8s','0s','ease-in-out','infinite','center');
+  addAnim(eyeTrackR,'sage-eye-track-l','4.8s','0s','ease-in-out','infinite','center');
+  eyeTrackL.appendChild(e('rect',{x:27*S,y:44*S,width:26*S,height:10*S,rx:4*S,fill:siC}));
+  eyeTrackL.appendChild(e('rect',{x:30*S,y:48*S,width:20*S,height:18*S,rx:4*S,fill:siC}));
+  eyeTrackL.appendChild(e('rect',{x:33*S,y:50*S,width:7*S,height:6*S,rx:2*S,fill:'white',opacity:'0.9'}));
+  eyeTrackR.appendChild(e('rect',{x:71*S,y:44*S,width:26*S,height:10*S,rx:4*S,fill:siC}));
+  eyeTrackR.appendChild(e('rect',{x:74*S,y:48*S,width:20*S,height:18*S,rx:4*S,fill:siC}));
+  eyeTrackR.appendChild(e('rect',{x:77*S,y:50*S,width:7*S,height:6*S,rx:2*S,fill:'white',opacity:'0.9'}));
+  headG.appendChild(eyeTrackL);
+  headG.appendChild(eyeTrackR);
+
+  /* Beak — triangle, stays with head */
+  headG.appendChild(e('polygon',{points:`${55*S},${74*S} ${62*S},${86*S} ${69*S},${74*S}`,fill:legend?'#FCDE5A':'#EF9F27'}));
+
+  /* Happy mouth */
+  if(happy||legend) headG.appendChild(e('path',{d:`M${38*S} ${95*S} Q${62*S} ${107*S} ${86*S} ${95*S}`,fill:'none',stroke:'#085041','stroke-width':2*S,'stroke-linecap':'round'}));
+
+  svg.appendChild(headG);
+}
+
+/* ─── CRASH ─── */
+function drawCrash(svg,mood,scale){
+  const happy=mood==='Happy'||mood==='Legendary',worried=mood==='Worried',legend=mood==='Legendary';
+  const S=scale, brC=worried?'#3A0000':legend?'#FCDE5A':'#501313';
+  svg.appendChild(e('ellipse',{cx:62*S,cy:225*S,rx:42*S,ry:8*S,fill:'#501313',opacity:'0.10'}));
+  svg.appendChild(e('rect',{x:32*S,y:168*S,width:24*S,height:38*S,rx:4*S,fill:'#A32D2D'}));
+  svg.appendChild(e('rect',{x:62*S,y:168*S,width:24*S,height:38*S,rx:4*S,fill:'#A32D2D'}));
+  svg.appendChild(e('rect',{x:24*S,y:196*S,width:36*S,height:16*S,rx:5*S,fill:'#791F1F'}));
+  svg.appendChild(e('rect',{x:58*S,y:196*S,width:36*S,height:16*S,rx:5*S,fill:'#791F1F'}));
+
+  const fistL=g();
+  addAnim(fistL,'fist-pump-l','0.9s','0s','ease-in-out','infinite',`${10*S}px ${118*S}px`);
+  fistL.appendChild(e('rect',{x:-4*S,y:102*S,width:26*S,height:20*S,rx:6*S,fill:'#E24B4A'}));
+  fistL.appendChild(e('rect',{x:-8*S,y:118*S,width:22*S,height:18*S,rx:6*S,fill:'#F09595',opacity:'0.7'}));
+  svg.appendChild(fistL);
+
+  const fistR=g();
+  addAnim(fistR,'fist-pump-r','0.9s','0.45s','ease-in-out','infinite',`${114*S}px ${118*S}px`);
+  fistR.appendChild(e('rect',{x:102*S,y:102*S,width:26*S,height:20*S,rx:6*S,fill:'#E24B4A'}));
+  fistR.appendChild(e('rect',{x:108*S,y:118*S,width:22*S,height:18*S,rx:6*S,fill:'#F09595',opacity:'0.7'}));
+  svg.appendChild(fistR);
+
+  const bounceG=g();
+  addAnim(bounceG,'crash-bounce','0.9s','0s','ease-in-out','infinite',`${62*S}px ${200*S}px`);
+  const squishG=g();
+  addAnim(squishG,'crash-squish','0.9s','0s','ease-in-out','infinite',`${62*S}px ${160*S}px`);
+  squishG.appendChild(e('rect',{x:18*S,y:95*S,width:88*S,height:80*S,rx:8*S,fill:'#E24B4A'}));
+  squishG.appendChild(e('rect',{x:32*S,y:110*S,width:60*S,height:44*S,rx:4*S,fill:'#A32D2D',opacity:'0.4'}));
+  squishG.appendChild(e('rect',{x:40*S,y:118*S,width:44*S,height:28*S,rx:4*S,fill:'#A32D2D'}));
+  squishG.appendChild(e('rect',{x:46*S,y:123*S,width:20*S,height:3*S,rx:1*S,fill:'#F09595',opacity:'0.7'}));
+  squishG.appendChild(e('rect',{x:46*S,y:129*S,width:14*S,height:3*S,rx:1*S,fill:'#F09595',opacity:'0.5'}));
+  squishG.appendChild(e('rect',{x:46*S,y:135*S,width:10*S,height:3*S,rx:1*S,fill:'#F09595',opacity:'0.4'}));
+  squishG.appendChild(e('circle',{cx:24*S,cy:36*S,r:16*S,fill:'#E24B4A'}));
+  squishG.appendChild(e('circle',{cx:24*S,cy:36*S,r:10*S,fill:'#F09595',opacity:'0.6'}));
+  squishG.appendChild(e('circle',{cx:100*S,cy:36*S,r:16*S,fill:'#E24B4A'}));
+  squishG.appendChild(e('circle',{cx:100*S,cy:36*S,r:10*S,fill:'#F09595',opacity:'0.6'}));
+  squishG.appendChild(e('rect',{x:12*S,y:36*S,width:100*S,height:66*S,rx:12*S,fill:'#E24B4A'}));
+  squishG.appendChild(e('rect',{x:34*S,y:74*S,width:56*S,height:24*S,rx:8*S,fill:'#F09595',opacity:'0.45'}));
+  squishG.appendChild(e('rect',{x:22*S,y:46*S,width:28*S,height:8*S,rx:3*S,fill:brC}));
+  squishG.appendChild(e('rect',{x:74*S,y:46*S,width:28*S,height:8*S,rx:3*S,fill:brC}));
+  squishG.appendChild(e('rect',{x:24*S,y:54*S,width:26*S,height:20*S,rx:4*S,fill:'white',opacity:'0.95'}));
+  squishG.appendChild(e('rect',{x:74*S,y:54*S,width:26*S,height:20*S,rx:4*S,fill:'white',opacity:'0.95'}));
+  squishG.appendChild(e('rect',{x:25*S,y:54*S,width:24*S,height:9*S,rx:2*S,fill:'#501313'}));
+  squishG.appendChild(e('rect',{x:75*S,y:54*S,width:24*S,height:9*S,rx:2*S,fill:'#501313'}));
+  squishG.appendChild(e('rect',{x:28*S,y:57*S,width:18*S,height:14*S,fill:'#501313'}));
+  squishG.appendChild(e('rect',{x:78*S,y:57*S,width:18*S,height:14*S,fill:'#501313'}));
+  squishG.appendChild(e('rect',{x:30*S,y:59*S,width:6*S,height:5*S,rx:1*S,fill:'white',opacity:'0.9'}));
+  squishG.appendChild(e('rect',{x:80*S,y:59*S,width:6*S,height:5*S,rx:1*S,fill:'white',opacity:'0.9'}));
+  squishG.appendChild(e('rect',{x:50*S,y:80*S,width:24*S,height:12*S,rx:5*S,fill:'#791F1F',opacity:'0.8'}));
+  const mouth=happy||legend?e('path',{d:`M${32*S} ${94*S} Q${62*S} ${108*S} ${92*S} ${94*S}`,fill:'none',stroke:'#791F1F','stroke-width':3*S,'stroke-linecap':'round'}):worried?e('path',{d:`M${38*S} ${97*S} Q${62*S} ${91*S} ${86*S} ${97*S}`,fill:'none',stroke:'#791F1F','stroke-width':2.5*S,'stroke-linecap':'round'}):e('path',{d:`M${38*S} ${94*S} Q${62*S} ${103*S} ${86*S} ${94*S}`,fill:'none',stroke:'#791F1F','stroke-width':2.5*S,'stroke-linecap':'round'});
+  squishG.appendChild(mouth);
+  bounceG.appendChild(squishG);
+  svg.appendChild(bounceG);
+}
+
+/* ─── ZERO ─── */
+function drawZero(svg,mood,scale){
+  const happy=mood==='Happy'||mood==='Legendary',worried=mood==='Worried',legend=mood==='Legendary';
+  const S=scale, glowC=worried?'#E24B4A':'#378ADD', glowC2=worried?'#F09595':'#B5D4F4';
+  svg.appendChild(e('ellipse',{cx:62*S,cy:222*S,rx:36*S,ry:6*S,fill:'#2C2C2A',opacity:'0.12'}));
+
+  const floatG=g();
+  addAnim(floatG,'zero-float','3.2s','0s','ease-in-out','infinite',`${62*S}px ${160*S}px`);
+  const swayG=g();
+  addAnim(swayG,'zero-sway','5s','0s','ease-in-out','infinite',`${62*S}px ${130*S}px`);
+  swayG.appendChild(e('path',{d:`M${22*S},${130*S} Q${16*S},${175*S} ${24*S},${208*S} Q${38*S},${216*S} ${62*S},${214*S} Q${86*S},${216*S} ${100*S},${208*S} Q${108*S},${175*S} ${102*S},${130*S} Z`,fill:'#444441'}));
+  swayG.appendChild(e('path',{d:`M${40*S},${208*S} Q${42*S},${215*S} ${62*S},${214*S} Q${82*S},${215*S} ${84*S},${208*S} Z`,fill:'#2C2C2A',opacity:'0.4'}));
+  swayG.appendChild(e('line',{x1:44*S,y1:140*S,x2:40*S,y2:208*S,stroke:'#2C2C2A','stroke-width':1*S,opacity:'0.3'}));
+  swayG.appendChild(e('line',{x1:62*S,y1:138*S,x2:62*S,y2:210*S,stroke:'#2C2C2A','stroke-width':1*S,opacity:'0.3'}));
+  swayG.appendChild(e('line',{x1:80*S,y1:140*S,x2:84*S,y2:208*S,stroke:'#2C2C2A','stroke-width':1*S,opacity:'0.3'}));
+  swayG.appendChild(e('rect',{x:52*S,y:112*S,width:20*S,height:16*S,rx:3*S,fill:'#D3D1C7'}));
+  swayG.appendChild(e('rect',{x:16*S,y:40*S,width:92*S,height:76*S,rx:12*S,fill:'#D3D1C7'}));
+  swayG.appendChild(e('path',{d:`M${16*S},${68*S} Q${14*S},${40*S} ${30*S},${28*S} Q${46*S},${16*S} ${62*S},${14*S} Q${78*S},${16*S} ${94*S},${28*S} Q${110*S},${40*S} ${108*S},${68*S} Q${100*S},${52*S} ${62*S},${50*S} Q${24*S},${52*S} ${16*S},${68*S}Z`,fill:'#2C2C2A'}));
+  const eyeBg=legend?'#185FA5':'#2C2C2A';
+  swayG.appendChild(e('rect',{x:24*S,y:56*S,width:28*S,height:22*S,rx:5*S,fill:eyeBg}));
+  swayG.appendChild(e('rect',{x:72*S,y:56*S,width:28*S,height:22*S,rx:5*S,fill:eyeBg}));
+  swayG.appendChild(e('rect',{x:27*S,y:59*S,width:22*S,height:16*S,rx:3*S,fill:glowC,opacity:'0.7'}));
+  swayG.appendChild(e('rect',{x:75*S,y:59*S,width:22*S,height:16*S,rx:3*S,fill:glowC,opacity:'0.7'}));
+  swayG.appendChild(e('rect',{x:31*S,y:62*S,width:14*S,height:10*S,rx:2*S,fill:glowC2,opacity:'0.9'}));
+  swayG.appendChild(e('rect',{x:79*S,y:62*S,width:14*S,height:10*S,rx:2*S,fill:glowC2,opacity:'0.9'}));
+  const glL=e('rect',{x:35*S,y:64*S,width:6*S,height:5*S,rx:1*S,fill:'white',opacity:'0.95'});
+  const glR=e('rect',{x:83*S,y:64*S,width:6*S,height:5*S,rx:1*S,fill:'white',opacity:'0.95'});
+  addAnim(glL,'eye-pulse','2s','0s','ease-in-out','infinite','center');
+  addAnim(glR,'eye-pulse','2s','0.4s','ease-in-out','infinite','center');
+  swayG.appendChild(glL);swayG.appendChild(glR);
+  if(happy||legend)swayG.appendChild(e('path',{d:`M${42*S} ${96*S} Q${62*S} ${100*S} ${82*S} ${96*S}`,fill:'none',stroke:'#888780','stroke-width':1.5*S,'stroke-linecap':'round',opacity:'0.6'}));
+  floatG.appendChild(swayG);
+  svg.appendChild(floatG);
+
+  const handLG=g();
+  addAnim(handLG,'hand-float','2.8s','0.4s','ease-in-out','infinite',`${10*S}px ${154*S}px`);
+  handLG.appendChild(e('rect',{x:0*S,y:144*S,width:20*S,height:20*S,rx:6*S,fill:'#444441'}));
+  handLG.appendChild(e('rect',{x:2*S,y:128*S,width:22*S,height:18*S,rx:5*S,fill:'#444441'}));
+  svg.appendChild(handLG);
+
+  const handRG=g();
+  addAnim(handRG,'hand-float','2.8s','1.4s','ease-in-out','infinite',`${114*S}px ${154*S}px`);
+  handRG.appendChild(e('rect',{x:104*S,y:144*S,width:20*S,height:20*S,rx:6*S,fill:'#444441'}));
+  handRG.appendChild(e('rect',{x:100*S,y:128*S,width:22*S,height:18*S,rx:5*S,fill:'#444441'}));
+  svg.appendChild(handRG);
+
+  const px1=e('rect',{x:2*S,y:48*S,width:10*S,height:4*S,rx:2*S,fill:'#378ADD',opacity:'0.45'});
+  const px2=e('rect',{x:112*S,y:60*S,width:10*S,height:4*S,rx:2*S,fill:'#378ADD',opacity:'0.35'});
+  const px3=e('rect',{x:4*S,y:72*S,width:8*S,height:4*S,rx:2*S,fill:'#85B7EB',opacity:'0.4'});
+  const px4=e('rect',{x:110*S,y:90*S,width:12*S,height:4*S,rx:2*S,fill:'#B5D4F4',opacity:'0.35'});
+  addAnim(px1,'particle-l','2.4s','0s','linear','infinite','center');
+  addAnim(px2,'particle-r','2.4s','0.6s','linear','infinite','center');
+  addAnim(px3,'particle-l','2.4s','1.2s','linear','infinite','center');
+  addAnim(px4,'particle-r','2.4s','1.8s','linear','infinite','center');
+  svg.appendChild(px1);svg.appendChild(px2);svg.appendChild(px3);svg.appendChild(px4);
+}
+
+/* ─── LUNA ─── */
+function drawLuna(svg,mood,scale){
+  const happy=mood==='Happy'||mood==='Legendary',worried=mood==='Worried',legend=mood==='Legendary';
+  const S=scale, liC=worried?'#1C1A12':legend?'#7F77DD':'#3C3489', hpC=legend?'#7F77DD':'#534AB7';
+  svg.appendChild(e('ellipse',{cx:62*S,cy:225*S,rx:38*S,ry:7*S,fill:'#26215C',opacity:'0.10'}));
+  svg.appendChild(e('rect',{x:36*S,y:168*S,width:20*S,height:38*S,rx:3*S,fill:'#3C3489'}));
+  svg.appendChild(e('rect',{x:62*S,y:168*S,width:20*S,height:38*S,rx:3*S,fill:'#3C3489'}));
+  svg.appendChild(e('rect',{x:28*S,y:196*S,width:32*S,height:14*S,rx:4*S,fill:'#26215C'}));
+  svg.appendChild(e('rect',{x:60*S,y:196*S,width:32*S,height:14*S,rx:4*S,fill:'#26215C'}));
+
+  const phoneG=g();
+  addAnim(phoneG,'phone-tilt','2s','0.3s','ease-in-out','infinite',`${114*S}px ${130*S}px`);
+  phoneG.appendChild(e('rect',{x:108*S,y:118*S,width:14*S,height:18*S,rx:3*S,fill:'#FAEEDA'}));
+  phoneG.appendChild(e('rect',{x:110*S,y:118*S,width:12*S,height:20*S,rx:3*S,fill:'#2C2C2A'}));
+  phoneG.appendChild(e('rect',{x:112*S,y:120*S,width:8*S,height:14*S,rx:2*S,fill:'#7F77DD',opacity:'0.7'}));
+  svg.appendChild(phoneG);
+
+  const bopG=g();
+  addAnim(bopG,'luna-bop','0.8s','0s','ease-in-out','infinite',`${62*S}px ${100*S}px`);
+  bopG.appendChild(e('rect',{x:22*S,y:97*S,width:80*S,height:76*S,rx:6*S,fill:'#534AB7'}));
+  bopG.appendChild(e('rect',{x:59*S,y:97*S,width:6*S,height:76*S,fill:'#3C3489',opacity:'0.5'}));
+  bopG.appendChild(e('rect',{x:34*S,y:110*S,width:8*S,height:8*S,rx:2*S,fill:'#7F77DD',opacity:'0.5'}));
+  bopG.appendChild(e('rect',{x:34*S,y:122*S,width:8*S,height:3*S,rx:1*S,fill:'#AFA9EC',opacity:'0.4'}));
+  bopG.appendChild(e('rect',{x:38*S,y:142*S,width:48*S,height:22*S,rx:4*S,fill:'#3C3489',opacity:'0.6'}));
+  bopG.appendChild(e('rect',{x:62*S,y:142*S,width:2*S,height:22*S,fill:'#26215C',opacity:'0.4'}));
+  bopG.appendChild(e('rect',{x:2*S,y:106*S,width:22*S,height:16*S,rx:5*S,fill:'#534AB7'}));
+  bopG.appendChild(e('rect',{x:0*S,y:118*S,width:16*S,height:14*S,rx:4*S,fill:'#FAEEDA'}));
+  bopG.appendChild(e('rect',{x:100*S,y:106*S,width:22*S,height:16*S,rx:5*S,fill:'#534AB7'}));
+  bopG.appendChild(e('rect',{x:16*S,y:34*S,width:92*S,height:68*S,rx:12*S,fill:'#FAEEDA'}));
+  bopG.appendChild(e('path',{d:`M${16*S},${58*S} Q${14*S},${34*S} ${30*S},${22*S} Q${46*S},${10*S} ${62*S},${10*S} Q${78*S},${10*S} ${94*S},${22*S} Q${110*S},${34*S} ${108*S},${58*S} Q${100*S},${42*S} ${62*S},${38*S} Q${24*S},${42*S} ${16*S},${58*S}Z`,fill:'#2C2C2A'}));
+  bopG.appendChild(e('rect',{x:16*S,y:56*S,width:10*S,height:40*S,rx:4*S,fill:'#2C2C2A'}));
+  bopG.appendChild(e('rect',{x:18*S,y:90*S,width:8*S,height:10*S,rx:4*S,fill:'#2C2C2A',opacity:'0.7'}));
+  bopG.appendChild(e('rect',{x:22*S,y:42*S,width:8*S,height:30*S,rx:3*S,fill:'#2C2C2A'}));
+  const hpBand=e('path',{d:`M${16*S},${58*S} Q${16*S},${34*S} ${62*S},${32*S} Q${108*S},${34*S} ${108*S},${58*S}`,fill:'none',stroke:hpC,'stroke-width':5*S,'stroke-linecap':'round'});
+  addAnim(hpBand,'hp-pulse','0.8s','0s','ease-in-out','infinite',`${62*S}px ${44*S}px`);
+  bopG.appendChild(hpBand);
+  bopG.appendChild(e('rect',{x:10*S,y:54*S,width:12*S,height:18*S,rx:5*S,fill:hpC}));
+  bopG.appendChild(e('rect',{x:102*S,y:54*S,width:12*S,height:18*S,rx:5*S,fill:hpC}));
+  bopG.appendChild(e('rect',{x:34*S,y:56*S,width:22*S,height:18*S,rx:4*S,fill:'white',opacity:'0.95'}));
+  bopG.appendChild(e('rect',{x:68*S,y:56*S,width:22*S,height:18*S,rx:4*S,fill:'white',opacity:'0.95'}));
+  bopG.appendChild(e('rect',{x:35*S,y:56*S,width:20*S,height:8*S,rx:2*S,fill:liC}));
+  bopG.appendChild(e('rect',{x:69*S,y:56*S,width:20*S,height:8*S,rx:2*S,fill:liC}));
+  bopG.appendChild(e('rect',{x:38*S,y:58*S,width:14*S,height:12*S,fill:liC}));
+  bopG.appendChild(e('rect',{x:72*S,y:58*S,width:14*S,height:12*S,fill:liC}));
+  bopG.appendChild(e('rect',{x:40*S,y:60*S,width:5*S,height:4*S,rx:1*S,fill:'white',opacity:'0.9'}));
+  bopG.appendChild(e('rect',{x:74*S,y:60*S,width:5*S,height:4*S,rx:1*S,fill:'white',opacity:'0.9'}));
+  const stL=e('rect',{x:48*S,y:60*S,width:4*S,height:4*S,rx:1*S,fill:'#7F77DD',opacity:'0.6'});
+  const stR=e('rect',{x:82*S,y:60*S,width:4*S,height:4*S,rx:1*S,fill:'#7F77DD',opacity:'0.6'});
+  addAnim(stL,'star-twinkle','1.2s','0s','ease-in-out','infinite',`${50*S}px ${62*S}px`);
+  addAnim(stR,'star-twinkle','1.2s','0.5s','ease-in-out','infinite',`${84*S}px ${62*S}px`);
+  bopG.appendChild(stL);bopG.appendChild(stR);
+  bopG.appendChild(e('rect',{x:54*S,y:78*S,width:16*S,height:8*S,rx:3*S,fill:'#EF9F27',opacity:'0.4'}));
+  const mouth=happy||legend?e('path',{d:`M${42*S} ${88*S} Q${62*S} ${96*S} ${82*S} ${88*S}`,fill:'none',stroke:'#BA7517','stroke-width':1.5*S,'stroke-linecap':'round',opacity:'0.8'}):worried?e('path',{d:`M${44*S} ${90*S} Q${62*S} ${86*S} ${80*S} ${90*S}`,fill:'none',stroke:'#BA7517','stroke-width':1.5*S,'stroke-linecap':'round',opacity:'0.6'}):e('path',{d:`M${42*S} ${88*S} Q${62*S} ${95*S} ${82*S} ${88*S}`,fill:'none',stroke:'#BA7517','stroke-width':1.5*S,'stroke-linecap':'round',opacity:'0.6'});
+  bopG.appendChild(mouth);
+  const star1=e('rect',{x:4*S,y:20*S,width:8*S,height:8*S,rx:2*S,fill:'#7F77DD',opacity:'0.35'});
+  const star2=e('rect',{x:112*S,y:28*S,width:6*S,height:6*S,rx:1*S,fill:'#AFA9EC',opacity:'0.4'});
+  addAnim(star1,'star-twinkle','2.1s','0.2s','ease-in-out','infinite',`${8*S}px ${24*S}px`);
+  addAnim(star2,'star-twinkle','1.7s','0.9s','ease-in-out','infinite',`${115*S}px ${31*S}px`);
+  bopG.appendChild(star1);bopG.appendChild(star2);
+  svg.appendChild(bopG);
+}
+
+/* ─── NULL — Wild Card Jester ─── */
+function drawNull(svg,mood,scale){
+  const happy=mood==='Happy'||mood==='Legendary',worried=mood==='Worried',legend=mood==='Legendary';
+  const S=scale;
+  const skinC  = '#C8A87A';
+  const skinD  = '#A8885A';
+  const hairC  = '#27500A';
+  const suitL  = '#639922', suitLD = '#3B6D11';
+  const suitR  = '#7F77DD', suitRD = '#3C3489';
+  const acc    = '#FCDE5A', accD   = '#BA7517';
+  const pupC   = legend?'#BA7517':worried?'#E24B4A':'#27500A';
+
+  svg.appendChild(e('ellipse',{cx:62*S,cy:228*S,rx:36*S,ry:6*S,fill:'#1C1A12',opacity:'0.10'}));
+
+  /* LEGS — left green, right purple */
+  const legLG=g(); addAnim(legLG,'leg-l-step','1.6s','0s','ease-in-out','infinite',`${46*S}px ${170*S}px`);
+  legLG.appendChild(e('rect',{x:36*S,y:168*S,width:20*S,height:38*S,rx:3*S,fill:suitLD}));
+  legLG.appendChild(e('rect',{x:38*S,y:170*S,width:16*S,height:34*S,rx:3*S,fill:suitL}));
+  [[172],[180],[188]].forEach(([y])=>legLG.appendChild(e('rect',{x:38*S,y:y*S,width:16*S,height:2*S,rx:1*S,fill:suitLD,opacity:'0.4'})));
+  legLG.appendChild(e('rect',{x:30*S,y:198*S,width:30*S,height:14*S,rx:5*S,fill:suitLD}));
+  legLG.appendChild(e('rect',{x:32*S,y:200*S,width:26*S,height:10*S,rx:4*S,fill:suitL}));
+  svg.appendChild(legLG);
+
+  const legRG=g(); addAnim(legRG,'leg-r-step','1.6s','0.8s','ease-in-out','infinite',`${78*S}px ${170*S}px`);
+  legRG.appendChild(e('rect',{x:62*S,y:168*S,width:20*S,height:38*S,rx:3*S,fill:suitRD}));
+  legRG.appendChild(e('rect',{x:64*S,y:170*S,width:16*S,height:34*S,rx:3*S,fill:suitR}));
+  [[173],[181],[189]].forEach(([y])=>legRG.appendChild(e('rect',{x:64*S,y:y*S,width:16*S,height:2*S,rx:1*S,fill:suitRD,opacity:'0.4'})));
+  legRG.appendChild(e('rect',{x:58*S,y:198*S,width:32*S,height:14*S,rx:5*S,fill:suitRD}));
+  legRG.appendChild(e('rect',{x:60*S,y:200*S,width:26*S,height:10*S,rx:4*S,fill:suitR}));
+  legRG.appendChild(e('rect',{x:84*S,y:204*S,width:10*S,height:6*S,rx:3*S,fill:suitRD}));
+  svg.appendChild(legRG);
+
+  /* BODY GROUP */
+  const bodyG=g();
+  addAnim(bodyG,'null-idle','1.6s','0s','ease-in-out','infinite',`${62*S}px ${130*S}px`);
+  addAnim(bodyG,'null-lean','3.2s','0.2s','ease-in-out','infinite',`${62*S}px ${130*S}px`);
+
+  /* Body — split left green / right purple */
+  bodyG.appendChild(e('rect',{x:22*S,y:100*S,width:42*S,height:72*S,rx:6*S,fill:suitLD}));
+  bodyG.appendChild(e('rect',{x:24*S,y:102*S,width:38*S,height:68*S,rx:5*S,fill:suitL}));
+  bodyG.appendChild(e('rect',{x:62*S,y:100*S,width:40*S,height:72*S,rx:6*S,fill:suitRD}));
+  bodyG.appendChild(e('rect',{x:62*S,y:102*S,width:38*S,height:68*S,rx:5*S,fill:suitR}));
+  bodyG.appendChild(e('rect',{x:59*S,y:98*S,width:6*S,height:76*S,fill:'#1C1A12',opacity:'0.12'}));
+
+  /* Collar ruff */
+  [[22,97,18,11],[38,93,16,10],[52,95,18,11],[66,93,16,10],[80,96,18,11]].forEach(([x,y,w,h])=>
+    bodyG.appendChild(e('rect',{x:x*S,y:y*S,width:w*S,height:h*S,rx:5*S,fill:'white',opacity:'0.92'})));
+  bodyG.appendChild(e('rect',{x:20*S,y:102*S,width:84*S,height:3*S,rx:1*S,fill:'#1C1A12',opacity:'0.1'}));
+
+  /* LEFT arm */
+  const armLG=g(); addAnim(armLG,'arm-l-swing','1.6s','0.1s','ease-in-out','infinite',`${22*S}px ${108*S}px`);
+  armLG.appendChild(e('rect',{x:2*S,y:102*S,width:22*S,height:14*S,rx:5*S,fill:suitLD}));
+  armLG.appendChild(e('rect',{x:4*S,y:104*S,width:18*S,height:10*S,rx:4*S,fill:suitL}));
+  armLG.appendChild(e('rect',{x:0*S,y:112*S,width:16*S,height:12*S,rx:5*S,fill:skinD}));
+  armLG.appendChild(e('rect',{x:2*S,y:114*S,width:12*S,height:9*S,rx:4*S,fill:skinC}));
+  bodyG.appendChild(armLG);
+
+  /* RIGHT arm + ? card */
+  const armRG=g(); addAnim(armRG,'arm-r-swing','1.6s','0.9s','ease-in-out','infinite',`${100*S}px ${108*S}px`);
+  armRG.appendChild(e('rect',{x:100*S,y:102*S,width:22*S,height:14*S,rx:5*S,fill:suitRD}));
+  armRG.appendChild(e('rect',{x:102*S,y:104*S,width:18*S,height:10*S,rx:4*S,fill:suitR}));
+  armRG.appendChild(e('rect',{x:108*S,y:112*S,width:16*S,height:12*S,rx:5*S,fill:skinD}));
+  armRG.appendChild(e('rect',{x:110*S,y:114*S,width:12*S,height:9*S,rx:4*S,fill:skinC}));
+  armRG.appendChild(e('rect',{x:116*S,y:98*S,width:16*S,height:20*S,rx:3*S,fill:'white'}));
+  armRG.appendChild(e('rect',{x:117*S,y:99*S,width:14*S,height:18*S,rx:2*S,fill:acc}));
+  armRG.appendChild(e('rect',{x:121*S,y:101*S,width:6*S,height:2*S,rx:1*S,fill:accD}));
+  armRG.appendChild(e('rect',{x:124*S,y:103*S,width:2*S,height:3*S,rx:1*S,fill:accD}));
+  armRG.appendChild(e('rect',{x:121*S,y:106*S,width:4*S,height:2*S,rx:1*S,fill:accD}));
+  armRG.appendChild(e('rect',{x:121*S,y:110*S,width:3*S,height:3*S,rx:1*S,fill:accD}));
+  bodyG.appendChild(armRG);
+
+  /* Neck + Head */
+  bodyG.appendChild(e('rect',{x:52*S,y:88*S,width:20*S,height:16*S,rx:4*S,fill:skinD}));
+  bodyG.appendChild(e('rect',{x:54*S,y:88*S,width:16*S,height:14*S,rx:3*S,fill:skinC}));
+  bodyG.appendChild(e('rect',{x:20*S,y:36*S,width:84*S,height:60*S,rx:14*S,fill:skinD}));
+  bodyG.appendChild(e('rect',{x:22*S,y:38*S,width:80*S,height:58*S,rx:12*S,fill:skinC}));
+
+  /* Hair — green, long messy left / short right */
+  bodyG.appendChild(e('path',{d:`M${22*S},${54*S} Q${16*S},${36*S} ${28*S},${24*S} Q${40*S},${14*S} ${56*S},${20*S} Q${44*S},${24*S} ${34*S},${40*S}Z`,fill:hairC}));
+  bodyG.appendChild(e('path',{d:`M${22*S},${54*S} Q${20*S},${40*S} ${32*S},${28*S} Q${44*S},${22*S} ${56*S},${20*S} Q${42*S},${26*S} ${32*S},${44*S}Z`,fill:'#3B6D11'}));
+  bodyG.appendChild(e('path',{d:`M${84*S},${44*S} Q${100*S},${38*S} ${102*S},${52*S} Q${102*S},${62*S} ${96*S},${64*S} Q${96*S},${52*S} ${84*S},${44*S}Z`,fill:hairC}));
+
+  /* JESTER HAT — two prongs, asymmetric */
+  /* Left prong — green, taller */
+  bodyG.appendChild(e('path',{d:`M${34*S},${42*S} Q${26*S},${22*S} ${36*S},${4*S} Q${40*S},${-4*S} ${46*S},${4*S} Q${52*S},${22*S} ${48*S},${42*S}Z`,fill:suitLD}));
+  bodyG.appendChild(e('path',{d:`M${36*S},${42*S} Q${30*S},${24*S} ${38*S},${8*S} Q${41*S},${2*S} ${45*S},${8*S} Q${49*S},${24*S} ${46*S},${42*S}Z`,fill:suitL}));
+  const bellL=e('circle',{cx:41*S,cy:3*S,r:6*S,fill:acc});
+  addAnim(bellL,'jester-bell','1.6s','0s','ease-in-out','infinite',`${41*S}px ${9*S}px`);
+  bodyG.appendChild(bellL);
+  bodyG.appendChild(e('circle',{cx:41*S,cy:3*S,r:2*S,fill:accD}));
+
+  /* Right prong — purple, shorter */
+  bodyG.appendChild(e('path',{d:`M${68*S},${42*S} Q${64*S},${26*S} ${70*S},${14*S} Q${74*S},${6*S} ${80*S},${14*S} Q${86*S},${26*S} ${84*S},${42*S}Z`,fill:suitRD}));
+  bodyG.appendChild(e('path',{d:`M${70*S},${42*S} Q${66*S},${28*S} ${72*S},${16*S} Q${75*S},${10*S} ${80*S},${16*S} Q${85*S},${28*S} ${82*S},${42*S}Z`,fill:suitR}));
+  const bellR=e('circle',{cx:77*S,cy:12*S,r:5*S,fill:acc});
+  addAnim(bellR,'jester-bell','1.6s','0.3s','ease-in-out','infinite',`${77*S}px ${17*S}px`);
+  bodyG.appendChild(bellR);
+  bodyG.appendChild(e('circle',{cx:77*S,cy:12*S,r:2*S,fill:accD}));
+
+  /* Hat brim */
+  bodyG.appendChild(e('rect',{x:20*S,y:38*S,width:84*S,height:10*S,rx:5*S,fill:hairC}));
+  bodyG.appendChild(e('rect',{x:22*S,y:40*S,width:80*S,height:6*S,rx:3*S,fill:'#3B6D11'}));
+  [[30,43],[46,43],[62,43],[78,43],[94,43]].forEach(([x,y])=>
+    bodyG.appendChild(e('circle',{cx:x*S,cy:y*S,r:2*S,fill:acc,opacity:'0.85'})));
+
+  /* EYES — big, asymmetric sizing */
+  bodyG.appendChild(e('rect',{x:28*S,y:54*S,width:24*S,height:18*S,rx:4*S,fill:'white',opacity:'0.95'}));
+  bodyG.appendChild(e('rect',{x:70*S,y:56*S,width:22*S,height:16*S,rx:4*S,fill:'white',opacity:'0.95'}));
+  bodyG.appendChild(e('rect',{x:29*S,y:54*S,width:22*S,height:9*S,rx:3*S,fill:'#1C1A12'}));
+  bodyG.appendChild(e('rect',{x:32*S,y:56*S,width:16*S,height:14*S,fill:'#1C1A12'}));
+  bodyG.appendChild(e('rect',{x:71*S,y:56*S,width:20*S,height:8*S,rx:3*S,fill:'#1C1A12'}));
+  bodyG.appendChild(e('rect',{x:74*S,y:58*S,width:14*S,height:12*S,fill:'#1C1A12'}));
+
+  /* ? pupils */
+  const qL=g(); addAnim(qL,'q-bounce','1.6s','0.1s','ease-in-out','infinite',`${40*S}px ${63*S}px`);
+  qL.appendChild(e('rect',{x:35*S,y:57*S,width:8*S,height:2.5*S,rx:1*S,fill:pupC}));
+  qL.appendChild(e('rect',{x:41*S,y:59.5*S,width:2.5*S,height:3*S,rx:1*S,fill:pupC}));
+  qL.appendChild(e('rect',{x:35*S,y:62.5*S,width:5*S,height:2.5*S,rx:1*S,fill:pupC}));
+  qL.appendChild(e('rect',{x:35*S,y:66.5*S,width:3*S,height:3*S,rx:1*S,fill:pupC}));
+  bodyG.appendChild(qL);
+
+  const qR=g(); addAnim(qR,'q-bounce','1.6s','0.5s','ease-in-out','infinite',`${81*S}px ${64*S}px`);
+  qR.appendChild(e('rect',{x:75*S,y:59*S,width:7*S,height:2*S,rx:1*S,fill:pupC}));
+  qR.appendChild(e('rect',{x:80*S,y:61*S,width:2*S,height:2.5*S,rx:1*S,fill:pupC}));
+  qR.appendChild(e('rect',{x:75*S,y:63.5*S,width:4*S,height:2*S,rx:1*S,fill:pupC}));
+  qR.appendChild(e('rect',{x:75*S,y:67*S,width:2.5*S,height:2.5*S,rx:1*S,fill:pupC}));
+  bodyG.appendChild(qR);
+
+  /* Glints */
+  bodyG.appendChild(e('rect',{x:30*S,y:55*S,width:5*S,height:4*S,rx:2*S,fill:'white',opacity:'0.7'}));
+  bodyG.appendChild(e('rect',{x:72*S,y:57*S,width:4*S,height:3*S,rx:2*S,fill:'white',opacity:'0.7'}));
+
+  /* Asymmetric eyebrows — left arched, right flat */
+  bodyG.appendChild(e('path',{d:`M${28*S} ${52*S} Q${38*S} ${46*S} ${52*S} ${52*S}`,fill:'none',stroke:'#1C1A12','stroke-width':2.5*S,'stroke-linecap':'round'}));
+  bodyG.appendChild(e('rect',{x:70*S,y:53*S,width:22*S,height:3*S,rx:1.5*S,fill:'#1C1A12'}));
+
+  /* Mouth */
+  if(happy||legend){
+    bodyG.appendChild(e('path',{d:`M${30*S} ${80*S} Q${62*S} ${96*S} ${90*S} ${78*S}`,fill:'none',stroke:'#1C1A12','stroke-width':2.5*S,'stroke-linecap':'round'}));
+  } else if(worried){
+    bodyG.appendChild(e('path',{d:`M${34*S} ${84*S} Q${62*S} ${76*S} ${88*S} ${80*S}`,fill:'none',stroke:'#1C1A12','stroke-width':2.5*S,'stroke-linecap':'round'}));
+  } else {
+    bodyG.appendChild(e('path',{d:`M${34*S} ${82*S} Q${52*S} ${88*S} ${70*S} ${82*S} Q${82*S} ${78*S} ${88*S} ${74*S}`,fill:'none',stroke:'#1C1A12','stroke-width':2.5*S,'stroke-linecap':'round'}));
+  }
+
+  /* Single blush left only — asymmetric */
+  bodyG.appendChild(e('ellipse',{cx:30*S,cy:76*S,rx:9*S,ry:6*S,fill:'#F09595',opacity:'0.35'}));
+
+  /* Spinning coin on left shoulder */
+  const coin=e('ellipse',{cx:24*S,cy:106*S,rx:7*S,ry:7*S,fill:acc});
+  addAnim(coin,'jester-coin','0.8s','0s','linear','infinite',`${24*S}px ${106*S}px`);
+  bodyG.appendChild(coin);
+  bodyG.appendChild(e('circle',{cx:24*S,cy:106*S,r:3*S,fill:accD}));
+
+  /* Chaos sparkles */
+  [{cx:6,cy:78,r:3.5,c:suitL,d:'0s'},{cx:120,cy:68,r:3,c:suitR,d:'0.6s'},
+   {cx:4,cy:128,r:3,c:acc,d:'1.2s'},{cx:118,cy:108,r:3.5,c:suitL,d:'1.8s'},
+   {cx:7,cy:48,r:2.5,c:suitR,d:'0.9s'}
+  ].forEach(({cx,cy,r,c,d})=>{
+    const sp=e('circle',{cx:cx*S,cy:cy*S,r:r*S,fill:c,opacity:'0.4'});
+    addAnim(sp,'null-idle','1.6s',d,'ease-in-out','infinite','center');
+    bodyG.appendChild(sp);
+  });
+
+  svg.appendChild(bodyG);
+}
+
+/* ─── DRAW DISPATCHER ─── */
+function drawChar(svgEl,id,scale,mood){
+  svgEl.innerHTML='';
+  const vbs={byte:'0 0 124 240',nova:'0 0 140 240',glitch:'0 0 140 240',sage:'0 0 140 240',crash:'0 0 140 240',zero:'0 0 140 240',luna:'0 0 140 240',null:'0 0 140 240'};
+  svgEl.setAttribute('viewBox',vbs[id]);
+  if(id==='byte')drawByte(svgEl,mood,scale);
+  else if(id==='nova')drawNova(svgEl,mood,scale);
+  else if(id==='glitch')drawGlitch(svgEl,mood,scale);
+  else if(id==='sage')drawSage(svgEl,mood,scale);
+  else if(id==='crash')drawCrash(svgEl,mood,scale);
+  else if(id==='zero')drawZero(svgEl,mood,scale);
+  else if(id==='luna')drawLuna(svgEl,mood,scale);
+  else if(id==='null')drawNull(svgEl,mood,scale);
+}
+
+/* ─── BUILD ROSTER ─── */
+function buildRoster(){
+  const grid=document.getElementById('roster');
+  Object.entries(CHARS).forEach(([id,c])=>{
+    const card=document.createElement('div');
+    card.className='char-card';
+    card.id='card-'+id;
+    card.style.setProperty('--c',c.color);
+    const lbl=document.createElement('div');
+    lbl.className='anim-label';
+    lbl.textContent=c.animLabel;
+    card.appendChild(lbl);
+    const svgEl=document.createElementNS(ns,'svg');
+    svgEl.setAttribute('width','96');svgEl.setAttribute('height','116');
+    svgEl.style.overflow='visible';
+    card.appendChild(svgEl);
+    const nm=document.createElement('div');
+    nm.className='cn';nm.style.color=c.color;nm.textContent=c.name;
+    card.appendChild(nm);
+    const sp=document.createElement('div');
+    sp.className='cs';sp.textContent=c.species;
+    card.appendChild(sp);
+    const badge=document.createElement('div');
+    badge.className='cbadge';badge.style.background=c.badgeBg;badge.style.color=c.badgeColor;badge.textContent=c.badge;
+    card.appendChild(badge);
+    card.onclick=()=>selectChar(id);
+    grid.appendChild(card);
+    drawChar(svgEl,id,0.72,'Idle');
+  });
+}
+
+/* ─── SELECT + DETAIL ─── */
+function selectChar(id){
+  activeId=id;activeMood='Idle';
+  document.querySelectorAll('.char-card').forEach(c=>c.classList.remove('active'));
+  document.getElementById('card-'+id).classList.add('active');
+  const panel=document.getElementById('detail');
+  panel.classList.add('show');
+  panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+  renderDetail(id,'Idle');
+}
+
+function renderDetail(id,mood){
+  const c=CHARS[id];
+  const stage=document.getElementById('d-stage');
+  stage.innerHTML='';
+  const bigSvg=document.createElementNS(ns,'svg');
+  bigSvg.setAttribute('width','168');bigSvg.setAttribute('height','210');bigSvg.style.overflow='visible';
+  stage.appendChild(bigSvg);
+  drawChar(bigSvg,id,1.1,mood);
+  document.getElementById('d-name').textContent=c.name;
+  document.getElementById('d-name').style.color=c.color;
+  document.getElementById('d-species').textContent=c.species;
+  document.getElementById('d-pal').innerHTML=c.palette.map(p=>`<div class="pal-dot" style="background:${p}"></div>`).join('');
+  document.getElementById('d-quote').textContent=c.quote;
+  document.getElementById('d-quote').style.color=c.color;
+  document.getElementById('d-quote').style.borderLeftColor=c.color;
+  document.getElementById('d-design').textContent=c.design;
+  document.getElementById('d-sig').textContent=c.sig;
+  document.getElementById('d-role').textContent=c.role;
+  document.getElementById('d-anim').textContent=c.anim;
+  document.getElementById('mood-row').innerHTML=MOODS.map(m=>{
+    const on=m===mood;
+    return `<div class="mbtn${on?' on':''}" style="${on?'background:'+c.color+';':''}" onclick="setMood('${m}')">${m}</div>`;
+  }).join('');
+}
+
+function setMood(mood){
+  activeMood=mood;
+  renderDetail(activeId,mood);
+}
+
+buildRoster();
+setTimeout(()=>selectChar('byte'),80);
+
+function showSection(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.nav-link').forEach(b=>b.classList.remove('on'));
+  document.getElementById('sec-'+id).classList.add('on');
+  event.target.classList.add('on');
+}
+
+/* Build hero mini-cards */
+function buildHero(){
+  const container=document.getElementById('hero-chars');
+  Object.entries(CHARS).forEach(([id,c])=>{
+    const div=document.createElement('div');
+    div.className='hero-char-card';
+    div.onclick=()=>{showSection('roster');setTimeout(()=>selectChar(id),80);};
+    const sv=document.createElementNS('http://www.w3.org/2000/svg','svg');
+    sv.setAttribute('width','56');sv.setAttribute('height','68');sv.style.overflow='visible';
+    div.appendChild(sv);
+    const nm=document.createElement('div');
+    nm.className='hcn';nm.style.color=c.color;nm.textContent=c.name;
+    div.appendChild(nm);
+    container.appendChild(div);
+    drawChar(sv,id,0.46,'Idle');
+  });
+}
+
+/* Build character profiles */
+function buildProfiles(){
+  const grid=document.getElementById('profiles-grid');
+  Object.entries(CHARS).forEach(([id,c])=>{
+    const card=document.createElement('div');
+    card.className='profile-card';
+    const av=document.createElement('div');
+    av.className='profile-avatar';
+    const sv=document.createElementNS('http://www.w3.org/2000/svg','svg');
+    sv.setAttribute('width','76');sv.setAttribute('height','96');sv.style.overflow='visible';
+    av.appendChild(sv);
+    card.appendChild(av);
+    const info=document.createElement('div');
+    info.className='profile-info';
+    info.innerHTML=`
+      <div class="profile-name" style="color:${c.color}">${c.name}</div>
+      <div class="profile-species">${c.species}</div>
+      <div class="profile-badge" style="background:${c.badgeBg};color:${c.color}">${c.badge}</div>
+      <div class="profile-quote" style="border-color:${c.color};color:${c.color}">${c.quote}</div>
+      <div class="profile-row"><span class="pr-label">Role</span><span class="pr-val">${c.role}</span></div>
+      <div class="profile-row"><span class="pr-label">Signature</span><span class="pr-val">${c.sig}</span></div>
+      <div class="profile-row"><span class="pr-label">Animation</span><span class="pr-val">${c.animLabel}</span></div>
+      <div class="pal-strip">${c.palette.map(p=>`<div class="pal-sq" style="background:${p}"></div>`).join('')}</div>`;
+    card.appendChild(info);
+    grid.appendChild(card);
+    drawChar(sv,id,0.62,'Idle');
+  });
+}
+
+/* Build char palettes in design section */
+function buildPalettes(){
+  const grid=document.getElementById('char-palettes');
+  Object.entries(CHARS).forEach(([id,c])=>{
+    const div=document.createElement('div');
+    div.className='char-pal-card';
+    div.innerHTML=`<div class="cpn" style="color:${c.color}">${c.name}</div>
+      <div class="char-pal-swatches">${c.palette.map(p=>`<div class="char-pal-sw" style="background:${p}" title="${p}"></div>`).join('')}</div>`;
+    grid.appendChild(div);
+  });
+}
+
+buildHero();
+buildRoster();
+buildProfiles();
+buildPalettes();
+setTimeout(()=>selectChar('byte'),80);
+
+</script>
+</body>
+</html>

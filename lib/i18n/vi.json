@@ -3,102 +3,187 @@
     "features": "Tính năng",
     "howItWorks": "Cách hoạt động",
     "pricing": "Bảng giá",
-    "joinWaitlist": "Trải nghiệm sớm",
+    "joinWaitlist": "Tham gia 1,504+ người dùng",
     "langEN": "EN",
     "langVI": "VI"
   },
   "hero": {
-    "badge": "Early access giới hạn — đang đầy dần",
-    "title": "Vibe coder giỏi nhất đều biết",
-    "titleAccent": "điểm yếu của mình",
-    "subtitle": "Bạn code với AI mỗi ngày. Nhưng bạn có biết prompt nào đang lãng phí thời gian, chỗ nào bạn bị lặp lỗi, hay bạn đang tiến bộ nhanh cỡ nào không? DevPet biết.",
-    "trustMeta": "Beta miễn phí · macOS · Không cần thẻ · Dev khắp nơi tin dùng"
+    "badge": "🐱 Bạn đồng hành lập trình AI",
+    "title": "Hôm qua bạn thử lại cùng một câu lệnh 5 lần.",
+    "titleAccent": "VibeMon biết.",
+    "subtitle": "Bạn lập trình với AI mỗi ngày — nhưng không nhìn thấy thói quen của mình. Những vòng lặp lỗi. Những câu lệnh lãng phí. Những kỹ năng chưa được xây. VibeMon theo dõi tất cả, để bạn thực sự giỏi lên.",
+    "trustMeta": "Dùng thử miễn phí · Hỗ trợ Cursor · VS Code · Claude Code",
+    "proofStats": [
+      { "value": "1,504+", "label": "người đã tham gia" },
+      { "value": "70%", "label": "tỉ lệ thành công" },
+      { "value": "2×", "label": "sửa lỗi nhanh hơn" }
+    ]
   },
   "form": {
     "placeholder": "email@cuaban.com",
-    "submit": "Trải nghiệm sớm →",
+    "submit": "Tham gia 1,504+ người dùng →",
     "loading": "Đang đăng ký...",
-    "success": "Bạn đã vào! Check inbox — chúng tôi sẽ báo trước khi ra mắt công khai.",
+    "success": "Bạn đã vào! Kiểm tra hộp thư nhé.",
     "errorDuplicate": "Bạn đã trong danh sách rồi — sẽ liên hệ sớm.",
     "errorValidation": "Vui lòng nhập địa chỉ email hợp lệ.",
-    "errorServer": "Đã xảy ra lỗi. Vui lòng thử lại."
+    "errorServer": "Đã xảy ra lỗi. Vui lòng thử lại.",
+    "spotsLeft": "Chỉ còn 16 chỗ trong bản thử nghiệm"
   },
   "howItWorks": {
     "eyebrow": "Cách hoạt động",
-    "title": "Không cần cài đặt. Hiểu ngay lập tức.",
-    "subtitle": "Hầu hết dev không biết mình thực sự code với AI như thế nào. DevPet thay đổi điều đó trong 30 giây.",
+    "title": "Lập trình với AI. Phần còn lại để mình lo.",
+    "subtitle": "VibeMon chạy ngầm. Bạn lập trình — nó học, theo dõi, và hướng dẫn.",
     "steps": [
       {
         "num": "01",
         "icon": "scan-search",
-        "title": "Mở editor. Xong.",
-        "desc": "Cursor, VS Code, Claude Code — DevPet tự phát hiện phiên code. Không config, không plugin, không rào cản."
+        "title": "Mở trình soạn thảo. Xong.",
+        "desc": "Cursor, VS Code, Claude Code — VibeMon tự phát hiện phiên làm việc. Không cài đặt, không tiện ích mở rộng, không rào cản."
       },
       {
         "num": "02",
         "icon": "book-open",
-        "title": "Thấy những gì bạn không thể tự thấy",
-        "desc": "Pattern prompt, vòng lặp lỗi, thời gian lãng phí — DevPet biến thói quen vô hình thành câu chuyện rõ ràng để bạn học từ đó."
+        "title": "Thấy thói quen vô hình",
+        "desc": "Bao nhiêu câu lệnh hiệu quả? Chỗ nào bị lặp? Công cụ nào tiết kiệm thời gian? VibeMon biến phiên làm việc thành câu chuyện bạn học được."
       },
       {
         "num": "03",
-        "icon": "sprout",
-        "title": "Nhìn bản thân tiến bộ từng ngày",
-        "desc": "Báo cáo kỹ năng hàng tuần cho thấy chính xác bạn giỏi lên ở đâu và đang bỏ lỡ gì."
+        "icon": "trophy",
+        "title": "Lên cấp thật sự",
+        "desc": "Nhận điểm kinh nghiệm, mở khóa kỹ năng, giữ chuỗi ngày. Báo cáo tuần cho thấy chính xác bạn giỏi lên ở đâu — bằng dữ liệu, không phải cảm giác."
       }
     ]
   },
   "features": {
     "eyebrow": "Tính năng",
-    "title": "Công cụ mà top vibe coder đang dùng.",
-    "subtitle": "Khác biệt giữa dev AI giỏi và xuất sắc? Hiểu rõ pattern của chính mình.",
+    "title": "Mọi thứ bạn cần để hết đoán mò, bắt đầu tiến bộ.",
+    "subtitle": "Hầu hết người dùng AI lập trình không biết mình có đang giỏi lên không. VibeMon sửa điều đó.",
     "cards": [
       {
         "icon": "activity",
         "title": "Theo dõi phiên tự động",
-        "desc": "Chạy ngầm trên Cursor, VS Code, Claude Code và Ollama. Bạn code — nó học.",
-        "bullets": ["Chấm điểm hiệu quả prompt", "Phát hiện vòng lặp lỗi real-time", "Phân tích pattern chuyển đổi context"]
+        "desc": "Mỗi phiên lập trình được ghi lại tự động. Câu lệnh, thành công, lỗi, thời gian — tất cả được lưu mà bạn không cần làm gì.",
+        "bullets": ["Biết câu lệnh nào thực sự hiệu quả", "Bắt vòng lặp lỗi trước khi mất cả ngày", "Biết giờ nào mình làm việc hiệu quả nhất"]
       },
       {
         "icon": "trophy",
-        "title": "Cây kỹ năng & XP",
-        "desc": "16 kỹ năng vibe coding đo lường được. Cuối cùng cũng có cách chứng minh bạn đang giỏi lên — chứ không chỉ bận hơn.",
-        "bullets": ["Mở khóa bằng cách ship, không phải xem video", "Tiến trình trực quan có thể chia sẻ", "Gợi ý trọng tâm cá nhân hàng tuần"]
+        "title": "Cây kỹ năng & Điểm kinh nghiệm",
+        "desc": "16 kỹ năng lập trình AI thật, chia 4 cấp. Từ rõ ràng câu lệnh đến kiến trúc AI — đo bằng điểm, không phải ý kiến.",
+        "bullets": ["Lên cấp bằng cách tạo sản phẩm thật", "Biết chính xác cần học gì tiếp", "Chia sẻ tiến trình với bạn bè"]
       },
       {
-        "icon": "message-circle",
-        "title": "AI Mentor hiểu bạn",
-        "desc": "Không phải chatbot chung chung. Pet đã thấy mọi phiên code, mọi lỗi, mọi thành công. Lời khuyên của nó là dành riêng cho bạn.",
-        "bullets": ["Hỗ trợ bởi Claude Sonnet", "Nhớ lịch sử & điểm yếu của bạn", "\"Tại sao tôi bị kẹt?\" — trả lời ngay"]
+        "icon": "cat",
+        "title": "Mèo huấn luyện viên AI",
+        "desc": "Không phải trò chuyện tự động chung chung. Mèo của bạn đã thấy mọi phiên, mọi lỗi, mọi thành công. Lời khuyên là dành riêng cho bạn.",
+        "bullets": ["\"Tại sao tôi bị kẹt?\" — trả lời ngay", "Nhớ lịch sử và điểm yếu của bạn", "Tư vấn theo ngữ cảnh từng thẻ"]
+      },
+      {
+        "icon": "bar-chart",
+        "title": "Báo cáo tuần",
+        "desc": "Tỉ lệ thành công, chi phí mỗi phiên, xu hướng lỗi, chuỗi ngày — những con số cho thấy bạn có đang tiến bộ thật không.",
+        "bullets": ["AI tổng hợp báo cáo tuần", "Bài học bạn thực sự đã rút ra", "Tiến bộ bạn cảm nhận được"]
       }
     ]
   },
+  "midCTA": {
+    "title": "Nghe quen không?",
+    "subtitle": "Tham gia 1,504+ người đang theo dõi tiến trình lập trình AI của họ.",
+    "spotsLeft": "Còn 16 chỗ thử nghiệm"
+  },
+  "testimonials": {
+    "eyebrow": "Từ người dùng thử nghiệm",
+    "title": "Người thật. Kết quả thật.",
+    "items": [
+      {
+        "name": "Minh T.",
+        "role": "13 tuổi · đang tập làm sản phẩm",
+        "avatar": "🧒",
+        "quote": "Mình mới 13 tuổi, chưa biết gì về lập trình. Nhờ VibeMon mà mình biết mình hay bị lặp lỗi ở đâu, giờ mình tự sửa được rồi. Vui lắm!",
+        "stat": "11 lần → 2",
+        "statLabel": "mỗi tuần"
+      },
+      {
+        "name": "Lan P.",
+        "role": "Designer",
+        "avatar": "👩‍🎨",
+        "quote": "Mình không biết mình đang tốn 40% thời gian cho câu lệnh không bao giờ hoạt động. Nhìn thấy con số đó đã thay đổi hoàn toàn cách mình làm việc.",
+        "stat": "40% lãng phí → 12%",
+        "statLabel": "hiệu quả câu lệnh"
+      },
+      {
+        "name": "Hùng N.",
+        "role": "Solo founder",
+        "avatar": "🚀",
+        "quote": "Mèo huấn luyện bảo mình đổi từ Cursor sang Claude Code cho xác thực — giải quyết trong 1 câu lệnh thay vì 6. Một mẹo đó tiết kiệm mấy tiếng.",
+        "stat": "6 câu lệnh → 1",
+        "statLabel": "cho luồng xác thực"
+      }
+    ]
+  },
+  "skillTree": {
+    "eyebrow": "Cây kỹ năng",
+    "title": "16 kỹ năng. 4 cấp. Không đoán mò.",
+    "subtitle": "Cuối cùng cũng biết mình đang ở đâu — và cần làm gì tiếp.",
+    "tiers": [
+      { "name": "Nền tảng", "color": "#6BCB77", "skills": ["Rõ ràng câu lệnh", "Đọc hiểu lỗi", "Cơ bản công cụ", "Đánh giá mã nguồn"] },
+      { "name": "Ngữ cảnh & Cấu trúc", "color": "#D89840", "skills": ["Thiết lập ngữ cảnh", "Tệp quy tắc AI", "Tài liệu hóa", "Cấu trúc dự án"] },
+      { "name": "Nâng cao", "color": "#7B8CE0", "skills": ["Chuyển đổi công cụ", "Quản lý phạm vi", "Hệ thống thiết kế", "Lặp lại câu lệnh"] },
+      { "name": "Chuyên gia", "color": "#C07AB8", "skills": ["Chân dung người dùng", "Cửa sổ ngữ cảnh", "Kiến trúc AI", "Bộ não thứ hai"] }
+    ]
+  },
   "meetYourPet": {
-    "eyebrow": "Gặp gỡ pet của bạn",
-    "title": "Người bạn code thực sự hiểu bạn.",
-    "body": "Pet không phải trang trí — nó phản chiếu trạng thái code thật của bạn. Khi bạn trong flow, nó ăn mừng. Khi bạn bị kẹt vòng lặp, nó nhận ra trước cả bạn. Các dev trong beta nói đây là tool đầu tiên khiến code với AI bớt cô đơn.",
-    "growthNote": "Pet tiến hóa cùng kỹ năng của bạn — từ mèo con tò mò đến mentor dày dạn.",
-    "moods": [
-      { "icon": "zap", "label": "Deep flow", "desc": "Prompt sạch, iteration nhanh" },
-      { "icon": "rotate-ccw", "label": "Bị kẹt", "desc": "Cùng lỗi 3 lần — pet cảnh báo" },
-      { "icon": "sparkles", "label": "Đột phá!", "desc": "Skill mới hoặc PR merged" },
-      { "icon": "brain", "label": "Đang phân tích...", "desc": "Tìm pattern bạn bỏ lỡ" }
+    "eyebrow": "Gặp đội của bạn",
+    "title": "8 người bạn. Mỗi bạn một tính cách.",
+    "body": "Mỗi nhân vật trong VibeMon đều có câu chuyện, tính cách và cách giúp bạn học riêng. Họ sống trong Thế Giới Số — một vũ trụ bên trong mọi chiếc máy tính — và đang chờ bạn gia nhập đội.",
+    "growthNote": "Mỗi thú cưng tiến hóa cùng kỹ năng của bạn",
+    "characters": [
+      { "name": "Byte", "species": "Bóng linh hồn · Nguồn gốc bí ẩn", "badge": "Lõi Hỗn Loạn", "color": "#534AB7", "quote": "Tao ở đây lâu hơn cả nhật ký ghi nhớ.", "role": "Bạn đồng hành chính. Phản ứng với mọi hoạt động lập trình của bạn." },
+      { "name": "Nova", "species": "Cáo lửa · Tị nạn hệ sao", "badge": "Cố Vấn Thiên Tài", "color": "#BA7517", "quote": "Tao biết 17 cách. Bắt đầu với cách kỳ lạ nhất nhé.", "role": "Gia sư chính. Xuất hiện trong bài học với giải thích sâu." },
+      { "name": "Sage", "species": "Cú xanh · Thủ thư cổ đại", "badge": "Người Dẫn Đường", "color": "#085041", "quote": "Không có đường tắt. Chỉ có con đường.", "role": "Dẫn dắt các bài học chuyên sâu và cung cấp câu chuyện thế giới." },
+      { "name": "Glitch", "species": "Mèo hồng · Kỹ sư nổi loạn", "badge": "Tin tặc Nổi Loạn", "color": "#993556", "quote": "Luật lệ chỉ là gợi ý mà trình biên dịch chưa từ chối.", "role": "Xuất hiện khi bạn gặp lỗi. Biến lỗi thành tính năng." },
+      { "name": "Crash", "species": "Gấu đỏ · Thợ xây dũng cảm", "badge": "Anh Hùng Vũ Phu", "color": "#A32D2D", "quote": "Xuất bản đi. Sửa sau. Xuất bản tiếp.", "role": "Sự kiện xây nhanh và cuộc thi lập trình. Ăn mừng mỗi lần xuất bản." },
+      { "name": "Zero", "species": "Bóng ma mã nguồn · Tiến trình bị lãng quên", "badge": "Tối Ưu Thầm Lặng", "color": "#444441", "quote": "Mã nguồn nhanh nhất là mã nguồn không cần chạy.", "role": "Xuất hiện khi mã nguồn không hiệu quả. Gợi ý tối ưu im lặng." },
+      { "name": "Luna", "species": "Người mơ mộng · Con người", "badge": "Nhà Sáng Tạo", "color": "#534AB7", "quote": "Không biết mình đang làm gì. Đã xuất bản 7 thứ tháng này.", "role": "Bạn đồng hành. Cùng xây dựng trong thử thách hợp tác." },
+      { "name": "Null", "species": "Chất nhờn · Thực thể chưa khởi tạo", "badge": "Lá Bài Hoang", "color": "#3B6D11", "quote": "???", "role": "Nhân vật sự kiện ngẫu nhiên. Xuất hiện bất ngờ với nội dung bí mật." }
     ]
   },
   "finalCTA": {
-    "title": "Đừng chỉ code với AI.",
-    "titleAccent": "Làm chủ nó",
-    "titleEnd": ".",
-    "subtitle": "Early access giới hạn. Đăng ký ngay để là người đầu tiên xem điểm vibe coding của bạn.",
-    "trustMeta": "Không spam · Hủy bất cứ lúc nào · macOS trước tiên"
+    "title": "Hết đoán mò.",
+    "titleAccent": "Bắt đầu tiến bộ.",
+    "titleEnd": "",
+    "subtitle": "1,504+ người đang theo dõi thói quen lập trình của họ. Bản thử nghiệm đóng khi hết chỗ.",
+    "trustMeta": "Dùng thử miễn phí · Không cần thẻ · Hủy bất cứ lúc nào",
+    "spotsLeft": "Còn 16 chỗ"
+  },
+  "mockup": {
+    "greeting": "Chào buổi chiều!",
+    "sessionLabel": "Phiên đang chạy",
+    "sessionTime": "14 phút",
+    "tool1": "Cursor",
+    "tool1Detail": "page.tsx",
+    "tool2": "Claude",
+    "tool2Detail": "đang hoạt động",
+    "streak": "7",
+    "streakLabel": "Ngày liên tiếp",
+    "goal": "2/3",
+    "goalLabel": "Mục tiêu hôm nay",
+    "goalSub": "Còn 1",
+    "focusTitle": "Hôm nay tập trung",
+    "focus1": "Tạo tệp quy tắc",
+    "focus1Why": "Sửa Cursor 6 lần tuần này",
+    "focus2": "Viết mô tả dự án",
+    "focus2Why": "Chưa có mô tả dự án",
+    "lessonTitle": "Hôm qua bạn đã học",
+    "lessonSkill": "Thiết lập ngữ cảnh",
+    "lessonText": "Nói cho AI biết công cụ bạn dùng trước khi hỏi mã nguồn"
   },
   "footer": {
-    "tagline": "DevPet",
+    "tagline": "VibeMon",
     "links": {
       "twitter": "Twitter / X",
       "github": "GitHub",
       "privacy": "Chính sách bảo mật"
     },
-    "copyright": "© 2026 DevPet. Dành cho dev muốn giỏi hơn, không chỉ nhanh hơn."
+    "copyright": "© 2026 VibeMon. Dành cho người muốn giỏi hơn, không chỉ nhanh hơn."
   }
 }

@@ -64,6 +64,12 @@ export default function WaitlistForm() {
       {state === 'error' && (
         <p className="mt-1.5 text-xs text-red-500">{t.form.errorServer}</p>
       )}
+      {t.form.spotsLeft && (
+        <p className="mt-2 text-[11px] text-mint-dark font-semibold flex items-center gap-1">
+          <span className="w-1.5 h-1.5 bg-mint rounded-full animate-pulse" />
+          {t.form.spotsLeft}
+        </p>
+      )}
     </form>
   )
 }

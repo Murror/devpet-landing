@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useState, ReactNode } from 'react'
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import en from './i18n/en.json'
 import vi from './i18n/vi.json'
 
@@ -17,9 +17,51 @@ const LocaleContext = createContext<LocaleContextValue | null>(null)
 
 const messages: Record<Locale, Messages> = { en, vi: vi as Messages }
 
+async function detectLocale(): Promise<Locale> {
+  try {
+    const res = await fetch('https://api.country.is', { signal: AbortSignal.timeout(3000) })
+    if (!res.ok) return 'en'
+    const data = await res.json()
+    return data.country === 'VN' ? 'vi' : 'en'
+  } catch {
+    return 'en'
+  }
+}
+
 export function LocaleProvider({ children }: { children: ReactNode }) {
   const [locale, setLocale] = useState<Locale>('en')
-  const toggleLocale = () => setLocale(l => l === 'en' ? 'vi' : 'en')
+
+  useEffect(() => {
+    // Clean up old localStorage key (before IP detection was added)
+    const oldKey = localStorage.getItem('devpet-locale')
+    if (oldKey && !localStorage.getItem('devpet-locale-manual')) {
+      localStorage.removeItem('devpet-locale')
+    }
+
+    // Only respect saved locale if user manually toggled (flag set)
+    const manual = localStorage.getItem('devpet-locale-manual')
+    if (manual) {
+      const saved = localStorage.getItem('devpet-locale') as Locale | null
+      if (saved && (saved === 'en' || saved === 'vi')) {
+        setLocale(saved)
+        return
+      }
+    }
+    detectLocale().then(detected => {
+      setLocale(detected)
+      localStorage.setItem('devpet-locale', detected)
+    })
+  }, [])
+
+  const toggleLocale = () => {
+    setLocale(prev => {
+      const next = prev === 'en' ? 'vi' : 'en'
+      localStorage.setItem('devpet-locale', next)
+      localStorage.setItem('devpet-locale-manual', '1')
+      return next
+    })
+  }
+
   return (
     <LocaleContext.Provider value={{ locale, t: messages[locale], toggleLocale }}>
       {children}
