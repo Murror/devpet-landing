@@ -65,7 +65,7 @@ export default function PetGuide() {
   const prevSection = useRef<SectionKey | null>(null)
   const speechTimeout = useRef<NodeJS.Timeout | null>(null)
 
-  const funQuotes = locale === 'vi' ? FUN_QUOTES_VI : FUN_QUOTES_EN
+  const funQuotes = ((t as Record<string, unknown>).funQuotes as string[] | undefined) ?? (locale === 'vi' ? FUN_QUOTES_VI : FUN_QUOTES_EN)
 
   // Update position when activeSection changes
   useEffect(() => {

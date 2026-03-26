@@ -3,7 +3,7 @@
     "features": "Tính năng",
     "howItWorks": "Cách hoạt động",
     "pricing": "Bảng giá",
-    "joinWaitlist": "Tham gia 1,504+ người dùng",
+    "joinWaitlist": "1,504 người dùng đã đăng ký",
     "langEN": "EN",
     "langVI": "VI"
   },
@@ -11,83 +11,83 @@
     "badge": "🐱 Bạn đồng hành lập trình AI",
     "title": "Hôm qua bạn thử lại cùng một câu lệnh 5 lần.",
     "titleAccent": "VibeMon biết.",
-    "subtitle": "Bạn lập trình với AI mỗi ngày — nhưng không nhìn thấy thói quen của mình. Những vòng lặp lỗi. Những câu lệnh lãng phí. Những kỹ năng chưa được xây. VibeMon theo dõi tất cả, để bạn thực sự giỏi lên.",
-    "trustMeta": "Dùng thử miễn phí · Hỗ trợ Cursor · VS Code · Claude Code",
+    "subtitle": "Theo dõi thói quen, bắt vòng lặp lỗi, lên cấp kỹ năng — tự động.",
+    "trustMeta": "Miễn phí · Cursor · VS Code · Claude Code",
     "proofStats": [
-      { "value": "1,504+", "label": "người đã tham gia" },
+      { "value": "1,504", "label": "người dùng đã đăng ký" },
       { "value": "70%", "label": "tỉ lệ thành công" },
       { "value": "2×", "label": "sửa lỗi nhanh hơn" }
     ]
   },
   "form": {
     "placeholder": "email@cuaban.com",
-    "submit": "Tham gia 1,504+ người dùng →",
+    "submit": "1,504 người dùng đã đăng ký →",
     "loading": "Đang đăng ký...",
     "success": "Bạn đã vào! Kiểm tra hộp thư nhé.",
-    "errorDuplicate": "Bạn đã trong danh sách rồi — sẽ liên hệ sớm.",
-    "errorValidation": "Vui lòng nhập địa chỉ email hợp lệ.",
-    "errorServer": "Đã xảy ra lỗi. Vui lòng thử lại.",
-    "spotsLeft": "Chỉ còn 16 chỗ trong bản thử nghiệm"
+    "errorDuplicate": "Bạn đã trong danh sách rồi.",
+    "errorValidation": "Email không hợp lệ.",
+    "errorServer": "Đã xảy ra lỗi. Thử lại nhé.",
+    "spotsLeft": "Còn 16 chỗ thử nghiệm"
   },
   "howItWorks": {
     "eyebrow": "Cách hoạt động",
     "title": "Lập trình với AI. Phần còn lại để mình lo.",
-    "subtitle": "VibeMon chạy ngầm. Bạn lập trình — nó học, theo dõi, và hướng dẫn.",
+    "subtitle": "VibeMon chạy ngầm. Bạn code — nó theo dõi và hướng dẫn.",
     "steps": [
       {
         "num": "01",
         "icon": "scan-search",
-        "title": "Mở trình soạn thảo. Xong.",
-        "desc": "Cursor, VS Code, Claude Code — VibeMon tự phát hiện phiên làm việc. Không cài đặt, không tiện ích mở rộng, không rào cản."
+        "title": "Mở editor. Xong.",
+        "desc": "Cursor, VS Code, Claude Code — tự phát hiện. Không cài đặt gì."
       },
       {
         "num": "02",
         "icon": "book-open",
         "title": "Thấy thói quen vô hình",
-        "desc": "Bao nhiêu câu lệnh hiệu quả? Chỗ nào bị lặp? Công cụ nào tiết kiệm thời gian? VibeMon biến phiên làm việc thành câu chuyện bạn học được."
+        "desc": "Câu lệnh nào hiệu quả? Chỗ nào bị lặp? Biến phiên code thành dữ liệu học được."
       },
       {
         "num": "03",
         "icon": "trophy",
         "title": "Lên cấp thật sự",
-        "desc": "Nhận điểm kinh nghiệm, mở khóa kỹ năng, giữ chuỗi ngày. Báo cáo tuần cho thấy chính xác bạn giỏi lên ở đâu — bằng dữ liệu, không phải cảm giác."
+        "desc": "XP, kỹ năng, chuỗi ngày. Báo cáo tuần cho thấy bạn giỏi lên ở đâu."
       }
     ]
   },
   "features": {
     "eyebrow": "Tính năng",
-    "title": "Mọi thứ bạn cần để hết đoán mò, bắt đầu tiến bộ.",
-    "subtitle": "Hầu hết người dùng AI lập trình không biết mình có đang giỏi lên không. VibeMon sửa điều đó.",
+    "title": "Hết đoán mò. Bắt đầu tiến bộ.",
+    "subtitle": "Biết chính xác mình đang ở đâu — và cần làm gì tiếp.",
     "cards": [
       {
         "icon": "activity",
         "title": "Theo dõi phiên tự động",
-        "desc": "Mỗi phiên lập trình được ghi lại tự động. Câu lệnh, thành công, lỗi, thời gian — tất cả được lưu mà bạn không cần làm gì.",
-        "bullets": ["Biết câu lệnh nào thực sự hiệu quả", "Bắt vòng lặp lỗi trước khi mất cả ngày", "Biết giờ nào mình làm việc hiệu quả nhất"]
+        "desc": "Câu lệnh, lỗi, thời gian — tất cả được ghi lại tự động.",
+        "bullets": ["Câu lệnh nào hiệu quả", "Bắt vòng lặp lỗi sớm", "Giờ làm việc hiệu quả nhất"]
       },
       {
         "icon": "trophy",
-        "title": "Cây kỹ năng & Điểm kinh nghiệm",
-        "desc": "16 kỹ năng lập trình AI thật, chia 4 cấp. Từ rõ ràng câu lệnh đến kiến trúc AI — đo bằng điểm, không phải ý kiến.",
-        "bullets": ["Lên cấp bằng cách tạo sản phẩm thật", "Biết chính xác cần học gì tiếp", "Chia sẻ tiến trình với bạn bè"]
+        "title": "Cây kỹ năng & XP",
+        "desc": "16 kỹ năng, 4 cấp. Đo bằng điểm, không phải ý kiến.",
+        "bullets": ["Lên cấp bằng sản phẩm thật", "Biết cần học gì tiếp", "Chia sẻ tiến trình"]
       },
       {
         "icon": "cat",
-        "title": "Mèo huấn luyện viên AI",
-        "desc": "Không phải trò chuyện tự động chung chung. Mèo của bạn đã thấy mọi phiên, mọi lỗi, mọi thành công. Lời khuyên là dành riêng cho bạn.",
-        "bullets": ["\"Tại sao tôi bị kẹt?\" — trả lời ngay", "Nhớ lịch sử và điểm yếu của bạn", "Tư vấn theo ngữ cảnh từng thẻ"]
+        "title": "Mèo huấn luyện AI",
+        "desc": "Đã thấy mọi phiên, mọi lỗi. Lời khuyên dành riêng cho bạn.",
+        "bullets": ["\"Tại sao tôi bị kẹt?\" — trả lời ngay", "Nhớ điểm yếu của bạn", "Tư vấn theo ngữ cảnh"]
       },
       {
         "icon": "bar-chart",
         "title": "Báo cáo tuần",
-        "desc": "Tỉ lệ thành công, chi phí mỗi phiên, xu hướng lỗi, chuỗi ngày — những con số cho thấy bạn có đang tiến bộ thật không.",
-        "bullets": ["AI tổng hợp báo cáo tuần", "Bài học bạn thực sự đã rút ra", "Tiến bộ bạn cảm nhận được"]
+        "desc": "Tỉ lệ thành công, xu hướng lỗi, chuỗi ngày — bằng dữ liệu.",
+        "bullets": ["AI tổng hợp tuần", "Bài học thực tế", "Tiến bộ đo được"]
       }
     ]
   },
   "midCTA": {
     "title": "Nghe quen không?",
-    "subtitle": "Tham gia 1,504+ người đang theo dõi tiến trình lập trình AI của họ.",
+    "subtitle": "1,504 người dùng đã đăng ký.",
     "spotsLeft": "Còn 16 chỗ thử nghiệm"
   },
   "testimonials": {
@@ -98,7 +98,7 @@
         "name": "Minh T.",
         "role": "13 tuổi · đang tập làm sản phẩm",
         "avatar": "🧒",
-        "quote": "Mình mới 13 tuổi, chưa biết gì về lập trình. Nhờ VibeMon mà mình biết mình hay bị lặp lỗi ở đâu, giờ mình tự sửa được rồi. Vui lắm!",
+        "quote": "Nhờ VibeMon mình biết hay lặp lỗi ở đâu. Giờ tự sửa được rồi!",
         "stat": "11 lần → 2",
         "statLabel": "mỗi tuần"
       },
@@ -106,7 +106,7 @@
         "name": "Lan P.",
         "role": "Designer",
         "avatar": "👩‍🎨",
-        "quote": "Mình không biết mình đang tốn 40% thời gian cho câu lệnh không bao giờ hoạt động. Nhìn thấy con số đó đã thay đổi hoàn toàn cách mình làm việc.",
+        "quote": "Không biết mình tốn 40% thời gian cho câu lệnh hỏng. Nhìn thấy con số đó — thay đổi hoàn toàn.",
         "stat": "40% lãng phí → 12%",
         "statLabel": "hiệu quả câu lệnh"
       },
@@ -114,7 +114,7 @@
         "name": "Hùng N.",
         "role": "Solo founder",
         "avatar": "🚀",
-        "quote": "Mèo huấn luyện bảo mình đổi từ Cursor sang Claude Code cho xác thực — giải quyết trong 1 câu lệnh thay vì 6. Một mẹo đó tiết kiệm mấy tiếng.",
+        "quote": "Mèo coach bảo đổi sang Claude Code cho auth — 1 câu lệnh thay vì 6. Tiết kiệm mấy tiếng.",
         "stat": "6 câu lệnh → 1",
         "statLabel": "cho luồng xác thực"
       }
@@ -123,7 +123,7 @@
   "skillTree": {
     "eyebrow": "Cây kỹ năng",
     "title": "16 kỹ năng. 4 cấp. Không đoán mò.",
-    "subtitle": "Cuối cùng cũng biết mình đang ở đâu — và cần làm gì tiếp.",
+    "subtitle": "Biết mình đang ở đâu — và cần làm gì tiếp.",
     "tiers": [
       { "name": "Nền tảng", "color": "#6BCB77", "skills": ["Rõ ràng câu lệnh", "Đọc hiểu lỗi", "Cơ bản công cụ", "Đánh giá mã nguồn"] },
       { "name": "Ngữ cảnh & Cấu trúc", "color": "#D89840", "skills": ["Thiết lập ngữ cảnh", "Tệp quy tắc AI", "Tài liệu hóa", "Cấu trúc dự án"] },
@@ -134,25 +134,25 @@
   "meetYourPet": {
     "eyebrow": "Gặp đội của bạn",
     "title": "8 người bạn. Mỗi bạn một tính cách.",
-    "body": "Mỗi nhân vật trong VibeMon đều có câu chuyện, tính cách và cách giúp bạn học riêng. Họ sống trong Thế Giới Số — một vũ trụ bên trong mọi chiếc máy tính — và đang chờ bạn gia nhập đội.",
-    "growthNote": "Mỗi thú cưng tiến hóa cùng kỹ năng của bạn",
+    "body": "Mỗi nhân vật có câu chuyện và cách giúp bạn học riêng. Bấm để khám phá.",
+    "growthNote": "Tiến hóa cùng kỹ năng của bạn",
     "characters": [
-      { "name": "Byte", "species": "Bóng linh hồn · Nguồn gốc bí ẩn", "badge": "Lõi Hỗn Loạn", "color": "#534AB7", "quote": "Tao ở đây lâu hơn cả nhật ký ghi nhớ.", "role": "Bạn đồng hành chính. Phản ứng với mọi hoạt động lập trình của bạn." },
-      { "name": "Nova", "species": "Cáo lửa · Tị nạn hệ sao", "badge": "Cố Vấn Thiên Tài", "color": "#BA7517", "quote": "Tao biết 17 cách. Bắt đầu với cách kỳ lạ nhất nhé.", "role": "Gia sư chính. Xuất hiện trong bài học với giải thích sâu." },
-      { "name": "Sage", "species": "Cú xanh · Thủ thư cổ đại", "badge": "Người Dẫn Đường", "color": "#085041", "quote": "Không có đường tắt. Chỉ có con đường.", "role": "Dẫn dắt các bài học chuyên sâu và cung cấp câu chuyện thế giới." },
-      { "name": "Glitch", "species": "Mèo hồng · Kỹ sư nổi loạn", "badge": "Tin tặc Nổi Loạn", "color": "#993556", "quote": "Luật lệ chỉ là gợi ý mà trình biên dịch chưa từ chối.", "role": "Xuất hiện khi bạn gặp lỗi. Biến lỗi thành tính năng." },
-      { "name": "Crash", "species": "Gấu đỏ · Thợ xây dũng cảm", "badge": "Anh Hùng Vũ Phu", "color": "#A32D2D", "quote": "Xuất bản đi. Sửa sau. Xuất bản tiếp.", "role": "Sự kiện xây nhanh và cuộc thi lập trình. Ăn mừng mỗi lần xuất bản." },
-      { "name": "Zero", "species": "Bóng ma mã nguồn · Tiến trình bị lãng quên", "badge": "Tối Ưu Thầm Lặng", "color": "#444441", "quote": "Mã nguồn nhanh nhất là mã nguồn không cần chạy.", "role": "Xuất hiện khi mã nguồn không hiệu quả. Gợi ý tối ưu im lặng." },
-      { "name": "Luna", "species": "Người mơ mộng · Con người", "badge": "Nhà Sáng Tạo", "color": "#534AB7", "quote": "Không biết mình đang làm gì. Đã xuất bản 7 thứ tháng này.", "role": "Bạn đồng hành. Cùng xây dựng trong thử thách hợp tác." },
-      { "name": "Null", "species": "Chất nhờn · Thực thể chưa khởi tạo", "badge": "Lá Bài Hoang", "color": "#3B6D11", "quote": "???", "role": "Nhân vật sự kiện ngẫu nhiên. Xuất hiện bất ngờ với nội dung bí mật." }
+      { "name": "Byte", "species": "Bóng linh hồn · Bí ẩn", "badge": "Lõi Hỗn Loạn", "color": "#534AB7", "quote": "Tao ở đây lâu hơn cả nhật ký ghi nhớ.", "role": "Bạn đồng hành chính. Phản ứng mọi hoạt động code." },
+      { "name": "Nova", "species": "Cáo lửa · Hệ sao", "badge": "Cố Vấn Thiên Tài", "color": "#BA7517", "quote": "Tao biết 17 cách. Bắt đầu với cách kỳ lạ nhất.", "role": "Gia sư chính. Giải thích sâu." },
+      { "name": "Sage", "species": "Cú xanh · Cổ đại", "badge": "Người Dẫn Đường", "color": "#085041", "quote": "Không có đường tắt. Chỉ có con đường.", "role": "Bài học chuyên sâu và lore." },
+      { "name": "Glitch", "species": "Mèo hồng · Nổi loạn", "badge": "Tin tặc Nổi Loạn", "color": "#993556", "quote": "Luật lệ chỉ là gợi ý chưa bị từ chối.", "role": "Xuất hiện khi gặp lỗi." },
+      { "name": "Crash", "species": "Gấu đỏ · Dũng cảm", "badge": "Anh Hùng Vũ Phu", "color": "#A32D2D", "quote": "Xuất bản đi. Sửa sau. Xuất bản tiếp.", "role": "Xây nhanh, ăn mừng mỗi lần ship." },
+      { "name": "Zero", "species": "Bóng ma · Bị quên", "badge": "Tối Ưu Thầm Lặng", "color": "#444441", "quote": "Code nhanh nhất là code không cần chạy.", "role": "Gợi ý tối ưu im lặng." },
+      { "name": "Luna", "species": "Người mơ · Con người", "badge": "Nhà Sáng Tạo", "color": "#534AB7", "quote": "Không biết mình đang làm gì. Ship 7 thứ tháng này.", "role": "Bạn đồng hành thử thách." },
+      { "name": "Null", "species": "Chất nhờn · Chưa khởi tạo", "badge": "Lá Bài Hoang", "color": "#3B6D11", "quote": "???", "role": "Xuất hiện bất ngờ với bí mật." }
     ]
   },
   "finalCTA": {
     "title": "Hết đoán mò.",
     "titleAccent": "Bắt đầu tiến bộ.",
     "titleEnd": "",
-    "subtitle": "1,504+ người đang theo dõi thói quen lập trình của họ. Bản thử nghiệm đóng khi hết chỗ.",
-    "trustMeta": "Dùng thử miễn phí · Không cần thẻ · Hủy bất cứ lúc nào",
+    "subtitle": "1,504 người đã đăng ký. Thử nghiệm đóng khi hết chỗ.",
+    "trustMeta": "Miễn phí · Không cần thẻ · Hủy bất cứ lúc nào",
     "spotsLeft": "Còn 16 chỗ"
   },
   "mockup": {
@@ -177,6 +177,20 @@
     "lessonSkill": "Thiết lập ngữ cảnh",
     "lessonText": "Nói cho AI biết công cụ bạn dùng trước khi hỏi mã nguồn"
   },
+  "funQuotes": [
+    "Hehe!", "Code thêm đi!", "Không có bug!", "Ship thôi!", "Ngon lắm!",
+    "Cậu làm được!", "Đi thôi!", "Woohoo!", "Tiếp tục nào!", "Đỉnh!"
+  ],
+  "companionQuotes": {
+    "Byte":    { "hero": "Hmm… tao đang phân tích mày đó.", "howItWorks": "3 bước thôi. Đừng lo.", "features": "Chức năng xịn phết nhỉ?", "skillTree": "Tao biết mày yếu chỗ nào.", "testimonials": "Người thật. Không phải bot.", "finalCTA": "Đăng ký đi. Tao đợi." },
+    "Nova":    { "hero": "17 cách để bắt đầu. Chọn cách lạ nhất.", "howItWorks": "Để tao giải thích rõ hơn…", "features": "Mỗi tính năng tao đều test rồi.", "skillTree": "Bắt đầu từ Nền tảng nhé!", "testimonials": "Gia sư giỏi thì trò giỏi.", "finalCTA": "Sẵn sàng học chưa?" },
+    "Sage":    { "hero": "Con đường nào cũng bắt đầu từ đây.", "howItWorks": "Hiểu quy trình trước. Code sau.", "features": "Kiên nhẫn sẽ được thưởng.", "skillTree": "Tri thức không có đường tắt.", "testimonials": "Lắng nghe kinh nghiệm người đi trước.", "finalCTA": "Sẵn sàng bước tiếp?" },
+    "Glitch":  { "hero": "Hack thôi! À ý là… code.", "howItWorks": "Luật lệ chỉ là gợi ý thôi.", "features": "Tao thích cái bắt lỗi nhất.", "skillTree": "Phá rồi sửa. Học nhanh hơn.", "testimonials": "Bug cũng là bạn, tin tao.", "finalCTA": "Đi thôi. Sợ gì!" },
+    "Crash":   { "hero": "Ship trước. Sửa sau!", "howItWorks": "Đọc xong chưa? Build đi!", "features": "Tính năng ngon. Dùng đi!", "skillTree": "XP nhiều = giỏi nhiều!", "testimonials": "Thấy chưa? Ai cũng ship được.", "finalCTA": "Xuất bản ngay!" },
+    "Zero":    { "hero": "...", "howItWorks": "Quy trình tối ưu. Im lặng hiệu quả.", "features": "Ít code hơn. Nhanh hơn.", "skillTree": "Refactor là nghệ thuật.", "testimonials": "Kết quả nói thay lời.", "finalCTA": "..." },
+    "Luna":    { "hero": "Không biết mình đang làm gì nhưng vui quá!", "howItWorks": "Ồ hay ghê! Dễ hiểu nữa.", "features": "Tao muốn thử hết luôn!", "skillTree": "Mình cùng leo rank nhé!", "testimonials": "Wholesome quá đi!", "finalCTA": "Cùng nhau nha!" },
+    "Null":    { "hero": "???", "howItWorks": "…bạn có nghe tiếng gì không?", "features": "Có tính năng ẩn đó.", "skillTree": "???", "testimonials": "Ai nói bạn tao đâu.", "finalCTA": "…" }
+  },
   "footer": {
     "tagline": "VibeMon",
     "links": {
@@ -184,6 +198,6 @@
       "github": "GitHub",
       "privacy": "Chính sách bảo mật"
     },
-    "copyright": "© 2026 VibeMon. Dành cho người muốn giỏi hơn, không chỉ nhanh hơn."
+    "copyright": "© 2026 VibeMon. Giỏi hơn, không chỉ nhanh hơn."
   }
 }

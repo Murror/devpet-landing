@@ -3,7 +3,7 @@
     "features": "Features",
     "howItWorks": "How it works",
     "pricing": "Pricing",
-    "joinWaitlist": "Join 1,504+ builders",
+    "joinWaitlist": "1,504 builders registered",
     "langEN": "EN",
     "langVI": "VI"
   },
@@ -11,83 +11,83 @@
     "badge": "🐱 Your AI coding companion",
     "title": "You retried the same prompt 5 times yesterday.",
     "titleAccent": "VibeMon noticed.",
-    "subtitle": "You vibe code every day — but you can't see your own patterns. The error loops. The wasted prompts. The skills you're not building. VibeMon tracks it all, so you actually get better.",
-    "trustMeta": "Free beta · Cursor · VS Code · Claude Code",
+    "subtitle": "Track habits, catch error loops, level up your skills — automatically.",
+    "trustMeta": "Free · Cursor · VS Code · Claude Code",
     "proofStats": [
-      { "value": "1,504+", "label": "builders joined" },
+      { "value": "1,504", "label": "builders registered" },
       { "value": "70%", "label": "success rate" },
       { "value": "2×", "label": "faster debugging" }
     ]
   },
   "form": {
     "placeholder": "your@email.com",
-    "submit": "Join 1,504+ builders →",
+    "submit": "1,504 builders registered →",
     "loading": "Joining...",
-    "success": "You're in! Check your inbox — we'll notify you before public launch.",
-    "errorDuplicate": "You're already on the list — we'll reach out soon.",
-    "errorValidation": "Please enter a valid email address.",
-    "errorServer": "Something went wrong. Please try again.",
+    "success": "You're in! Check your inbox.",
+    "errorDuplicate": "You're already on the list.",
+    "errorValidation": "Invalid email address.",
+    "errorServer": "Something went wrong. Try again.",
     "spotsLeft": "Only 16 spots left in beta"
   },
   "howItWorks": {
     "eyebrow": "How it works",
     "title": "Code with AI. We handle the rest.",
-    "subtitle": "VibeMon runs quietly in the background. You code — it learns, tracks, and coaches.",
+    "subtitle": "VibeMon runs in the background. You code — it tracks and coaches.",
     "steps": [
       {
         "num": "01",
         "icon": "scan-search",
         "title": "Open your editor. Done.",
-        "desc": "Cursor, VS Code, Claude Code — VibeMon auto-detects your session. No setup, no plugins, no friction."
+        "desc": "Cursor, VS Code, Claude Code — auto-detected. No setup needed."
       },
       {
         "num": "02",
         "icon": "book-open",
         "title": "See your invisible habits",
-        "desc": "How many prompts worked? Where did you loop? Which tool saved time? VibeMon turns your sessions into a story you can learn from."
+        "desc": "Which prompts worked? Where did you loop? Turn sessions into learnable data."
       },
       {
         "num": "03",
         "icon": "trophy",
         "title": "Level up for real",
-        "desc": "Earn XP, unlock skills, track your streak. Weekly reports show exactly where you improved — with data, not vibes."
+        "desc": "XP, skills, streaks. Weekly reports show exactly where you improved."
       }
     ]
   },
   "features": {
     "eyebrow": "Features",
-    "title": "Everything you need to stop guessing and start growing.",
-    "subtitle": "Most vibe coders have no idea if they're getting better. VibeMon fixes that.",
+    "title": "Stop guessing. Start growing.",
+    "subtitle": "Know exactly where you stand — and what to work on next.",
     "cards": [
       {
         "icon": "activity",
         "title": "Session Tracker",
-        "desc": "Every coding session logged automatically. Prompts, wins, errors, duration — all captured without you lifting a finger.",
-        "bullets": ["See which prompts actually worked", "Catch error loops before they eat your day", "Know your most productive hours"]
+        "desc": "Prompts, errors, duration — all captured automatically.",
+        "bullets": ["Which prompts actually worked", "Catch error loops early", "Your most productive hours"]
       },
       {
         "icon": "trophy",
         "title": "Skill Tree & XP",
-        "desc": "16 real vibe coding skills across 4 tiers. From prompt clarity to AI architecture — tracked with XP, not opinions.",
-        "bullets": ["Level up by shipping, not watching", "See exactly what to learn next", "Share your progress"]
+        "desc": "16 skills, 4 tiers. Tracked with XP, not opinions.",
+        "bullets": ["Level up by shipping", "See what to learn next", "Share your progress"]
       },
       {
         "icon": "cat",
         "title": "AI Cat Coach",
-        "desc": "Not a generic chatbot. Your cat has seen every session, every mistake, every win. Its advice is personal.",
-        "bullets": ["\"Why did I get stuck?\" — answered instantly", "Remembers your history & weak spots", "Context-aware per tab"]
+        "desc": "Seen every session, every mistake. Advice that's personal.",
+        "bullets": ["\"Why did I get stuck?\" — answered", "Remembers your weak spots", "Context-aware per tab"]
       },
       {
         "icon": "bar-chart",
         "title": "Weekly Insights",
-        "desc": "Success rate, cost per session, error patterns, streaks — the numbers that show if you're actually improving.",
-        "bullets": ["AI-generated weekly summary", "Lessons you actually learned", "Progress you can feel"]
+        "desc": "Success rate, error patterns, streaks — real numbers.",
+        "bullets": ["AI-generated summary", "Lessons you learned", "Measurable progress"]
       }
     ]
   },
   "midCTA": {
     "title": "Sounds like you?",
-    "subtitle": "Join 1,504+ vibe coders already tracking their progress.",
+    "subtitle": "1,504 builders registered.",
     "spotsLeft": "16 beta spots remaining"
   },
   "testimonials": {
@@ -96,17 +96,17 @@
     "items": [
       {
         "name": "Minh T.",
-        "role": "13 years old · learning to build products",
+        "role": "13 years old · building products",
         "avatar": "🧒",
-        "quote": "I'm only 13 and I didn't know anything about coding. VibeMon showed me where I keep making the same mistakes, and now I can fix them myself. So fun!",
+        "quote": "VibeMon showed me where I keep repeating mistakes. Now I fix them myself!",
         "stat": "11 retries → 2",
         "statLabel": "per week"
       },
       {
         "name": "Sarah K.",
-        "role": "Product designer who codes",
+        "role": "Designer who codes",
         "avatar": "👩‍🎨",
-        "quote": "I had no idea I was spending 40% of my time on prompts that never worked. Seeing that number made me change my whole approach.",
+        "quote": "Had no idea 40% of my prompts never worked. Seeing that number changed everything.",
         "stat": "40% waste → 12%",
         "statLabel": "prompt efficiency"
       },
@@ -114,7 +114,7 @@
         "name": "Alex R.",
         "role": "Solo founder",
         "avatar": "🚀",
-        "quote": "The cat coach told me to switch from Cursor to Claude Code for auth — solved it in 1 prompt instead of 6. That one tip saved me hours.",
+        "quote": "Cat coach said switch to Claude Code for auth — 1 prompt instead of 6. Hours saved.",
         "stat": "6 prompts → 1",
         "statLabel": "for auth flow"
       }
@@ -123,7 +123,7 @@
   "skillTree": {
     "eyebrow": "Skill tree",
     "title": "16 skills. 4 tiers. Zero guessing.",
-    "subtitle": "Finally know exactly where you stand — and what to work on next.",
+    "subtitle": "Know where you stand — and what's next.",
     "tiers": [
       { "name": "Foundations", "color": "#6BCB77", "skills": ["Prompt Clarity", "Error Reading", "Tool Basics", "Code Judgment"] },
       { "name": "Context & Structure", "color": "#D89840", "skills": ["Context Setting", "AI Rules Files", "Documentation", "Project Structure"] },
@@ -134,25 +134,25 @@
   "meetYourPet": {
     "eyebrow": "Meet your crew",
     "title": "8 friends. Each with their own personality.",
-    "body": "Every character in VibeMon has their own story, personality, and way of helping you learn. They live in the DevRealm — a digital universe inside every computer — and they're waiting for you to join the crew.",
+    "body": "Every character has a story and a way to help you learn. Tap to discover.",
     "growthNote": "Each pet evolves as your skills grow",
     "characters": [
-      { "name": "Byte", "species": "Spirit blob · Unknown origin", "badge": "The Chaotic Core", "color": "#534AB7", "quote": "I've been here longer than the logs remember.", "role": "Your main companion. Reacts to all your coding activity in real-time." },
-      { "name": "Nova", "species": "Fire fox · Star system refugee", "badge": "The Genius Mentor", "color": "#BA7517", "quote": "I know 17 ways. Let's start with the weirdest.", "role": "Your primary tutor. Appears during lessons with deep explanations." },
-      { "name": "Sage", "species": "Teal owl · Ancient archivist", "badge": "The Wise Guide", "color": "#085041", "quote": "There is no shortcut. Only the path.", "role": "Hosts deep-dive learning paths and provides lore entries." },
-      { "name": "Glitch", "species": "Pink cat · Rogue engineer", "badge": "The Hacker Rebel", "color": "#993556", "quote": "Rules are suggestions the compiler hasn't rejected yet.", "role": "Appears when you hit errors. Frames bugs as features." },
-      { "name": "Crash", "species": "Red bear · Fearless builder", "badge": "The Brute Force Hero", "color": "#A32D2D", "quote": "Ship it. Fix it. Ship it again.", "role": "Speed build events and hackathon mode. Celebrates every ship." },
-      { "name": "Zero", "species": "Code wraith · Forgotten process", "badge": "The Silent Optimiser", "color": "#444441", "quote": "The fastest code is code that doesn't run.", "role": "Appears when code is inefficient. Silent refactor nudges." },
-      { "name": "Luna", "species": "Indie dreamer · Human", "badge": "The Creative Builder", "color": "#534AB7", "quote": "No idea what I'm doing. Shipped 7 things this month.", "role": "Peer companion. Co-builds in collaborative challenges." },
-      { "name": "Null", "species": "Slime · Uninitialized entity", "badge": "The Wild Card", "color": "#3B6D11", "quote": "???", "role": "Random event character. Appears unexpectedly with secret content." }
+      { "name": "Byte", "species": "Spirit blob · Unknown origin", "badge": "The Chaotic Core", "color": "#534AB7", "quote": "I've been here longer than the logs remember.", "role": "Main companion. Reacts to all your coding." },
+      { "name": "Nova", "species": "Fire fox · Star system", "badge": "The Genius Mentor", "color": "#BA7517", "quote": "I know 17 ways. Let's start with the weirdest.", "role": "Primary tutor. Deep explanations." },
+      { "name": "Sage", "species": "Teal owl · Ancient", "badge": "The Wise Guide", "color": "#085041", "quote": "There is no shortcut. Only the path.", "role": "Deep-dive lessons and lore." },
+      { "name": "Glitch", "species": "Pink cat · Rogue", "badge": "The Hacker Rebel", "color": "#993556", "quote": "Rules are suggestions the compiler hasn't rejected yet.", "role": "Appears when you hit errors." },
+      { "name": "Crash", "species": "Red bear · Fearless", "badge": "The Brute Force Hero", "color": "#A32D2D", "quote": "Ship it. Fix it. Ship it again.", "role": "Speed builds. Celebrates every ship." },
+      { "name": "Zero", "species": "Code wraith · Forgotten", "badge": "The Silent Optimiser", "color": "#444441", "quote": "The fastest code is code that doesn't run.", "role": "Silent refactor nudges." },
+      { "name": "Luna", "species": "Indie dreamer · Human", "badge": "The Creative Builder", "color": "#534AB7", "quote": "No idea what I'm doing. Shipped 7 things this month.", "role": "Peer companion in challenges." },
+      { "name": "Null", "species": "Slime · Uninitialized", "badge": "The Wild Card", "color": "#3B6D11", "quote": "???", "role": "Appears unexpectedly with secrets." }
     ]
   },
   "finalCTA": {
     "title": "Stop guessing.",
     "titleAccent": "Start growing.",
     "titleEnd": "",
-    "subtitle": "1,504+ builders already tracking their patterns. Beta closes when spots fill up.",
-    "trustMeta": "Free beta · No credit card · Cancel anytime",
+    "subtitle": "1,504 builders registered. Beta closes when spots fill up.",
+    "trustMeta": "Free · No credit card · Cancel anytime",
     "spotsLeft": "16 spots remaining"
   },
   "mockup": {
@@ -177,6 +177,20 @@
     "lessonSkill": "Context Setting",
     "lessonText": "Tell AI your tools before asking for code"
   },
+  "funQuotes": [
+    "Hehe!", "Code more!", "Bug-free zone!", "Ship it!", "Nice one!",
+    "You got this!", "Let's go!", "Woohoo!", "Keep going!", "Epic!"
+  ],
+  "companionQuotes": {
+    "Byte":    { "hero": "Hmm… I'm analyzing you.", "howItWorks": "Just 3 steps. Relax.", "features": "These features slap.", "skillTree": "I know your weak spots.", "testimonials": "Real people. Not bots.", "finalCTA": "Sign up. I'll wait." },
+    "Nova":    { "hero": "17 ways to start. Pick the weirdest.", "howItWorks": "Let me explain further…", "features": "I've tested every single one.", "skillTree": "Start with Foundations!", "testimonials": "Great tutors make great students.", "finalCTA": "Ready to learn?" },
+    "Sage":    { "hero": "Every path starts here.", "howItWorks": "Understand the process first.", "features": "Patience will be rewarded.", "skillTree": "Knowledge has no shortcuts.", "testimonials": "Listen to those who walked before.", "finalCTA": "Ready for the next step?" },
+    "Glitch":  { "hero": "Let's hack! I mean… code.", "howItWorks": "Rules are just suggestions.", "features": "I love the error catcher.", "skillTree": "Break it, fix it. Learn faster.", "testimonials": "Bugs are friends. Trust me.", "finalCTA": "Let's go. Fear nothing!" },
+    "Crash":   { "hero": "Ship first. Fix later!", "howItWorks": "Done reading? Build now!", "features": "Cool features. Use them!", "skillTree": "More XP = more skill!", "testimonials": "See? Anyone can ship.", "finalCTA": "Ship it now!" },
+    "Zero":    { "hero": "...", "howItWorks": "Optimal process. Silent efficiency.", "features": "Less code. Faster.", "skillTree": "Refactoring is art.", "testimonials": "Results speak.", "finalCTA": "..." },
+    "Luna":    { "hero": "No idea what I'm doing but this is fun!", "howItWorks": "Oh cool! So easy to follow.", "features": "I wanna try everything!", "skillTree": "Let's climb ranks together!", "testimonials": "So wholesome!", "finalCTA": "Together!" },
+    "Null":    { "hero": "???", "howItWorks": "…did you hear something?", "features": "There's a hidden feature.", "skillTree": "???", "testimonials": "Who said they're my friends.", "finalCTA": "…" }
+  },
   "footer": {
     "tagline": "VibeMon",
     "links": {
@@ -184,6 +198,6 @@
       "github": "GitHub",
       "privacy": "Privacy Policy"
     },
-    "copyright": "© 2026 VibeMon. Built for builders who want to get better, not just faster."
+    "copyright": "© 2026 VibeMon. Get better, not just faster."
   }
 }
