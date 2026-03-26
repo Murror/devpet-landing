@@ -5,23 +5,29 @@ import { motion } from 'framer-motion'
 import WaitlistForm from './WaitlistForm'
 import ScrollReveal from './ScrollReveal'
 import { Cat } from 'lucide-react'
+import PetSlot from './PetSlot'
 
 export default function FinalCTA() {
   const { t } = useLocale()
 
   return (
     <>
-      <section className="py-20 md:py-24">
+      <section id="final-cta" className="py-20 md:py-24">
         <ScrollReveal>
           <div className="mx-auto max-w-[640px] px-6 text-center">
             <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
+              initial={{ scale: 0.95, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, ease: 'easeOut' }}
+              transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
               className="w-14 h-14 bg-mint-light rounded-2xl flex items-center justify-center mx-auto mb-4"
             >
-              <Cat className="w-7 h-7 text-mint-dark" />
+              <motion.div
+                animate={{ rotate: [0, -8, 8, -4, 0] }}
+                transition={{ duration: 1.5, delay: 0.5, ease: 'easeInOut' }}
+              >
+                <Cat className="w-7 h-7 text-mint-dark" />
+              </motion.div>
             </motion.div>
             <h2 className="text-3xl md:text-[42px] font-black tracking-[-1.5px] mb-4">
               {t.finalCTA.title}{' '}
@@ -32,6 +38,7 @@ export default function FinalCTA() {
             <div className="mb-4">
               <WaitlistForm />
             </div>
+            <PetSlot section="finalCTA" className="hidden md:block mx-auto" />
             <p className="text-xs text-muted-light">{t.finalCTA.trustMeta}</p>
           </div>
         </ScrollReveal>

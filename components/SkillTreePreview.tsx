@@ -3,6 +3,7 @@
 import { useLocale } from '@/lib/LocaleProvider'
 import { motion } from 'framer-motion'
 import ScrollReveal from './ScrollReveal'
+import PetSlot from './PetSlot'
 
 const xpData = [
   [64, 36, 90, 16],
@@ -16,7 +17,7 @@ export default function SkillTreePreview() {
   const { tiers } = t.skillTree
 
   return (
-    <section className="mx-auto max-w-[1100px] px-6 py-16 md:py-20 border-t border-border">
+    <section id="skill-tree" className="mx-auto max-w-[1100px] px-6 py-16 md:py-20 border-t border-border">
       <ScrollReveal>
         <div className="text-center mb-10">
           <p className="text-xs font-bold text-mint uppercase tracking-[0.12em] mb-3">{t.skillTree.eyebrow}</p>
@@ -24,6 +25,9 @@ export default function SkillTreePreview() {
           <p className="text-base text-muted leading-[1.7] max-w-[500px] mx-auto">{t.skillTree.subtitle}</p>
         </div>
       </ScrollReveal>
+      <div className="relative">
+        <PetSlot section="skillTree" className="hidden md:block absolute -right-4 top-0" />
+      </div>
 
       <div className="flex flex-col gap-5">
         {tiers.map((tier, ti) => (
@@ -58,7 +62,7 @@ export default function SkillTreePreview() {
                           initial={{ width: 0 }}
                           whileInView={{ width: `${xp}%` }}
                           viewport={{ once: true }}
-                          transition={{ duration: 0.8, delay: si * 0.1, ease: 'easeOut' }}
+                          transition={{ duration: 0.5, delay: si * 0.08, ease: [0.25, 0.1, 0.25, 1] }}
                           className="h-full rounded-full"
                           style={{ backgroundColor: tier.color }}
                         />
