@@ -32,7 +32,7 @@ export default function Features() {
                 initial={{ scale: 1 }}
                 whileInView={{ scale: [1, 1.12, 1] }}
                 viewport={{ once: true }}
-                transition={{ type: 'spring', stiffness: 400, damping: 15, delay: 0.2 + i * 0.1 }}
+                transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 + i * 0.1 }}
                 className={`w-12 h-12 ${iconBgClasses[i]} rounded-md flex items-center justify-center mb-4`}
               >
                 <Icon name={card.icon} className={`w-6 h-6 ${iconTextClasses[i]}`} />

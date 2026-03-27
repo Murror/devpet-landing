@@ -39,7 +39,7 @@ export default function HowItWorks() {
                 initial={{ scale: 1 }}
                 whileInView={{ scale: [1, 1.15, 1] }}
                 viewport={{ once: true }}
-                transition={{ type: 'spring', stiffness: 400, damping: 15, delay: 0.3 + i * 0.15 }}
+                transition={{ duration: 0.6, ease: 'easeOut', delay: 0.3 + i * 0.15 }}
                 className="mb-3"
               >
                 <Icon name={step.icon} className="w-7 h-7 text-primary" />

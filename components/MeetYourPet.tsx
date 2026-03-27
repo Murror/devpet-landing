@@ -97,7 +97,7 @@ export default function MeetYourPet() {
                     <div className="w-full aspect-square flex items-center justify-center relative overflow-hidden" style={{ backgroundColor: char.color + '10' }}>
                       <motion.div
                         animate={isActive ? { scale: [1, 1.1, 1] } : {}}
-                        transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+                        transition={{ duration: 0.25, ease: 'easeOut' }}
                         className="w-[70%] h-[70%]"
                       >
                         <CharacterSvg name={char.name} className="w-full h-full" />
