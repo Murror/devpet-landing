@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import WaitlistForm from './WaitlistForm'
 import ScrollReveal from './ScrollReveal'
 import CharacterSvg from './CharacterSvg'
+import { getCharacterAnimation } from '@/lib/characterAnimations'
 
 export default function FinalCTA() {
   const { t } = useLocale()
@@ -15,7 +16,7 @@ export default function FinalCTA() {
         <div className="mx-auto max-w-[1100px] px-6 grid md:grid-cols-[0.8fr_1.2fr] gap-12 items-center">
           <ScrollReveal>
             <div className="aspect-square rounded-2xl flex items-center justify-center max-w-[280px] mx-auto" style={{ backgroundColor: '#3B6D1115' }}>
-              <motion.div animate={{ y: [0, -6, 0] }} transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }} className="w-[70%] h-[70%]">
+              <motion.div animate={getCharacterAnimation('Null').animate} transition={getCharacterAnimation('Null').transition} className="w-[70%] h-[70%]">
                 <CharacterSvg name="Null" className="w-full h-full" />
               </motion.div>
             </div>

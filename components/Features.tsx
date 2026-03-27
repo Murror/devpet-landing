@@ -6,6 +6,7 @@ import SectionHeader from './SectionHeader'
 import ScrollReveal from './ScrollReveal'
 import Icon from './Icon'
 import CharacterSvg from './CharacterSvg'
+import { getCharacterAnimation } from '@/lib/characterAnimations'
 
 const iconBgClasses = ['bg-primary-tint', 'bg-xp-tint', 'bg-premium-tint', 'bg-info-tint']
 const iconTextClasses = ['text-primary-dark', 'text-xp-dark', 'text-premium-dark', 'text-info-dark']
@@ -37,7 +38,7 @@ export default function Features() {
 
         <ScrollReveal>
           <div className="aspect-square rounded-2xl flex items-center justify-center max-w-[280px] mx-auto" style={{ backgroundColor: '#08504115' }}>
-            <motion.div animate={{ y: [0, -6, 0] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }} className="w-[70%] h-[70%]">
+            <motion.div animate={getCharacterAnimation('Sage').animate} transition={getCharacterAnimation('Sage').transition} className="w-[70%] h-[70%]">
               <CharacterSvg name="Sage" className="w-full h-full" />
             </motion.div>
           </div>
