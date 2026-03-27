@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Varela_Round } from 'next/font/google'
 import { LocaleProvider } from '@/lib/LocaleProvider'
-import { CompanionProvider } from '@/lib/CompanionContext'
 import './globals.css'
 
 const varelaRound = Varela_Round({ weight: '400', subsets: ['latin'], variable: '--font-varela' })
@@ -25,9 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={varelaRound.variable}>
         <LocaleProvider>
-          <CompanionProvider>
-            {children}
-          </CompanionProvider>
+          {children}
         </LocaleProvider>
       </body>
     </html>

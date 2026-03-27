@@ -1,0 +1,6 @@
+{"type":"server-started","port":54356,"host":"127.0.0.1","url_host":"localhost","url":"http://localhost:54356","screen_dir":"/Users/williamdominich/Documents/Murror/devpet-landing/.superpowers/brainstorm/33616-1774598516/content","state_dir":"/Users/williamdominich/Documents/Murror/devpet-landing/.superpowers/brainstorm/33616-1774598516/state"}
+{"type":"screen-added","file":"/Users/williamdominich/Documents/Murror/devpet-landing/.superpowers/brainstorm/33616-1774598516/content/color-palette.html"}
+{"source":"user-event","type":"click","text":"Get Started\n        Learn More\n      \n    \n    \n      B. Duolingo-ified DevPet\n      Keep your mint green (#34D399) as primary but pump up the saturation. Add bold secondary colors inspired by Duolingo. Apply their 3D button style and bold typography to your existing palette.","choice":"b","id":null,"timestamp":1774599161778}
+{"type":"screen-added","file":"/Users/williamdominich/Documents/Murror/devpet-landing/.superpowers/brainstorm/33616-1774598516/content/design-overview.html"}
+{"type":"screen-added","file":"/Users/williamdominich/Documents/Murror/devpet-landing/.superpowers/brainstorm/33616-1774598516/content/waiting.html"}
+{"type":"server-stopped","reason":"idle timeout"}

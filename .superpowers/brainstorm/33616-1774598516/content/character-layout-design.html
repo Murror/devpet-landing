@@ -1,0 +1,120 @@
+<h2>Thiết kế: Nhân vật hiện diện khắp trang</h2>
+<p class="subtitle">Layout alternating giống Duolingo, mỗi section có nhân vật riêng, bỏ PetGuide</p>
+
+<!-- HERO -->
+<div class="section">
+  <h3>1. Hero — Nhóm 3-4 nhân vật bên phải</h3>
+  <div class="mockup">
+    <div class="mockup-header">Hero Section</div>
+    <div class="mockup-body" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center; min-height: 280px;">
+      <div>
+        <div style="background: #ECFDF5; border: 2px solid #34D399; border-radius: 9999px; display: inline-block; padding: 4px 12px; font-size: 11px; color: #059669; margin-bottom: 12px;">🟢 Early Access</div>
+        <div style="font-size: 28px; color: #1A1A1A; line-height: 1.1; margin-bottom: 12px;">Your AI Coding <em style="color: #34D399;">Companion</em></div>
+        <div style="font-size: 14px; color: #777; margin-bottom: 16px; line-height: 1.6;">Track sessions, build streaks, level up your skills with your personal AI pet.</div>
+        <div style="display: flex; gap: 8px;">
+          <div style="flex: 1; border: 2px solid #E5E5E5; border-radius: 16px; padding: 10px 14px; font-size: 13px; color: #AFAFAF;">Enter email...</div>
+          <div style="background: #34D399; color: white; padding: 10px 20px; border-radius: 16px; box-shadow: 0 5px 0 #059669; font-size: 13px; text-transform: uppercase; letter-spacing: 1px;">Join</div>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; position: relative;">
+        <div style="background: #534AB7; border-radius: 16px; height: 120px; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; transform: translateY(-8px);">🟣 Byte</div>
+        <div style="background: #BA7517; border-radius: 16px; height: 120px; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; transform: translateY(8px);">🟠 Nova</div>
+        <div style="background: #085041; border-radius: 16px; height: 120px; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; transform: translateY(-4px);">🟢 Sage</div>
+        <div style="background: #993556; border-radius: 16px; height: 120px; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; transform: translateY(12px);">🩷 Glitch</div>
+      </div>
+    </div>
+  </div>
+  <p style="font-size: 13px; color: #777; margin-top: 8px;">AppWindowMockup bị bỏ. 4 nhân vật hiện ở bên phải với staggered positions, mỗi nhân vật có SVG thật.</p>
+</div>
+
+<!-- SECTION MAPPING -->
+<div class="section">
+  <h3>2. Gán nhân vật cho từng section</h3>
+  <div style="display: grid; gap: 8px;">
+    <div style="display: grid; grid-template-columns: 140px 100px 1fr; gap: 12px; padding: 10px 16px; background: white; border: 2px solid #E5E5E5; border-radius: 12px; box-shadow: 0 3px 0 #E5E5E5; align-items: center;">
+      <strong style="font-size: 13px; color: #1A1A1A;">WhyVibeCode</strong>
+      <span style="font-size: 12px; color: #993556;">🩷 Glitch</span>
+      <span style="font-size: 11px; color: #777;">Hacker Rebel — phù hợp pain points, "code bị stuck"</span>
+    </div>
+    <div style="display: grid; grid-template-columns: 140px 100px 1fr; gap: 12px; padding: 10px 16px; background: white; border: 2px solid #E5E5E5; border-radius: 12px; box-shadow: 0 3px 0 #E5E5E5; align-items: center;">
+      <strong style="font-size: 13px; color: #1A1A1A;">HowItWorks</strong>
+      <span style="font-size: 12px; color: #BA7517;">🟠 Nova</span>
+      <span style="font-size: 11px; color: #777;">Genius Mentor — hướng dẫn 3 bước</span>
+    </div>
+    <div style="display: grid; grid-template-columns: 140px 100px 1fr; gap: 12px; padding: 10px 16px; background: white; border: 2px solid #E5E5E5; border-radius: 12px; box-shadow: 0 3px 0 #E5E5E5; align-items: center;">
+      <strong style="font-size: 13px; color: #1A1A1A;">Features</strong>
+      <span style="font-size: 12px; color: #085041;">🟢 Sage</span>
+      <span style="font-size: 11px; color: #777;">Wise Guide — giới thiệu tính năng</span>
+    </div>
+    <div style="display: grid; grid-template-columns: 140px 100px 1fr; gap: 12px; padding: 10px 16px; background: white; border: 2px solid #E5E5E5; border-radius: 12px; box-shadow: 0 3px 0 #E5E5E5; align-items: center;">
+      <strong style="font-size: 13px; color: #1A1A1A;">SkillTree</strong>
+      <span style="font-size: 12px; color: #A32D2D;">🔴 Crash</span>
+      <span style="font-size: 11px; color: #777;">Brute Force Hero — level up, XP</span>
+    </div>
+    <div style="display: grid; grid-template-columns: 140px 100px 1fr; gap: 12px; padding: 10px 16px; background: white; border: 2px solid #E5E5E5; border-radius: 12px; box-shadow: 0 3px 0 #E5E5E5; align-items: center;">
+      <strong style="font-size: 13px; color: #1A1A1A;">Testimonials</strong>
+      <span style="font-size: 12px; color: #534AB7;">🟣 Luna</span>
+      <span style="font-size: 11px; color: #777;">Creative Builder — social proof, community</span>
+    </div>
+    <div style="display: grid; grid-template-columns: 140px 100px 1fr; gap: 12px; padding: 10px 16px; background: white; border: 2px solid #E5E5E5; border-radius: 12px; box-shadow: 0 3px 0 #E5E5E5; align-items: center;">
+      <strong style="font-size: 13px; color: #1A1A1A;">FinalCTA</strong>
+      <span style="font-size: 12px; color: #3B6D11;">🟢 Null</span>
+      <span style="font-size: 11px; color: #777;">Wild Card — "what are you waiting for?"</span>
+    </div>
+  </div>
+  <p style="font-size: 13px; color: #777; margin-top: 8px;">MeetYourPet giữ nguyên grid 8 nhân vật. MidCTA không cần nhân vật (green bg CTA).</p>
+</div>
+
+<!-- ALTERNATING LAYOUT -->
+<div class="section">
+  <h3>3. Layout Alternating — Ví dụ</h3>
+  <div class="split">
+    <div class="mockup">
+      <div class="mockup-header">WhyVibeCode (text trái, Glitch phải)</div>
+      <div class="mockup-body" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 20px; align-items: center; min-height: 200px;">
+        <div>
+          <div style="font-size: 11px; color: #34D399; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;">The Problem</div>
+          <div style="font-size: 20px; color: #1A1A1A; margin-bottom: 12px;">Sound familiar?</div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <div style="background: white; border: 2px solid #E5E5E5; border-radius: 12px; padding: 8px 12px; font-size: 11px; box-shadow: 0 3px 0 #E5E5E5;">😵 Code all day, learn nothing</div>
+            <div style="background: white; border: 2px solid #E5E5E5; border-radius: 12px; padding: 8px 12px; font-size: 11px; box-shadow: 0 3px 0 #E5E5E5;">🔄 Same mistakes, no feedback</div>
+            <div style="background: white; border: 2px solid #E5E5E5; border-radius: 12px; padding: 8px 12px; font-size: 11px; box-shadow: 0 3px 0 #E5E5E5;">📉 No way to measure growth</div>
+          </div>
+        </div>
+        <div style="background: #993556; border-radius: 20px; height: 180px; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px;">🩷 Glitch SVG<br><em style="font-size: 10px; opacity: 0.7;">with idle animation</em></div>
+      </div>
+    </div>
+    <div class="mockup">
+      <div class="mockup-header">HowItWorks (Nova trái, text phải)</div>
+      <div class="mockup-body" style="display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 20px; align-items: center; min-height: 200px;">
+        <div style="background: #BA7517; border-radius: 20px; height: 180px; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px;">🟠 Nova SVG<br><em style="font-size: 10px; opacity: 0.7;">with teaching animation</em></div>
+        <div>
+          <div style="font-size: 11px; color: #34D399; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;">How It Works</div>
+          <div style="font-size: 20px; color: #1A1A1A; margin-bottom: 12px;">3 simple steps</div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <div style="background: white; border: 2px solid #E5E5E5; border-radius: 12px; padding: 8px 12px; font-size: 11px; box-shadow: 0 3px 0 #E5E5E5;">1️⃣ Install the extension</div>
+            <div style="background: white; border: 2px solid #E5E5E5; border-radius: 12px; padding: 8px 12px; font-size: 11px; box-shadow: 0 3px 0 #E5E5E5;">2️⃣ Code like normal</div>
+            <div style="background: white; border: 2px solid #E5E5E5; border-radius: 12px; padding: 8px 12px; font-size: 11px; box-shadow: 0 3px 0 #E5E5E5;">3️⃣ Watch your pet grow</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- KEY CHANGES -->
+<div class="section">
+  <h3>4. Tóm tắt thay đổi</h3>
+  <div style="background: white; border: 2px solid #E5E5E5; border-radius: 16px; padding: 20px; box-shadow: 0 4px 0 #E5E5E5;">
+    <ul style="margin: 0; padding-left: 18px; line-height: 2.2; color: #4B4B4B; font-size: 14px;">
+      <li><strong>Hero:</strong> Bỏ AppWindowMockup → 4 nhân vật grid (Byte, Nova, Sage, Glitch) với staggered animation</li>
+      <li><strong>6 sections:</strong> Thêm nhân vật SVG, layout alternating text/character xen kẽ trái-phải</li>
+      <li><strong>Bỏ PetGuide:</strong> Xóa component floating companion + CompanionContext dependencies</li>
+      <li><strong>Bỏ AppWindowMockup:</strong> Không còn dùng</li>
+      <li><strong>MeetYourPet:</strong> Giữ nguyên grid 8 nhân vật</li>
+      <li><strong>MidCTA:</strong> Giữ nguyên (green bg, no character)</li>
+      <li><strong>Mỗi nhân vật:</strong> Dùng CharacterSvg + CSS animation idle đã có sẵn</li>
+      <li><strong>Mobile:</strong> Nhân vật stack lên trên hoặc dưới text (1 column)</li>
+    </ul>
+  </div>
+</div>

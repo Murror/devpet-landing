@@ -1,0 +1,157 @@
+<h2>Proposed Design: Duolingo-ified DevPet</h2>
+<p class="subtitle">Full visual overhaul — your content and characters, Duolingo's design language</p>
+
+<!-- COLOR SYSTEM -->
+<div class="section">
+  <h3>1. Color System</h3>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin: 16px 0;">
+    <div style="text-align: center;">
+      <div style="width: 100%; height: 64px; border-radius: 16px; background: #34D399; box-shadow: 0 4px 0 #059669;"></div>
+      <p style="margin: 6px 0 0; font-size: 13px;"><strong>Primary</strong><br>#34D399</p>
+    </div>
+    <div style="text-align: center;">
+      <div style="width: 100%; height: 64px; border-radius: 16px; background: #38BDF8; box-shadow: 0 4px 0 #0284C7;"></div>
+      <p style="margin: 6px 0 0; font-size: 13px;"><strong>Info/Blue</strong><br>#38BDF8</p>
+    </div>
+    <div style="text-align: center;">
+      <div style="width: 100%; height: 64px; border-radius: 16px; background: #FB7185; box-shadow: 0 4px 0 #E11D48;"></div>
+      <p style="margin: 6px 0 0; font-size: 13px;"><strong>Danger/Red</strong><br>#FB7185</p>
+    </div>
+    <div style="text-align: center;">
+      <div style="width: 100%; height: 64px; border-radius: 16px; background: #FBBF24; box-shadow: 0 4px 0 #D97706;"></div>
+      <p style="margin: 6px 0 0; font-size: 13px;"><strong>XP/Gold</strong><br>#FBBF24</p>
+    </div>
+    <div style="text-align: center;">
+      <div style="width: 100%; height: 64px; border-radius: 16px; background: #A78BFA; box-shadow: 0 4px 0 #7C3AED;"></div>
+      <p style="margin: 6px 0 0; font-size: 13px;"><strong>Premium/Purple</strong><br>#A78BFA</p>
+    </div>
+    <div style="text-align: center;">
+      <div style="width: 100%; height: 64px; border-radius: 16px; background: #FB923C; box-shadow: 0 4px 0 #EA580C;"></div>
+      <p style="margin: 6px 0 0; font-size: 13px;"><strong>Streak/Orange</strong><br>#FB923C</p>
+    </div>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 12px; margin-top: 12px;">
+    <div style="text-align: center;">
+      <div style="width: 100%; height: 48px; border-radius: 12px; background: #FFFFFF; border: 2px solid #E5E5E5;"></div>
+      <p style="margin: 4px 0 0; font-size: 12px;">Background<br>#FFF</p>
+    </div>
+    <div style="text-align: center;">
+      <div style="width: 100%; height: 48px; border-radius: 12px; background: #F7F7F7;"></div>
+      <p style="margin: 4px 0 0; font-size: 12px;">Surface<br>#F7F7F7</p>
+    </div>
+    <div style="text-align: center;">
+      <div style="width: 100%; height: 48px; border-radius: 12px; background: #E5E5E5;"></div>
+      <p style="margin: 4px 0 0; font-size: 12px;">Border<br>#E5E5E5</p>
+    </div>
+    <div style="text-align: center;">
+      <div style="width: 100%; height: 48px; border-radius: 12px; background: #4B4B4B;"></div>
+      <p style="margin: 4px 0 0; font-size: 12px;">Text<br>#4B4B4B</p>
+    </div>
+    <div style="text-align: center;">
+      <div style="width: 100%; height: 48px; border-radius: 12px; background: #777777;"></div>
+      <p style="margin: 4px 0 0; font-size: 12px;">Muted<br>#777</p>
+    </div>
+    <div style="text-align: center;">
+      <div style="width: 100%; height: 48px; border-radius: 12px; background: #1A1A1A;"></div>
+      <p style="margin: 4px 0 0; font-size: 12px;">Heading<br>#1A1A1A</p>
+    </div>
+  </div>
+</div>
+
+<!-- TYPOGRAPHY -->
+<div class="section">
+  <h3>2. Typography — Varela Round</h3>
+  <div style="font-family: 'Varela Round', Nunito, sans-serif; padding: 16px; background: #F7F7F7; border-radius: 16px;">
+    <p style="font-size: 42px; font-weight: 400; color: #1A1A1A; margin: 0 0 8px; line-height: 1.1;">Your AI Coding Companion</p>
+    <p style="font-size: 24px; color: #4B4B4B; margin: 0 0 12px;">Section headings feel bold and friendly</p>
+    <p style="font-size: 17px; color: #777777; margin: 0 0 16px; line-height: 1.6;">Body text at 17px with generous line-height for readability. Everything feels rounded and approachable.</p>
+    <p style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: #34D399; font-weight: 700; margin: 0;">Eyebrow Label</p>
+  </div>
+</div>
+
+<!-- BUTTONS -->
+<div class="section">
+  <h3>3. 3D Button System</h3>
+  <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; padding: 24px; background: #F7F7F7; border-radius: 16px;">
+    <button style="background: #34D399; color: white; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border: none; border-radius: 16px; padding: 14px 28px; box-shadow: 0 5px 0 #059669; font-size: 15px; cursor: pointer; transition: all 100ms ease; font-family: inherit;" onmousedown="this.style.boxShadow='none';this.style.transform='translateY(5px)'" onmouseup="this.style.boxShadow='0 5px 0 #059669';this.style.transform='translateY(0)'" onmouseleave="this.style.boxShadow='0 5px 0 #059669';this.style.transform='translateY(0)'">Join Waitlist</button>
+    <button style="background: #38BDF8; color: white; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border: none; border-radius: 16px; padding: 14px 28px; box-shadow: 0 5px 0 #0284C7; font-size: 15px; cursor: pointer; transition: all 100ms ease; font-family: inherit;" onmousedown="this.style.boxShadow='none';this.style.transform='translateY(5px)'" onmouseup="this.style.boxShadow='0 5px 0 #0284C7';this.style.transform='translateY(0)'" onmouseleave="this.style.boxShadow='0 5px 0 #0284C7';this.style.transform='translateY(0)'">Learn More</button>
+    <button style="background: #FFFFFF; color: #34D399; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border: none; border-radius: 16px; padding: 14px 28px; box-shadow: 0 5px 0 #E5E5E5; font-size: 15px; cursor: pointer; transition: all 100ms ease; font-family: inherit;" onmousedown="this.style.boxShadow='none';this.style.transform='translateY(5px)'" onmouseup="this.style.boxShadow='0 5px 0 #E5E5E5';this.style.transform='translateY(0)'" onmouseleave="this.style.boxShadow='0 5px 0 #E5E5E5';this.style.transform='translateY(0)'">Ghost Button</button>
+  </div>
+  <p style="font-size: 14px; color: #777; margin-top: 8px;">Try clicking them! They push down like Duolingo's buttons.</p>
+</div>
+
+<!-- CARDS -->
+<div class="section">
+  <h3>4. 3D Card Style</h3>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+    <div style="background: white; border-radius: 16px; padding: 24px; box-shadow: 0 4px 0 #E5E5E5; cursor: pointer; transition: all 100ms ease; border: 2px solid #E5E5E5;" onmousedown="this.style.boxShadow='none';this.style.transform='translateY(4px)'" onmouseup="this.style.boxShadow='0 4px 0 #E5E5E5';this.style.transform='translateY(0)'" onmouseleave="this.style.boxShadow='0 4px 0 #E5E5E5';this.style.transform='translateY(0)'">
+      <div style="width: 48px; height: 48px; background: #ECFDF5; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 12px;">🔍</div>
+      <p style="font-weight: 700; font-size: 18px; color: #1A1A1A; margin: 0 0 6px;">Session Tracker</p>
+      <p style="font-size: 14px; color: #777; margin: 0; line-height: 1.5;">Track your coding sessions and build streaks</p>
+    </div>
+    <div style="background: white; border-radius: 16px; padding: 24px; box-shadow: 0 4px 0 #E5E5E5; cursor: pointer; transition: all 100ms ease; border: 2px solid #E5E5E5;" onmousedown="this.style.boxShadow='none';this.style.transform='translateY(4px)'" onmouseup="this.style.boxShadow='0 4px 0 #E5E5E5';this.style.transform='translateY(0)'" onmouseleave="this.style.boxShadow='0 4px 0 #E5E5E5';this.style.transform='translateY(0)'">
+      <div style="width: 48px; height: 48px; background: #EFF6FF; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 12px;">🌳</div>
+      <p style="font-weight: 700; font-size: 18px; color: #1A1A1A; margin: 0 0 6px;">Skill Tree</p>
+      <p style="font-size: 14px; color: #777; margin: 0; line-height: 1.5;">Level up through coding challenges</p>
+    </div>
+    <div style="background: white; border-radius: 16px; padding: 24px; box-shadow: 0 4px 0 #E5E5E5; cursor: pointer; transition: all 100ms ease; border: 2px solid #E5E5E5;" onmousedown="this.style.boxShadow='none';this.style.transform='translateY(4px)'" onmouseup="this.style.boxShadow='0 4px 0 #E5E5E5';this.style.transform='translateY(0)'" onmouseleave="this.style.boxShadow='0 4px 0 #E5E5E5';this.style.transform='translateY(0)'">
+      <div style="width: 48px; height: 48px; background: #FDF4FF; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 12px;">🐱</div>
+      <p style="font-weight: 700; font-size: 18px; color: #1A1A1A; margin: 0 0 6px;">AI Coach</p>
+      <p style="font-size: 14px; color: #777; margin: 0; line-height: 1.5;">Your personal coding companion</p>
+    </div>
+  </div>
+  <p style="font-size: 14px; color: #777; margin-top: 8px;">Cards also push down on click. Border + bottom shadow = Duolingo's raised look.</p>
+</div>
+
+<!-- PROGRESS BAR -->
+<div class="section">
+  <h3>5. Gamification Elements</h3>
+  <div style="background: #F7F7F7; border-radius: 16px; padding: 24px;">
+    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+      <span style="font-size: 24px;">🔥</span>
+      <span style="font-weight: 700; font-size: 20px; color: #FB923C;">7 day streak</span>
+    </div>
+    <div style="margin-bottom: 16px;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+        <span style="font-weight: 700; font-size: 14px; color: #4B4B4B;">XP Progress</span>
+        <span style="font-weight: 700; font-size: 14px; color: #FBBF24;">450 / 600 XP</span>
+      </div>
+      <div style="background: #E5E5E5; border-radius: 999px; height: 16px; overflow: hidden;">
+        <div style="background: #FBBF24; height: 100%; width: 75%; border-radius: 999px; transition: width 300ms ease-out;"></div>
+      </div>
+    </div>
+    <div style="display: flex; gap: 12px;">
+      <div style="background: white; border: 2px solid #E5E5E5; border-radius: 12px; padding: 8px 16px; box-shadow: 0 3px 0 #E5E5E5; text-align: center;">
+        <span style="font-size: 20px;">⚡</span>
+        <p style="font-size: 13px; font-weight: 700; color: #4B4B4B; margin: 2px 0 0;">2,450 XP</p>
+      </div>
+      <div style="background: white; border: 2px solid #E5E5E5; border-radius: 12px; padding: 8px 16px; box-shadow: 0 3px 0 #E5E5E5; text-align: center;">
+        <span style="font-size: 20px;">🏆</span>
+        <p style="font-size: 13px; font-weight: 700; color: #4B4B4B; margin: 2px 0 0;">Gold III</p>
+      </div>
+      <div style="background: white; border: 2px solid #E5E5E5; border-radius: 12px; padding: 8px 16px; box-shadow: 0 3px 0 #E5E5E5; text-align: center;">
+        <span style="font-size: 20px;">❤️</span>
+        <p style="font-size: 13px; font-weight: 700; color: #4B4B4B; margin: 2px 0 0;">5 Lives</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- KEY CHANGES SUMMARY -->
+<div class="section">
+  <h3>6. Key Changes Summary</h3>
+  <div style="background: white; border: 2px solid #E5E5E5; border-radius: 16px; padding: 24px; box-shadow: 0 4px 0 #E5E5E5;">
+    <ul style="margin: 0; padding-left: 20px; line-height: 2; color: #4B4B4B;">
+      <li><strong>Font:</strong> Inter → Varela Round</li>
+      <li><strong>Background:</strong> warm-bg #FAFFFE → clean white #FFFFFF</li>
+      <li><strong>Primary:</strong> mint #34D399 kept, darker shadow #059669 added</li>
+      <li><strong>Borders:</strong> soft green #D1FAE5 → neutral grey #E5E5E5</li>
+      <li><strong>Buttons:</strong> flat → 3D with 5px bottom shadow + push-down</li>
+      <li><strong>Cards:</strong> subtle shadow → raised 3D with border + bottom shadow</li>
+      <li><strong>Text:</strong> green-tinted greys → pure greys (#4B4B4B, #777)</li>
+      <li><strong>Radius:</strong> mixed → consistent 16px on cards/buttons</li>
+      <li><strong>CTAs:</strong> sentence case → UPPERCASE + letter-spacing</li>
+      <li><strong>Animations:</strong> smooth ease → bouncier spring physics</li>
+    </ul>
+  </div>
+</div>
