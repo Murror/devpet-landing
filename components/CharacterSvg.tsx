@@ -38,5 +38,5 @@ export default function CharacterSvg({ name, className }: { name: string; classN
       })
   }, [name])
 
-  return <div ref={ref} className={className} />
+  return <div ref={ref} className={className} suppressHydrationWarning />
 }
