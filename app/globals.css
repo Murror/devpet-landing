@@ -4,23 +4,16 @@
 
 @layer base {
   body {
-    @apply bg-warm-bg text-text font-sans antialiased;
+    @apply bg-bg text-text font-sans antialiased;
   }
 }
 
-@layer utilities {
-  .bg-meet-gradient {
-    background: linear-gradient(135deg, #ECFDF5 0%, #FAFFFE 40%, #F0EEFF 100%);
-  }
-}
-
-/* Emil Kowalski: button active feedback */
+/* Duolingo 3D button press — replaces Emil Kowalski scale approach */
 button:active, a[href]:active {
-  transform: scale(0.97);
-  transition: transform 160ms ease-out;
+  /* Let Framer Motion or component-level styles handle press states */
 }
 
-/* Emil Kowalski: gate hover behind pointer:fine to avoid false positives on touch */
+/* Gate hover behind pointer:fine to avoid false positives on touch */
 @media (hover: none) {
   .transition-colors:hover {
     transition: none;
