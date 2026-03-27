@@ -2,6 +2,7 @@
 
 import { useLocale } from '@/lib/LocaleProvider'
 import { motion } from 'framer-motion'
+import { getCharacterAnimation } from '@/lib/characterAnimations'
 import SectionHeader from './SectionHeader'
 import ScrollReveal from './ScrollReveal'
 import Icon from './Icon'
@@ -19,7 +20,7 @@ export default function HowItWorks() {
       <div className="mx-auto max-w-[1100px] px-6 grid md:grid-cols-[0.8fr_1.2fr] gap-12 items-center">
         <ScrollReveal>
           <div className="aspect-square rounded-2xl flex items-center justify-center max-w-[280px] mx-auto" style={{ backgroundColor: '#BA751715' }}>
-            <motion.div animate={{ y: [0, -6, 0] }} transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }} className="w-[70%] h-[70%]">
+            <motion.div animate={getCharacterAnimation('Nova').animate} transition={getCharacterAnimation('Nova').transition} className="w-[70%] h-[70%]">
               <CharacterSvg name="Nova" className="w-full h-full" />
             </motion.div>
           </div>

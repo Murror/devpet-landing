@@ -5,6 +5,7 @@ import { useLocale } from '@/lib/LocaleProvider'
 import { motion } from 'framer-motion'
 import WaitlistForm from './WaitlistForm'
 import CharacterSvg from './CharacterSvg'
+import { getCharacterAnimation } from '@/lib/characterAnimations'
 
 function parseStat(value: string) {
   const match = value.match(/^([^\d]*)([\d,]+(?:\.\d+)?)(.*)$/)
@@ -142,8 +143,8 @@ export default function Hero() {
               style={{ backgroundColor: char.color + '15' }}
             >
               <motion.div
-                animate={{ y: [0, -6, 0] }}
-                transition={{ duration: 3 + i * 0.5, repeat: Infinity, ease: 'easeInOut' }}
+                animate={getCharacterAnimation(char.name).animate}
+                transition={getCharacterAnimation(char.name).transition}
                 className="w-[70%] h-[70%]"
               >
                 <CharacterSvg name={char.name} className="w-full h-full" />
