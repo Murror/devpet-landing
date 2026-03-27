@@ -9,16 +9,23 @@ interface CharacterSceneProps {
   className?: string
 }
 
+// Deterministic pseudo-random to avoid hydration mismatch
+function seeded(seed: number) {
+  const x = Math.sin(seed * 9301 + 49297) * 233280
+  return x - Math.floor(x)
+}
+
 /* ── Floating particles ── */
-function FloatingParticles({ color, count = 5 }: { color: string; count?: number }) {
+function FloatingParticles({ color, count = 5, seed = 0 }: { color: string; count?: number; seed?: number }) {
   return (
     <>
       {Array.from({ length: count }, (_, i) => {
-        const size = 3 + Math.random() * 5
-        const left = 10 + Math.random() * 80
-        const top = 10 + Math.random() * 80
+        const r = (n: number) => seeded(seed * 100 + i * 10 + n)
+        const size = 3 + r(1) * 5
+        const left = 10 + r(2) * 80
+        const top = 10 + r(3) * 80
         const delay = i * 0.6
-        const dur = 2.5 + Math.random() * 2
+        const dur = 2.5 + r(4) * 2
         return (
           <motion.div
             key={i}
@@ -31,8 +38,8 @@ function FloatingParticles({ color, count = 5 }: { color: string; count?: number
               backgroundColor: color,
             }}
             animate={{
-              y: [0, -20 - Math.random() * 15, 0],
-              x: [0, (Math.random() - 0.5) * 16, 0],
+              y: [0, -20 - r(5) * 15, 0],
+              x: [0, (r(6) - 0.5) * 16, 0],
               opacity: [0, 0.7, 0],
               scale: [0.5, 1, 0.5],
             }}
@@ -108,7 +115,7 @@ function GlitchBars({ color }: { color: string }) {
           key={i}
           className="absolute pointer-events-none"
           style={{
-            height: 2 + Math.random() * 3,
+            height: 2 + seeded(i * 7 + 3) * 3,
             backgroundColor: color,
             top: `${top}%`,
             left: '5%',
@@ -118,7 +125,7 @@ function GlitchBars({ color }: { color: string }) {
           animate={{
             opacity: [0, 0.6, 0],
             scaleX: [0.3, 1, 0.5],
-            x: [0, (Math.random() - 0.5) * 20, 0],
+            x: [0, (seeded(i * 7 + 5) - 0.5) * 20, 0],
           }}
           transition={{
             duration: 0.3,
@@ -167,9 +174,10 @@ function StaticNoise({ color }: { color: string }) {
   return (
     <>
       {Array.from({ length: 8 }, (_, i) => {
-        const size = 4 + Math.random() * 8
-        const left = Math.random() * 90
-        const top = Math.random() * 90
+        const r = (n: number) => seeded(i * 13 + n + 50)
+        const size = 4 + r(1) * 8
+        const left = r(2) * 90
+        const top = r(3) * 90
         return (
           <motion.div
             key={i}
@@ -188,8 +196,8 @@ function StaticNoise({ color }: { color: string }) {
             transition={{
               duration: 0.15,
               repeat: Infinity,
-              repeatDelay: 1.5 + Math.random() * 3,
-              delay: Math.random() * 2,
+              repeatDelay: 1.5 + r(4) * 3,
+              delay: r(5) * 2,
               ease: 'linear',
             }}
           />
@@ -287,7 +295,7 @@ export default function CharacterScene({ name, color, className = '' }: Characte
       {/* Ambient effects per character */}
       {name === 'Byte' && (
         <>
-          <FloatingParticles color={color} count={6} />
+          <FloatingParticles color={color} count={6} seed={1} />
           <PulseRing color={color} delay={0} scale={1.1} />
           <PulseRing color={color} delay={1.2} scale={1.2} />
         </>
@@ -296,7 +304,7 @@ export default function CharacterScene({ name, color, className = '' }: Characte
       {name === 'Nova' && (
         <>
           <OrbitDots color={color} count={3} />
-          <FloatingParticles color="#FBBF24" count={4} />
+          <FloatingParticles color="#FBBF24" count={4} seed={2} />
         </>
       )}
 
@@ -304,34 +312,34 @@ export default function CharacterScene({ name, color, className = '' }: Characte
         <>
           <PulseRing color={color} delay={0} scale={1.08} />
           <PulseRing color={color} delay={1.5} scale={1.12} />
-          <FloatingParticles color={color} count={3} />
+          <FloatingParticles color={color} count={3} seed={3} />
         </>
       )}
 
       {name === 'Glitch' && (
         <>
           <GlitchBars color={color} />
-          <FloatingParticles color={color} count={4} />
+          <FloatingParticles color={color} count={4} seed={4} />
         </>
       )}
 
       {name === 'Crash' && (
         <>
           <ImpactWaves color={color} />
-          <FloatingParticles color={color} count={3} />
+          <FloatingParticles color={color} count={3} seed={5} />
         </>
       )}
 
       {name === 'Zero' && (
         <>
-          <FloatingParticles color={color} count={2} />
+          <FloatingParticles color={color} count={2} seed={6} />
         </>
       )}
 
       {name === 'Luna' && (
         <>
-          <FloatingParticles color="#FB7185" count={3} />
-          <FloatingParticles color="#FBBF24" count={2} />
+          <FloatingParticles color="#FB7185" count={3} seed={7} />
+          <FloatingParticles color="#FBBF24" count={2} seed={8} />
           <OrbitDots color={color} count={2} />
         </>
       )}
