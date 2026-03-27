@@ -32,25 +32,8 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
   const [locale, setLocale] = useState<Locale>('en')
 
   useEffect(() => {
-    // Clean up old localStorage key (before IP detection was added)
-    const oldKey = localStorage.getItem('devpet-locale')
-    if (oldKey && !localStorage.getItem('devpet-locale-manual')) {
-      localStorage.removeItem('devpet-locale')
-    }
-
-    // Only respect saved locale if user manually toggled (flag set)
-    const manual = localStorage.getItem('devpet-locale-manual')
-    if (manual) {
-      const saved = localStorage.getItem('devpet-locale') as Locale | null
-      if (saved && (saved === 'en' || saved === 'vi')) {
-        setLocale(saved)
-        return
-      }
-    }
-    detectLocale().then(detected => {
-      setLocale(detected)
-      localStorage.setItem('devpet-locale', detected)
-    })
+    // Hard-coded to 'en' for now
+    setLocale('en')
   }, [])
 
   const toggleLocale = () => {
