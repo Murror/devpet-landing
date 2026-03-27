@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Varela_Round } from 'next/font/google'
 import { LocaleProvider } from '@/lib/LocaleProvider'
 import { CompanionProvider } from '@/lib/CompanionContext'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const varelaRound = Varela_Round({ weight: '400', subsets: ['latin'], variable: '--font-varela' })
 
 export const metadata: Metadata = {
   title: 'VibeMon — Theo dõi và nâng cao kỹ năng lập trình AI',
@@ -23,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           />
         )}
       </head>
-      <body className={inter.variable}>
+      <body className={varelaRound.variable}>
         <LocaleProvider>
           <CompanionProvider>
             {children}
