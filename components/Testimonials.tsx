@@ -3,6 +3,7 @@
 import { useLocale } from '@/lib/LocaleProvider'
 import { motion } from 'framer-motion'
 import ScrollReveal from './ScrollReveal'
+import CharacterSvg from './CharacterSvg'
 
 const statColors = ['#34D399', '#38BDF8', '#A78BFA']
 
@@ -10,50 +11,45 @@ export default function Testimonials() {
   const { t } = useLocale()
 
   return (
-    <section id="testimonials" className="mx-auto max-w-[1100px] px-6 py-20 md:py-24 bg-surface border-b-2 border-border">
-      <ScrollReveal>
-        <div className="text-center mb-10">
-          <p className="text-[13px] text-primary uppercase tracking-[2px] mb-3">{t.testimonials.eyebrow}</p>
-          <h2 className="text-[28px] md:text-[36px] tracking-[-1.5px] text-heading">{t.testimonials.title}</h2>
-        </div>
-      </ScrollReveal>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
-        {t.testimonials.items.map((item, i) => (
-          <ScrollReveal key={item.name} delay={i * 100}>
-            <motion.div
-              whileTap={{ y: 4, boxShadow: 'none' }}
-              className="bg-bg border-2 border-border rounded-lg shadow-card h-full flex flex-col overflow-hidden cursor-pointer transition-all duration-100"
-            >
-              <div className="px-5 pt-5 pb-3 flex-1">
-                <motion.span
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  whileInView={{ opacity: 0.15, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 15, delay: 0.2 + i * 0.1 }}
-                  className="block text-4xl text-primary leading-none mb-1"
-                >
-                  &ldquo;
-                </motion.span>
-                <p className="text-[13px] text-text leading-relaxed italic">{item.quote}</p>
-              </div>
-              <div className="px-5 pb-5 pt-2 flex items-center gap-3 border-t-2 border-border mt-auto">
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.15 }}
-                  className="w-9 h-9 rounded-full flex items-center justify-center text-lg"
-                  style={{ backgroundColor: statColors[i] + '18' }}
-                >
-                  {item.avatar}
-                </motion.div>
-                <div>
-                  <p className="text-sm text-heading">{item.name}</p>
-                  <p className="text-[10px] text-muted">{item.role}</p>
-                </div>
-              </div>
-            </motion.div>
+    <section id="testimonials" className="py-20 md:py-24 bg-surface border-b-2 border-border">
+      <div className="mx-auto max-w-[1100px] px-6 grid md:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
+        <div>
+          <ScrollReveal>
+            <div className="mb-8">
+              <p className="text-[13px] text-primary uppercase tracking-[2px] mb-3">{t.testimonials.eyebrow}</p>
+              <h2 className="text-[28px] md:text-[36px] tracking-[-1.5px] text-heading">{t.testimonials.title}</h2>
+            </div>
           </ScrollReveal>
-        ))}
+
+          <div className="flex flex-col gap-4">
+            {t.testimonials.items.map((item, i) => (
+              <ScrollReveal key={item.name} delay={i * 100}>
+                <motion.div whileTap={{ y: 4, boxShadow: 'none' }} className="bg-bg border-2 border-border rounded-lg shadow-card cursor-pointer transition-all duration-100 overflow-hidden">
+                  <div className="px-5 pt-4 pb-3">
+                    <p className="text-[13px] text-text leading-relaxed italic">{item.quote}</p>
+                  </div>
+                  <div className="px-5 pb-4 pt-2 flex items-center gap-3 border-t-2 border-border">
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm" style={{ backgroundColor: statColors[i] + '18' }}>
+                      {item.avatar}
+                    </div>
+                    <div>
+                      <p className="text-sm text-heading">{item.name}</p>
+                      <p className="text-[10px] text-muted">{item.role}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+
+        <ScrollReveal>
+          <div className="aspect-square rounded-2xl flex items-center justify-center max-w-[280px] mx-auto" style={{ backgroundColor: '#534AB715' }}>
+            <motion.div animate={{ y: [0, -6, 0] }} transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }} className="w-[70%] h-[70%]">
+              <CharacterSvg name="Luna" className="w-full h-full" />
+            </motion.div>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   )
