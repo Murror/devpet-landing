@@ -4,7 +4,7 @@ import { useLocale } from '@/lib/LocaleProvider'
 import { motion } from 'framer-motion'
 import WaitlistForm from './WaitlistForm'
 import ScrollReveal from './ScrollReveal'
-import { Cat } from 'lucide-react'
+import CharacterSvg from './CharacterSvg'
 
 export default function FinalCTA() {
   const { t } = useLocale()
@@ -12,34 +12,30 @@ export default function FinalCTA() {
   return (
     <>
       <section id="final-cta" className="py-20 md:py-24">
-        <ScrollReveal>
-          <div className="mx-auto max-w-[640px] px-6 text-center">
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ type: 'spring', stiffness: 400, damping: 15 }}
-              className="w-14 h-14 bg-primary-tint border-2 border-primary rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-[0_4px_0_#059669]"
-            >
-              <motion.div
-                animate={{ rotate: [0, -8, 8, -4, 0] }}
-                transition={{ duration: 2, delay: 0.8, ease: 'easeInOut' }}
-              >
-                <Cat className="w-7 h-7 text-primary-dark" />
+        <div className="mx-auto max-w-[1100px] px-6 grid md:grid-cols-[0.8fr_1.2fr] gap-12 items-center">
+          <ScrollReveal>
+            <div className="aspect-square rounded-2xl flex items-center justify-center max-w-[280px] mx-auto" style={{ backgroundColor: '#3B6D1115' }}>
+              <motion.div animate={{ y: [0, -6, 0] }} transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }} className="w-[70%] h-[70%]">
+                <CharacterSvg name="Null" className="w-full h-full" />
               </motion.div>
-            </motion.div>
-            <h2 className="text-[28px] md:text-[42px] tracking-[-1.5px] text-heading mb-4">
-              {t.finalCTA.title}{' '}
-              <em className="text-primary italic">{t.finalCTA.titleAccent}</em>
-              {t.finalCTA.titleEnd}
-            </h2>
-            <p className="text-[17px] text-muted leading-relaxed mb-8">{t.finalCTA.subtitle}</p>
-            <div className="mb-4">
-              <WaitlistForm />
             </div>
-            <p className="text-xs text-muted-light">{t.finalCTA.trustMeta}</p>
-          </div>
-        </ScrollReveal>
+          </ScrollReveal>
+
+          <ScrollReveal>
+            <div>
+              <h2 className="text-[28px] md:text-[42px] tracking-[-1.5px] text-heading mb-4">
+                {t.finalCTA.title}{' '}
+                <em className="text-primary italic">{t.finalCTA.titleAccent}</em>
+                {t.finalCTA.titleEnd}
+              </h2>
+              <p className="text-[17px] text-muted leading-relaxed mb-8">{t.finalCTA.subtitle}</p>
+              <div className="mb-4">
+                <WaitlistForm />
+              </div>
+              <p className="text-xs text-muted-light">{t.finalCTA.trustMeta}</p>
+            </div>
+          </ScrollReveal>
+        </div>
       </section>
 
       <footer className="border-t-2 border-border">
