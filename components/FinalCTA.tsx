@@ -18,22 +18,22 @@ export default function FinalCTA() {
               initial={{ scale: 0.95, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
-              className="w-14 h-14 bg-mint-light rounded-2xl flex items-center justify-center mx-auto mb-4"
+              transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+              className="w-14 h-14 bg-primary-tint border-2 border-primary rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-[0_4px_0_#059669]"
             >
               <motion.div
                 animate={{ rotate: [0, -8, 8, -4, 0] }}
                 transition={{ duration: 2, delay: 0.8, ease: 'easeInOut' }}
               >
-                <Cat className="w-7 h-7 text-mint-dark" />
+                <Cat className="w-7 h-7 text-primary-dark" />
               </motion.div>
             </motion.div>
-            <h2 className="text-3xl md:text-[42px] font-black tracking-[-1.5px] mb-4">
+            <h2 className="text-[28px] md:text-[42px] tracking-[-1.5px] text-heading mb-4">
               {t.finalCTA.title}{' '}
-              <em className="text-mint italic">{t.finalCTA.titleAccent}</em>
+              <em className="text-primary italic">{t.finalCTA.titleAccent}</em>
               {t.finalCTA.titleEnd}
             </h2>
-            <p className="text-base text-muted leading-relaxed mb-8">{t.finalCTA.subtitle}</p>
+            <p className="text-[17px] text-muted leading-relaxed mb-8">{t.finalCTA.subtitle}</p>
             <div className="mb-4">
               <WaitlistForm />
             </div>
@@ -42,16 +42,16 @@ export default function FinalCTA() {
         </ScrollReveal>
       </section>
 
-      <footer className="border-t border-border">
+      <footer className="border-t-2 border-border">
         <div className="mx-auto max-w-[1100px] px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2 text-sm font-extrabold">
-            <span className="w-2 h-2 bg-mint rounded-full" />
+          <div className="flex items-center gap-2 text-sm text-heading">
+            <span className="w-2 h-2 bg-primary rounded-full" />
             {t.footer.tagline}
           </div>
           <div className="flex gap-6">
-            <a href="https://twitter.com/devpetapp" rel="noopener noreferrer" className="text-sm text-muted hover:text-text transition-colors">{t.footer.links.twitter}</a>
-            <a href="https://github.com/devpet" rel="noopener noreferrer" className="text-sm text-muted hover:text-text transition-colors">{t.footer.links.github}</a>
-            <a href="/privacy" className="text-sm text-muted hover:text-text transition-colors">{t.footer.links.privacy}</a>
+            <a href="https://twitter.com/devpetapp" rel="noopener noreferrer" className="text-sm text-muted hover:text-heading transition-colors">{t.footer.links.twitter}</a>
+            <a href="https://github.com/devpet" rel="noopener noreferrer" className="text-sm text-muted hover:text-heading transition-colors">{t.footer.links.github}</a>
+            <a href="/privacy" className="text-sm text-muted hover:text-heading transition-colors">{t.footer.links.privacy}</a>
           </div>
           <p className="text-xs text-muted-light">{t.footer.copyright}</p>
         </div>
