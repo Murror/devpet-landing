@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import CharacterSvg from './CharacterSvg'
 
@@ -209,74 +210,78 @@ function StaticNoise({ color }: { color: string }) {
 
 /* ── Main component ── */
 export default function CharacterScene({ name, color, className = '' }: CharacterSceneProps) {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
 
   return (
     <div
       className={`aspect-square rounded-2xl flex items-center justify-center max-w-[300px] mx-auto relative overflow-hidden ${className}`}
       style={{ backgroundColor: color + '12' }}
     >
-      {/* Ambient effects per character */}
-      {name === 'Byte' && (
+      {/* Ambient effects — client-only to avoid hydration mismatch */}
+      {mounted && (
         <>
-          <FloatingParticles color={color} count={6} seed={1} />
-          <PulseRing color={color} delay={0} scale={1.1} />
-          <PulseRing color={color} delay={1.2} scale={1.2} />
-        </>
-      )}
+          {name === 'Byte' && (
+            <>
+              <FloatingParticles color={color} count={6} seed={1} />
+              <PulseRing color={color} delay={0} scale={1.1} />
+              <PulseRing color={color} delay={1.2} scale={1.2} />
+            </>
+          )}
 
-      {name === 'Nova' && (
-        <>
-          <OrbitDots color={color} count={3} />
-          <FloatingParticles color="#FBBF24" count={4} seed={2} />
-        </>
-      )}
+          {name === 'Nova' && (
+            <>
+              <OrbitDots color={color} count={3} />
+              <FloatingParticles color="#FBBF24" count={4} seed={2} />
+            </>
+          )}
 
-      {name === 'Sage' && (
-        <>
-          <PulseRing color={color} delay={0} scale={1.08} />
-          <PulseRing color={color} delay={1.5} scale={1.12} />
-          <FloatingParticles color={color} count={3} seed={3} />
-        </>
-      )}
+          {name === 'Sage' && (
+            <>
+              <PulseRing color={color} delay={0} scale={1.08} />
+              <PulseRing color={color} delay={1.5} scale={1.12} />
+              <FloatingParticles color={color} count={3} seed={3} />
+            </>
+          )}
 
-      {name === 'Glitch' && (
-        <>
-          <GlitchBars color={color} />
-          <FloatingParticles color={color} count={4} seed={4} />
-        </>
-      )}
+          {name === 'Glitch' && (
+            <>
+              <GlitchBars color={color} />
+              <FloatingParticles color={color} count={4} seed={4} />
+            </>
+          )}
 
-      {name === 'Crash' && (
-        <>
-          <ImpactWaves color={color} />
-          <FloatingParticles color={color} count={3} seed={5} />
-        </>
-      )}
+          {name === 'Crash' && (
+            <>
+              <ImpactWaves color={color} />
+              <FloatingParticles color={color} count={3} seed={5} />
+            </>
+          )}
 
-      {name === 'Zero' && (
-        <>
-          <FloatingParticles color={color} count={2} seed={6} />
-        </>
-      )}
+          {name === 'Zero' && (
+            <>
+              <FloatingParticles color={color} count={2} seed={6} />
+            </>
+          )}
 
-      {name === 'Luna' && (
-        <>
-          <FloatingParticles color="#FB7185" count={3} seed={7} />
-          <FloatingParticles color="#FBBF24" count={2} seed={8} />
-          <OrbitDots color={color} count={2} />
-        </>
-      )}
+          {name === 'Luna' && (
+            <>
+              <FloatingParticles color="#FB7185" count={3} seed={7} />
+              <FloatingParticles color="#FBBF24" count={2} seed={8} />
+              <OrbitDots color={color} count={2} />
+            </>
+          )}
 
-      {name === 'Null' && (
-        <>
-          <StaticNoise color={color} />
-          <GlitchBars color="#3B6D11" />
-        </>
-      )}
+          {name === 'Null' && (
+            <>
+              <StaticNoise color={color} />
+              <GlitchBars color="#3B6D11" />
+            </>
+          )}
 
-      {/* Shadow on ground */}
-      <motion.div
-        className="absolute bottom-[10%] left-1/2 -translate-x-1/2 rounded-full pointer-events-none"
+          {/* Shadow on ground */}
+          <motion.div
+            className="absolute bottom-[10%] left-1/2 -translate-x-1/2 rounded-full pointer-events-none"
         style={{
           width: '50%',
           height: 8,
@@ -288,7 +293,9 @@ export default function CharacterScene({ name, color, className = '' }: Characte
           scaleX: [1, 0.85, 1],
         }}
         transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-      />
+          />
+        </>
+      )}
 
       {/* Character SVG — CSS animations inside SVG handle head/arms/legs/tail/eyes */}
       <div className="w-[65%] h-[65%] relative z-10">
