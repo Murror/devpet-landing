@@ -258,11 +258,11 @@ export default function PetGuide() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 4 }}
               transition={{ duration: 0.2 }}
-              className="max-w-[180px] px-3 py-2 rounded-xl text-[11px] font-medium shadow-lg"
+              className="max-w-[180px] px-3 py-2 rounded-lg text-[11px] shadow-card border-2"
               style={{
-                backgroundColor: color + '18',
-                border: `1.5px solid ${color}30`,
-                color: '#1A2E23',
+                backgroundColor: '#FFFFFF',
+                borderColor: '#E5E5E5',
+                color: '#4B4B4B',
               }}
             >
               {sectionQuote}
@@ -274,7 +274,7 @@ export default function PetGuide() {
               initial={{ opacity: 0, scale: 0.8, y: 4 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.8 }}
-              className="px-3 py-1.5 rounded-full text-[11px] font-bold shadow-lg"
+              className="px-3 py-1.5 rounded-pill text-[11px] shadow-[0_3px_0_rgba(0,0,0,0.15)]"
               style={{ backgroundColor: color, color: '#fff' }}
             >
               {clickQuote}
@@ -332,13 +332,13 @@ export default function PetGuide() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.25 }}
-            className={`absolute top-1/2 -translate-y-1/2 w-max max-w-[200px] px-3 py-2 rounded-xl text-[12px] font-medium shadow-lg pointer-events-none ${
+            className={`absolute top-1/2 -translate-y-1/2 w-max max-w-[200px] px-3 py-2 rounded-lg text-[12px] shadow-card border-2 pointer-events-none ${
               isLeft ? 'left-[calc(100%+10px)]' : 'right-[calc(100%+10px)]'
             }`}
             style={{
-              backgroundColor: color + '15',
-              border: `1.5px solid ${color}30`,
-              color: '#1A2E23',
+              backgroundColor: '#FFFFFF',
+              borderColor: '#E5E5E5',
+              color: '#4B4B4B',
             }}
           >
             {sectionQuote}
@@ -348,10 +348,10 @@ export default function PetGuide() {
                 isLeft ? '-left-1.5' : '-right-1.5'
               }`}
               style={{
-                backgroundColor: color + '15',
+                backgroundColor: '#FFFFFF',
                 ...(isLeft
-                  ? { borderLeft: `1.5px solid ${color}30`, borderBottom: `1.5px solid ${color}30` }
-                  : { borderRight: `1.5px solid ${color}30`, borderTop: `1.5px solid ${color}30` }),
+                  ? { borderLeft: '2px solid #E5E5E5', borderBottom: '2px solid #E5E5E5' }
+                  : { borderRight: '2px solid #E5E5E5', borderTop: '2px solid #E5E5E5' }),
               }}
             />
           </motion.div>
@@ -366,7 +366,7 @@ export default function PetGuide() {
             initial={{ opacity: 0, scale: 0.5, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: -10 }}
             exit={{ opacity: 0, y: -20 }}
-            className="absolute -top-4 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-full text-[11px] font-bold whitespace-nowrap shadow-lg pointer-events-none"
+            className="absolute -top-4 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-pill text-[11px] whitespace-nowrap shadow-[0_3px_0_rgba(0,0,0,0.15)] pointer-events-none"
             style={{ backgroundColor: color, color: '#fff' }}
           >
             {clickQuote}
