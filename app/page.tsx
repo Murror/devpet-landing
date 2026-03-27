@@ -1,5 +1,6 @@
 import Nav from '@/components/Nav'
 import Hero from '@/components/Hero'
+import WhyVibeCode from '@/components/WhyVibeCode'
 import MeetYourPet from '@/components/MeetYourPet'
 import HowItWorks from '@/components/HowItWorks'
 import Features from '@/components/Features'
@@ -17,6 +18,7 @@ export default function Home() {
       <PetGuide />
       <Nav />
       <Hero />
+      <WhyVibeCode />
       <MeetYourPet />
       <HowItWorks />
       <Features />

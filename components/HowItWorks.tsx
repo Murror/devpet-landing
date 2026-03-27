@@ -5,7 +5,6 @@ import { motion } from 'framer-motion'
 import SectionHeader from './SectionHeader'
 import ScrollReveal from './ScrollReveal'
 import Icon from './Icon'
-import PetSlot from './PetSlot'
 
 export default function HowItWorks() {
   const { t } = useLocale()
@@ -20,15 +19,12 @@ export default function HowItWorks() {
           subtitle={t.howItWorks.subtitle}
         />
       </ScrollReveal>
-      <div className="relative">
-        <PetSlot section="howItWorks" className="hidden md:block absolute -right-4 top-0" />
-      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {steps.map((step, i) => (
           <ScrollReveal key={step.num} delay={i * 150}>
             <motion.div
               whileHover={{ y: -4, boxShadow: '0 4px 20px rgba(26,46,35,0.10)' }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.3 }}
               className="relative bg-card-bg border border-border rounded-lg p-7 shadow-card h-full group"
             >
               <div className="w-9 h-9 bg-mint-light rounded-sm flex items-center justify-center text-sm font-extrabold text-mint-dark mb-4">
@@ -38,7 +34,7 @@ export default function HowItWorks() {
                 initial={{ scale: 1 }}
                 whileInView={{ scale: [1, 1.15, 1] }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.2 + i * 0.15, ease: [0.25, 0.1, 0.25, 1] }}
+                transition={{ duration: 0.6, delay: 0.3 + i * 0.15, ease: 'easeOut' }}
                 className="mb-3"
               >
                 <Icon name={step.icon} className="w-7 h-7 text-mint" />
@@ -51,7 +47,7 @@ export default function HowItWorks() {
                   initial={{ opacity: 0, x: -4 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.25, delay: 0.3 + i * 0.15 }}
+                  transition={{ duration: 0.5, delay: 0.4 + i * 0.15, ease: 'easeOut' }}
                   className="hidden lg:flex absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-warm-bg border border-border rounded-full items-center justify-center text-[11px] text-muted z-10"
                 >
                   →

@@ -1,24 +1,17 @@
 'use client'
 
-import { createContext, useContext, useState, useCallback, useEffect, ReactNode } from 'react'
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 
 type SectionKey = 'hero' | 'howItWorks' | 'features' | 'skillTree' | 'testimonials' | 'finalCTA'
-
-interface SlotPosition {
-  top: number
-  left: number
-  width: number
-  height: number
-}
 
 interface CompanionState {
   characterName: string | null
   pick: (name: string) => void
   activeSection: SectionKey | null
   setActiveSection: (section: SectionKey) => void
-  slotPositions: Partial<Record<SectionKey, SlotPosition>>
-  registerSlot: (section: SectionKey, rect: SlotPosition) => void
   isMobile: boolean
+  pickerDismissed: boolean
+  dismissPicker: () => void
 }
 
 const CompanionCtx = createContext<CompanionState>({
@@ -26,16 +19,17 @@ const CompanionCtx = createContext<CompanionState>({
   pick: () => {},
   activeSection: null,
   setActiveSection: () => {},
-  slotPositions: {},
-  registerSlot: () => {},
   isMobile: false,
+  pickerDismissed: false,
+  dismissPicker: () => {},
 })
 
 export function CompanionProvider({ children }: { children: ReactNode }) {
   const [characterName, setCharacterName] = useState<string | null>(null)
   const [activeSection, setActiveSection] = useState<SectionKey | null>(null)
-  const [slotPositions, setSlotPositions] = useState<Partial<Record<SectionKey, SlotPosition>>>({})
   const [isMobile, setIsMobile] = useState(false)
+  const [pickerDismissed, setPickerDismissed] = useState(false)
+  const dismissPicker = () => setPickerDismissed(true)
 
   useEffect(() => {
     const mql = window.matchMedia('(min-width: 768px)')
@@ -45,19 +39,15 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
     return () => mql.removeEventListener('change', handler)
   }, [])
 
-  const registerSlot = useCallback((section: SectionKey, rect: SlotPosition) => {
-    setSlotPositions(prev => ({ ...prev, [section]: rect }))
-  }, [])
-
   return (
     <CompanionCtx.Provider value={{
       characterName,
       pick: setCharacterName,
       activeSection,
       setActiveSection,
-      slotPositions,
-      registerSlot,
       isMobile,
+      pickerDismissed,
+      dismissPicker,
     }}>
       {children}
     </CompanionCtx.Provider>
@@ -68,4 +58,4 @@ export function useCompanion() {
   return useContext(CompanionCtx)
 }
 
-export type { SectionKey, SlotPosition }
+export type { SectionKey }

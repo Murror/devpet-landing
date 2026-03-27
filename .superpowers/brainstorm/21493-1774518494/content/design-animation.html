@@ -1,0 +1,130 @@
+<h2>Design: Pet Guide — Animation & Interaction</h2>
+<p class="subtitle">Section 2/3: Bounce animation, poses, click interaction</p>
+
+<div class="section">
+  <h3>Bounce Animation</h3>
+  <div class="mockup">
+    <div class="mockup-header">Pet chuyển từ Section A → Section B</div>
+    <div class="mockup-body" style="font-size: 14px; line-height: 1.8; padding: 20px;">
+      <div style="position:relative; height:120px; margin: 10px 0;">
+        <div style="position:absolute; left:10%; bottom:0; text-align:center; font-size:12px; color:#888;">
+          <div style="width:40px;height:40px;background:#a78bfa;border-radius:8px;margin:0 auto 4px;"></div>
+          Slot A (cũ)
+        </div>
+        <div style="position:absolute; left:50%; bottom:60px; transform:translateX(-50%);">
+          <div style="width:48px;height:48px;background:#f472b6;border-radius:12px;border:3px solid #fff;box-shadow:0 4px 12px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;font-size:20px;">🐱</div>
+        </div>
+        <div style="position:absolute; left:10%; bottom:0; right:10%; border-bottom:2px dashed #555;">
+          <svg width="100%" height="90" style="position:absolute;bottom:0;overflow:visible;">
+            <path d="M 0,80 Q 200,-20 400,80" stroke="#a78bfa" stroke-width="2" fill="none" stroke-dasharray="6,4" />
+          </svg>
+        </div>
+        <div style="position:absolute; right:10%; bottom:0; text-align:center; font-size:12px; color:#888;">
+          <div style="width:40px;height:40px;background:#a78bfa;border-radius:8px;margin:0 auto 4px;border:2px dashed #f472b6;"></div>
+          Slot B (mới)
+        </div>
+      </div>
+      <br/>
+      <p><strong>Keyframes:</strong></p>
+      <p>1. <strong>Launch</strong> (0-200ms) — Pet scale down 0.8 → nhún lên, rời slot cũ</p>
+      <p>2. <strong>Arc</strong> (200-500ms) — Bay theo đường cong lên trên (translateY giảm)</p>
+      <p>3. <strong>Land</strong> (500-700ms) — Rơi xuống slot mới với bounce spring</p>
+      <p>4. <strong>Settle</strong> (700-900ms) — Squash & stretch nhẹ khi chạm đất</p>
+      <p>5. <strong>Speech</strong> (900-1200ms) — Bubble fade in + scale from 0</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Framer Motion Config</h3>
+  <div class="mockup">
+    <div class="mockup-header">Animation Settings</div>
+    <div class="mockup-body" style="font-size: 13px; font-family: monospace; line-height: 1.6;">
+<pre style="margin:0; white-space:pre-wrap;">
+// Bounce transition
+transition: {
+  type: "spring",
+  stiffness: 300,
+  damping: 20,
+  mass: 0.8
+}
+
+// Squash & stretch on land
+onAnimationComplete → trigger:
+  scaleY: [1, 0.8, 1.1, 1]  // squash → stretch → settle
+  scaleX: [1, 1.2, 0.9, 1]  // inverse
+  duration: 200ms
+</pre>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Pet Poses (per section)</h3>
+  <div class="mockup">
+    <div class="mockup-header">Pose System</div>
+    <div class="mockup-body" style="font-size: 14px; line-height: 1.8;">
+      <p>Mỗi pet character có các pose bằng CSS transform trên sprite:</p>
+      <table style="width:100%; font-size:13px; border-collapse:collapse;">
+        <tr style="border-bottom:1px solid #333;">
+          <td style="padding:6px;"><strong>Section</strong></td>
+          <td style="padding:6px;"><strong>Pose</strong></td>
+          <td style="padding:6px;"><strong>CSS</strong></td>
+        </tr>
+        <tr style="border-bottom:1px solid #222;">
+          <td style="padding:6px;">Hero</td>
+          <td style="padding:6px;">Wave 👋</td>
+          <td style="padding:6px; font-family:monospace; font-size:12px;">rotate(-10deg) + hand animation</td>
+        </tr>
+        <tr style="border-bottom:1px solid #222;">
+          <td style="padding:6px;">HowItWorks</td>
+          <td style="padding:6px;">Point right 👉</td>
+          <td style="padding:6px; font-family:monospace; font-size:12px;">scaleX(-1) nếu cần flip</td>
+        </tr>
+        <tr style="border-bottom:1px solid #222;">
+          <td style="padding:6px;">Features</td>
+          <td style="padding:6px;">Excited ⭐</td>
+          <td style="padding:6px; font-family:monospace; font-size:12px;">bounce nhẹ liên tục</td>
+        </tr>
+        <tr style="border-bottom:1px solid #222;">
+          <td style="padding:6px;">SkillTree</td>
+          <td style="padding:6px;">Thinking 🤔</td>
+          <td style="padding:6px; font-family:monospace; font-size:12px;">tilt head + slow bob</td>
+        </tr>
+        <tr style="border-bottom:1px solid #222;">
+          <td style="padding:6px;">Testimonials</td>
+          <td style="padding:6px;">Happy 😊</td>
+          <td style="padding:6px; font-family:monospace; font-size:12px;">gentle sway</td>
+        </tr>
+        <tr>
+          <td style="padding:6px;">FinalCTA</td>
+          <td style="padding:6px;">Wave 👋</td>
+          <td style="padding:6px; font-family:monospace; font-size:12px;">rotate(-10deg) + hand animation</td>
+        </tr>
+      </table>
+      <br/>
+      <p><em>Note: Poses dùng CSS animation trên pet SVG hiện có — không cần thêm sprite mới.</em></p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Click Interaction</h3>
+  <div class="mockup">
+    <div class="mockup-header">Tap/Click vào Pet</div>
+    <div class="mockup-body" style="font-size: 14px; line-height: 1.8;">
+      <p><strong>Click → Fun reaction:</strong></p>
+      <p>1. Pet nhảy lên 1 lần (translateY -20px → spring back)</p>
+      <p>2. Xoay nhẹ random (-15° đến +15°)</p>
+      <p>3. Hiện random quote từ pool (khác speech bubble chính)</p>
+      <p>4. Sparkle particles quanh pet (3-5 dots, fade out)</p>
+      <br/>
+      <p><strong>Random quotes pool (ví dụ):</strong></p>
+      <p style="font-family:monospace; font-size:12px; color:#a78bfa;">
+        "Hehe!" · "Code thêm đi!" · "Bug-free zone 🛡" · "Ship it! 🚀" · "Ngon lắm!"
+      </p>
+      <br/>
+      <p><strong>Cooldown:</strong> 1 giây giữa mỗi click để tránh spam animation.</p>
+    </div>
+  </div>
+</div>

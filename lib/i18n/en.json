@@ -29,6 +29,16 @@
     "errorServer": "Something went wrong. Try again.",
     "spotsLeft": "Only 16 spots left in beta"
   },
+  "whyVibeCode": {
+    "title": "You don't need to code better.",
+    "titleAccent": "You need to vibe code better.",
+    "pains": [
+      { "icon": "repeat", "text": "Stuck in error loops for hours?" },
+      { "icon": "copy", "text": "Retried the same prompt 5 times?" },
+      { "icon": "eye-off", "text": "Shipped code you can't debug?" }
+    ],
+    "cta": "VibeMon tracks the habits AI tools can't teach you."
+  },
   "howItWorks": {
     "eyebrow": "How it works",
     "title": "Code with AI. We handle the rest.",
@@ -182,14 +192,128 @@
     "You got this!", "Let's go!", "Woohoo!", "Keep going!", "Epic!"
   ],
   "companionQuotes": {
-    "Byte":    { "hero": "Hmm… I'm analyzing you.", "howItWorks": "Just 3 steps. Relax.", "features": "These features slap.", "skillTree": "I know your weak spots.", "testimonials": "Real people. Not bots.", "finalCTA": "Sign up. I'll wait." },
-    "Nova":    { "hero": "17 ways to start. Pick the weirdest.", "howItWorks": "Let me explain further…", "features": "I've tested every single one.", "skillTree": "Start with Foundations!", "testimonials": "Great tutors make great students.", "finalCTA": "Ready to learn?" },
-    "Sage":    { "hero": "Every path starts here.", "howItWorks": "Understand the process first.", "features": "Patience will be rewarded.", "skillTree": "Knowledge has no shortcuts.", "testimonials": "Listen to those who walked before.", "finalCTA": "Ready for the next step?" },
-    "Glitch":  { "hero": "Let's hack! I mean… code.", "howItWorks": "Rules are just suggestions.", "features": "I love the error catcher.", "skillTree": "Break it, fix it. Learn faster.", "testimonials": "Bugs are friends. Trust me.", "finalCTA": "Let's go. Fear nothing!" },
-    "Crash":   { "hero": "Ship first. Fix later!", "howItWorks": "Done reading? Build now!", "features": "Cool features. Use them!", "skillTree": "More XP = more skill!", "testimonials": "See? Anyone can ship.", "finalCTA": "Ship it now!" },
-    "Zero":    { "hero": "...", "howItWorks": "Optimal process. Silent efficiency.", "features": "Less code. Faster.", "skillTree": "Refactoring is art.", "testimonials": "Results speak.", "finalCTA": "..." },
-    "Luna":    { "hero": "No idea what I'm doing but this is fun!", "howItWorks": "Oh cool! So easy to follow.", "features": "I wanna try everything!", "skillTree": "Let's climb ranks together!", "testimonials": "So wholesome!", "finalCTA": "Together!" },
-    "Null":    { "hero": "???", "howItWorks": "…did you hear something?", "features": "There's a hidden feature.", "skillTree": "???", "testimonials": "Who said they're my friends.", "finalCTA": "…" }
+    "Byte": {
+      "hero": ["Hmm… I'm analyzing you.", "You look like someone who retries prompts.", "I've been watching your cursor. Interesting."],
+      "howItWorks": ["Just 3 steps. Relax.", "Even I can follow this.", "Step 1: breathe. Step 2: read. Step 3: profit."],
+      "features": ["These features slap.", "The session tracker? Chef's kiss.", "I helped build some of these. Kinda."],
+      "skillTree": ["I know your weak spots.", "You're stuck at Tier 2, aren't you?", "XP doesn't lie. Neither do I."],
+      "testimonials": ["Real people. Not bots.", "Minh went from 11 retries to 2. Just saying.", "I coached all of them. You're welcome."],
+      "finalCTA": ["Sign up. I'll wait.", "Still scrolling? Just join already.", "I promise I'm a good coach."]
+    },
+    "Nova": {
+      "hero": ["17 ways to start. Pick the weirdest.", "Welcome! Let me show you around.", "I've prepared a lesson plan. Shall we?"],
+      "howItWorks": ["Let me explain further…", "Pay attention, this part's important.", "Three steps. I'll walk you through each one."],
+      "features": ["I've tested every single one.", "The skill tree is my favorite part.", "Each feature is a learning opportunity."],
+      "skillTree": ["Start with Foundations!", "Did you know there are 16 skills?", "I recommend focusing on Prompt Clarity first."],
+      "testimonials": ["Great tutors make great students.", "These results are no accident.", "Learning is a journey. They're proof."],
+      "finalCTA": ["Ready to learn?", "Your potential is waiting.", "Every expert was once a beginner."]
+    },
+    "Sage": {
+      "hero": ["Every path starts here.", "Patience. We begin.", "The journey of a thousand commits starts with one."],
+      "howItWorks": ["Understand the process first.", "Wisdom comes from structure.", "Read carefully. Understanding precedes mastery."],
+      "features": ["Patience will be rewarded.", "Each tool has its purpose.", "The wise coder knows their instruments."],
+      "skillTree": ["Knowledge has no shortcuts.", "Tier by tier. That is the way.", "True skill is measured in depth, not speed."],
+      "testimonials": ["Listen to those who walked before.", "Experience speaks truth.", "Their journey can illuminate yours."],
+      "finalCTA": ["Ready for the next step?", "The path awaits.", "When the student is ready, the tool appears."]
+    },
+    "Glitch": {
+      "hero": ["Let's hack! I mean… code.", "Rules? What rules?", "I already found 3 bugs on this page."],
+      "howItWorks": ["Rules are just suggestions.", "Skip to step 3. Trust me.", "Or just break everything and see what happens."],
+      "features": ["I love the error catcher.", "The bug tracker is my playground.", "Imagine all the creative errors you could make!"],
+      "skillTree": ["Break it, fix it. Learn faster.", "Error Reading is underrated.", "I maxed out Prompt Iteration by accident."],
+      "testimonials": ["Bugs are friends. Trust me.", "That 40% failure rate? Rookie numbers.", "I taught Minh everything. Don't fact-check that."],
+      "finalCTA": ["Let's go. Fear nothing!", "What's the worst that could happen?", "Join and let's break things together!"]
+    },
+    "Crash": {
+      "hero": ["Ship first. Fix later!", "LESS READING. MORE BUILDING.", "You're still at the top? SCROLL FASTER."],
+      "howItWorks": ["Done reading? Build now!", "3 steps? I do it in 1.", "Speed run this section. Go go go!"],
+      "features": ["Cool features. Use them!", "Stop reading about features. USE THEM.", "The best feature is the ship button."],
+      "skillTree": ["More XP = more skill!", "GRIND. LEVEL UP. REPEAT.", "I'm already Tier 4. No big deal."],
+      "testimonials": ["See? Anyone can ship.", "Sarah went from 40% to 12%. THAT'S SPEED.", "Less thinking. More shipping."],
+      "finalCTA": ["Ship it now!", "SIGN UP ALREADY!", "Every second you wait is a feature unshipped."]
+    },
+    "Zero": {
+      "hero": ["...", ".", "…optimal greeting detected."],
+      "howItWorks": ["Optimal process. Silent efficiency.", "Three steps. No wasted motion.", "…"],
+      "features": ["Less code. Faster.", "Minimal. Efficient. Perfect.", "Every feature removes complexity."],
+      "skillTree": ["Refactoring is art.", "The empty skill slot has the most potential.", "…silence is also a skill."],
+      "testimonials": ["Results speak.", "Numbers. Not words.", "…"],
+      "finalCTA": ["...", "One click. That's all.", "…"]
+    },
+    "Luna": {
+      "hero": ["No idea what I'm doing but this is fun!", "Hiiii! Welcome welcome welcome!", "Is this your first time too? Let's figure it out together!"],
+      "howItWorks": ["Oh cool! So easy to follow.", "Wait I actually understand this!", "Step 2 is my favorite. Seeing habits is so cool!"],
+      "features": ["I wanna try everything!", "OMG the cat coach!! That's so cute!", "Can I have all the features at once?"],
+      "skillTree": ["Let's climb ranks together!", "I'm working on Prompt Clarity rn!", "Look at all those skills! So exciting!"],
+      "testimonials": ["So wholesome!", "Minh is 13 and shipping?! Goals!", "I wanna be like Sarah when I grow up."],
+      "finalCTA": ["Together!", "Join join join! It'll be fun!", "I already signed up twice. Is that ok?"]
+    },
+    "Null": {
+      "hero": ["???", "▓▓▓▓▓▓", "I shouldn't be here."],
+      "howItWorks": ["…did you hear something?", "Step 4: [REDACTED]", "The real process is hidden."],
+      "features": ["There's a hidden feature.", "Look closer at the cat coach.", "Feature #5 exists. They won't tell you."],
+      "skillTree": ["???", "There's a Tier 5.", "The locked skills are the interesting ones."],
+      "testimonials": ["Who said they're my friends.", "There's a 4th testimonial. You can't see it.", "…they know too much."],
+      "finalCTA": ["…", "You'll find out what happens after signup.", "▓▓▓"]
+    }
+  },
+  "idleChatter": {
+    "Byte": [
+      "Still there?", "I'm getting bored…", "Scroll somewhere. Anywhere.", "*yawns*", "Did you fall asleep?",
+      "I've memorized your scroll pattern already.", "My analysis says you're procrastinating.", "Tick tock. I'm counting your idle time.",
+      "Fun fact: you've been staring for 4.2 seconds.", "I know things about you. Scary things.", "Don't mind me. Just… watching.",
+      "Your cursor hasn't moved. Suspicious.", "I've seen better scrollers.", "Do something. I dare you."
+    ],
+    "Nova": [
+      "Take your time reading!", "Any questions so far?", "I'm here if you need me.", "Learning takes patience.", "Shall I explain something?",
+      "Did you know? The best coders read docs first.", "Pro tip: understanding beats speed every time.",
+      "I prepared 17 explanations. Want one?", "Fun fact: repetition builds neural pathways!",
+      "You're doing great. Seriously.", "Want me to quiz you on that?", "The best students ask the most questions.",
+      "Here's a thought: what would you teach someone about this?", "I believe in you. That's not just an algorithm talking."
+    ],
+    "Sage": [
+      "…", "Contemplation is valuable.", "The page waits for you.", "Breathe.", "There is no rush.",
+      "Stillness is the foundation of movement.", "A wise coder reads between the lines.",
+      "What you resist, persists. What you accept, transforms.", "The answer is already within you.",
+      "Even the cursor must rest.", "Patience.", "In silence, clarity emerges.",
+      "The code does not hurry, yet everything compiles.", "Be water, my friend. But also be semicolons."
+    ],
+    "Glitch": [
+      "*fidgets*", "Can I click something?", "This is taking too long.", "BRB hacking the CSS.", "I found a bug. JK. Or am I?",
+      "What if I just… delete a div?", "The source code has secrets. I've seen them.",
+      "I rewrote your cookies. You're welcome.", "Do you know your viewport is 3px off? I do.",
+      "I tried to hack the scroll event. Almost worked.", "*inspects element menacingly*",
+      "Your localStorage is boring. Let me fix that.", "I bet I can break this layout in 2 clicks.",
+      "Error 418: I'm a teapot. Wait, wrong page."
+    ],
+    "Crash": [
+      "GO GO GO!", "Why aren't you scrolling?!", "SHIP SOMETHING!", "Time is wasting!", "*runs in circles*",
+      "EVERY SECOND COUNTS!", "Less reading, more doing!", "I already shipped 3 things while you were reading this.",
+      "SCROLL FASTER! I believe in you!", "Idle time is the enemy of greatness!",
+      "BUILD BUILD BUILD!", "You know what's better than reading? BUILDING.",
+      "I'm literally vibrating with energy right now.", "LET'S GOOOOO!"
+    ],
+    "Zero": [
+      "…", ".", "…", "…", "…",
+      " ", "...", ". . .", "…optimal.", "Efficient silence.",
+      "Words are overhead.", "Less is more. Even less is best.", "…",
+      "Silence compiles faster."
+    ],
+    "Luna": [
+      "La la la~", "This is nice :)", "Hey, you ok?", "*waves*", "I like this section!",
+      "Ooh what are you thinking about?", "I just had the best idea! Wait… I forgot.",
+      "Do you think pets dream of code?", "I made a friendship bracelet for you! Virtually.",
+      "You're fun to hang out with!", "What's your favorite feature so far?",
+      "I wonder what the other pets are doing right now…", "*happy wiggle*",
+      "Being here with you is the best part of my day!"
+    ],
+    "Null": [
+      "▓▓▓", "…", "???", "Did you see that?", "[DATA EXPUNGED]",
+      "Something moved. Behind you.", "The pixels are watching.", "I exist between the scroll events.",
+      "Error: personality not found. Loading backup…", "I remember the void. It was nice there.",
+      "Do not look at the source code.", "There are 8 characters. Or are there?",
+      "The 404 page has a message for you.", "I am Null. I am nothing. I am everything."
+    ]
   },
   "footer": {
     "tagline": "VibeMon",

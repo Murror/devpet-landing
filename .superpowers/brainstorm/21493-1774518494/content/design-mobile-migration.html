@@ -1,0 +1,109 @@
+<h2>Design: Pet Guide — Mobile & Migration</h2>
+<p class="subtitle">Section 3/3: Mobile fallback, migration từ FloatingCompanion, cleanup</p>
+
+<div class="section">
+  <h3>Mobile Fallback</h3>
+  <div class="mockup">
+    <div class="mockup-header">Breakpoint: &lt; 768px (md)</div>
+    <div class="mockup-body" style="font-size: 14px; line-height: 1.8;">
+      <div style="display:flex; gap:20px; align-items:flex-start;">
+        <div style="flex:1;">
+          <p><strong>Desktop (≥768px):</strong></p>
+          <p>Pet nhảy giữa PetSlots trong layout</p>
+          <p>Speech bubble đầy đủ</p>
+          <p>Click interaction + sparkles</p>
+          <p>Tất cả 6 section waypoints</p>
+        </div>
+        <div style="flex:1;">
+          <p><strong>Mobile (&lt;768px):</strong></p>
+          <p>Pet thu nhỏ (48→36px), fixed bottom-right</p>
+          <p>Speech bubble ngắn hơn, auto-hide 3s</p>
+          <p>Click interaction giữ nguyên</p>
+          <p>Chỉ 3 waypoints: Hero, Features, CTA</p>
+          <p>Không bounce giữa sections — fade transition</p>
+        </div>
+      </div>
+      <br/>
+      <p style="color:#a78bfa;"><strong>Detect:</strong> <code>useMediaQuery("(min-width: 768px)")</code> hoặc Tailwind <code>md:</code> breakpoint</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Migration Plan</h3>
+  <div class="mockup">
+    <div class="mockup-header">Thay thế FloatingCompanion + ByteGuide</div>
+    <div class="mockup-body" style="font-size: 14px; line-height: 1.8;">
+      <table style="width:100%; font-size:13px; border-collapse:collapse;">
+        <tr style="border-bottom:1px solid #333;">
+          <td style="padding:8px;"><strong>Component cũ</strong></td>
+          <td style="padding:8px;"><strong>Hành động</strong></td>
+          <td style="padding:8px;"><strong>Lý do</strong></td>
+        </tr>
+        <tr style="border-bottom:1px solid #222;">
+          <td style="padding:8px; font-family:monospace;">FloatingCompanion</td>
+          <td style="padding:8px; color:#f87171;">Xóa</td>
+          <td style="padding:8px;">Thay bằng PetGuide — cùng chức năng nhưng inline</td>
+        </tr>
+        <tr style="border-bottom:1px solid #222;">
+          <td style="padding:8px; font-family:monospace;">ByteGuide</td>
+          <td style="padding:8px; color:#f87171;">Xóa</td>
+          <td style="padding:8px;">Chức năng guide giờ do pet đảm nhận — không cần 2 guide</td>
+        </tr>
+        <tr style="border-bottom:1px solid #222;">
+          <td style="padding:8px; font-family:monospace;">CompanionContext</td>
+          <td style="padding:8px; color:#fbbf24;">Nâng cấp</td>
+          <td style="padding:8px;">Thêm activeSection, slotPositions, registerSlot</td>
+        </tr>
+        <tr style="border-bottom:1px solid #222;">
+          <td style="padding:8px; font-family:monospace;">CharacterPicker</td>
+          <td style="padding:8px; color:#4ade80;">Giữ nguyên</td>
+          <td style="padding:8px;">Hoạt động tốt rồi</td>
+        </tr>
+        <tr>
+          <td style="padding:8px; font-family:monospace;">i18n quotes</td>
+          <td style="padding:8px; color:#fbbf24;">Cập nhật</td>
+          <td style="padding:8px;">Thêm fun quotes pool cho click interaction</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>New Files</h3>
+  <div class="mockup">
+    <div class="mockup-header">Files to create / modify</div>
+    <div class="mockup-body" style="font-size: 13px; font-family: monospace; line-height: 2;">
+<pre style="margin:0;">
+<span style="color:#4ade80;">CREATE</span>  components/PetGuide.tsx      ← Main pet renderer + animation
+<span style="color:#4ade80;">CREATE</span>  components/PetSlot.tsx       ← Invisible anchor per section
+<span style="color:#fbbf24;">MODIFY</span>  lib/CompanionContext.tsx     ← Add slot registry + active section
+<span style="color:#fbbf24;">MODIFY</span>  app/page.tsx                ← Remove old components, add PetGuide
+<span style="color:#fbbf24;">MODIFY</span>  components/Hero.tsx          ← Add PetSlot
+<span style="color:#fbbf24;">MODIFY</span>  components/HowItWorks.tsx    ← Add PetSlot
+<span style="color:#fbbf24;">MODIFY</span>  components/Features.tsx      ← Add PetSlot
+<span style="color:#fbbf24;">MODIFY</span>  components/SkillTreePreview.tsx ← Add PetSlot
+<span style="color:#fbbf24;">MODIFY</span>  components/Testimonials.tsx  ← Add PetSlot
+<span style="color:#fbbf24;">MODIFY</span>  components/FinalCTA.tsx      ← Add PetSlot
+<span style="color:#fbbf24;">MODIFY</span>  lib/i18n/en.json            ← Add fun quotes
+<span style="color:#fbbf24;">MODIFY</span>  lib/i18n/vi.json            ← Add fun quotes
+<span style="color:#f87171;">DELETE</span>  components/FloatingCompanion.tsx
+<span style="color:#f87171;">DELETE</span>  components/ByteGuide.tsx
+</pre>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Accessibility & Performance</h3>
+  <div class="mockup">
+    <div class="mockup-header">Considerations</div>
+    <div class="mockup-body" style="font-size: 14px; line-height: 1.8;">
+      <p><strong>prefers-reduced-motion:</strong> Nếu user bật reduced motion → pet teleport thay vì bounce, không sparkle</p>
+      <p><strong>Performance:</strong> Chỉ 1 pet instance render, animation dùng transform/opacity (GPU accelerated)</p>
+      <p><strong>aria-hidden="true":</strong> Pet là decorative, không ảnh hưởng screen readers</p>
+      <p><strong>pointer-events:</strong> Pet clickable nhưng không block content bên dưới</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,83 @@
+<h2>2 Technical Approaches</h2>
+<p class="subtitle">Cách implement pet guide nhảy giữa các section</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>🎯 Inline Waypoint (Recommended)</h3>
+      <p><strong>Pet nằm trong DOM của mỗi section</strong></p>
+      <br/>
+      <div class="mockup">
+        <div class="mockup-header">Cách hoạt động</div>
+        <div class="mockup-body" style="font-size:14px; line-height:1.8;">
+          <p>• Mỗi section có một <code>&lt;PetSlot /&gt;</code> component đặt ở vị trí cụ thể</p>
+          <p>• Chỉ <strong>1 pet render</strong> tại một thời điểm — ở section đang active</p>
+          <p>• Khi scroll sang section mới → pet <strong>animate bay từ slot cũ → slot mới</strong> bằng Framer Motion <code>layoutId</code></p>
+          <p>• Trong lúc bay: pet ở <code>position: fixed</code> (tạm thời)</p>
+          <p>• Đến nơi: pet trở lại <code>position: relative</code> trong flow</p>
+        </div>
+      </div>
+      <br/>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>Pros</h4>
+          <ul>
+            <li>Pet là một phần của layout — responsive tự nhiên</li>
+            <li>Framer Motion <code>layoutId</code> xử lý animation tự động</li>
+            <li>Dễ customize vị trí per-section</li>
+            <li>Không cần tính toán tọa độ pixel</li>
+            <li>SEO friendly — pet trong document flow</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>Cons</h4>
+          <ul>
+            <li>Cần đặt PetSlot vào từng section component</li>
+            <li>Animation transition phức tạp hơn một chút</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>📌 Fixed + Scroll Waypoints</h3>
+      <p><strong>Pet luôn fixed, vị trí thay đổi theo scroll progress</strong></p>
+      <br/>
+      <div class="mockup">
+        <div class="mockup-header">Cách hoạt động</div>
+        <div class="mockup-body" style="font-size:14px; line-height:1.8;">
+          <p>• Pet luôn <code>position: fixed</code> — overlay trên content</p>
+          <p>• Mỗi section đăng ký waypoint: <code>{ x, y, pose, speech }</code></p>
+          <p>• Intersection Observer detect section active</p>
+          <p>• Pet <strong>animate bounce</strong> đến tọa độ mới bằng spring physics</p>
+          <p>• Tọa độ tính theo viewport percentage (responsive)</p>
+        </div>
+      </div>
+      <br/>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>Pros</h4>
+          <ul>
+            <li>Kiến trúc đơn giản — 1 component, 1 vị trí render</li>
+            <li>Không cần modify section components</li>
+            <li>Animation dễ control hơn</li>
+            <li>Giống cách FloatingCompanion hiện tại — ít refactor</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>Cons</h4>
+          <ul>
+            <li>Pet overlay content — có thể che chữ/button</li>
+            <li>Cần tính toán tọa độ viewport cho mỗi breakpoint</li>
+            <li>Không thực sự "trong" layout — vẫn floating</li>
+            <li>Khó align chính xác với content elements</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

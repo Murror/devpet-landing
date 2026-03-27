@@ -29,6 +29,16 @@
     "errorServer": "Đã xảy ra lỗi. Thử lại nhé.",
     "spotsLeft": "Còn 16 chỗ thử nghiệm"
   },
+  "whyVibeCode": {
+    "title": "Bạn không cần code giỏi hơn.",
+    "titleAccent": "Bạn cần vibe code giỏi hơn.",
+    "pains": [
+      { "icon": "repeat", "text": "Kẹt error loop hàng tiếng đồng hồ?" },
+      { "icon": "copy", "text": "Thử lại cùng một prompt 5 lần?" },
+      { "icon": "eye-off", "text": "Ship code mà không debug được?" }
+    ],
+    "cta": "VibeMon theo dõi những thói quen mà AI không dạy được."
+  },
   "howItWorks": {
     "eyebrow": "Cách hoạt động",
     "title": "Lập trình với AI. Phần còn lại để mình lo.",
@@ -132,10 +142,10 @@
     ]
   },
   "meetYourPet": {
-    "eyebrow": "Gặp đội của bạn",
-    "title": "8 người bạn. Mỗi bạn một tính cách.",
-    "body": "Mỗi nhân vật có câu chuyện và cách giúp bạn học riêng. Bấm để khám phá.",
-    "growthNote": "Tiến hóa cùng kỹ năng của bạn",
+    "eyebrow": "Gặp đội của mày",
+    "title": "8 người bạn. Mỗi đứa một tính cách.",
+    "body": "Mỗi nhân vật có câu chuyện và cách giúp mày học riêng. Bấm để khám phá.",
+    "growthNote": "Tiến hóa cùng kỹ năng của mày",
     "characters": [
       { "name": "Byte", "species": "Bóng linh hồn · Bí ẩn", "badge": "Lõi Hỗn Loạn", "color": "#534AB7", "quote": "Tao ở đây lâu hơn cả nhật ký ghi nhớ.", "role": "Bạn đồng hành chính. Phản ứng mọi hoạt động code." },
       { "name": "Nova", "species": "Cáo lửa · Hệ sao", "badge": "Cố Vấn Thiên Tài", "color": "#BA7517", "quote": "Tao biết 17 cách. Bắt đầu với cách kỳ lạ nhất.", "role": "Gia sư chính. Giải thích sâu." },
@@ -179,17 +189,131 @@
   },
   "funQuotes": [
     "Hehe!", "Code thêm đi!", "Không có bug!", "Ship thôi!", "Ngon lắm!",
-    "Cậu làm được!", "Đi thôi!", "Woohoo!", "Tiếp tục nào!", "Đỉnh!"
+    "Mày làm được!", "Đi thôi!", "Woohoo!", "Tiếp tục nào!", "Đỉnh!"
   ],
   "companionQuotes": {
-    "Byte":    { "hero": "Hmm… tao đang phân tích mày đó.", "howItWorks": "3 bước thôi. Đừng lo.", "features": "Chức năng xịn phết nhỉ?", "skillTree": "Tao biết mày yếu chỗ nào.", "testimonials": "Người thật. Không phải bot.", "finalCTA": "Đăng ký đi. Tao đợi." },
-    "Nova":    { "hero": "17 cách để bắt đầu. Chọn cách lạ nhất.", "howItWorks": "Để tao giải thích rõ hơn…", "features": "Mỗi tính năng tao đều test rồi.", "skillTree": "Bắt đầu từ Nền tảng nhé!", "testimonials": "Gia sư giỏi thì trò giỏi.", "finalCTA": "Sẵn sàng học chưa?" },
-    "Sage":    { "hero": "Con đường nào cũng bắt đầu từ đây.", "howItWorks": "Hiểu quy trình trước. Code sau.", "features": "Kiên nhẫn sẽ được thưởng.", "skillTree": "Tri thức không có đường tắt.", "testimonials": "Lắng nghe kinh nghiệm người đi trước.", "finalCTA": "Sẵn sàng bước tiếp?" },
-    "Glitch":  { "hero": "Hack thôi! À ý là… code.", "howItWorks": "Luật lệ chỉ là gợi ý thôi.", "features": "Tao thích cái bắt lỗi nhất.", "skillTree": "Phá rồi sửa. Học nhanh hơn.", "testimonials": "Bug cũng là bạn, tin tao.", "finalCTA": "Đi thôi. Sợ gì!" },
-    "Crash":   { "hero": "Ship trước. Sửa sau!", "howItWorks": "Đọc xong chưa? Build đi!", "features": "Tính năng ngon. Dùng đi!", "skillTree": "XP nhiều = giỏi nhiều!", "testimonials": "Thấy chưa? Ai cũng ship được.", "finalCTA": "Xuất bản ngay!" },
-    "Zero":    { "hero": "...", "howItWorks": "Quy trình tối ưu. Im lặng hiệu quả.", "features": "Ít code hơn. Nhanh hơn.", "skillTree": "Refactor là nghệ thuật.", "testimonials": "Kết quả nói thay lời.", "finalCTA": "..." },
-    "Luna":    { "hero": "Không biết mình đang làm gì nhưng vui quá!", "howItWorks": "Ồ hay ghê! Dễ hiểu nữa.", "features": "Tao muốn thử hết luôn!", "skillTree": "Mình cùng leo rank nhé!", "testimonials": "Wholesome quá đi!", "finalCTA": "Cùng nhau nha!" },
-    "Null":    { "hero": "???", "howItWorks": "…bạn có nghe tiếng gì không?", "features": "Có tính năng ẩn đó.", "skillTree": "???", "testimonials": "Ai nói bạn tao đâu.", "finalCTA": "…" }
+    "Byte": {
+      "hero": ["Hmm… tao đang phân tích mày đó.", "Mày có vẻ hay retry prompt lắm.", "Tao theo dõi cursor mày rồi. Thú vị."],
+      "howItWorks": ["3 bước thôi. Đừng lo.", "Tao còn hiểu được mà.", "Bước 1: thở. Bước 2: đọc. Bước 3: profit."],
+      "features": ["Chức năng xịn phết nhỉ?", "Session tracker? Tuyệt cú mèo.", "Tao có góp phần xây mấy cái này. Chắc vậy."],
+      "skillTree": ["Tao biết mày yếu chỗ nào.", "Mày đang kẹt ở Tier 2 đúng không?", "XP không nói dối. Tao cũng vậy."],
+      "testimonials": ["Người thật. Không phải bot.", "Minh từ 11 lần retry xuống 2. Nói vậy thôi.", "Tao coach hết đám này. Không có chi."],
+      "finalCTA": ["Đăng ký đi. Tao đợi.", "Vẫn đang scroll à? Đăng ký luôn đi.", "Tao hứa tao coach tốt lắm."]
+    },
+    "Nova": {
+      "hero": ["17 cách để bắt đầu. Chọn cách lạ nhất.", "Chào mày! Để tao dẫn mày xem.", "Tao đã chuẩn bị giáo án. Bắt đầu nhé?"],
+      "howItWorks": ["Để tao giải thích rõ hơn…", "Chú ý nhé, phần này quan trọng.", "Ba bước. Tao hướng dẫn mày từng bước."],
+      "features": ["Mỗi tính năng tao đều test rồi.", "Cây kỹ năng là phần tao thích nhất.", "Mỗi tính năng là một cơ hội học hỏi."],
+      "skillTree": ["Bắt đầu từ Nền tảng nhé!", "Mày biết có 16 kỹ năng không?", "Tao khuyên mày nên tập trung Rõ ràng câu lệnh trước."],
+      "testimonials": ["Gia sư giỏi thì trò giỏi.", "Kết quả này không phải ngẫu nhiên.", "Học là hành trình. Họ là bằng chứng."],
+      "finalCTA": ["Sẵn sàng học chưa?", "Tiềm năng đang chờ mày.", "Chuyên gia nào cũng từng là người mới."]
+    },
+    "Sage": {
+      "hero": ["Con đường nào cũng bắt đầu từ đây.", "Kiên nhẫn. Ta bắt đầu.", "Hành trình ngàn commit bắt đầu từ một."],
+      "howItWorks": ["Hiểu quy trình trước. Code sau.", "Trí tuệ đến từ cấu trúc.", "Đọc kỹ đi. Hiểu rồi mới thành thạo."],
+      "features": ["Kiên nhẫn sẽ được thưởng.", "Mỗi công cụ có mục đích riêng.", "Kẻ code giỏi hiểu rõ công cụ của mình."],
+      "skillTree": ["Tri thức không có đường tắt.", "Từng cấp một. Đó là con đường.", "Kỹ năng thật đo bằng chiều sâu, không phải tốc độ."],
+      "testimonials": ["Hãy lắng nghe kinh nghiệm kẻ đi trước.", "Trải nghiệm nói lên sự thật.", "Hành trình của họ soi sáng cho ngươi."],
+      "finalCTA": ["Ngươi sẵn sàng bước tiếp?", "Con đường đang chờ ngươi.", "Khi học trò sẵn sàng, công cụ sẽ xuất hiện."]
+    },
+    "Glitch": {
+      "hero": ["Hack thôi! À ý là… code.", "Luật lệ? Luật gì?", "Tao tìm ra 3 bug trên trang này rồi."],
+      "howItWorks": ["Luật lệ chỉ là gợi ý thôi.", "Nhảy thẳng bước 3. Tin tao.", "Hoặc phá hết rồi xem chuyện gì xảy ra."],
+      "features": ["Tao thích cái bắt lỗi nhất.", "Bug tracker là sân chơi của tao.", "Tưởng tượng mấy lỗi sáng tạo mày có thể tạo!"],
+      "skillTree": ["Phá rồi sửa. Học nhanh hơn.", "Đọc hiểu lỗi bị đánh giá thấp.", "Tao max Lặp lại câu lệnh do lỡ tay."],
+      "testimonials": ["Bug cũng là bạn, tin tao.", "40% fail rate? Con số nghiệp dư.", "Tao dạy Minh mọi thứ. Đừng kiểm tra."],
+      "finalCTA": ["Đi thôi. Sợ gì!", "Tệ nhất thì sao nào?", "Tham gia rồi phá đồ chung nhé!"]
+    },
+    "Crash": {
+      "hero": ["Ship trước. Sửa sau!", "ÍT ĐỌC. NHIỀU BUILD.", "Vẫn ở trên cùng? SCROLL NHANH LÊN."],
+      "howItWorks": ["Đọc xong chưa? Build đi!", "3 bước? Tao làm 1 bước.", "Speed run phần này. Đi đi đi!"],
+      "features": ["Tính năng ngon. Dùng đi!", "Đừng đọc về tính năng nữa. DÙNG ĐI.", "Tính năng tốt nhất là nút ship."],
+      "skillTree": ["XP nhiều = giỏi nhiều!", "GRIND. LEVEL UP. LẶP LẠI.", "Tao Tier 4 rồi. Bình thường thôi."],
+      "testimonials": ["Thấy chưa? Ai cũng ship được.", "Lan từ 40% xuống 12%. ĐÓ LÀ TỐC ĐỘ.", "Ít suy nghĩ. Nhiều shipping."],
+      "finalCTA": ["Xuất bản ngay!", "ĐĂNG KÝ ĐI!", "Mỗi giây mày chần chừ là một feature chưa ship."]
+    },
+    "Zero": {
+      "hero": ["...", ".", "…lời chào tối ưu được phát hiện."],
+      "howItWorks": ["Quy trình tối ưu. Im lặng hiệu quả.", "Ba bước. Không lãng phí.", "…"],
+      "features": ["Ít code hơn. Nhanh hơn.", "Tối giản. Hiệu quả. Hoàn hảo.", "Mỗi tính năng loại bỏ phức tạp."],
+      "skillTree": ["Refactor là nghệ thuật.", "Ô kỹ năng trống có tiềm năng nhất.", "…im lặng cũng là kỹ năng."],
+      "testimonials": ["Kết quả nói thay lời.", "Số liệu. Không phải lời nói.", "…"],
+      "finalCTA": ["...", "Một click. Đủ rồi.", "…"]
+    },
+    "Luna": {
+      "hero": ["Không biết mình đang làm gì nhưng vui quá!", "Chào chào chào!", "Lần đầu của cậu à? Mình cùng tìm hiểu nhé!"],
+      "howItWorks": ["Ồ hay ghê! Dễ hiểu nữa.", "Ê mình hiểu được luôn!", "Bước 2 mình thích nhất. Thấy thói quen hay lắm!"],
+      "features": ["Mình muốn thử hết luôn!", "OMG mèo coach!! Dễ thương quá!", "Cho mình tất cả tính năng được không?"],
+      "skillTree": ["Mình cùng leo rank nhé!", "Mình đang học Rõ ràng câu lệnh nè!", "Coi bao nhiêu kỹ năng kìa! Phấn khích quá!"],
+      "testimonials": ["Wholesome quá đi!", "Minh 13 tuổi mà ship được?! Mục tiêu luôn!", "Mình muốn giống chị Lan khi lớn lên."],
+      "finalCTA": ["Cùng nhau nha!", "Tham gia tham gia! Vui lắm!", "Mình đăng ký 2 lần rồi. Được không?"]
+    },
+    "Null": {
+      "hero": ["???", "▓▓▓▓▓▓", "Tao không nên ở đây."],
+      "howItWorks": ["…mày có nghe tiếng gì không?", "Bước 4: [ĐÃ XÓA]", "Quy trình thật bị ẩn rồi."],
+      "features": ["Có tính năng ẩn đó.", "Nhìn kỹ mèo coach đi.", "Tính năng #5 tồn tại. Họ không nói cho mày."],
+      "skillTree": ["???", "Có Tier 5 đó.", "Mấy kỹ năng bị khóa mới thú vị."],
+      "testimonials": ["Ai nói bạn tao đâu.", "Có testimonial thứ 4. Mày không thấy.", "…họ biết quá nhiều."],
+      "finalCTA": ["…", "Đăng ký rồi mày sẽ biết chuyện gì xảy ra.", "▓▓▓"]
+    }
+  },
+  "idleChatter": {
+    "Byte": [
+      "Còn đây không?", "Tao chán rồi…", "Scroll đi. Chỗ nào cũng được.", "*ngáp*", "Ngủ à?",
+      "Tao thuộc lòng pattern scroll của mày rồi.", "Phân tích cho thấy mày đang trì hoãn.", "Tích tắc. Tao đếm thời gian rảnh của mày.",
+      "Fun fact: mày nhìn chằm chằm 4.2 giây rồi.", "Tao biết mấy thứ về mày. Đáng sợ lắm.", "Đừng để ý tao. Chỉ… quan sát thôi.",
+      "Cursor mày không nhúc nhích. Đáng ngờ.", "Tao thấy người scroll giỏi hơn rồi.", "Làm gì đi. Tao thách."
+    ],
+    "Nova": [
+      "Cứ từ từ đọc nhé!", "Có thắc mắc gì không?", "Tao ở đây nếu mày cần.", "Học cần kiên nhẫn.", "Tao giải thích gì cho mày không?",
+      "Mày biết không? Coder giỏi nhất đọc docs trước.", "Mẹo: hiểu bài hơn là nhanh.",
+      "Tao chuẩn bị 17 bài giải thích. Muốn nghe không?", "Fun fact: lặp lại giúp xây dựng nơ-ron!",
+      "Mày làm tốt lắm. Thật đó.", "Muốn tao quiz không?", "Học trò giỏi nhất hỏi nhiều nhất.",
+      "Thử nghĩ: mày sẽ dạy ai đó gì về phần này?", "Tao tin mày. Không phải chỉ thuật toán nói vậy."
+    ],
+    "Sage": [
+      "…", "Suy ngẫm là giá trị.", "Trang chờ ngươi.", "Hít thở.", "Không cần vội.",
+      "Tĩnh lặng là nền tảng của chuyển động.", "Người code giỏi đọc giữa những dòng.",
+      "Điều ngươi chống lại sẽ tồn tại. Điều ngươi chấp nhận sẽ chuyển hóa.", "Câu trả lời đã ở trong ngươi.",
+      "Ngay cả cursor cũng cần nghỉ.", "Kiên nhẫn.", "Trong im lặng, sự rõ ràng hiện ra.",
+      "Code không vội, nhưng mọi thứ đều compile.", "Hãy như nước. Nhưng cũng hãy là dấu chấm phẩy."
+    ],
+    "Glitch": [
+      "*ngọ nguậy*", "Cho tao bấm gì đi?", "Lâu quá rồi.", "BRB hack CSS.", "Tao tìm bug. Đùa thôi. Hay không?",
+      "Nếu tao xóa một div thì sao?", "Source code có bí mật. Tao thấy rồi.",
+      "Tao viết lại cookie của mày. Không cần cảm ơn.", "Viewport mày lệch 3px. Tao biết.",
+      "Tao thử hack scroll event. Gần xong rồi.", "*inspect element đe dọa*",
+      "localStorage của mày nhạt quá. Để tao fix.", "Tao cá tao phá layout này trong 2 click.",
+      "Error 418: Tao là ấm trà. Ơ nhầm trang."
+    ],
+    "Crash": [
+      "ĐI ĐI ĐI!", "Sao không scroll?!", "SHIP GÌ ĐI!", "Thời gian lãng phí!", "*chạy vòng tròn*",
+      "MỖI GIÂY ĐỀU QUAN TRỌNG!", "Ít đọc thôi, làm đi!", "Tao ship 3 thứ rồi trong lúc mày đọc cái này.",
+      "SCROLL NHANH LÊN! Tao tin mày!", "Thời gian rảnh là kẻ thù của sự vĩ đại!",
+      "BUILD BUILD BUILD!", "Biết cái gì hay hơn đọc không? BUILD.",
+      "Tao đang rung lắc vì năng lượng.", "TRIỂN THÔIIIII!"
+    ],
+    "Zero": [
+      "…", ".", "…", "…", "…",
+      " ", "...", ". . .", "…tối ưu.", "Im lặng hiệu quả.",
+      "Chữ là overhead.", "Ít hơn là nhiều hơn. Ít hơn nữa là tốt nhất.", "…",
+      "Im lặng compile nhanh hơn."
+    ],
+    "Luna": [
+      "La la la~", "Vui ghê :)", "Ê ổn không?", "*vẫy tay*", "Mình thích phần này!",
+      "Ôi cậu đang nghĩ gì vậy?", "Mình vừa có ý tưởng hay! Khoan… quên rồi.",
+      "Cậu nghĩ pet có mơ về code không?", "Mình làm vòng tay tình bạn cho cậu! Kiểu ảo.",
+      "Đi chơi với cậu vui lắm!", "Cậu thích tính năng nào nhất?",
+      "Không biết mấy pet khác đang làm gì…", "*nhún nhảy vui vẻ*",
+      "Ở đây với cậu là phần hay nhất ngày của mình!"
+    ],
+    "Null": [
+      "▓▓▓", "…", "???", "Mày thấy cái đó không?", "[DỮ LIỆU ĐÃ XÓA]",
+      "Có gì đó di chuyển. Phía sau mày.", "Pixel đang theo dõi.", "Tao tồn tại giữa các scroll event.",
+      "Error: tính cách không tìm thấy. Đang load backup…", "Tao nhớ hư không. Ở đó dễ chịu.",
+      "Đừng nhìn source code.", "Có 8 nhân vật. Hay là không?",
+      "Trang 404 có tin nhắn cho mày.", "Tao là Null. Tao là hư vô. Tao là tất cả."
+    ]
   },
   "footer": {
     "tagline": "VibeMon",

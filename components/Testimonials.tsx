@@ -3,7 +3,6 @@
 import { useLocale } from '@/lib/LocaleProvider'
 import { motion } from 'framer-motion'
 import ScrollReveal from './ScrollReveal'
-import PetSlot from './PetSlot'
 
 const statColors = ['#34D399', '#6BCB77', '#7B8CE0']
 
@@ -18,16 +17,13 @@ export default function Testimonials() {
           <h2 className="text-3xl md:text-[38px] font-black tracking-[-1.5px]">{t.testimonials.title}</h2>
         </div>
       </ScrollReveal>
-      <div className="relative">
-        <PetSlot section="testimonials" className="hidden md:block absolute -left-4 top-0" />
-      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
         {t.testimonials.items.map((item, i) => (
           <ScrollReveal key={item.name} delay={i * 120}>
             <motion.div
               whileHover={{ y: -4, boxShadow: '0 4px 20px rgba(26,46,35,0.10)' }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.3 }}
               className="bg-card-bg border border-border rounded-lg shadow-card h-full flex flex-col overflow-hidden"
             >
               {/* Quote */}
@@ -36,7 +32,7 @@ export default function Testimonials() {
                   initial={{ opacity: 0, scale: 0.5 }}
                   whileInView={{ opacity: 0.15, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: 0.1 + i * 0.08 }}
+                  transition={{ duration: 0.6, delay: 0.2 + i * 0.1, ease: 'easeOut' }}
                   className="block text-4xl font-black text-mint leading-none mb-1"
                 >
                   &ldquo;

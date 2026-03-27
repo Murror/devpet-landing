@@ -34,7 +34,7 @@ function Confetti({ color }: { color: string }) {
             scale: 0.2,
             rotate: p.rotation,
           }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
+          transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
           className="absolute left-1/2 top-1/3"
           style={{
             width: p.size,
@@ -81,10 +81,10 @@ export default function MeetYourPet() {
                   <AnimatePresence>
                     {isActive && (
                       <motion.div
-                        initial={{ opacity: 0, y: 8, scale: 0.9 }}
+                        initial={{ opacity: 0, y: 8, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 4, scale: 0.95 }}
-                        transition={{ duration: 0.25, ease: 'easeOut' }}
+                        exit={{ opacity: 0, y: 4, scale: 0.97 }}
+                        transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
                         className="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full z-30 w-[200px]"
                       >
                         <div
@@ -111,7 +111,7 @@ export default function MeetYourPet() {
                       y: [0, -12, 0],
                       rotate: [0, -3, 3, -2, 0],
                     } : {}}
-                    transition={{ duration: 0.5, ease: 'easeOut' }}
+                    transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
                     className={`bg-card-bg rounded-lg border-2 overflow-hidden shadow-card cursor-pointer select-none
                       ${isActive ? 'ring-2 ring-offset-2' : ''}`}
                     style={{
@@ -128,7 +128,7 @@ export default function MeetYourPet() {
                         animate={isActive ? {
                           scale: [1, 1.1, 1],
                         } : {}}
-                        transition={{ duration: 0.4 }}
+                        transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
                         className="w-[70%] h-[70%]"
                       >
                         <CharacterSvg name={char.name} className="w-full h-full" />

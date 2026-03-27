@@ -1,0 +1,89 @@
+<h2>Design: Pet Guide — Architecture</h2>
+<p class="subtitle">Section 1/3: Component architecture & data flow</p>
+
+<div class="section">
+  <h3>Component Tree</h3>
+  <div class="mockup">
+    <div class="mockup-header">Component Hierarchy</div>
+    <div class="mockup-body" style="font-family: monospace; font-size: 13px; line-height: 2;">
+<pre style="margin:0;">
+&lt;CompanionProvider&gt;              ← Context: selected pet, active section
+  &lt;CharacterPicker /&gt;            ← Modal chọn pet (giữ nguyên)
+  &lt;Nav /&gt;
+  &lt;Hero&gt;
+    &lt;PetSlot section="hero"      ← Vị trí: cạnh CTA button
+       pose="wave" /&gt;               Speech: "Chào mừng đến VibeMon!"
+  &lt;/Hero&gt;
+  &lt;HowItWorks&gt;
+    &lt;PetSlot section="how"       ← Vị trí: bên phải step 1
+       pose="point-right" /&gt;        Speech: "Xem cách hoạt động nè"
+  &lt;/HowItWorks&gt;
+  &lt;Features&gt;
+    &lt;PetSlot section="features"  ← Vị trí: ngồi trên feature card
+       pose="excited" /&gt;            Speech: "Tính năng xịn lắm!"
+  &lt;/Features&gt;
+  &lt;SkillTreePreview&gt;
+    &lt;PetSlot section="skill"     ← Vị trí: cạnh skill tree
+       pose="thinking" /&gt;           Speech: "Level up nào!"
+  &lt;/SkillTreePreview&gt;
+  &lt;Testimonials&gt;
+    &lt;PetSlot section="testimonials" ← Vị trí: giữa cards
+       pose="happy" /&gt;              Speech: "Mọi người nói gì..."
+  &lt;/Testimonials&gt;
+  &lt;FinalCTA&gt;
+    &lt;PetSlot section="cta"       ← Vị trí: cạnh sign-up form
+       pose="wave" /&gt;               Speech: "Tham gia ngay!"
+  &lt;/FinalCTA&gt;
+  &lt;PetGuide /&gt;                   ← Renders THE pet (chỉ 1 instance)
+&lt;/pre&gt;
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Core Components</h3>
+  <div class="mockup">
+    <div class="mockup-header">3 New/Modified Components</div>
+    <div class="mockup-body" style="font-size: 14px; line-height: 1.8;">
+      <p><strong>1. PetSlot</strong> — Invisible anchor point</p>
+      <ul style="margin: 4px 0 12px 20px;">
+        <li>Đặt trong mỗi section tại vị trí mong muốn</li>
+        <li>Register vị trí của mình vào Context khi mount</li>
+        <li>Dùng <code>useInView</code> (Framer Motion) để báo khi section visible</li>
+        <li>Render: chỉ một <code>&lt;div ref /&gt;</code> ẩn — zero visual footprint</li>
+      </ul>
+
+      <p><strong>2. PetGuide</strong> — The actual pet (replaces FloatingCompanion)</p>
+      <ul style="margin: 4px 0 12px 20px;">
+        <li>Chỉ <strong>1 instance</strong> render trên toàn page</li>
+        <li>Đọc active section từ Context → lấy tọa độ PetSlot tương ứng</li>
+        <li>Dùng <code>motion.div</code> với <code>animate</code> để bounce đến vị trí mới</li>
+        <li>Render: pet sprite + speech bubble + click interaction</li>
+        <li>Khi chuyển section: <code>position: fixed</code> tạm → bounce → về <code>absolute</code></li>
+      </ul>
+
+      <p><strong>3. CompanionProvider</strong> (enhanced) — State management</p>
+      <ul style="margin: 4px 0 12px 20px;">
+        <li>Giữ: <code>characterName</code>, <code>activeSection</code>, <code>slotPositions</code></li>
+        <li>Thêm: <code>registerSlot()</code>, <code>setActiveSection()</code></li>
+        <li>Thêm: <code>isTransitioning</code> flag cho animation state</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Data Flow</h3>
+  <div class="mockup">
+    <div class="mockup-header">Scroll → Pet Movement Flow</div>
+    <div class="mockup-body" style="font-size: 14px; line-height: 1.8;">
+      <p><strong>1.</strong> User scrolls → PetSlot's <code>useInView</code> fires</p>
+      <p><strong>2.</strong> PetSlot calls <code>setActiveSection("features")</code></p>
+      <p><strong>3.</strong> PetGuide reads new activeSection from Context</p>
+      <p><strong>4.</strong> PetGuide gets target position from <code>slotPositions["features"]</code></p>
+      <p><strong>5.</strong> PetGuide animates: current pos → arc up → bounce down to target</p>
+      <p><strong>6.</strong> Speech bubble fades in after pet lands (300ms delay)</p>
+      <p><strong>7.</strong> Pet switches to section-specific idle pose</p>
+    </div>
+  </div>
+</div>

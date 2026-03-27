@@ -1,45 +1,78 @@
 'use client'
 
-import { useState, useEffect, useRef, useCallback } from 'react'
-import { motion, AnimatePresence, useReducedMotion, Transition, TargetAndTransition } from 'framer-motion'
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
+import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent, useReducedMotion } from 'framer-motion'
 import { useCompanion, SectionKey } from '@/lib/CompanionContext'
 import { useLocale } from '@/lib/LocaleProvider'
 import CharacterSvg from './CharacterSvg'
 
-interface WaypointConfig {
-  pose: string
+// Waypoints define where the pet sits at each scroll percentage
+// side: 'left' | 'right' — which margin the pet floats in
+// verticalPct: viewport Y position as % (0 = top, 100 = bottom)
+interface Waypoint {
+  scrollPct: number
+  side: 'left' | 'right'
+  verticalPct: number
+  section: SectionKey
 }
 
-const WAYPOINTS: Record<SectionKey, WaypointConfig> = {
-  hero: { pose: 'wave' },
-  howItWorks: { pose: 'point' },
-  features: { pose: 'excited' },
-  skillTree: { pose: 'thinking' },
-  testimonials: { pose: 'happy' },
-  finalCTA: { pose: 'wave' },
+const WAYPOINTS: Waypoint[] = [
+  { scrollPct: 0,    side: 'right', verticalPct: 60, section: 'hero' },
+  { scrollPct: 0.18, side: 'left',  verticalPct: 45, section: 'howItWorks' },
+  { scrollPct: 0.38, side: 'right', verticalPct: 50, section: 'features' },
+  { scrollPct: 0.58, side: 'left',  verticalPct: 40, section: 'skillTree' },
+  { scrollPct: 0.78, side: 'right', verticalPct: 50, section: 'testimonials' },
+  { scrollPct: 0.95, side: 'left',  verticalPct: 55, section: 'finalCTA' },
+]
+
+// Character-specific idle animations based on personality from Meet Your Pet section
+// Byte: "The Chaotic Core" — spirit blob, mysterious, analytical → glitchy vibration
+// Nova: "The Genius Mentor" — fire fox, smart, teaching → confident gentle sway
+// Sage: "The Wise Guide" — ancient owl, patient, deep → slow meditative bob
+// Glitch: "The Hacker Rebel" — rogue cat, chaotic, rule-breaker → erratic jitter
+// Crash: "The Brute Force Hero" — fearless bear, hyper, ships fast → aggressive bounce
+// Zero: "The Silent Optimiser" — code wraith, minimal, silent → barely perceptible drift
+// Luna: "The Creative Builder" — indie dreamer, bubbly, fun → playful wiggle
+// Null: "The Wild Card" — slime, undefined, eerie → glitchy flicker
+const CHARACTER_ANIMATIONS: Record<string, { animate: Record<string, number[]>; transition: Record<string, unknown> }> = {
+  Byte: {
+    animate: { rotate: [0, -2, 2, -1, 3, -2, 0], scale: [1, 1.02, 0.98, 1.01, 1] },
+    transition: { duration: 2, repeat: Infinity, ease: 'easeInOut' },
+  },
+  Nova: {
+    animate: { rotate: [0, -5, 5, 0], y: [0, -3, 0] },
+    transition: { duration: 3, repeat: Infinity, ease: 'easeInOut' },
+  },
+  Sage: {
+    animate: { y: [0, -4, 0], rotate: [0, 1, 0, -1, 0] },
+    transition: { duration: 4, repeat: Infinity, ease: 'easeInOut' },
+  },
+  Glitch: {
+    animate: { x: [0, -3, 4, -2, 3, 0], rotate: [0, -4, 5, -3, 0], scale: [1, 1.03, 0.97, 1.02, 1] },
+    transition: { duration: 1.2, repeat: Infinity, ease: 'linear' },
+  },
+  Crash: {
+    animate: { y: [0, -8, 0, -5, 0], scale: [1, 1.05, 0.95, 1.03, 1] },
+    transition: { duration: 0.8, repeat: Infinity, ease: 'easeInOut' },
+  },
+  Zero: {
+    animate: { opacity: [1, 0.85, 1], y: [0, -1, 0] },
+    transition: { duration: 5, repeat: Infinity, ease: 'easeInOut' },
+  },
+  Luna: {
+    animate: { rotate: [0, -8, 8, -5, 5, 0], y: [0, -4, 0, -2, 0] },
+    transition: { duration: 2, repeat: Infinity, ease: 'easeInOut' },
+  },
+  Null: {
+    animate: { opacity: [1, 0.4, 1, 0.7, 1], x: [0, -2, 3, -1, 0], scale: [1, 0.98, 1.02, 1] },
+    transition: { duration: 1.5, repeat: Infinity, ease: 'linear' },
+  },
 }
 
-const POSE_ANIMATIONS: Record<string, { animate: TargetAndTransition; transition: Transition }> = {
-  wave: {
-    animate: { rotate: [0, -10, 10, -10, 0] },
-    transition: { duration: 1.5, repeat: Infinity, repeatDelay: 2 },
-  },
-  point: {
-    animate: { x: [0, 4, 0] },
-    transition: { duration: 1, repeat: Infinity, repeatDelay: 1.5 },
-  },
-  excited: {
-    animate: { y: [0, -6, 0] },
-    transition: { duration: 0.6, repeat: Infinity, repeatDelay: 0.8 },
-  },
-  thinking: {
-    animate: { rotate: [0, 5, 0, -5, 0] },
-    transition: { duration: 3, repeat: Infinity },
-  },
-  happy: {
-    animate: { rotate: [0, 3, -3, 0] },
-    transition: { duration: 2, repeat: Infinity },
-  },
+// Fallback for unknown characters
+const DEFAULT_ANIMATION = {
+  animate: { y: [0, -4, 0] },
+  transition: { duration: 2, repeat: Infinity, ease: 'easeInOut' as const },
 }
 
 const FUN_QUOTES_EN = [
@@ -52,47 +85,138 @@ const FUN_QUOTES_VI = [
   'Cậu làm được!', 'Đi thôi!', 'Woohoo!', 'Tiếp tục nào!', 'Đỉnh!',
 ]
 
+// Interpolate between waypoints given a scroll progress value
+function getInterpolatedState(progress: number) {
+  if (progress <= WAYPOINTS[0].scrollPct) return WAYPOINTS[0]
+  if (progress >= WAYPOINTS[WAYPOINTS.length - 1].scrollPct) return WAYPOINTS[WAYPOINTS.length - 1]
+
+  for (let i = 0; i < WAYPOINTS.length - 1; i++) {
+    const a = WAYPOINTS[i]
+    const b = WAYPOINTS[i + 1]
+    if (progress >= a.scrollPct && progress <= b.scrollPct) {
+      const t = (progress - a.scrollPct) / (b.scrollPct - a.scrollPct)
+      // Interpolate vertical position
+      const verticalPct = a.verticalPct + (b.verticalPct - a.verticalPct) * t
+      // Side switches at midpoint between waypoints
+      const side = t < 0.5 ? a.side : b.side
+      // Section switches at midpoint
+      const section = t < 0.5 ? a.section : b.section
+      return { scrollPct: progress, side, verticalPct, section }
+    }
+  }
+  return WAYPOINTS[0]
+}
+
+// Pick a random item from an array
+function pickRandom<T>(arr: T[]): T {
+  return arr[Math.floor(Math.random() * arr.length)]
+}
+
 export default function PetGuide() {
-  const { characterName, activeSection, slotPositions, isMobile } = useCompanion()
+  const { characterName, isMobile, setActiveSection } = useCompanion()
   const { t, locale } = useLocale()
   const prefersReducedMotion = useReducedMotion()
+  const { scrollYProgress } = useScroll()
 
-  const [petPos, setPetPos] = useState<{ top: number; left: number } | null>(null)
+  const [currentState, setCurrentState] = useState(() => getInterpolatedState(0))
   const [showSpeech, setShowSpeech] = useState(false)
+  const [currentQuote, setCurrentQuote] = useState<string | null>(null)
   const [clickQuote, setClickQuote] = useState<string | null>(null)
-  const [isTransitioning, setIsTransitioning] = useState(false)
   const clickCooldown = useRef(false)
   const prevSection = useRef<SectionKey | null>(null)
   const speechTimeout = useRef<NodeJS.Timeout | null>(null)
+  const idleTimeout = useRef<NodeJS.Timeout | null>(null)
+  const quoteIndex = useRef<Record<string, number>>({})
 
   const funQuotes = ((t as Record<string, unknown>).funQuotes as string[] | undefined) ?? (locale === 'vi' ? FUN_QUOTES_VI : FUN_QUOTES_EN)
 
-  // Update position when activeSection changes
-  useEffect(() => {
-    if (!activeSection || !slotPositions[activeSection]) return
+  // Get quotes for current character + section (now arrays)
+  const getQuote = useCallback((section: SectionKey) => {
+    const charQuotes = (t.companionQuotes as Record<string, Record<string, string | string[]>>)?.[characterName || '']
+    if (!charQuotes) return null
+    const sectionQuotes = charQuotes[section]
+    if (!sectionQuotes) return null
+    // Support both old string format and new array format
+    if (typeof sectionQuotes === 'string') return sectionQuotes
+    // Cycle through quotes in order
+    const key = `${characterName}-${section}`
+    const idx = (quoteIndex.current[key] || 0) % sectionQuotes.length
+    quoteIndex.current[key] = idx + 1
+    return sectionQuotes[idx]
+  }, [t, characterName])
 
-    const slot = slotPositions[activeSection]!
-    const newPos = {
-      top: slot.top,
-      left: slot.left,
-    }
+  // Get idle chatter for current character
+  const getIdleChatter = useCallback(() => {
+    const chatter = (t as Record<string, unknown>).idleChatter as Record<string, string[]> | undefined
+    if (!chatter || !characterName) return null
+    const lines = chatter[characterName]
+    if (!lines || lines.length === 0) return null
+    return pickRandom(lines)
+  }, [t, characterName])
 
-    if (prevSection.current !== activeSection) {
-      setIsTransitioning(true)
-      setShowSpeech(false)
+  // Start idle chatter timer
+  const startIdleTimer = useCallback(() => {
+    if (idleTimeout.current) clearTimeout(idleTimeout.current)
+    // 2 second delay before next idle chatter
+    const delay = 2000
+    idleTimeout.current = setTimeout(() => {
+      const chatter = getIdleChatter()
+      if (chatter) {
+        setCurrentQuote(chatter)
+        setShowSpeech(true)
+        // Hide after 3s, then restart idle timer
+        if (speechTimeout.current) clearTimeout(speechTimeout.current)
+        speechTimeout.current = setTimeout(() => {
+          setShowSpeech(false)
+          // After hiding, show a new idle chatter again
+          startIdleTimer()
+        }, 3500)
+      }
+    }, delay)
+  }, [getIdleChatter])
+
+  // Track scroll and update pet state continuously
+  useMotionValueEvent(scrollYProgress, 'change', (v) => {
+    const state = getInterpolatedState(v)
+    setCurrentState(state)
+
+    // Update active section in context
+    if (state.section !== prevSection.current) {
+      prevSection.current = state.section
+      setActiveSection(state.section)
       setClickQuote(null)
-      prevSection.current = activeSection
+
+      // Pick a new quote for this section
+      const quote = getQuote(state.section)
+      setCurrentQuote(quote)
+
+      // Show speech after a short delay
+      setShowSpeech(false)
+      if (speechTimeout.current) clearTimeout(speechTimeout.current)
+      if (idleTimeout.current) clearTimeout(idleTimeout.current)
+      speechTimeout.current = setTimeout(() => {
+        setShowSpeech(true)
+        // Start idle timer after speech shows — it will cycle quotes when user stops scrolling
+        startIdleTimer()
+      }, 600)
     }
+  })
 
-    setPetPos(newPos)
-  }, [activeSection, slotPositions])
-
-  // Show speech bubble after landing
-  const handleTransitionEnd = useCallback(() => {
-    setIsTransitioning(false)
-    if (speechTimeout.current) clearTimeout(speechTimeout.current)
-    speechTimeout.current = setTimeout(() => setShowSpeech(true), 300)
-  }, [])
+  // Show initial speech
+  useEffect(() => {
+    if (characterName) {
+      const quote = getQuote('hero')
+      setCurrentQuote(quote)
+      speechTimeout.current = setTimeout(() => {
+        setShowSpeech(true)
+        startIdleTimer()
+      }, 1000)
+    }
+    return () => {
+      if (speechTimeout.current) clearTimeout(speechTimeout.current)
+      if (idleTimeout.current) clearTimeout(idleTimeout.current)
+    }
+  }, [characterName])
 
   // Click interaction
   const handleClick = useCallback(() => {
@@ -100,31 +224,28 @@ export default function PetGuide() {
     clickCooldown.current = true
     setTimeout(() => { clickCooldown.current = false }, 1000)
 
-    const quote = funQuotes[Math.floor(Math.random() * funQuotes.length)]
+    const quote = pickRandom(funQuotes)
     setClickQuote(quote)
     setShowSpeech(false)
+    if (idleTimeout.current) clearTimeout(idleTimeout.current)
 
     setTimeout(() => {
       setClickQuote(null)
-      if (activeSection) setShowSpeech(true)
+      setShowSpeech(true)
+      startIdleTimer()
     }, 1500)
-  }, [funQuotes, activeSection])
+  }, [funQuotes, startIdleTimer])
 
-  // Cleanup
-  useEffect(() => {
-    return () => {
-      if (speechTimeout.current) clearTimeout(speechTimeout.current)
-    }
-  }, [])
+  if (!characterName) return null
 
-  if (!characterName || !activeSection) return null
-
-  const quotes = (t.companionQuotes as Record<string, Record<string, string>>)?.[characterName]
-  const sectionQuote = activeSection ? quotes?.[activeSection] : null
+  const sectionQuote = currentQuote
   const charData = t.meetYourPet.characters.find(c => c.name === characterName)
   const color = charData?.color || '#34D399'
-  const pose = WAYPOINTS[activeSection]?.pose || 'wave'
-  const poseAnim = POSE_ANIMATIONS[pose] || POSE_ANIMATIONS.wave
+  const charAnim = CHARACTER_ANIMATIONS[characterName] || DEFAULT_ANIMATION
+
+  // Compute position
+  const isLeft = currentState.side === 'left'
+  const topPct = `${currentState.verticalPct}%`
 
   // Mobile: fixed corner mode
   if (isMobile) {
@@ -162,8 +283,8 @@ export default function PetGuide() {
         </AnimatePresence>
         <motion.div
           className="w-10 h-10 cursor-pointer"
-          animate={{ y: [0, -3, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          animate={prefersReducedMotion ? {} : charAnim.animate}
+          transition={prefersReducedMotion ? {} : charAnim.transition}
           whileTap={{ scale: 0.9 }}
           onClick={handleClick}
         >
@@ -173,44 +294,35 @@ export default function PetGuide() {
     )
   }
 
-  // Desktop: inline bounce mode
-  if (!petPos) return null
-
-  const bounceTransition = prefersReducedMotion
-    ? { duration: 0.01 }
-    : { type: 'spring' as const, stiffness: 300, damping: 20, mass: 0.8 }
-
+  // Desktop: scroll-linked companion floating in margins
   return (
     <motion.div
-      className="absolute z-[80] pointer-events-none"
+      className="fixed z-[80] pointer-events-none"
+      animate={{
+        top: topPct,
+        left: isLeft ? 'clamp(8px, 2vw, 32px)' : 'auto',
+        right: isLeft ? 'auto' : 'clamp(8px, 2vw, 32px)',
+        x: isLeft ? 0 : 0,
+      }}
+      transition={
+        prefersReducedMotion
+          ? { duration: 0.01 }
+          : { type: 'spring', stiffness: 120, damping: 25, mass: 0.6 }
+      }
       style={{ width: 64, height: 64 }}
-      animate={{ top: petPos.top, left: petPos.left }}
-      transition={bounceTransition}
-      onAnimationComplete={handleTransitionEnd}
     >
       {/* Pet character */}
       <motion.div
         className="w-16 h-16 cursor-pointer pointer-events-auto"
-        {...(prefersReducedMotion ? {} : poseAnim)}
-        whileHover={{ scale: 1.1 }}
+        animate={prefersReducedMotion ? {} : charAnim.animate}
+        transition={prefersReducedMotion ? {} : charAnim.transition}
+        whileHover={{ scale: 1.15 }}
         whileTap={{ scale: 0.85, rotate: Math.random() > 0.5 ? 15 : -15 }}
         onClick={handleClick}
         aria-hidden="true"
       >
         <CharacterSvg name={characterName} className="w-full h-full drop-shadow-lg" />
       </motion.div>
-
-      {/* Squash & stretch on land */}
-      {isTransitioning && !prefersReducedMotion && (
-        <motion.div
-          className="absolute inset-0"
-          animate={{
-            scaleY: [1, 0.8, 1.1, 1],
-            scaleX: [1, 1.2, 0.9, 1],
-          }}
-          transition={{ duration: 0.2 }}
-        />
-      )}
 
       {/* Speech bubble */}
       <AnimatePresence>
@@ -220,7 +332,9 @@ export default function PetGuide() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.25 }}
-            className="absolute -top-2 left-[calc(100%+8px)] w-max max-w-[220px] px-3 py-2 rounded-xl text-[12px] font-medium shadow-lg pointer-events-none"
+            className={`absolute top-1/2 -translate-y-1/2 w-max max-w-[200px] px-3 py-2 rounded-xl text-[12px] font-medium shadow-lg pointer-events-none ${
+              isLeft ? 'left-[calc(100%+10px)]' : 'right-[calc(100%+10px)]'
+            }`}
             style={{
               backgroundColor: color + '15',
               border: `1.5px solid ${color}30`,
@@ -228,12 +342,16 @@ export default function PetGuide() {
             }}
           >
             {sectionQuote}
+            {/* Arrow pointing toward pet */}
             <div
-              className="absolute top-1/2 -left-1.5 -translate-y-1/2 w-2.5 h-2.5 rotate-45"
+              className={`absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rotate-45 ${
+                isLeft ? '-left-1.5' : '-right-1.5'
+              }`}
               style={{
                 backgroundColor: color + '15',
-                borderLeft: `1.5px solid ${color}30`,
-                borderBottom: `1.5px solid ${color}30`,
+                ...(isLeft
+                  ? { borderLeft: `1.5px solid ${color}30`, borderBottom: `1.5px solid ${color}30` }
+                  : { borderRight: `1.5px solid ${color}30`, borderTop: `1.5px solid ${color}30` }),
               }}
             />
           </motion.div>

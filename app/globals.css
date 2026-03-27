@@ -10,7 +10,29 @@
 
 @layer utilities {
   .bg-meet-gradient {
-    background: linear-gradient(135deg, #FDF2E8 0%, #FAF8F4 40%, #F4F0FF 100%);
+    background: linear-gradient(135deg, #ECFDF5 0%, #FAFFFE 40%, #F0EEFF 100%);
+  }
+}
+
+/* Emil Kowalski: button active feedback */
+button:active, a[href]:active {
+  transform: scale(0.97);
+  transition: transform 160ms ease-out;
+}
+
+/* Emil Kowalski: gate hover behind pointer:fine to avoid false positives on touch */
+@media (hover: none) {
+  .transition-colors:hover {
+    transition: none;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 

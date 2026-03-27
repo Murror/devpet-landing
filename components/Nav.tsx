@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useLocale } from '@/lib/LocaleProvider'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Cat } from 'lucide-react'
@@ -8,13 +8,21 @@ import { Cat } from 'lucide-react'
 export default function Nav() {
   const { t } = useLocale()
   const [menuOpen, setMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   return (
     <motion.nav
       initial={{ opacity: 0, y: -12 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, ease: 'easeOut' }}
-      className="sticky top-0 z-50 border-b border-border bg-[rgba(250,248,244,0.85)] backdrop-blur-md"
+      transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
+      className={`sticky top-0 z-50 border-b bg-[rgba(250,255,254,0.85)] backdrop-blur-md transition-[border-color,box-shadow] duration-200
+        ${scrolled ? 'border-border shadow-card' : 'border-transparent'}`}
     >
       <div className="mx-auto max-w-[1100px] px-6 h-[60px] flex items-center justify-between">
         {/* Logo */}
@@ -34,15 +42,16 @@ export default function Nav() {
 
         {/* Right: CTA + hamburger */}
         <div className="flex items-center gap-3">
-          <a href="#waitlist" className="hidden sm:block bg-mint hover:bg-mint-dark text-white text-sm font-bold px-4 py-2 rounded-pill transition-colors">
+          <a href="#hero" className="hidden sm:block bg-mint hover:bg-mint-dark text-white text-sm font-bold px-4 py-2 rounded-pill transition-[background-color] duration-150 ease-out">
             {t.nav.joinWaitlist}
           </a>
 
           {/* Hamburger (mobile) */}
           <button
-            className="md:hidden text-muted hover:text-text text-xl"
+            className="md:hidden text-muted hover:text-text text-xl transition-transform duration-150"
             onClick={() => setMenuOpen(o => !o)}
             aria-label="Toggle menu"
+            style={{ transform: menuOpen ? 'rotate(90deg)' : 'rotate(0deg)' }}
           >
             {menuOpen ? '✕' : '☰'}
           </button>
@@ -56,7 +65,7 @@ export default function Nav() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: 'easeInOut' }}
+            transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
             className="md:hidden border-t border-border bg-warm-bg px-6 py-4 flex flex-col gap-4 overflow-hidden"
           >
             {([{ label: t.nav.howItWorks, href: '#how-it-works' }, { label: t.nav.features, href: '#features' }, { label: t.meetYourPet.eyebrow, href: '#meet-your-pet' }]).map(link => (
@@ -64,7 +73,7 @@ export default function Nav() {
                 {link.label}
               </a>
             ))}
-            <a href="#waitlist" className="bg-mint text-white text-sm font-bold px-4 py-2 rounded-pill text-center" onClick={() => setMenuOpen(false)}>
+            <a href="#hero" className="bg-mint text-white text-sm font-bold px-4 py-2 rounded-pill text-center" onClick={() => setMenuOpen(false)}>
               {t.nav.joinWaitlist}
             </a>
           </motion.div>
