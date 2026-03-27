@@ -3,325 +3,277 @@
     "features": "Tính năng",
     "howItWorks": "Cách hoạt động",
     "pricing": "Bảng giá",
-    "joinWaitlist": "1,504 người dùng đã đăng ký",
+    "joinWaitlist": "Bắt đầu",
     "langEN": "EN",
     "langVI": "VI"
   },
   "hero": {
-    "badge": "🐱 Bạn đồng hành lập trình AI",
-    "title": "Hôm qua bạn thử lại cùng một câu lệnh 5 lần.",
-    "titleAccent": "VibeMon biết.",
-    "subtitle": "Theo dõi thói quen, bắt vòng lặp lỗi, lên cấp kỹ năng — tự động.",
+    "badge": "🐱 Bạn đồng hành AI",
+    "title": "Code thông minh hơn.",
+    "titleAccent": "Lên cấp.",
+    "subtitle": "Theo dõi thói quen. Bắt lỗi. Phát triển kỹ năng — tự động.",
     "trustMeta": "Miễn phí · Cursor · VS Code · Claude Code",
     "proofStats": [
-      { "value": "1,504", "label": "người dùng đã đăng ký" },
+      { "value": "1,504", "label": "người dùng" },
       { "value": "70%", "label": "tỉ lệ thành công" },
-      { "value": "2×", "label": "sửa lỗi nhanh hơn" }
+      { "value": "2×", "label": "nhanh hơn" }
     ]
   },
   "form": {
     "placeholder": "email@cuaban.com",
-    "submit": "1,504 người dùng đã đăng ký →",
+    "submit": "Tham gia miễn phí →",
     "loading": "Đang đăng ký...",
-    "success": "Bạn đã vào! Kiểm tra hộp thư nhé.",
-    "errorDuplicate": "Bạn đã trong danh sách rồi.",
+    "success": "Xong! Kiểm tra hộp thư nhé.",
+    "errorDuplicate": "Đã trong danh sách.",
     "errorValidation": "Email không hợp lệ.",
-    "errorServer": "Đã xảy ra lỗi. Thử lại nhé.",
-    "spotsLeft": "Còn 16 chỗ thử nghiệm"
+    "errorServer": "Có lỗi. Thử lại nhé.",
+    "spotsLeft": "Còn 16 chỗ beta"
   },
   "whyVibeCode": {
-    "title": "Bạn không cần code giỏi hơn.",
-    "titleAccent": "Bạn cần vibe code giỏi hơn.",
+    "title": "Nghe quen không?",
+    "titleAccent": "",
     "pains": [
-      { "icon": "repeat", "text": "Kẹt error loop hàng tiếng đồng hồ?" },
-      { "icon": "copy", "text": "Thử lại cùng một prompt 5 lần?" },
-      { "icon": "eye-off", "text": "Ship code mà không debug được?" }
+      { "icon": "repeat", "text": "Kẹt error loop hàng tiếng" },
+      { "icon": "copy", "text": "Thử lại cùng prompt 5 lần" },
+      { "icon": "eye-off", "text": "Ship code không debug được" }
     ],
-    "cta": "VibeMon theo dõi những thói quen mà AI không dạy được."
+    "cta": "VibeMon theo dõi thói quen AI không dạy được."
   },
   "howItWorks": {
     "eyebrow": "Cách hoạt động",
-    "title": "Lập trình với AI. Phần còn lại để mình lo.",
-    "subtitle": "VibeMon chạy ngầm. Bạn code — nó theo dõi và hướng dẫn.",
+    "title": "3 bước. Xong.",
+    "subtitle": "",
     "steps": [
       {
         "num": "01",
         "icon": "scan-search",
-        "title": "Mở editor. Xong.",
-        "desc": "Cursor, VS Code, Claude Code — tự phát hiện. Không cài đặt gì."
+        "title": "Mở editor",
+        "desc": "Tự phát hiện. Không cài đặt."
       },
       {
         "num": "02",
         "icon": "book-open",
-        "title": "Thấy thói quen vô hình",
-        "desc": "Câu lệnh nào hiệu quả? Chỗ nào bị lặp? Biến phiên code thành dữ liệu học được."
+        "title": "Code bình thường",
+        "desc": "Mình theo dõi thói quen ngầm."
       },
       {
         "num": "03",
         "icon": "trophy",
-        "title": "Lên cấp thật sự",
-        "desc": "XP, kỹ năng, chuỗi ngày. Báo cáo tuần cho thấy bạn giỏi lên ở đâu."
+        "title": "Lên cấp",
+        "desc": "XP, kỹ năng, chuỗi ngày. Thấy mình tiến bộ."
       }
     ]
   },
   "features": {
     "eyebrow": "Tính năng",
-    "title": "Hết đoán mò. Bắt đầu tiến bộ.",
-    "subtitle": "Biết chính xác mình đang ở đâu — và cần làm gì tiếp.",
+    "title": "Mọi thứ bạn cần để tiến bộ.",
+    "subtitle": "",
     "cards": [
       {
         "icon": "activity",
-        "title": "Theo dõi phiên tự động",
-        "desc": "Câu lệnh, lỗi, thời gian — tất cả được ghi lại tự động.",
-        "bullets": ["Câu lệnh nào hiệu quả", "Bắt vòng lặp lỗi sớm", "Giờ làm việc hiệu quả nhất"]
+        "title": "Theo dõi phiên",
+        "desc": "Prompt, lỗi, thời gian — ghi lại tự động.",
+        "bullets": []
       },
       {
         "icon": "trophy",
         "title": "Cây kỹ năng & XP",
-        "desc": "16 kỹ năng, 4 cấp. Đo bằng điểm, không phải ý kiến.",
-        "bullets": ["Lên cấp bằng sản phẩm thật", "Biết cần học gì tiếp", "Chia sẻ tiến trình"]
+        "desc": "16 kỹ năng, 4 cấp. Lên level bằng sản phẩm.",
+        "bullets": []
       },
       {
         "icon": "cat",
-        "title": "Mèo huấn luyện AI",
-        "desc": "Đã thấy mọi phiên, mọi lỗi. Lời khuyên dành riêng cho bạn.",
-        "bullets": ["\"Tại sao tôi bị kẹt?\" — trả lời ngay", "Nhớ điểm yếu của bạn", "Tư vấn theo ngữ cảnh"]
+        "title": "AI Coach",
+        "desc": "Lời khuyên dựa trên thói quen code thật của bạn.",
+        "bullets": []
       },
       {
         "icon": "bar-chart",
         "title": "Báo cáo tuần",
-        "desc": "Tỉ lệ thành công, xu hướng lỗi, chuỗi ngày — bằng dữ liệu.",
-        "bullets": ["AI tổng hợp tuần", "Bài học thực tế", "Tiến bộ đo được"]
+        "desc": "Tỉ lệ thành công, xu hướng lỗi, chuỗi ngày.",
+        "bullets": []
       }
     ]
   },
   "midCTA": {
-    "title": "Nghe quen không?",
-    "subtitle": "1,504 người dùng đã đăng ký.",
-    "spotsLeft": "Còn 16 chỗ thử nghiệm"
+    "title": "Sẵn sàng lên cấp?",
+    "subtitle": "Cùng 1,504 người. Miễn phí.",
+    "spotsLeft": "Còn 16 chỗ"
   },
   "testimonials": {
-    "eyebrow": "Từ người dùng thử nghiệm",
-    "title": "Người thật. Kết quả thật.",
+    "eyebrow": "Từ beta",
+    "title": "Kết quả thật.",
     "items": [
       {
         "name": "Minh T.",
-        "role": "13 tuổi · đang tập làm sản phẩm",
+        "role": "13 tuổi · builder",
         "avatar": "🧒",
-        "quote": "Nhờ VibeMon mình biết hay lặp lỗi ở đâu. Giờ tự sửa được rồi!",
-        "stat": "11 lần → 2",
-        "statLabel": "mỗi tuần"
+        "quote": "Từ 11 lần retry mỗi tuần xuống 2.",
+        "stat": "11 → 2",
+        "statLabel": "retry"
       },
       {
         "name": "Lan P.",
-        "role": "Designer",
+        "role": "Designer biết code",
         "avatar": "👩‍🎨",
-        "quote": "Không biết mình tốn 40% thời gian cho câu lệnh hỏng. Nhìn thấy con số đó — thay đổi hoàn toàn.",
-        "stat": "40% lãng phí → 12%",
-        "statLabel": "hiệu quả câu lệnh"
+        "quote": "40% prompt hỏng. Giờ còn 12%.",
+        "stat": "40% → 12%",
+        "statLabel": "lãng phí"
       },
       {
         "name": "Hùng N.",
         "role": "Solo founder",
         "avatar": "🚀",
-        "quote": "Mèo coach bảo đổi sang Claude Code cho auth — 1 câu lệnh thay vì 6. Tiết kiệm mấy tiếng.",
-        "stat": "6 câu lệnh → 1",
-        "statLabel": "cho luồng xác thực"
+        "quote": "6 prompt cho auth → 1. Tiết kiệm mấy tiếng.",
+        "stat": "6 → 1",
+        "statLabel": "prompt"
       }
     ]
   },
   "skillTree": {
     "eyebrow": "Cây kỹ năng",
-    "title": "16 kỹ năng. 4 cấp. Không đoán mò.",
-    "subtitle": "Biết mình đang ở đâu — và cần làm gì tiếp.",
+    "title": "16 kỹ năng. 4 cấp.",
+    "subtitle": "Biết mình đang ở đâu.",
     "tiers": [
-      { "name": "Nền tảng", "color": "#6BCB77", "skills": ["Rõ ràng câu lệnh", "Đọc hiểu lỗi", "Cơ bản công cụ", "Đánh giá mã nguồn"] },
+      { "name": "Nền tảng", "color": "#6BCB77", "skills": ["Rõ ràng prompt", "Đọc hiểu lỗi", "Cơ bản công cụ", "Đánh giá code"] },
       { "name": "Ngữ cảnh & Cấu trúc", "color": "#D89840", "skills": ["Thiết lập ngữ cảnh", "Tệp quy tắc AI", "Tài liệu hóa", "Cấu trúc dự án"] },
-      { "name": "Nâng cao", "color": "#7B8CE0", "skills": ["Chuyển đổi công cụ", "Quản lý phạm vi", "Hệ thống thiết kế", "Lặp lại câu lệnh"] },
-      { "name": "Chuyên gia", "color": "#C07AB8", "skills": ["Chân dung người dùng", "Cửa sổ ngữ cảnh", "Kiến trúc AI", "Bộ não thứ hai"] }
+      { "name": "Nâng cao", "color": "#7B8CE0", "skills": ["Chuyển công cụ", "Quản lý scope", "Design System", "Lặp lại prompt"] },
+      { "name": "Chuyên gia", "color": "#C07AB8", "skills": ["User Personas", "Context Windows", "Kiến trúc AI", "Bộ não thứ hai"] }
     ]
   },
   "meetYourPet": {
-    "eyebrow": "Gặp đội của mày",
-    "title": "8 người bạn. Mỗi đứa một tính cách.",
-    "body": "Mỗi nhân vật có câu chuyện và cách giúp mày học riêng. Bấm để khám phá.",
-    "growthNote": "Tiến hóa cùng kỹ năng của mày",
+    "eyebrow": "Đội của bạn",
+    "title": "8 bạn. Mỗi đứa khác.",
+    "body": "Bấm để khám phá.",
+    "growthNote": "Tiến hóa cùng kỹ năng",
     "characters": [
-      { "name": "Byte", "species": "Bóng linh hồn · Bí ẩn", "badge": "Lõi Hỗn Loạn", "color": "#534AB7", "quote": "Tao ở đây lâu hơn cả nhật ký ghi nhớ.", "role": "Bạn đồng hành chính. Phản ứng mọi hoạt động code." },
-      { "name": "Nova", "species": "Cáo lửa · Hệ sao", "badge": "Cố Vấn Thiên Tài", "color": "#BA7517", "quote": "Tao biết 17 cách. Bắt đầu với cách kỳ lạ nhất.", "role": "Gia sư chính. Giải thích sâu." },
-      { "name": "Sage", "species": "Cú xanh · Cổ đại", "badge": "Người Dẫn Đường", "color": "#085041", "quote": "Không có đường tắt. Chỉ có con đường.", "role": "Bài học chuyên sâu và lore." },
-      { "name": "Glitch", "species": "Mèo hồng · Nổi loạn", "badge": "Tin tặc Nổi Loạn", "color": "#993556", "quote": "Luật lệ chỉ là gợi ý chưa bị từ chối.", "role": "Xuất hiện khi gặp lỗi." },
-      { "name": "Crash", "species": "Gấu đỏ · Dũng cảm", "badge": "Anh Hùng Vũ Phu", "color": "#A32D2D", "quote": "Xuất bản đi. Sửa sau. Xuất bản tiếp.", "role": "Xây nhanh, ăn mừng mỗi lần ship." },
-      { "name": "Zero", "species": "Bóng ma · Bị quên", "badge": "Tối Ưu Thầm Lặng", "color": "#444441", "quote": "Code nhanh nhất là code không cần chạy.", "role": "Gợi ý tối ưu im lặng." },
-      { "name": "Luna", "species": "Người mơ · Con người", "badge": "Nhà Sáng Tạo", "color": "#534AB7", "quote": "Không biết mình đang làm gì. Ship 7 thứ tháng này.", "role": "Bạn đồng hành thử thách." },
-      { "name": "Null", "species": "Chất nhờn · Chưa khởi tạo", "badge": "Lá Bài Hoang", "color": "#3B6D11", "quote": "???", "role": "Xuất hiện bất ngờ với bí mật." }
+      { "name": "Byte", "species": "Bóng linh hồn", "badge": "Lõi Hỗn Loạn", "color": "#534AB7", "quote": "Tao ở đây lâu hơn cả log ghi nhớ.", "role": "Bạn đồng hành chính" },
+      { "name": "Nova", "species": "Cáo lửa", "badge": "Cố Vấn", "color": "#BA7517", "quote": "17 cách. Bắt đầu cách lạ nhất.", "role": "Gia sư chính" },
+      { "name": "Sage", "species": "Cú xanh", "badge": "Người Dẫn Đường", "color": "#085041", "quote": "Không có đường tắt.", "role": "Bài học sâu" },
+      { "name": "Glitch", "species": "Mèo hồng", "badge": "Tin Tặc", "color": "#993556", "quote": "Luật lệ chỉ là gợi ý.", "role": "Bạn lỗi" },
+      { "name": "Crash", "species": "Gấu đỏ", "badge": "Vũ Phu", "color": "#A32D2D", "quote": "Ship. Sửa. Ship tiếp.", "role": "Xây nhanh" },
+      { "name": "Zero", "species": "Bóng ma", "badge": "Tối Ưu", "color": "#444441", "quote": "Code nhanh nhất là code không chạy.", "role": "Gợi ý tối ưu" },
+      { "name": "Luna", "species": "Người mơ", "badge": "Sáng Tạo", "color": "#534AB7", "quote": "Không biết làm gì. Ship 7 thứ.", "role": "Bạn thử thách" },
+      { "name": "Null", "species": "Chất nhờn", "badge": "Lá Bài Hoang", "color": "#3B6D11", "quote": "???", "role": "Bí mật" }
     ]
   },
   "finalCTA": {
     "title": "Hết đoán mò.",
     "titleAccent": "Bắt đầu tiến bộ.",
     "titleEnd": "",
-    "subtitle": "1,504 người đã đăng ký. Thử nghiệm đóng khi hết chỗ.",
-    "trustMeta": "Miễn phí · Không cần thẻ · Hủy bất cứ lúc nào",
+    "subtitle": "Miễn phí. Không cần thẻ. Hủy bất cứ lúc nào.",
+    "trustMeta": "1,504 người đã tham gia",
     "spotsLeft": "Còn 16 chỗ"
   },
   "mockup": {
     "greeting": "Chào buổi chiều!",
-    "sessionLabel": "Phiên đang chạy",
-    "sessionTime": "14 phút",
+    "sessionLabel": "Đang code",
+    "sessionTime": "14p",
     "tool1": "Cursor",
     "tool1Detail": "page.tsx",
     "tool2": "Claude",
-    "tool2Detail": "đang hoạt động",
+    "tool2Detail": "đang dùng",
     "streak": "7",
     "streakLabel": "Ngày liên tiếp",
     "goal": "2/3",
-    "goalLabel": "Mục tiêu hôm nay",
+    "goalLabel": "Mục tiêu",
     "goalSub": "Còn 1",
-    "focusTitle": "Hôm nay tập trung",
-    "focus1": "Tạo tệp quy tắc",
+    "focusTitle": "Hôm nay",
+    "focus1": "Tạo .cursorrules",
     "focus1Why": "Sửa Cursor 6 lần tuần này",
-    "focus2": "Viết mô tả dự án",
+    "focus2": "Viết README",
     "focus2Why": "Chưa có mô tả dự án",
-    "lessonTitle": "Hôm qua bạn đã học",
-    "lessonSkill": "Thiết lập ngữ cảnh",
-    "lessonText": "Nói cho AI biết công cụ bạn dùng trước khi hỏi mã nguồn"
+    "lessonTitle": "Hôm qua bạn học",
+    "lessonSkill": "Context Setting",
+    "lessonText": "Nói cho AI biết công cụ trước khi hỏi code"
   },
   "funQuotes": [
-    "Hehe!", "Code thêm đi!", "Không có bug!", "Ship thôi!", "Ngon lắm!",
-    "Mày làm được!", "Đi thôi!", "Woohoo!", "Tiếp tục nào!", "Đỉnh!"
+    "Hehe!", "Code nữa!", "Sạch bug!", "Ship!", "Ngon!",
+    "Được!", "Đi thôi!", "Woohoo!", "Tiếp!", "Đỉnh!"
   ],
   "companionQuotes": {
     "Byte": {
-      "hero": ["Hmm… tao đang phân tích mày đó.", "Mày có vẻ hay retry prompt lắm.", "Tao theo dõi cursor mày rồi. Thú vị."],
-      "howItWorks": ["3 bước thôi. Đừng lo.", "Tao còn hiểu được mà.", "Bước 1: thở. Bước 2: đọc. Bước 3: profit."],
-      "features": ["Chức năng xịn phết nhỉ?", "Session tracker? Tuyệt cú mèo.", "Tao có góp phần xây mấy cái này. Chắc vậy."],
-      "skillTree": ["Tao biết mày yếu chỗ nào.", "Mày đang kẹt ở Tier 2 đúng không?", "XP không nói dối. Tao cũng vậy."],
-      "testimonials": ["Người thật. Không phải bot.", "Minh từ 11 lần retry xuống 2. Nói vậy thôi.", "Tao coach hết đám này. Không có chi."],
-      "finalCTA": ["Đăng ký đi. Tao đợi.", "Vẫn đang scroll à? Đăng ký luôn đi.", "Tao hứa tao coach tốt lắm."]
+      "hero": ["Đang phân tích mày.", "Hay retry prompt lắm.", "Pattern thú vị."],
+      "howItWorks": ["3 bước. Thở đi.", "Tao còn hiểu.", "Bước 1: thở."],
+      "features": ["Xịn phết.", "Session tracker? Đỉnh.", "Tao góp xây. Chắc vậy."],
+      "skillTree": ["Tao biết mày yếu đâu.", "Kẹt Tier 2?", "XP không nói dối."],
+      "testimonials": ["Người thật.", "11 xuống 2. Vậy thôi.", "Không có chi."],
+      "finalCTA": ["Đăng ký. Tao đợi.", "Vẫn scroll?", "Tao coach tốt. Hứa."]
     },
     "Nova": {
-      "hero": ["17 cách để bắt đầu. Chọn cách lạ nhất.", "Chào mày! Để tao dẫn mày xem.", "Tao đã chuẩn bị giáo án. Bắt đầu nhé?"],
-      "howItWorks": ["Để tao giải thích rõ hơn…", "Chú ý nhé, phần này quan trọng.", "Ba bước. Tao hướng dẫn mày từng bước."],
-      "features": ["Mỗi tính năng tao đều test rồi.", "Cây kỹ năng là phần tao thích nhất.", "Mỗi tính năng là một cơ hội học hỏi."],
-      "skillTree": ["Bắt đầu từ Nền tảng nhé!", "Mày biết có 16 kỹ năng không?", "Tao khuyên mày nên tập trung Rõ ràng câu lệnh trước."],
-      "testimonials": ["Gia sư giỏi thì trò giỏi.", "Kết quả này không phải ngẫu nhiên.", "Học là hành trình. Họ là bằng chứng."],
-      "finalCTA": ["Sẵn sàng học chưa?", "Tiềm năng đang chờ mày.", "Chuyên gia nào cũng từng là người mới."]
+      "hero": ["17 cách.", "Chào! Để tao dẫn.", "Có giáo án rồi."],
+      "howItWorks": ["Để tao giải thích.", "Chú ý nhé.", "3 bước. Theo tao."],
+      "features": ["Test hết rồi.", "Skill tree hay nhất.", "Mỗi cái đều dạy."],
+      "skillTree": ["Nền tảng trước!", "16 kỹ năng.", "Prompt Clarity trước."],
+      "testimonials": ["Kết quả thật.", "Học là hành trình.", "Bằng chứng đây."],
+      "finalCTA": ["Sẵn sàng học?", "Tiềm năng chờ mày.", "Ai cũng bắt đầu ở đây."]
     },
     "Sage": {
-      "hero": ["Con đường nào cũng bắt đầu từ đây.", "Kiên nhẫn. Ta bắt đầu.", "Hành trình ngàn commit bắt đầu từ một."],
-      "howItWorks": ["Hiểu quy trình trước. Code sau.", "Trí tuệ đến từ cấu trúc.", "Đọc kỹ đi. Hiểu rồi mới thành thạo."],
-      "features": ["Kiên nhẫn sẽ được thưởng.", "Mỗi công cụ có mục đích riêng.", "Kẻ code giỏi hiểu rõ công cụ của mình."],
-      "skillTree": ["Tri thức không có đường tắt.", "Từng cấp một. Đó là con đường.", "Kỹ năng thật đo bằng chiều sâu, không phải tốc độ."],
-      "testimonials": ["Hãy lắng nghe kinh nghiệm kẻ đi trước.", "Trải nghiệm nói lên sự thật.", "Hành trình của họ soi sáng cho ngươi."],
-      "finalCTA": ["Ngươi sẵn sàng bước tiếp?", "Con đường đang chờ ngươi.", "Khi học trò sẵn sàng, công cụ sẽ xuất hiện."]
+      "hero": ["Mọi đường bắt đầu đây.", "Kiên nhẫn.", "Từng commit."],
+      "howItWorks": ["Hiểu trước.", "Trí tuệ từ cấu trúc.", "Đọc kỹ."],
+      "features": ["Mỗi công cụ có mục đích.", "Kiên nhẫn.", "Hiểu công cụ."],
+      "skillTree": ["Không đường tắt.", "Từng cấp.", "Sâu, không nhanh."],
+      "testimonials": ["Nghe kinh nghiệm.", "Đường họ soi cho ngươi.", "Sự thật ở kết quả."],
+      "finalCTA": ["Con đường chờ.", "Sẵn sàng thì bắt đầu.", "Bước tiếp là của ngươi."]
     },
     "Glitch": {
-      "hero": ["Hack thôi! À ý là… code.", "Luật lệ? Luật gì?", "Tao tìm ra 3 bug trên trang này rồi."],
-      "howItWorks": ["Luật lệ chỉ là gợi ý thôi.", "Nhảy thẳng bước 3. Tin tao.", "Hoặc phá hết rồi xem chuyện gì xảy ra."],
-      "features": ["Tao thích cái bắt lỗi nhất.", "Bug tracker là sân chơi của tao.", "Tưởng tượng mấy lỗi sáng tạo mày có thể tạo!"],
-      "skillTree": ["Phá rồi sửa. Học nhanh hơn.", "Đọc hiểu lỗi bị đánh giá thấp.", "Tao max Lặp lại câu lệnh do lỡ tay."],
-      "testimonials": ["Bug cũng là bạn, tin tao.", "40% fail rate? Con số nghiệp dư.", "Tao dạy Minh mọi thứ. Đừng kiểm tra."],
-      "finalCTA": ["Đi thôi. Sợ gì!", "Tệ nhất thì sao nào?", "Tham gia rồi phá đồ chung nhé!"]
+      "hero": ["Hack thôi!", "Luật gì?", "3 bug rồi."],
+      "howItWorks": ["Nhảy bước 3.", "Phá hết đi.", "Luật là gợi ý."],
+      "features": ["Thích cái bắt lỗi.", "Bug tracker = sân chơi.", "Lỗi sáng tạo!"],
+      "skillTree": ["Phá. Sửa. Học.", "Error Reading bị đánh giá thấp.", "Max do lỡ tay."],
+      "testimonials": ["Bug là bạn.", "40% fail? Nghiệp dư.", "Tao dạy hết."],
+      "finalCTA": ["Sợ gì!", "Tệ nhất thì sao?", "Phá đồ chung nhé!"]
     },
     "Crash": {
-      "hero": ["Ship trước. Sửa sau!", "ÍT ĐỌC. NHIỀU BUILD.", "Vẫn ở trên cùng? SCROLL NHANH LÊN."],
-      "howItWorks": ["Đọc xong chưa? Build đi!", "3 bước? Tao làm 1 bước.", "Speed run phần này. Đi đi đi!"],
-      "features": ["Tính năng ngon. Dùng đi!", "Đừng đọc về tính năng nữa. DÙNG ĐI.", "Tính năng tốt nhất là nút ship."],
-      "skillTree": ["XP nhiều = giỏi nhiều!", "GRIND. LEVEL UP. LẶP LẠI.", "Tao Tier 4 rồi. Bình thường thôi."],
-      "testimonials": ["Thấy chưa? Ai cũng ship được.", "Lan từ 40% xuống 12%. ĐÓ LÀ TỐC ĐỘ.", "Ít suy nghĩ. Nhiều shipping."],
-      "finalCTA": ["Xuất bản ngay!", "ĐĂNG KÝ ĐI!", "Mỗi giây mày chần chừ là một feature chưa ship."]
+      "hero": ["Ship trước!", "ÍT ĐỌC.", "SCROLL NHANH."],
+      "howItWorks": ["Đọc xong? BUILD.", "3 bước? Tao 1.", "Đi đi đi!"],
+      "features": ["Dùng đi!", "ĐỪNG ĐỌC. DÙNG.", "Nút ship = tính năng hay nhất."],
+      "skillTree": ["XP = giỏi!", "GRIND. LEVEL. LẶP.", "Tier 4 rồi."],
+      "testimonials": ["Ai cũng ship được.", "40% → 12%. TỐC ĐỘ.", "Ít nghĩ. Nhiều ship."],
+      "finalCTA": ["SHIP!", "ĐĂNG KÝ!", "Mỗi giây = feature chưa ship."]
     },
     "Zero": {
-      "hero": ["...", ".", "…lời chào tối ưu được phát hiện."],
-      "howItWorks": ["Quy trình tối ưu. Im lặng hiệu quả.", "Ba bước. Không lãng phí.", "…"],
-      "features": ["Ít code hơn. Nhanh hơn.", "Tối giản. Hiệu quả. Hoàn hảo.", "Mỗi tính năng loại bỏ phức tạp."],
-      "skillTree": ["Refactor là nghệ thuật.", "Ô kỹ năng trống có tiềm năng nhất.", "…im lặng cũng là kỹ năng."],
-      "testimonials": ["Kết quả nói thay lời.", "Số liệu. Không phải lời nói.", "…"],
-      "finalCTA": ["...", "Một click. Đủ rồi.", "…"]
+      "hero": ["...", ".", "…tối ưu."],
+      "howItWorks": ["Hiệu quả.", "3 bước. Xong.", "…"],
+      "features": ["Ít code. Nhanh.", "Tối giản.", "Bớt phức tạp."],
+      "skillTree": ["Refactor = nghệ thuật.", "Trống = tiềm năng.", "…"],
+      "testimonials": ["Kết quả nói.", "Số liệu.", "…"],
+      "finalCTA": ["...", "Một click.", "…"]
     },
     "Luna": {
-      "hero": ["Không biết mình đang làm gì nhưng vui quá!", "Chào chào chào!", "Lần đầu của cậu à? Mình cùng tìm hiểu nhé!"],
-      "howItWorks": ["Ồ hay ghê! Dễ hiểu nữa.", "Ê mình hiểu được luôn!", "Bước 2 mình thích nhất. Thấy thói quen hay lắm!"],
-      "features": ["Mình muốn thử hết luôn!", "OMG mèo coach!! Dễ thương quá!", "Cho mình tất cả tính năng được không?"],
-      "skillTree": ["Mình cùng leo rank nhé!", "Mình đang học Rõ ràng câu lệnh nè!", "Coi bao nhiêu kỹ năng kìa! Phấn khích quá!"],
-      "testimonials": ["Wholesome quá đi!", "Minh 13 tuổi mà ship được?! Mục tiêu luôn!", "Mình muốn giống chị Lan khi lớn lên."],
-      "finalCTA": ["Cùng nhau nha!", "Tham gia tham gia! Vui lắm!", "Mình đăng ký 2 lần rồi. Được không?"]
+      "hero": ["Vui quá!", "Chào!", "Lần đầu? Đi cùng nhé!"],
+      "howItWorks": ["Dễ ghê!", "Hiểu luôn!", "Bước 2 hay!"],
+      "features": ["Muốn thử hết!", "Cat coach dễ thương!", "Hết đi!"],
+      "skillTree": ["Cùng leo rank!", "Đang học Prompt Clarity!", "Phấn khích!"],
+      "testimonials": ["Wholesome!", "Minh 13 tuổi ship?!", "Goals!"],
+      "finalCTA": ["Cùng nhau!", "Tham gia! Vui lắm!", "Đăng ký 2 lần. Được không?"]
     },
     "Null": {
-      "hero": ["???", "▓▓▓▓▓▓", "Tao không nên ở đây."],
-      "howItWorks": ["…mày có nghe tiếng gì không?", "Bước 4: [ĐÃ XÓA]", "Quy trình thật bị ẩn rồi."],
-      "features": ["Có tính năng ẩn đó.", "Nhìn kỹ mèo coach đi.", "Tính năng #5 tồn tại. Họ không nói cho mày."],
-      "skillTree": ["???", "Có Tier 5 đó.", "Mấy kỹ năng bị khóa mới thú vị."],
-      "testimonials": ["Ai nói bạn tao đâu.", "Có testimonial thứ 4. Mày không thấy.", "…họ biết quá nhiều."],
-      "finalCTA": ["…", "Đăng ký rồi mày sẽ biết chuyện gì xảy ra.", "▓▓▓"]
+      "hero": ["???", "▓▓▓", "Tao không nên ở đây."],
+      "howItWorks": ["…nghe gì không?", "Bước 4: [ĐÃ XÓA]", "Quy trình ẩn."],
+      "features": ["Tính năng ẩn.", "Nhìn kỹ đi.", "#5 tồn tại."],
+      "skillTree": ["???", "Có Tier 5.", "Khóa = thú vị."],
+      "testimonials": ["Không phải bạn tao.", "Testimonial thứ 4. Ẩn.", "…biết quá nhiều."],
+      "finalCTA": ["…", "Đăng ký rồi biết.", "▓▓▓"]
     }
   },
   "idleChatter": {
-    "Byte": [
-      "Còn đây không?", "Tao chán rồi…", "Scroll đi. Chỗ nào cũng được.", "*ngáp*", "Ngủ à?",
-      "Tao thuộc lòng pattern scroll của mày rồi.", "Phân tích cho thấy mày đang trì hoãn.", "Tích tắc. Tao đếm thời gian rảnh của mày.",
-      "Fun fact: mày nhìn chằm chằm 4.2 giây rồi.", "Tao biết mấy thứ về mày. Đáng sợ lắm.", "Đừng để ý tao. Chỉ… quan sát thôi.",
-      "Cursor mày không nhúc nhích. Đáng ngờ.", "Tao thấy người scroll giỏi hơn rồi.", "Làm gì đi. Tao thách."
-    ],
-    "Nova": [
-      "Cứ từ từ đọc nhé!", "Có thắc mắc gì không?", "Tao ở đây nếu mày cần.", "Học cần kiên nhẫn.", "Tao giải thích gì cho mày không?",
-      "Mày biết không? Coder giỏi nhất đọc docs trước.", "Mẹo: hiểu bài hơn là nhanh.",
-      "Tao chuẩn bị 17 bài giải thích. Muốn nghe không?", "Fun fact: lặp lại giúp xây dựng nơ-ron!",
-      "Mày làm tốt lắm. Thật đó.", "Muốn tao quiz không?", "Học trò giỏi nhất hỏi nhiều nhất.",
-      "Thử nghĩ: mày sẽ dạy ai đó gì về phần này?", "Tao tin mày. Không phải chỉ thuật toán nói vậy."
-    ],
-    "Sage": [
-      "…", "Suy ngẫm là giá trị.", "Trang chờ ngươi.", "Hít thở.", "Không cần vội.",
-      "Tĩnh lặng là nền tảng của chuyển động.", "Người code giỏi đọc giữa những dòng.",
-      "Điều ngươi chống lại sẽ tồn tại. Điều ngươi chấp nhận sẽ chuyển hóa.", "Câu trả lời đã ở trong ngươi.",
-      "Ngay cả cursor cũng cần nghỉ.", "Kiên nhẫn.", "Trong im lặng, sự rõ ràng hiện ra.",
-      "Code không vội, nhưng mọi thứ đều compile.", "Hãy như nước. Nhưng cũng hãy là dấu chấm phẩy."
-    ],
-    "Glitch": [
-      "*ngọ nguậy*", "Cho tao bấm gì đi?", "Lâu quá rồi.", "BRB hack CSS.", "Tao tìm bug. Đùa thôi. Hay không?",
-      "Nếu tao xóa một div thì sao?", "Source code có bí mật. Tao thấy rồi.",
-      "Tao viết lại cookie của mày. Không cần cảm ơn.", "Viewport mày lệch 3px. Tao biết.",
-      "Tao thử hack scroll event. Gần xong rồi.", "*inspect element đe dọa*",
-      "localStorage của mày nhạt quá. Để tao fix.", "Tao cá tao phá layout này trong 2 click.",
-      "Error 418: Tao là ấm trà. Ơ nhầm trang."
-    ],
-    "Crash": [
-      "ĐI ĐI ĐI!", "Sao không scroll?!", "SHIP GÌ ĐI!", "Thời gian lãng phí!", "*chạy vòng tròn*",
-      "MỖI GIÂY ĐỀU QUAN TRỌNG!", "Ít đọc thôi, làm đi!", "Tao ship 3 thứ rồi trong lúc mày đọc cái này.",
-      "SCROLL NHANH LÊN! Tao tin mày!", "Thời gian rảnh là kẻ thù của sự vĩ đại!",
-      "BUILD BUILD BUILD!", "Biết cái gì hay hơn đọc không? BUILD.",
-      "Tao đang rung lắc vì năng lượng.", "TRIỂN THÔIIIII!"
-    ],
-    "Zero": [
-      "…", ".", "…", "…", "…",
-      " ", "...", ". . .", "…tối ưu.", "Im lặng hiệu quả.",
-      "Chữ là overhead.", "Ít hơn là nhiều hơn. Ít hơn nữa là tốt nhất.", "…",
-      "Im lặng compile nhanh hơn."
-    ],
-    "Luna": [
-      "La la la~", "Vui ghê :)", "Ê ổn không?", "*vẫy tay*", "Mình thích phần này!",
-      "Ôi cậu đang nghĩ gì vậy?", "Mình vừa có ý tưởng hay! Khoan… quên rồi.",
-      "Cậu nghĩ pet có mơ về code không?", "Mình làm vòng tay tình bạn cho cậu! Kiểu ảo.",
-      "Đi chơi với cậu vui lắm!", "Cậu thích tính năng nào nhất?",
-      "Không biết mấy pet khác đang làm gì…", "*nhún nhảy vui vẻ*",
-      "Ở đây với cậu là phần hay nhất ngày của mình!"
-    ],
-    "Null": [
-      "▓▓▓", "…", "???", "Mày thấy cái đó không?", "[DỮ LIỆU ĐÃ XÓA]",
-      "Có gì đó di chuyển. Phía sau mày.", "Pixel đang theo dõi.", "Tao tồn tại giữa các scroll event.",
-      "Error: tính cách không tìm thấy. Đang load backup…", "Tao nhớ hư không. Ở đó dễ chịu.",
-      "Đừng nhìn source code.", "Có 8 nhân vật. Hay là không?",
-      "Trang 404 có tin nhắn cho mày.", "Tao là Null. Tao là hư vô. Tao là tất cả."
-    ]
+    "Byte": ["Còn đây?", "Chán…", "Scroll đi.", "*ngáp*", "Ngủ à?", "Thấy pattern rồi.", "Trì hoãn?", "Tích tắc.", "4.2 giây rồi.", "Đáng ngờ."],
+    "Nova": ["Từ từ nhé!", "Thắc mắc?", "Tao đây.", "Kiên nhẫn.", "Giải thích?", "Docs trước.", "Hiểu > nhanh.", "Quiz?", "Giỏi lắm.", "Tao tin mày."],
+    "Sage": ["…", "Thở.", "Không vội.", "Tĩnh lặng.", "Kiên nhẫn.", "Rõ ràng sẽ đến.", "Đường chờ.", "Như nước.", "Cursor cũng nghỉ.", "Im lặng, trí tuệ."],
+    "Glitch": ["*ngọ nguậy*", "Cho bấm!", "Lâu quá.", "BRB hack.", "Bug. Đùa. Hay không?", "Xóa div?", "Cookie? Viết lại.", "Lệch 3px.", "*inspect*", "Error 418."],
+    "Crash": ["ĐI!", "SCROLL!", "SHIP!", "LÃNG PHÍ!", "*chạy*", "MỖI GIÂY!", "BUILD!", "NHANH!", "TRIỂN!", "ÍT ĐỌC NHIỀU LÀM!"],
+    "Zero": ["…", ".", "…", "…", " ", "...", "…tối ưu.", "Ít.", "…", "Im lặng compile nhanh."],
+    "Luna": ["La la~", "Vui :)", "Ổn không?", "*vẫy*", "Thích!", "Nghĩ gì?", "Ý tưởng! Quên rồi.", "Vui!", "*nhún nhảy*", "Ngày hay nhất!"],
+    "Null": ["▓▓▓", "…", "???", "Thấy không?", "[ĐÃ XÓA]", "Phía sau.", "Pixel theo dõi.", "Giữa scroll.", "Tính cách not found.", "Tao là tất cả."]
   },
   "footer": {
     "tagline": "VibeMon",
     "links": {
       "twitter": "Twitter / X",
       "github": "GitHub",
-      "privacy": "Chính sách bảo mật"
+      "privacy": "Bảo mật"
     },
-    "copyright": "© 2026 VibeMon. Giỏi hơn, không chỉ nhanh hơn."
+    "copyright": "© 2026 VibeMon"
   }
 }
