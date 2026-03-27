@@ -33,8 +33,8 @@ export default function WaitlistForm() {
       <motion.div
         initial={{ opacity: 0, y: 8, scale: 0.97 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
-        className="bg-mint-light border border-mint rounded-md px-4 py-3 text-sm text-mint-dark font-medium"
+        transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+        className="bg-primary-tint border-2 border-primary rounded-lg px-4 py-3 text-sm text-primary-dark"
       >
         {msg}
       </motion.div>
@@ -50,19 +50,20 @@ export default function WaitlistForm() {
           onChange={e => { setEmail(e.target.value); setValidationError(false) }}
           placeholder={t.form.placeholder}
           disabled={state === 'loading'}
-          className={`flex-1 bg-card-bg border rounded-md px-4 py-3 text-sm text-text placeholder-muted-light outline-none
-            focus:border-mint focus:shadow-[0_0_0_3px_rgba(52,211,153,0.12)] transition-[border-color,box-shadow] duration-150
-            ${validationError ? 'border-red-400' : 'border-border'}`}
+          className={`flex-1 bg-bg border-2 rounded-lg px-4 py-3 text-sm text-text placeholder-muted-light outline-none
+            focus:border-info focus:shadow-[0_0_0_3px_rgba(56,189,248,0.15)] transition-[border-color,box-shadow] duration-150
+            ${validationError ? 'border-danger' : 'border-border'}`}
         />
-        <button
+        <motion.button
           type="submit"
           disabled={state === 'loading'}
-          className="bg-mint hover:bg-mint-dark disabled:opacity-60 text-white font-bold text-sm px-5 py-3 rounded-md transition-[background-color,transform] duration-150 ease-out whitespace-nowrap active:scale-[0.97]"
+          whileTap={{ y: 5, boxShadow: 'none' }}
+          className="bg-primary disabled:opacity-60 text-white text-[15px] uppercase tracking-[1px] px-6 py-3 rounded-lg shadow-btn transition-all duration-100 whitespace-nowrap"
         >
           {state === 'loading' ? (
             <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
           ) : t.form.submit}
-        </button>
+        </motion.button>
       </div>
       <AnimatePresence>
         {validationError && (
@@ -71,7 +72,7 @@ export default function WaitlistForm() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
             transition={{ duration: 0.15 }}
-            className="mt-1.5 text-xs text-red-500"
+            className="mt-1.5 text-xs text-danger"
           >
             {t.form.errorValidation}
           </motion.p>
@@ -84,15 +85,15 @@ export default function WaitlistForm() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
             transition={{ duration: 0.15 }}
-            className="mt-1.5 text-xs text-red-500"
+            className="mt-1.5 text-xs text-danger"
           >
             {t.form.errorServer}
           </motion.p>
         )}
       </AnimatePresence>
       {t.form.spotsLeft && (
-        <p className="mt-2 text-[11px] text-mint-dark font-semibold flex items-center gap-1">
-          <span className="w-1.5 h-1.5 bg-mint rounded-full animate-pulse" />
+        <p className="mt-2 text-[11px] text-primary-dark flex items-center gap-1">
+          <span className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
           {t.form.spotsLeft}
         </p>
       )}
