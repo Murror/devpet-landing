@@ -3,8 +3,7 @@
 import { useLocale } from '@/lib/LocaleProvider'
 import { motion } from 'framer-motion'
 import ScrollReveal from './ScrollReveal'
-import CharacterSvg from './CharacterSvg'
-import { getCharacterAnimation } from '@/lib/characterAnimations'
+import CharacterScene from './CharacterScene'
 
 const statColors = ['#34D399', '#38BDF8', '#A78BFA']
 
@@ -45,11 +44,7 @@ export default function Testimonials() {
         </div>
 
         <ScrollReveal>
-          <div className="aspect-square rounded-2xl flex items-center justify-center max-w-[280px] mx-auto" style={{ backgroundColor: '#534AB715' }}>
-            <motion.div animate={getCharacterAnimation('Luna').animate} transition={getCharacterAnimation('Luna').transition} className="w-[70%] h-[70%]">
-              <CharacterSvg name="Luna" className="w-full h-full" />
-            </motion.div>
-          </div>
+          <CharacterScene name="Luna" color="#534AB7" />
         </ScrollReveal>
       </div>
     </section>

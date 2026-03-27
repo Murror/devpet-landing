@@ -2,11 +2,10 @@
 
 import { useLocale } from '@/lib/LocaleProvider'
 import { motion } from 'framer-motion'
-import { getCharacterAnimation } from '@/lib/characterAnimations'
 import SectionHeader from './SectionHeader'
 import ScrollReveal from './ScrollReveal'
 import Icon from './Icon'
-import CharacterSvg from './CharacterSvg'
+import CharacterScene from './CharacterScene'
 
 const stepColors = ['#34D399', '#38BDF8', '#FBBF24']
 const stepShadows = ['#059669', '#0284C7', '#D97706']
@@ -19,11 +18,7 @@ export default function HowItWorks() {
     <section id="how-it-works" className="py-20 md:py-24 bg-surface border-b-2 border-border">
       <div className="mx-auto max-w-[1100px] px-6 grid md:grid-cols-[0.8fr_1.2fr] gap-12 items-center">
         <ScrollReveal>
-          <div className="aspect-square rounded-2xl flex items-center justify-center max-w-[280px] mx-auto" style={{ backgroundColor: '#BA751715' }}>
-            <motion.div animate={getCharacterAnimation('Nova').animate} transition={getCharacterAnimation('Nova').transition} className="w-[70%] h-[70%]">
-              <CharacterSvg name="Nova" className="w-full h-full" />
-            </motion.div>
-          </div>
+          <CharacterScene name="Nova" color="#BA7517" />
         </ScrollReveal>
 
         <div>

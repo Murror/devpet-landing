@@ -3,9 +3,8 @@
 import { useLocale } from '@/lib/LocaleProvider'
 import { motion } from 'framer-motion'
 import ScrollReveal from './ScrollReveal'
-import { getCharacterAnimation } from '@/lib/characterAnimations'
 import Icon from './Icon'
-import CharacterSvg from './CharacterSvg'
+import CharacterScene from './CharacterScene'
 
 export default function WhyVibeCode() {
   const { t } = useLocale()
@@ -55,11 +54,7 @@ export default function WhyVibeCode() {
         </div>
 
         <ScrollReveal>
-          <div className="aspect-square rounded-2xl flex items-center justify-center max-w-[280px] mx-auto" style={{ backgroundColor: '#99355615' }}>
-            <motion.div animate={getCharacterAnimation('Glitch').animate} transition={getCharacterAnimation('Glitch').transition} className="w-[70%] h-[70%]">
-              <CharacterSvg name="Glitch" className="w-full h-full" />
-            </motion.div>
-          </div>
+          <CharacterScene name="Glitch" color="#993556" />
         </ScrollReveal>
       </div>
     </section>

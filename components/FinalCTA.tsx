@@ -1,11 +1,9 @@
 'use client'
 
 import { useLocale } from '@/lib/LocaleProvider'
-import { motion } from 'framer-motion'
 import WaitlistForm from './WaitlistForm'
 import ScrollReveal from './ScrollReveal'
-import CharacterSvg from './CharacterSvg'
-import { getCharacterAnimation } from '@/lib/characterAnimations'
+import CharacterScene from './CharacterScene'
 
 export default function FinalCTA() {
   const { t } = useLocale()
@@ -15,11 +13,7 @@ export default function FinalCTA() {
       <section id="final-cta" className="py-20 md:py-24">
         <div className="mx-auto max-w-[1100px] px-6 grid md:grid-cols-[0.8fr_1.2fr] gap-12 items-center">
           <ScrollReveal>
-            <div className="aspect-square rounded-2xl flex items-center justify-center max-w-[280px] mx-auto" style={{ backgroundColor: '#3B6D1115' }}>
-              <motion.div animate={getCharacterAnimation('Null').animate} transition={getCharacterAnimation('Null').transition} className="w-[70%] h-[70%]">
-                <CharacterSvg name="Null" className="w-full h-full" />
-              </motion.div>
-            </div>
+            <CharacterScene name="Null" color="#3B6D11" />
           </ScrollReveal>
 
           <ScrollReveal>

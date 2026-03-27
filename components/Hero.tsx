@@ -4,8 +4,7 @@ import { useRef, useState, useEffect } from 'react'
 import { useLocale } from '@/lib/LocaleProvider'
 import { motion } from 'framer-motion'
 import WaitlistForm from './WaitlistForm'
-import CharacterSvg from './CharacterSvg'
-import { getCharacterAnimation } from '@/lib/characterAnimations'
+import CharacterScene from './CharacterScene'
 
 function parseStat(value: string) {
   const match = value.match(/^([^\d]*)([\d,]+(?:\.\d+)?)(.*)$/)
@@ -138,18 +137,7 @@ export default function Hero() {
             transition={{ ...duoSpring, delay: 0.2 + i * 0.1 }}
             style={{ transform: `translateY(${char.offsetY}px)` }}
           >
-            <div
-              className="aspect-square rounded-2xl border-2 border-border shadow-card flex items-center justify-center overflow-hidden"
-              style={{ backgroundColor: char.color + '15' }}
-            >
-              <motion.div
-                animate={getCharacterAnimation(char.name).animate}
-                transition={getCharacterAnimation(char.name).transition}
-                className="w-[70%] h-[70%]"
-              >
-                <CharacterSvg name={char.name} className="w-full h-full" />
-              </motion.div>
-            </div>
+            <CharacterScene name={char.name} color={char.color} className="border-2 border-border shadow-card" />
           </motion.div>
         ))}
       </div>

@@ -3,8 +3,7 @@
 import { useLocale } from '@/lib/LocaleProvider'
 import { motion } from 'framer-motion'
 import ScrollReveal from './ScrollReveal'
-import CharacterSvg from './CharacterSvg'
-import { getCharacterAnimation } from '@/lib/characterAnimations'
+import CharacterScene from './CharacterScene'
 
 const xpData = [
   [64, 36, 90, 16],
@@ -21,11 +20,7 @@ export default function SkillTreePreview() {
     <section id="skill-tree" className="py-20 md:py-24 border-b-2 border-border">
       <div className="mx-auto max-w-[1100px] px-6 grid md:grid-cols-[0.8fr_1.2fr] gap-12 items-center">
         <ScrollReveal>
-          <div className="aspect-square rounded-2xl flex items-center justify-center max-w-[280px] mx-auto" style={{ backgroundColor: '#A32D2D15' }}>
-            <motion.div animate={getCharacterAnimation('Crash').animate} transition={getCharacterAnimation('Crash').transition} className="w-[70%] h-[70%]">
-              <CharacterSvg name="Crash" className="w-full h-full" />
-            </motion.div>
-          </div>
+          <CharacterScene name="Crash" color="#A32D2D" />
         </ScrollReveal>
 
         <div>
