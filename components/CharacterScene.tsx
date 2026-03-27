@@ -207,85 +207,8 @@ function StaticNoise({ color }: { color: string }) {
   )
 }
 
-/* ── Character body animations ── */
-const BODY_ANIMATIONS: Record<string, {
-  animate: Record<string, number[]>
-  transition: Record<string, unknown>
-}> = {
-  Byte: {
-    animate: {
-      rotate: [0, -1.5, 2, -2.5, 3, -1, 0],
-      scale: [1, 1.03, 0.97, 1.02, 0.99, 1.01, 1],
-      y: [0, -3, 1, -2, 0],
-    },
-    transition: { duration: 2.5, repeat: Infinity, ease: 'easeInOut' },
-  },
-  Nova: {
-    animate: {
-      rotate: [0, -4, 6, -3, 4, 0],
-      y: [0, -8, -2, -6, 0],
-      scale: [1, 1.02, 1, 1.01, 1],
-    },
-    transition: { duration: 3.5, repeat: Infinity, ease: 'easeInOut' },
-  },
-  Sage: {
-    animate: {
-      y: [0, -3, -1, -4, 0],
-      rotate: [0, 0.8, 0, -0.8, 0],
-    },
-    transition: { duration: 5, repeat: Infinity, ease: 'easeInOut' },
-  },
-  Glitch: {
-    animate: {
-      x: [0, -4, 5, -3, 4, -1, 0],
-      y: [0, 2, -3, 1, -2, 0],
-      rotate: [0, -5, 6, -4, 3, 0],
-      scale: [1, 1.04, 0.96, 1.03, 0.98, 1],
-    },
-    transition: { duration: 1.4, repeat: Infinity, ease: 'linear' },
-  },
-  Crash: {
-    animate: {
-      y: [0, -12, 2, -8, 1, -4, 0],
-      scale: [1, 1.06, 0.94, 1.04, 0.97, 1.02, 1],
-      rotate: [0, -2, 2, -1, 0],
-    },
-    transition: { duration: 1, repeat: Infinity, ease: 'easeInOut' },
-  },
-  Zero: {
-    animate: {
-      opacity: [1, 0.8, 0.95, 0.85, 1],
-      y: [0, -1.5, 0, -0.5, 0],
-      scale: [1, 0.995, 1.005, 0.998, 1],
-    },
-    transition: { duration: 6, repeat: Infinity, ease: 'easeInOut' },
-  },
-  Luna: {
-    animate: {
-      rotate: [0, -6, 8, -4, 6, -2, 0],
-      y: [0, -6, -1, -4, -1, -3, 0],
-      scale: [1, 1.03, 0.99, 1.02, 1],
-    },
-    transition: { duration: 2.2, repeat: Infinity, ease: 'easeInOut' },
-  },
-  Null: {
-    animate: {
-      opacity: [1, 0.3, 1, 0.5, 0.9, 0.4, 1],
-      x: [0, -3, 4, -2, 1, 0],
-      scale: [1, 0.97, 1.03, 0.99, 1.01, 1],
-    },
-    transition: { duration: 1.8, repeat: Infinity, ease: 'linear' },
-  },
-}
-
-const DEFAULT_BODY = {
-  animate: { y: [0, -4, 0] },
-  transition: { duration: 2, repeat: Infinity, ease: 'easeInOut' as const },
-}
-
 /* ── Main component ── */
 export default function CharacterScene({ name, color, className = '' }: CharacterSceneProps) {
-  const bodyAnim = BODY_ANIMATIONS[name] || DEFAULT_BODY
 
   return (
     <div
@@ -364,17 +287,13 @@ export default function CharacterScene({ name, color, className = '' }: Characte
           opacity: [0.15, 0.08, 0.15],
           scaleX: [1, 0.85, 1],
         }}
-        transition={{ duration: bodyAnim.transition.duration as number || 2, repeat: Infinity, ease: 'easeInOut' }}
+        transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
       />
 
-      {/* Character SVG with unique animation */}
-      <motion.div
-        animate={bodyAnim.animate}
-        transition={bodyAnim.transition}
-        className="w-[65%] h-[65%] relative z-10"
-      >
+      {/* Character SVG — CSS animations inside SVG handle head/arms/legs/tail/eyes */}
+      <div className="w-[65%] h-[65%] relative z-10">
         <CharacterSvg name={name} className="w-full h-full drop-shadow-lg" />
-      </motion.div>
+      </div>
     </div>
   )
 }
