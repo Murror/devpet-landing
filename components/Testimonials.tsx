@@ -11,8 +11,8 @@ export default function Testimonials() {
   const { t } = useLocale()
 
   return (
-    <section id="testimonials" className="py-20 md:py-24 bg-surface border-b-2 border-border">
-      <div className="mx-auto max-w-[1100px] px-6 grid md:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
+    <section id="testimonials" data-section-color="#F3F0FD" className="py-20 md:py-24 border-b border-border/50">
+      <div className="mx-auto max-w-[1100px] px-6 grid md:grid-cols-[1.2fr_0.8fr] gap-8 md:gap-12 items-center">
         <div>
           <ScrollReveal>
             <div className="mb-8">
@@ -24,11 +24,11 @@ export default function Testimonials() {
           <div className="flex flex-col gap-4">
             {t.testimonials.items.map((item, i) => (
               <ScrollReveal key={item.name} delay={i * 100}>
-                <motion.div whileTap={{ y: 4, boxShadow: 'none' }} className="bg-bg border-2 border-border rounded-lg shadow-card cursor-pointer transition-all duration-100 overflow-hidden">
+                <motion.div whileTap={{ scale: 0.98 }} className="bg-bg border border-border rounded-lg shadow-card cursor-pointer transition-all duration-100 overflow-hidden">
                   <div className="px-5 pt-4 pb-3">
                     <p className="text-[13px] text-text leading-relaxed italic">{item.quote}</p>
                   </div>
-                  <div className="px-5 pb-4 pt-2 flex items-center gap-3 border-t-2 border-border">
+                  <div className="px-5 pb-4 pt-2 flex items-center gap-3 border-t border-border/50">
                     <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm" style={{ backgroundColor: statColors[i] + '18' }}>
                       {item.avatar}
                     </div>

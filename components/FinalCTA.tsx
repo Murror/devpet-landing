@@ -10,9 +10,9 @@ export default function FinalCTA() {
 
   return (
     <>
-      <section id="final-cta" className="py-20 md:py-24">
-        <div className="mx-auto max-w-[1100px] px-6 grid md:grid-cols-[0.8fr_1.2fr] gap-12 items-center">
-          <ScrollReveal>
+      <section id="final-cta" data-section-color="#F0F7EC" className="py-20 md:py-24">
+        <div className="mx-auto max-w-[1100px] px-6 grid md:grid-cols-[0.8fr_1.2fr] gap-8 md:gap-12 items-center">
+          <ScrollReveal className="hidden md:block">
             <CharacterScene name="Null" color="#3B6D11" />
           </ScrollReveal>
 
@@ -33,16 +33,16 @@ export default function FinalCTA() {
         </div>
       </section>
 
-      <footer className="border-t-2 border-border">
+      <footer className="border-t border-border/50">
         <div className="mx-auto max-w-[1100px] px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2 text-sm text-heading">
             <span className="w-2 h-2 bg-primary rounded-full" />
             {t.footer.tagline}
           </div>
           <div className="flex gap-6">
-            <a href="https://twitter.com/devpetapp" rel="noopener noreferrer" className="text-sm text-muted hover:text-heading transition-colors">{t.footer.links.twitter}</a>
-            <a href="https://github.com/devpet" rel="noopener noreferrer" className="text-sm text-muted hover:text-heading transition-colors">{t.footer.links.github}</a>
-            <a href="/privacy" className="text-sm text-muted hover:text-heading transition-colors">{t.footer.links.privacy}</a>
+            <a href="https://twitter.com/devpetapp" rel="noopener noreferrer" className="text-sm text-muted hover:text-heading transition-colors py-2">{t.footer.links.twitter}</a>
+            <a href="https://github.com/devpet" rel="noopener noreferrer" className="text-sm text-muted hover:text-heading transition-colors py-2">{t.footer.links.github}</a>
+            <a href="/privacy" className="text-sm text-muted hover:text-heading transition-colors py-2">{t.footer.links.privacy}</a>
           </div>
           <p className="text-xs text-muted-light">{t.footer.copyright}</p>
         </div>

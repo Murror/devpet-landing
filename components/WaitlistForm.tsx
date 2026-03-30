@@ -34,7 +34,7 @@ export default function WaitlistForm() {
         initial={{ opacity: 0, y: 8, scale: 0.97 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ type: 'spring', stiffness: 400, damping: 15 }}
-        className="bg-primary-tint border-2 border-primary rounded-lg px-4 py-3 text-sm text-primary-dark"
+        className="bg-primary-tint border border-primary/30 rounded-lg px-4 py-3 text-sm text-primary-dark"
       >
         {msg}
       </motion.div>
@@ -43,21 +43,21 @@ export default function WaitlistForm() {
 
   return (
     <form onSubmit={handleSubmit} noValidate>
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         <input
           type="email"
           value={email}
           onChange={e => { setEmail(e.target.value); setValidationError(false) }}
           placeholder={t.form.placeholder}
           disabled={state === 'loading'}
-          className={`flex-1 bg-bg border-2 rounded-lg px-4 py-3 text-sm text-text placeholder-muted-light outline-none
+          className={`flex-1 bg-bg border rounded-lg px-4 py-3 text-sm text-text placeholder-muted-light outline-none
             focus:border-info focus:shadow-[0_0_0_3px_rgba(56,189,248,0.15)] transition-[border-color,box-shadow] duration-150
             ${validationError ? 'border-danger' : 'border-border'}`}
         />
         <motion.button
           type="submit"
           disabled={state === 'loading'}
-          whileTap={{ y: 5, boxShadow: 'none' }}
+          whileTap={{ scale: 0.97 }}
           className="bg-primary disabled:opacity-60 text-white text-[15px] uppercase tracking-[1px] px-6 py-3 rounded-lg shadow-btn transition-all duration-100 whitespace-nowrap"
         >
           {state === 'loading' ? (
@@ -92,8 +92,8 @@ export default function WaitlistForm() {
         )}
       </AnimatePresence>
       {t.form.spotsLeft && (
-        <p className="mt-2 text-[11px] text-primary-dark flex items-center gap-1">
-          <span className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
+        <p className="mt-2 text-[11px] text-current opacity-70 flex items-center gap-1">
+          <span className="w-1.5 h-1.5 bg-current rounded-full animate-pulse opacity-60" />
           {t.form.spotsLeft}
         </p>
       )}

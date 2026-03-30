@@ -18,8 +18,8 @@ export default function WhyVibeCode() {
   if (!data) return null
 
   return (
-    <section className="py-20 md:py-24 bg-surface border-b-2 border-border">
-      <div className="mx-auto max-w-[1100px] px-6 grid md:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
+    <section data-section-color="#FDF2F5" className="py-20 md:py-24 border-b border-border/50">
+      <div className="mx-auto max-w-[1100px] px-6 grid md:grid-cols-[1.2fr_0.8fr] gap-8 md:gap-12 items-center">
         <div>
           <ScrollReveal>
             <h2 className="text-[28px] md:text-[36px] tracking-[-1.5px] leading-[1.15] text-heading mb-8">
@@ -33,8 +33,8 @@ export default function WhyVibeCode() {
             {data.pains.map((pain, i) => (
               <ScrollReveal key={i} delay={i * 120}>
                 <motion.div
-                  whileTap={{ y: 4, boxShadow: 'none' }}
-                  className="flex items-center gap-3 bg-bg border-2 border-border rounded-lg px-5 py-4 shadow-card cursor-pointer transition-all duration-100"
+                  whileTap={{ scale: 0.98 }}
+                  className="flex items-center gap-3 bg-bg border border-border rounded-lg px-5 py-4 shadow-card cursor-pointer transition-all duration-100"
                 >
                   <div className="relative flex-shrink-0 w-8 h-8">
                     <span className="absolute inset-0 rounded-full bg-danger/15 animate-ping" style={{ animationDuration: '2.5s', animationDelay: `${i * 0.4}s` }} />

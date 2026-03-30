@@ -6,8 +6,8 @@ import './globals.css'
 const varelaRound = Varela_Round({ weight: '400', subsets: ['latin'], variable: '--font-varela' })
 
 export const metadata: Metadata = {
-  title: 'VibeMon — Theo dõi và nâng cao kỹ năng lập trình AI',
-  description: 'Bạn đồng hành AI giúp theo dõi phiên lập trình, phát triển kỹ năng, và biến sai lầm thành bài học.',
+  title: 'CodePet — The AI coding school with your pet',
+  description: 'Learn to vibecode with your companion. 16 skills, 4 tiers, and a pet that grows as you do.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

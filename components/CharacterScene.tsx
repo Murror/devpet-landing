@@ -8,6 +8,7 @@ interface CharacterSceneProps {
   name: string
   color: string
   className?: string
+  withBackground?: boolean
 }
 
 // Deterministic pseudo-random to avoid hydration mismatch
@@ -209,14 +210,14 @@ function StaticNoise({ color }: { color: string }) {
 }
 
 /* ── Main component ── */
-export default function CharacterScene({ name, color, className = '' }: CharacterSceneProps) {
+export default function CharacterScene({ name, color, className = '', withBackground = false }: CharacterSceneProps) {
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
 
   return (
     <div
-      className={`aspect-square rounded-2xl flex items-center justify-center max-w-[300px] mx-auto relative overflow-hidden ${className}`}
-      style={{ backgroundColor: color + '12' }}
+      className={`aspect-square flex items-center justify-center mx-auto relative overflow-hidden ${withBackground ? 'max-w-[300px] rounded-2xl border border-border shadow-card' : 'max-w-[400px]'} ${className}`}
+      style={withBackground ? { backgroundColor: color + '0A' } : undefined}
     >
       {/* Ambient effects — client-only to avoid hydration mismatch */}
       {mounted && (

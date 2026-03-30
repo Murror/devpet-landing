@@ -1,3 +1,4 @@
+import SectionColorProvider from '@/components/SectionColorProvider'
 import Nav from '@/components/Nav'
 import Hero from '@/components/Hero'
 import WhyVibeCode from '@/components/WhyVibeCode'
@@ -11,6 +12,7 @@ import FinalCTA from '@/components/FinalCTA'
 export default function Home() {
   return (
     <main className="relative">
+      <SectionColorProvider />
       <Nav />
       <Hero />
       <WhyVibeCode />

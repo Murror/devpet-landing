@@ -8,10 +8,10 @@
     "langVI": "VI"
   },
   "hero": {
-    "badge": "🐱 AI coding companion",
-    "title": "Code smarter.",
-    "titleAccent": "Level up.",
-    "subtitle": "Track habits. Catch mistakes. Grow your skills — automatically.",
+    "badge": "🐾 The AI coding school with your pet",
+    "title": "Learn to vibecode with your companion.",
+    "titleAccent": "Actually get good at it.",
+    "subtitle": "16 skills. 4 tiers. A companion that grows as you do. Practice in the editor you already use — and finally know what you're doing.",
     "trustMeta": "Free · Cursor · VS Code · Claude Code",
     "proofStats": [
       { "value": "1,504", "label": "builders" },
@@ -33,11 +33,12 @@
     "title": "Sound familiar?",
     "titleAccent": "",
     "pains": [
-      { "icon": "repeat", "text": "Stuck in error loops for hours" },
-      { "icon": "copy", "text": "Retried the same prompt 5 times" },
-      { "icon": "eye-off", "text": "Shipped code you can't debug" }
+      { "icon": "copy", "text": "You copy-paste the error and hope the AI figures it out" },
+      { "icon": "repeat", "text": "Your prompts work sometimes — you have no idea why" },
+      { "icon": "eye-off", "text": "Every new project feels like starting from zero" },
+      { "icon": "alert-triangle", "text": "You've shipped code you couldn't explain if someone asked" }
     ],
-    "cta": "VibeMon tracks what AI tools can't teach."
+    "cta": "You're not bad at coding. You just never learned how to work with AI. CodePet teaches you the skills that make the difference."
   },
   "howItWorks": {
     "eyebrow": "How it works",
@@ -47,50 +48,50 @@
       {
         "num": "01",
         "icon": "scan-search",
-        "title": "Open your editor",
-        "desc": "Auto-detected. Zero setup."
+        "title": "Pick up your companion",
+        "desc": "Choose your pet and they will teach, coach, and grow with you through every skill."
       },
       {
         "num": "02",
         "icon": "book-open",
-        "title": "Code like normal",
-        "desc": "We track habits in the background."
+        "title": "Follow the skill path",
+        "desc": "6 micro-lessons across 4 tiers. From Prompt Clarity to AI Architecture."
       },
       {
         "num": "03",
         "icon": "trophy",
-        "title": "Level up",
-        "desc": "XP, skills, streaks. See your growth."
+        "title": "Complete challenges. Earn XP. Level up",
+        "desc": "Daily challenges, streaks, and a world map unlock as you master each skill."
       }
     ]
   },
   "features": {
     "eyebrow": "Features",
-    "title": "Everything you need to grow.",
+    "title": "Everything you need to actually get good.",
     "subtitle": "",
     "cards": [
       {
-        "icon": "activity",
-        "title": "Session Tracker",
-        "desc": "Every prompt, error, and session — captured automatically.",
-        "bullets": []
-      },
-      {
         "icon": "trophy",
-        "title": "Skill Tree & XP",
-        "desc": "16 skills, 4 tiers. Level up by shipping.",
+        "title": "Know exactly what to learn next",
+        "desc": "16 skills across 4 tiers: Foundations, Context, Advanced, Mastery.",
         "bullets": []
       },
       {
         "icon": "cat",
-        "title": "AI Coach",
-        "desc": "Personal advice based on your real coding patterns.",
+        "title": "Your Companion",
+        "desc": "Built to keep you building. Crash, Nova, Glitch, and more — each pet teaches specific skills.",
+        "bullets": []
+      },
+      {
+        "icon": "code",
+        "title": "Real Practice",
+        "desc": "Every challenge happens in Cursor, VS Code, or Claude Code.",
         "bullets": []
       },
       {
         "icon": "bar-chart",
-        "title": "Weekly Insights",
-        "desc": "Success rate, error trends, streaks — real numbers.",
+        "title": "Honest Insights",
+        "desc": "See your weak spots clearly. Error trends, prompt success rates, streak data. Your companion surfaces what the numbers really mean — and what to practice next.",
         "bullets": []
       }
     ]
@@ -133,7 +134,7 @@
   "skillTree": {
     "eyebrow": "Skill tree",
     "title": "16 skills. 4 tiers.",
-    "subtitle": "Know where you stand.",
+    "subtitle": "Know exactly what to learn next.",
     "tiers": [
       { "name": "Foundations", "color": "#6BCB77", "skills": ["Prompt Clarity", "Error Reading", "Tool Basics", "Code Judgment"] },
       { "name": "Context & Structure", "color": "#D89840", "skills": ["Context Setting", "AI Rules Files", "Documentation", "Project Structure"] },
@@ -268,12 +269,12 @@
     "Null": ["▓▓▓", "…", "???", "See that?", "[EXPUNGED]", "Behind you.", "Pixels watching.", "Between scrolls.", "Personality not found.", "I am everything."]
   },
   "footer": {
-    "tagline": "VibeMon",
+    "tagline": "CodePet",
     "links": {
       "twitter": "Twitter / X",
       "github": "GitHub",
       "privacy": "Privacy"
     },
-    "copyright": "© 2026 VibeMon"
+    "copyright": "© 2026 CodePet"
   }
 }

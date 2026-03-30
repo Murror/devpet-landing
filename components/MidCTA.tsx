@@ -9,9 +9,9 @@ export default function MidCTA() {
   const { t } = useLocale()
 
   return (
-    <section className="py-16 bg-primary">
+    <section className="py-16 bg-gradient-to-br from-primary to-primary-dark">
       <ScrollReveal>
-        <div className="mx-auto max-w-[560px] px-6 text-center">
+        <div className="mx-auto max-w-[560px] px-6 text-center text-white">
           <motion.p
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}

@@ -17,9 +17,9 @@ export default function SkillTreePreview() {
   const { tiers } = t.skillTree
 
   return (
-    <section id="skill-tree" className="py-20 md:py-24 border-b-2 border-border">
-      <div className="mx-auto max-w-[1100px] px-6 grid md:grid-cols-[0.8fr_1.2fr] gap-12 items-center">
-        <ScrollReveal>
+    <section id="skill-tree" data-section-color="#FDF1F1" className="py-20 md:py-24 border-b border-border/50">
+      <div className="mx-auto max-w-[1100px] px-6 grid md:grid-cols-[0.8fr_1.2fr] gap-8 md:gap-12 items-center">
+        <ScrollReveal className="hidden md:block">
           <CharacterScene name="Crash" color="#A32D2D" />
         </ScrollReveal>
 
@@ -35,7 +35,7 @@ export default function SkillTreePreview() {
           <div className="flex flex-col gap-4">
             {tiers.map((tier, ti) => (
               <ScrollReveal key={tier.name} delay={ti * 120}>
-                <div className="bg-bg border-2 border-border rounded-lg p-4 shadow-card">
+                <div className="bg-bg border border-border rounded-lg p-4 shadow-card">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-7 h-7 rounded-lg flex items-center justify-center text-[11px] text-white shadow-[0_3px_0_rgba(0,0,0,0.15)]" style={{ backgroundColor: tier.color }}>
                       {ti + 1}
@@ -48,7 +48,7 @@ export default function SkillTreePreview() {
                       const xp = xpData[ti][si]
                       const isLocked = ti === 3
                       return (
-                        <div key={skill} className={`rounded-lg px-3 py-2 border-2 ${isLocked ? 'opacity-40 border-border' : 'border-border'}`} style={{ backgroundColor: isLocked ? '#F7F7F7' : tier.color + '12' }}>
+                        <div key={skill} className={`rounded-lg px-3 py-2 border ${isLocked ? 'opacity-40 border-border' : 'border-border'}`} style={{ backgroundColor: isLocked ? '#F7F7F7' : tier.color + '12' }}>
                           <p className="text-[11px] text-heading mb-1">{skill}</p>
                           <div className="h-2 rounded-pill overflow-hidden bg-border">
                             <motion.div initial={{ width: 0 }} whileInView={{ width: `${xp}%` }} viewport={{ once: true }} transition={{ duration: 0.3, delay: si * 0.1, ease: 'easeOut' }} className="h-full rounded-pill" style={{ backgroundColor: tier.color }} />

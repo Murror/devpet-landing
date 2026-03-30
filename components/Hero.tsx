@@ -66,13 +66,13 @@ export default function Hero() {
   const { t } = useLocale()
 
   return (
-    <section id="hero" className="mx-auto max-w-[1100px] px-6 py-20 md:py-24 grid md:grid-cols-[1fr_1fr] gap-12 items-center">
+    <section id="hero" data-section-color="#FFFFFF" className="mx-auto max-w-[1100px] px-6 py-12 md:py-24 grid md:grid-cols-[1fr_1fr] gap-8 md:gap-12 items-center">
       <div className="relative">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...duoSpring }}
-          className="inline-flex items-center gap-1.5 bg-primary-tint border-2 border-primary rounded-pill px-3 py-1.5 text-xs text-primary-dark mb-6 shadow-[0_3px_0_#059669]"
+          className="inline-flex items-center gap-1.5 bg-primary-tint border border-primary/20 rounded-pill px-3 py-1.5 text-xs text-primary-dark mb-6 shadow-soft"
         >
           <span className="w-1.5 h-1.5 bg-primary rounded-full" />
           {t.hero.badge}
@@ -98,10 +98,10 @@ export default function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...duoSpring, delay: 0.3 }}
-          className="flex gap-5 mb-6"
+          className="flex flex-wrap gap-3 sm:gap-5 mb-6"
         >
           {t.hero.proofStats.map((stat, i) => (
-            <div key={i} className="flex flex-col bg-bg border-2 border-border rounded-lg px-3 py-2 shadow-card">
+            <div key={i} className="flex flex-col bg-bg border border-border rounded-lg px-3 py-2 shadow-card">
               <span className="text-lg text-heading tabular-nums">
                 <CountUp value={stat.value} duration={1.5} delay={0.4 + i * 0.15} />
               </span>
@@ -128,7 +128,7 @@ export default function Hero() {
       </div>
 
       {/* 4-character grid */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="hidden md:grid grid-cols-2 gap-4">
         {heroCharacters.map((char, i) => (
           <motion.div
             key={char.name}
@@ -137,7 +137,7 @@ export default function Hero() {
             transition={{ ...duoSpring, delay: 0.2 + i * 0.1 }}
             style={{ transform: `translateY(${char.offsetY}px)` }}
           >
-            <CharacterScene name={char.name} color={char.color} className="border-2 border-border shadow-card" />
+            <CharacterScene name={char.name} color={char.color} withBackground />
           </motion.div>
         ))}
       </div>
