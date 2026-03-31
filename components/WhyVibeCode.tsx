@@ -37,9 +37,9 @@ export default function WhyVibeCode() {
                   className="flex items-center gap-3 bg-bg border border-border rounded-lg px-5 py-4 shadow-card cursor-pointer transition-all duration-100"
                 >
                   <div className="relative flex-shrink-0 w-8 h-8">
-                    <span className="absolute inset-0 rounded-full bg-danger/15 animate-ping" style={{ animationDuration: '2.5s', animationDelay: `${i * 0.4}s` }} />
-                    <span className="relative w-8 h-8 bg-danger/10 rounded-full flex items-center justify-center animate-pulse" style={{ animationDuration: '2.5s', animationDelay: `${i * 0.4}s` }}>
-                      <Icon name={pain.icon} className="w-4 h-4 text-danger" />
+                    <span className="absolute inset-0 rounded-full bg-streak/35 animate-ping" style={{ animationDuration: '2.5s', animationDelay: `${i * 0.4}s` }} />
+                    <span className="relative w-8 h-8 bg-streak/25 rounded-full flex items-center justify-center animate-pulse" style={{ animationDuration: '2.5s', animationDelay: `${i * 0.4}s` }}>
+                      <Icon name={pain.icon} className="w-4 h-4 text-streak-dark" />
                     </span>
                   </div>
                   <p className="text-sm text-text text-left">{pain.text}</p>

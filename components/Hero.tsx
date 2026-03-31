@@ -128,7 +128,7 @@ export default function Hero() {
       </div>
 
       {/* 4-character grid */}
-      <div className="hidden md:grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-4">
         {heroCharacters.map((char, i) => (
           <motion.div
             key={char.name}

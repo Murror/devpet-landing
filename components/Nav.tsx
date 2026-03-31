@@ -27,8 +27,8 @@ export default function Nav() {
       <div className="mx-auto max-w-[1100px] px-6 h-[60px] flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center"><Cat className="w-4 h-4 text-white" /></div>
-          <span className="text-[17px] text-heading">CodePet</span>
+          <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center"><Cat className="w-4 h-4 text-primary-dark" /></div>
+          <span className="text-[17px] font-extrabold text-heading">Codepet</span>
         </div>
 
         {/* Desktop nav links */}
@@ -45,7 +45,7 @@ export default function Nav() {
           <motion.a
             href="#hero"
             whileTap={{ scale: 0.97 }}
-            className="hidden sm:block bg-primary text-white text-[13px] uppercase tracking-[1px] px-5 py-2 rounded-lg shadow-btn transition-all duration-100"
+            className="hidden sm:block bg-primary text-primary-dark text-[13px] uppercase tracking-[1px] px-5 py-2 rounded-lg shadow-btn transition-all duration-100"
           >
             {t.nav.joinWaitlist}
           </motion.a>
@@ -80,7 +80,7 @@ export default function Nav() {
             <motion.a
               href="#hero"
               whileTap={{ scale: 0.97 }}
-              className="bg-primary text-white text-[13px] uppercase tracking-[1px] px-5 py-2.5 rounded-lg shadow-btn text-center"
+              className="bg-primary text-primary-dark text-[13px] uppercase tracking-[1px] px-5 py-2.5 rounded-lg shadow-btn text-center"
               onClick={() => setMenuOpen(false)}
             >
               {t.nav.joinWaitlist}

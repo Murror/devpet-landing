@@ -37,7 +37,7 @@
       { "icon": "copy", "text": "Thử lại cùng prompt 5 lần" },
       { "icon": "eye-off", "text": "Ship code không debug được" }
     ],
-    "cta": "CodePet theo dõi thói quen AI không dạy được."
+    "cta": "Codepet theo dõi thói quen AI không dạy được."
   },
   "howItWorks": {
     "eyebrow": "Cách hoạt động",
@@ -268,12 +268,12 @@
     "Null": ["▓▓▓", "…", "???", "Thấy không?", "[ĐÃ XÓA]", "Phía sau.", "Pixel theo dõi.", "Giữa scroll.", "Tính cách not found.", "Tao là tất cả."]
   },
   "footer": {
-    "tagline": "CodePet",
+    "tagline": "Codepet",
     "links": {
       "twitter": "Twitter / X",
       "github": "GitHub",
       "privacy": "Bảo mật"
     },
-    "copyright": "© 2026 CodePet"
+    "copyright": "© 2026 Codepet"
   }
 }

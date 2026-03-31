@@ -38,7 +38,7 @@
       { "icon": "eye-off", "text": "Every new project feels like starting from zero" },
       { "icon": "alert-triangle", "text": "You've shipped code you couldn't explain if someone asked" }
     ],
-    "cta": "You're not bad at coding. You just never learned how to work with AI. CodePet teaches you the skills that make the difference."
+    "cta": "You're not bad at coding. You just never learned how to work with AI. Codepet teaches you the skills that make the difference."
   },
   "howItWorks": {
     "eyebrow": "How it works",
@@ -269,12 +269,12 @@
     "Null": ["▓▓▓", "…", "???", "See that?", "[EXPUNGED]", "Behind you.", "Pixels watching.", "Between scrolls.", "Personality not found.", "I am everything."]
   },
   "footer": {
-    "tagline": "CodePet",
+    "tagline": "Codepet",
     "links": {
       "twitter": "Twitter / X",
       "github": "GitHub",
       "privacy": "Privacy"
     },
-    "copyright": "© 2026 CodePet"
+    "copyright": "© 2026 Codepet"
   }
 }

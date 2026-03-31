@@ -58,7 +58,7 @@ export default function WaitlistForm() {
           type="submit"
           disabled={state === 'loading'}
           whileTap={{ scale: 0.97 }}
-          className="bg-primary disabled:opacity-60 text-white text-[15px] uppercase tracking-[1px] px-6 py-3 rounded-lg shadow-btn transition-all duration-100 whitespace-nowrap"
+          className="bg-primary disabled:opacity-60 text-primary-dark text-[15px] uppercase tracking-[1px] px-6 py-3 rounded-lg shadow-btn transition-all duration-100 whitespace-nowrap"
         >
           {state === 'loading' ? (
             <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />

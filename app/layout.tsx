@@ -6,7 +6,7 @@ import './globals.css'
 const varelaRound = Varela_Round({ weight: '400', subsets: ['latin'], variable: '--font-varela' })
 
 export const metadata: Metadata = {
-  title: 'CodePet — The AI coding school with your pet',
+  title: 'Codepet — The AI coding school with your pet',
   description: 'Learn to vibecode with your companion. 16 skills, 4 tiers, and a pet that grows as you do.',
 }
 
