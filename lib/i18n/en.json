@@ -23,7 +23,7 @@
     "placeholder": "your@email.com",
     "submit": "Join free →",
     "loading": "Joining...",
-    "success": "You're in! Check your inbox.",
+    "success": "You're in! We'll keep you posted.",
     "errorDuplicate": "Already on the list.",
     "errorValidation": "Invalid email.",
     "errorServer": "Something went wrong. Try again.",

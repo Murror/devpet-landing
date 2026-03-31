@@ -23,7 +23,7 @@
     "placeholder": "email@cuaban.com",
     "submit": "Tham gia miễn phí →",
     "loading": "Đang đăng ký...",
-    "success": "Xong! Kiểm tra hộp thư nhé.",
+    "success": "Xong! Chúng tôi sẽ thông báo khi ra mắt.",
     "errorDuplicate": "Đã trong danh sách.",
     "errorValidation": "Email không hợp lệ.",
     "errorServer": "Có lỗi. Thử lại nhé.",

@@ -22,9 +22,24 @@ export default function WaitlistForm() {
       return
     }
 
-    // TODO: Connect to a backend API (e.g. Cloudflare Worker, Vercel serverless)
-    // For now, show success on static hosting
-    setState('success')
+    setState('loading')
+    try {
+      const res = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      })
+      const data = await res.json()
+      if (data.status === 'duplicate') {
+        setState('duplicate')
+      } else if (res.ok) {
+        setState('success')
+      } else {
+        setState('error')
+      }
+    } catch {
+      setState('error')
+    }
   }
 
   if (state === 'success' || state === 'duplicate') {

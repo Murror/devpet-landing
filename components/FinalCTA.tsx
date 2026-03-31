@@ -23,7 +23,7 @@ export default function FinalCTA() {
                 <em className="text-primary italic">{t.finalCTA.titleAccent}</em>
                 {t.finalCTA.titleEnd}
               </h2>
-              <p className="text-[17px] text-muted leading-relaxed mb-8">{t.finalCTA.subtitle}</p>
+              <p className="hidden md:block text-[17px] text-muted leading-relaxed mb-8">{t.finalCTA.subtitle}</p>
               <div className="mb-4">
                 <WaitlistForm />
               </div>

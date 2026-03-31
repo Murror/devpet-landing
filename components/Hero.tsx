@@ -90,7 +90,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...duoSpring, delay: 0.2 }}
-          className="text-[17px] text-muted leading-[1.7] max-w-[440px] mb-6"
+          className="hidden md:block text-[17px] text-muted leading-[1.7] max-w-[440px] mb-6"
         >
           {t.hero.subtitle}
         </motion.p>
@@ -127,8 +127,8 @@ export default function Hero() {
         </motion.p>
       </div>
 
-      {/* 4-character grid */}
-      <div className="grid grid-cols-2 gap-4">
+      {/* 4-character grid — show first on mobile */}
+      <div className="order-first md:order-last grid grid-cols-2 gap-4">
         {heroCharacters.map((char, i) => (
           <motion.div
             key={char.name}

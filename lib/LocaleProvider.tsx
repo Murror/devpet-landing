@@ -32,8 +32,13 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
   const [locale, setLocale] = useState<Locale>('en')
 
   useEffect(() => {
-    // Hard-coded to 'en' for now
-    setLocale('en')
+    const manual = localStorage.getItem('devpet-locale-manual')
+    const saved = localStorage.getItem('devpet-locale') as Locale | null
+    if (manual && saved) {
+      setLocale(saved)
+    } else {
+      detectLocale().then(setLocale)
+    }
   }, [])
 
   const toggleLocale = () => {
