@@ -30,12 +30,11 @@ export async function POST(req: Request) {
   }
 
   const text = await finalRes.text()
-  console.log('Apps Script response:', finalRes.status, text)
   let data: { result?: string }
   try {
     data = JSON.parse(text)
   } catch {
-    return NextResponse.json({ error: 'Invalid response from sheet', debug: { status: finalRes.status, body: text.slice(0, 500) } }, { status: 502 })
+    return NextResponse.json({ error: 'Failed to save' }, { status: 502 })
   }
 
   if (data.result === 'duplicate') {

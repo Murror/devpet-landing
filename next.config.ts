@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const nextConfig: NextConfig = {
-  output: "export",
+  // output: "export", — removed to enable API routes on Vercel
   basePath,
   assetPrefix: basePath || undefined,
   images: {
