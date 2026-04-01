@@ -13,10 +13,10 @@
   },
   "hero": {
     "badge": "🐾 Trường học lập trình AI cùng bạn đồng hành",
-    "title": "Hãy bắt đầu học cách vibecoding/tư duy lập trình cùng AI.",
-    "titleAccent": "Và trở thành chuyên gia của nó.",
+    "title": "Hãy bắt đầu học cách vibecoding cùng AI.",
+    "titleAccent": "Và trở thành một chuyên gia.",
     "subtitle": "16 kỹ năng. 4 cấp độ. Với sự đồng hành của các người bạn thú vị. Codepet tạo ra không gian nơi bạn vừa chơi và học - và quan trọng là được thực chiến với code.",
-    "trustMeta": "Miễn phí · Cursor · VS Code · Claude Code",
+    "trustMeta": "Cursor · VS Code · Claude Code",
     "proofStats": [
       { "value": "1,504", "label": "builders" },
       { "value": "16", "label": "kỹ năng cần chinh phục" },
@@ -25,7 +25,7 @@
   },
   "form": {
     "placeholder": "email@cuaban.com",
-    "submit": "Bắt đầu miễn phí →",
+    "submit": "Bắt đầu ngay →",
     "loading": "Đang đăng ký...",
     "success": "Xong! Chúng tôi sẽ thông báo khi ra mắt.",
     "errorDuplicate": "Đã trong danh sách.",
@@ -102,7 +102,7 @@
   },
   "midCTA": {
     "title": "Sẵn sàng lên cấp?",
-    "subtitle": "Cùng 1,504 người. Miễn phí.",
+    "subtitle": "Cùng 1,504 người.",
     "spotsLeft": "Còn 16 cơ hội trải nghiệm beta"
   },
   "testimonials": {
@@ -163,10 +163,10 @@
     ]
   },
   "finalCTA": {
-    "title": "Hết đoán mò.",
-    "titleAccent": "Bắt đầu tiến bộ.",
+    "title": "Ngừng suy đoán.",
+    "titleAccent": "Và bắt đầu phát triển.",
     "titleEnd": "",
-    "subtitle": "Miễn phí. Không cần thẻ. Hủy bất cứ lúc nào.",
+    "subtitle": "Không cần thẻ. Hủy bất cứ lúc nào.",
     "trustMeta": "1,504 người đã tham gia",
     "spotsLeft": "Còn 16 cơ hội trải nghiệm beta"
   },

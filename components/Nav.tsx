@@ -27,7 +27,7 @@ export default function Nav() {
       <div className="mx-auto max-w-[1100px] px-6 h-[60px] flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center">
-          <Image src="/logo.png" alt="Codepet" width={120} height={36} className="h-9 w-auto" priority />
+          <Image src="/logo.jpg" alt="Codepet" width={186} height={62} className="h-14 w-auto" priority />
         </div>
 
         {/* Desktop nav links */}

@@ -16,7 +16,7 @@
     "title": "Learn to vibecode with your companion.",
     "titleAccent": "Actually get good at it.",
     "subtitle": "16 skills. 4 tiers. A companion that grows as you do. Practice in the editor you already use — and finally know what you're doing.",
-    "trustMeta": "Free · Cursor · VS Code · Claude Code",
+    "trustMeta": "Cursor · VS Code · Claude Code",
     "proofStats": [
       { "value": "1,504", "label": "builders" },
       { "value": "70%", "label": "success rate" },
@@ -25,7 +25,7 @@
   },
   "form": {
     "placeholder": "your@email.com",
-    "submit": "Join free →",
+    "submit": "Join waitlist →",
     "loading": "Joining...",
     "success": "You're in! We'll keep you posted.",
     "errorDuplicate": "Already on the list.",
@@ -102,7 +102,7 @@
   },
   "midCTA": {
     "title": "Ready to level up?",
-    "subtitle": "Join 1,504 builders. Free.",
+    "subtitle": "Join 1,504 builders.",
     "spotsLeft": "16 spots left"
   },
   "testimonials": {
@@ -166,7 +166,7 @@
     "title": "Stop guessing.",
     "titleAccent": "Start growing.",
     "titleEnd": "",
-    "subtitle": "Free. No credit card. Cancel anytime.",
+    "subtitle": "No credit card. Cancel anytime.",
     "trustMeta": "1,504 builders already joined",
     "spotsLeft": "16 spots left"
   },

@@ -39,11 +39,6 @@ export default function FinalCTA() {
             <span className="w-2 h-2 bg-primary rounded-full" />
             {t.footer.tagline}
           </div>
-          <div className="flex gap-6">
-            <a href="https://twitter.com/devpetapp" rel="noopener noreferrer" className="text-sm text-muted hover:text-heading transition-colors py-2">{t.footer.links.twitter}</a>
-            <a href="https://github.com/devpet" rel="noopener noreferrer" className="text-sm text-muted hover:text-heading transition-colors py-2">{t.footer.links.github}</a>
-            <a href="/privacy" className="text-sm text-muted hover:text-heading transition-colors py-2">{t.footer.links.privacy}</a>
-          </div>
           <p className="text-xs text-muted-light">{t.footer.copyright}</p>
         </div>
       </footer>
