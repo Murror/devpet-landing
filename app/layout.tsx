@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: 'Codepet — The AI coding school with your pet',
   description: 'Learn to vibecode with your companion. 16 skills, 4 tiers, and a pet that grows as you do.',
 }
+// Note: title & description are updated client-side by LocaleProvider based on detected locale
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

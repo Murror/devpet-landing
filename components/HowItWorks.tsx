@@ -7,8 +7,8 @@ import ScrollReveal from './ScrollReveal'
 import Icon from './Icon'
 import CharacterScene from './CharacterScene'
 
-const stepColors = ['#34D399', '#38BDF8', '#FBBF24']
-const stepShadows = ['#059669', '#0284C7', '#D97706']
+const stepColors = ['#7B6DC8', '#7C9DF5', '#FBBF24']
+const stepShadows = ['#5A4EA6', '#4B6CD4', '#D97706']
 
 export default function HowItWorks() {
   const { t } = useLocale()

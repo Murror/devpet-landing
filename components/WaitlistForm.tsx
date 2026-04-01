@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 type FormState = 'idle' | 'loading' | 'success' | 'duplicate' | 'error'
 
 export default function WaitlistForm() {
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
   const [email, setEmail] = useState('')
   const [state, setState] = useState<FormState>('idle')
   const [validationError, setValidationError] = useState(false)
@@ -27,7 +27,7 @@ export default function WaitlistForm() {
       const res = await fetch('/api/waitlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, locale }),
       })
       const data = await res.json()
       if (data.status === 'duplicate') {
@@ -73,7 +73,7 @@ export default function WaitlistForm() {
           type="submit"
           disabled={state === 'loading'}
           whileTap={{ scale: 0.97 }}
-          className="bg-primary disabled:opacity-60 text-primary-dark text-[15px] uppercase tracking-[1px] px-6 py-3 rounded-lg shadow-btn transition-all duration-100 whitespace-nowrap"
+          className="bg-primary disabled:opacity-60 text-white text-[15px] uppercase tracking-[1px] px-6 py-3 rounded-lg shadow-btn transition-all duration-100 whitespace-nowrap"
         >
           {state === 'loading' ? (
             <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />

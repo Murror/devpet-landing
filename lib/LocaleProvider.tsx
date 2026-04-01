@@ -41,6 +41,13 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
+  useEffect(() => {
+    const t = messages[locale]
+    document.title = t.metadata.title
+    document.querySelector('meta[name="description"]')?.setAttribute('content', t.metadata.description)
+    document.documentElement.lang = locale === 'vi' ? 'vi' : 'en'
+  }, [locale])
+
   const toggleLocale = () => {
     setLocale(prev => {
       const next = prev === 'en' ? 'vi' : 'en'

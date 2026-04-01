@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import ScrollReveal from './ScrollReveal'
 import CharacterScene from './CharacterScene'
 
-const statColors = ['#34D399', '#38BDF8', '#A78BFA']
+const statColors = ['#7B6DC8', '#7C9DF5', '#A78BFA']
 
 export default function Testimonials() {
   const { t } = useLocale()

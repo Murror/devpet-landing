@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "title": "Codepet — Trường học lập trình AI cùng bạn đồng hành",
+    "description": "16 kỹ năng. 4 cấp độ. Với sự đồng hành của các người bạn thú vị. Codepet tạo ra không gian nơi bạn vừa chơi và học - và quan trọng là được thực chiến với code."
+  },
   "nav": {
     "features": "Tính năng",
     "howItWorks": "Cách hoạt động",
@@ -8,36 +12,37 @@
     "langVI": "VI"
   },
   "hero": {
-    "badge": "🐱 Bạn đồng hành AI",
-    "title": "Code thông minh hơn.",
-    "titleAccent": "Lên cấp.",
-    "subtitle": "Theo dõi thói quen. Bắt lỗi. Phát triển kỹ năng — tự động.",
+    "badge": "🐾 Trường học lập trình AI cùng bạn đồng hành",
+    "title": "Hãy bắt đầu học cách vibecoding/tư duy lập trình cùng AI.",
+    "titleAccent": "Và trở thành chuyên gia của nó.",
+    "subtitle": "16 kỹ năng. 4 cấp độ. Với sự đồng hành của các người bạn thú vị. Codepet tạo ra không gian nơi bạn vừa chơi và học - và quan trọng là được thực chiến với code.",
     "trustMeta": "Miễn phí · Cursor · VS Code · Claude Code",
     "proofStats": [
-      { "value": "1,504", "label": "người dùng" },
-      { "value": "70%", "label": "tỉ lệ thành công" },
-      { "value": "2×", "label": "nhanh hơn" }
+      { "value": "1,504", "label": "builders" },
+      { "value": "16", "label": "kỹ năng cần chinh phục" },
+      { "value": "4", "label": "người bạn đồng hành để mở khóa" }
     ]
   },
   "form": {
     "placeholder": "email@cuaban.com",
-    "submit": "Tham gia miễn phí →",
+    "submit": "Bắt đầu miễn phí →",
     "loading": "Đang đăng ký...",
     "success": "Xong! Chúng tôi sẽ thông báo khi ra mắt.",
     "errorDuplicate": "Đã trong danh sách.",
     "errorValidation": "Email không hợp lệ.",
     "errorServer": "Có lỗi. Thử lại nhé.",
-    "spotsLeft": "Còn 16 chỗ beta"
+    "spotsLeft": "Còn 16 cơ hội trải nghiệm beta"
   },
   "whyVibeCode": {
-    "title": "Nghe quen không?",
+    "title": "Có phải bạn cũng mắc lỗi?",
     "titleAccent": "",
     "pains": [
-      { "icon": "repeat", "text": "Kẹt error loop hàng tiếng" },
-      { "icon": "copy", "text": "Thử lại cùng prompt 5 lần" },
-      { "icon": "eye-off", "text": "Ship code không debug được" }
+      { "icon": "copy", "text": "Copy-paste lỗi rồi hy vọng AI tự lo" },
+      { "icon": "repeat", "text": "Prompt đôi khi chạy, đôi khi không — bạn không biết tại sao" },
+      { "icon": "eye-off", "text": "Mỗi dự án mới cảm giác như bắt đầu lại từ số 0" },
+      { "icon": "alert-triangle", "text": "Bạn đã ship code nhưng nếu ai hỏi, bạn không giải thích được" }
     ],
-    "cta": "Codepet theo dõi thói quen AI không dạy được."
+    "cta": "Không phải là bạn không biết code. Bạn chỉ chưa học cách làm việc với AI. Codepet dạy bạn những kỹ năng tạo nên sự khác biệt."
   },
   "howItWorks": {
     "eyebrow": "Cách hoạt động",
@@ -47,50 +52,50 @@
       {
         "num": "01",
         "icon": "scan-search",
-        "title": "Mở editor",
-        "desc": "Tự phát hiện. Không cài đặt."
+        "title": "Chọn người bạn đồng hành",
+        "desc": "Chọn thú cưng và chúng sẽ dạy, huấn luyện, dẫn dắt và phát triển cùng bạn ở từng kỹ năng."
       },
       {
         "num": "02",
         "icon": "book-open",
-        "title": "Code bình thường",
-        "desc": "Mình theo dõi thói quen ngầm."
+        "title": "Đi theo lộ trình kỹ năng",
+        "desc": "16 micro-lesson qua 4 cấp độ. Từ Prompt Clarity đến AI Architecture."
       },
       {
         "num": "03",
         "icon": "trophy",
-        "title": "Lên cấp",
-        "desc": "XP, kỹ năng, chuỗi ngày. Thấy mình tiến bộ."
+        "title": "Hoàn thành thử thách và lên trình",
+        "desc": "Thành thạo kỹ năng và đạt chuỗi streak của bạn để mở ra bản đồ thế giới và nâng cấp nhân vật."
       }
     ]
   },
   "features": {
     "eyebrow": "Tính năng",
-    "title": "Mọi thứ bạn cần để tiến bộ.",
+    "title": "Để thực sự trở thành chuyên gia, bạn cần:",
     "subtitle": "",
     "cards": [
       {
-        "icon": "activity",
-        "title": "Theo dõi phiên",
-        "desc": "Prompt, lỗi, thời gian — ghi lại tự động.",
-        "bullets": []
-      },
-      {
         "icon": "trophy",
-        "title": "Cây kỹ năng & XP",
-        "desc": "16 kỹ năng, 4 cấp. Lên level bằng sản phẩm.",
+        "title": "Bản đồ kỹ năng",
+        "desc": "Biết chính xác mình cần học gì qua 16 kỹ năng và đi từ 4 cấp: Nền tảng, Bối cảnh, Nâng cao và Thành thạo.",
         "bullets": []
       },
       {
         "icon": "cat",
-        "title": "AI Coach",
-        "desc": "Lời khuyên dựa trên thói quen code thật của bạn.",
+        "title": "Người bạn đồng hành",
+        "desc": "Crash, Nova, Glitch và nhiều nhân vật khác — mỗi nhân vật sẽ dạy một kỹ năng riêng biệt.",
+        "bullets": []
+      },
+      {
+        "icon": "code",
+        "title": "Thử thách thật",
+        "desc": "Được thực hành với Cursor, VS Code hoặc Claude Code.",
         "bullets": []
       },
       {
         "icon": "bar-chart",
-        "title": "Báo cáo tuần",
-        "desc": "Tỉ lệ thành công, xu hướng lỗi, chuỗi ngày.",
+        "title": "Insights chân thật",
+        "desc": "Bạn thấy được khuyết điểm của mình. Xu hướng mắc lỗi, tỷ lệ thành công của prompt. Người bạn đồng hành giúp bạn thật sự hiểu dữ liệu đang nói gì — và cần luyện gì tiếp theo.",
         "bullets": []
       }
     ]
@@ -98,7 +103,7 @@
   "midCTA": {
     "title": "Sẵn sàng lên cấp?",
     "subtitle": "Cùng 1,504 người. Miễn phí.",
-    "spotsLeft": "Còn 16 chỗ"
+    "spotsLeft": "Còn 16 cơ hội trải nghiệm beta"
   },
   "testimonials": {
     "eyebrow": "Từ beta",
@@ -163,7 +168,7 @@
     "titleEnd": "",
     "subtitle": "Miễn phí. Không cần thẻ. Hủy bất cứ lúc nào.",
     "trustMeta": "1,504 người đã tham gia",
-    "spotsLeft": "Còn 16 chỗ"
+    "spotsLeft": "Còn 16 cơ hội trải nghiệm beta"
   },
   "mockup": {
     "greeting": "Chào buổi chiều!",

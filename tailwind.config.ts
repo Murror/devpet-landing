@@ -9,14 +9,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Primary
-        primary:        '#34D399',
-        'primary-dark': '#052E1F',
-        'primary-tint': '#ECFDF5',
+        // Primary — purple palette matching Codepet pixel logo
+        primary:        '#7B6DC8',
+        'primary-dark': '#2D2466',
+        'primary-tint': '#EDEAF7',
         // Secondary
-        info:           '#38BDF8',
-        'info-dark':    '#0284C7',
-        'info-tint':    '#EFF6FF',
+        info:           '#7C9DF5',
+        'info-dark':    '#4B6CD4',
+        'info-tint':    '#EEF2FF',
         danger:         '#FB7185',
         'danger-dark':  '#E11D48',
         xp:             '#FBBF24',
@@ -29,17 +29,17 @@ const config: Config = {
         'streak-dark':  '#EA580C',
         // Neutrals
         bg:             '#FFFFFF',
-        surface:        '#FAFAF9',
-        border:         '#EBEBEB',
+        surface:        '#F8F7FC',
+        border:         '#E5E2F0',
         text:           '#4B4B4B',
-        heading:        '#1A1A1A',
+        heading:        '#1A1A2E',
         muted:          '#777777',
         'muted-light':  '#AFAFAF',
         // Mood states
-        'mood-flow':      '#34D399',
+        'mood-flow':      '#7B6DC8',
         'mood-stuck':     '#FB7185',
         'mood-milestone': '#A78BFA',
-        'mood-thinking':  '#38BDF8',
+        'mood-thinking':  '#7C9DF5',
       },
       borderRadius: {
         sm:   '10px',
@@ -52,7 +52,7 @@ const config: Config = {
         'card':    '0 2px 8px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)',
         'card-lg': '0 4px 16px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04)',
         'card-hover': '0 8px 24px rgba(0,0,0,0.1), 0 2px 6px rgba(0,0,0,0.04)',
-        'btn':     '0 2px 8px rgba(5,150,105,0.35)',
+        'btn':     '0 2px 8px rgba(124,108,196,0.35)',
         'btn-info':'0 2px 8px rgba(2,132,199,0.35)',
         'btn-ghost':'0 2px 8px rgba(0,0,0,0.06)',
         'soft':    '0 1px 3px rgba(0,0,0,0.04)',
