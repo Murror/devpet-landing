@@ -36,7 +36,7 @@ export default function FinalCTA() {
 
       <footer className="border-t border-border/50">
         <div className="mx-auto max-w-[1100px] px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <Image src="/logo.jpg" alt={t.footer.tagline} width={120} height={40} className="h-8 w-auto" />
+          <Image src="/logo.png" alt={t.footer.tagline} width={120} height={40} className="h-8 w-auto" />
           <p className="text-xs text-muted-light">{t.footer.copyright}</p>
         </div>
       </footer>

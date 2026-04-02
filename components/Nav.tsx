@@ -27,12 +27,12 @@ export default function Nav() {
       <div className="mx-auto max-w-[1100px] px-6 h-[60px] flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center">
-          <Image src="/logo.jpg" alt="Codepet" width={186} height={62} className="h-14 w-auto" priority />
+          <Image src="/logo.png" alt="Codepet" width={186} height={62} className="h-14 w-auto" priority />
         </div>
 
         {/* Desktop nav links */}
         <div className="hidden md:flex gap-7">
-          {([{ label: t.nav.howItWorks, href: '#how-it-works' }, { label: t.nav.features, href: '#features' }, { label: t.meetYourPet.eyebrow, href: '#meet-your-pet' }]).map(link => (
+          {([{ label: t.nav.howItWorks, href: '#how-it-works' }, { label: t.nav.features, href: '#features' }]).map(link => (
             <a key={link.href} href={link.href} className="text-sm text-muted hover:text-heading transition-colors cursor-pointer">
               {link.label}
             </a>
@@ -41,13 +41,12 @@ export default function Nav() {
 
         {/* Right: CTA + hamburger */}
         <div className="flex items-center gap-3">
-          <motion.a
+          <a
             href="#hero"
-            whileTap={{ scale: 0.97 }}
-            className="hidden sm:block bg-primary text-white text-[13px] uppercase tracking-[1px] px-5 py-2 rounded-lg shadow-btn transition-all duration-100"
+            className="hidden sm:block pixel-btn text-white text-[13px] uppercase tracking-[1px] px-5 py-2"
           >
             {t.nav.joinWaitlist}
-          </motion.a>
+          </a>
 
           {/* Hamburger (mobile) */}
           <button
@@ -71,19 +70,18 @@ export default function Nav() {
             transition={{ type: 'spring', stiffness: 300, damping: 25 }}
             className="md:hidden border-t border-border/50 bg-bg/95 backdrop-blur-lg px-6 py-4 flex flex-col gap-4 overflow-hidden"
           >
-            {([{ label: t.nav.howItWorks, href: '#how-it-works' }, { label: t.nav.features, href: '#features' }, { label: t.meetYourPet.eyebrow, href: '#meet-your-pet' }]).map(link => (
+            {([{ label: t.nav.howItWorks, href: '#how-it-works' }, { label: t.nav.features, href: '#features' }]).map(link => (
               <a key={link.href} href={link.href} className="text-sm text-muted py-2" onClick={() => setMenuOpen(false)}>
                 {link.label}
               </a>
             ))}
-            <motion.a
+            <a
               href="#hero"
-              whileTap={{ scale: 0.97 }}
-              className="bg-primary text-white text-[13px] uppercase tracking-[1px] px-5 py-2.5 rounded-lg shadow-btn text-center"
+              className="pixel-btn text-white text-[13px] uppercase tracking-[1px] px-5 py-2.5 text-center"
               onClick={() => setMenuOpen(false)}
             >
               {t.nav.joinWaitlist}
-            </motion.a>
+            </a>
           </motion.div>
         )}
       </AnimatePresence>

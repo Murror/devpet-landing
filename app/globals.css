@@ -8,9 +8,94 @@
   }
 }
 
-/* Duolingo 3D button press — replaces Emil Kowalski scale approach */
-button:active, a[href]:active {
-  /* Let Framer Motion or component-level styles handle press states */
+/* ── Pixel button — stepped 8-bit corners ── */
+
+/* Stepped-corner polygon (outer) */
+.pixel-stepped {
+  clip-path: polygon(
+    0 8px, 4px 8px, 4px 4px, 8px 4px, 8px 0,
+    calc(100% - 8px) 0, calc(100% - 8px) 4px, calc(100% - 4px) 4px, calc(100% - 4px) 8px, 100% 8px,
+    100% calc(100% - 8px), calc(100% - 4px) calc(100% - 8px), calc(100% - 4px) calc(100% - 4px), calc(100% - 8px) calc(100% - 4px), calc(100% - 8px) 100%,
+    8px 100%, 8px calc(100% - 4px), 4px calc(100% - 4px), 4px calc(100% - 8px), 0 calc(100% - 8px)
+  );
+}
+
+.pixel-btn {
+  position: relative;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0;
+  isolation: isolate;
+  filter: drop-shadow(0 5px 0 var(--pixel-border, #2D2466));
+  transition: transform 0.06s, filter 0.06s;
+  cursor: pointer;
+}
+
+/* Dark border shell */
+.pixel-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: var(--pixel-border, #2D2466);
+  clip-path: polygon(
+    0 8px, 4px 8px, 4px 4px, 8px 4px, 8px 0,
+    calc(100% - 8px) 0, calc(100% - 8px) 4px, calc(100% - 4px) 4px, calc(100% - 4px) 8px, 100% 8px,
+    100% calc(100% - 8px), calc(100% - 4px) calc(100% - 8px), calc(100% - 4px) calc(100% - 4px), calc(100% - 8px) calc(100% - 4px), calc(100% - 8px) 100%,
+    8px 100%, 8px calc(100% - 4px), 4px calc(100% - 4px), 4px calc(100% - 8px), 0 calc(100% - 8px)
+  );
+}
+
+/* Colored face with gloss */
+.pixel-btn::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  z-index: -1;
+  background: var(--pixel-face, #8B7FD4);
+  background-image: linear-gradient(180deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.12) 42%, transparent 55%);
+  clip-path: polygon(
+    0 5px, 3px 5px, 3px 3px, 5px 3px, 5px 0,
+    calc(100% - 5px) 0, calc(100% - 5px) 3px, calc(100% - 3px) 3px, calc(100% - 3px) 5px, 100% 5px,
+    100% calc(100% - 5px), calc(100% - 3px) calc(100% - 5px), calc(100% - 3px) calc(100% - 3px), calc(100% - 5px) calc(100% - 3px), calc(100% - 5px) 100%,
+    5px 100%, 5px calc(100% - 3px), 3px calc(100% - 3px), 3px calc(100% - 5px), 0 calc(100% - 5px)
+  );
+}
+
+.pixel-btn:hover {
+  filter: drop-shadow(0 5px 0 var(--pixel-border, #2D2466)) brightness(1.06);
+}
+
+.pixel-btn:active:not(:disabled) {
+  transform: translateY(5px);
+  filter: none;
+}
+
+.pixel-btn:active:not(:disabled)::after {
+  background-image: linear-gradient(180deg, rgba(255,255,255,0.18) 0%, transparent 55%);
+}
+
+.pixel-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Pixel-styled input — stepped corners with border */
+.pixel-input {
+  border: 3px solid #C4BFD6;
+  border-radius: 0;
+  clip-path: polygon(
+    0 6px, 3px 6px, 3px 3px, 6px 3px, 6px 0,
+    calc(100% - 6px) 0, calc(100% - 6px) 3px, calc(100% - 3px) 3px, calc(100% - 3px) 6px, 100% 6px,
+    100% calc(100% - 6px), calc(100% - 3px) calc(100% - 6px), calc(100% - 3px) calc(100% - 3px), calc(100% - 6px) calc(100% - 3px), calc(100% - 6px) 100%,
+    6px 100%, 6px calc(100% - 3px), 3px calc(100% - 3px), 3px calc(100% - 6px), 0 calc(100% - 6px)
+  );
+  transition: border-color 0.15s;
+}
+
+.pixel-input:focus {
+  border-color: #7B6DC8;
+  outline: none;
 }
 
 /* Gate hover behind pointer:fine to avoid false positives on touch */

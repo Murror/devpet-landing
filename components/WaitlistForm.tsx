@@ -65,20 +65,18 @@ export default function WaitlistForm() {
           onChange={e => { setEmail(e.target.value); setValidationError(false) }}
           placeholder={t.form.placeholder}
           disabled={state === 'loading'}
-          className={`flex-1 bg-bg border rounded-lg px-4 py-3 text-sm text-text placeholder-muted-light outline-none
-            focus:border-info focus:shadow-[0_0_0_3px_rgba(56,189,248,0.15)] transition-[border-color,box-shadow] duration-150
-            ${validationError ? 'border-danger' : 'border-border'}`}
+          className={`flex-1 bg-bg pixel-input px-4 py-3 text-sm text-text placeholder-muted-light
+            ${validationError ? '!border-danger' : ''}`}
         />
-        <motion.button
+        <button
           type="submit"
           disabled={state === 'loading'}
-          whileTap={{ scale: 0.97 }}
-          className="bg-primary disabled:opacity-60 text-white text-[15px] uppercase tracking-[1px] px-6 py-3 rounded-lg shadow-btn transition-all duration-100 whitespace-nowrap"
+          className="pixel-btn text-white text-[15px] uppercase tracking-[1px] px-6 py-3 whitespace-nowrap"
         >
           {state === 'loading' ? (
             <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
           ) : t.form.submit}
-        </motion.button>
+        </button>
       </div>
       <AnimatePresence>
         {validationError && (
