@@ -108,39 +108,6 @@ function OrbitDots({ color, count = 3 }: { color: string; count?: number }) {
   )
 }
 
-/* ── Glitch bars ── */
-function GlitchBars({ color }: { color: string }) {
-  return (
-    <>
-      {[20, 45, 70].map((top, i) => (
-        <motion.div
-          key={i}
-          className="absolute pointer-events-none"
-          style={{
-            height: 2 + seeded(i * 7 + 3) * 3,
-            backgroundColor: color,
-            top: `${top}%`,
-            left: '5%',
-            right: '5%',
-            opacity: 0,
-          }}
-          animate={{
-            opacity: [0, 0.6, 0],
-            scaleX: [0.3, 1, 0.5],
-            x: [0, (seeded(i * 7 + 5) - 0.5) * 20, 0],
-          }}
-          transition={{
-            duration: 0.3,
-            repeat: Infinity,
-            repeatDelay: 2 + i * 1.5,
-            delay: i * 0.8,
-            ease: 'linear',
-          }}
-        />
-      ))}
-    </>
-  )
-}
 
 /* ── Impact waves (for Crash) ── */
 function ImpactWaves({ color }: { color: string }) {
@@ -247,7 +214,6 @@ export default function CharacterScene({ name, color, className = '', withBackgr
 
           {name === 'Glitch' && (
             <>
-              <GlitchBars color={color} />
               <FloatingParticles color={color} count={4} seed={4} />
             </>
           )}
@@ -276,7 +242,6 @@ export default function CharacterScene({ name, color, className = '', withBackgr
           {name === 'Null' && (
             <>
               <StaticNoise color={color} />
-              <GlitchBars color="#3B6D11" />
             </>
           )}
 

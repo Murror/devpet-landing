@@ -4,6 +4,7 @@ import { useLocale } from '@/lib/LocaleProvider'
 import WaitlistForm from './WaitlistForm'
 import ScrollReveal from './ScrollReveal'
 import CharacterScene from './CharacterScene'
+import Image from 'next/image'
 
 export default function FinalCTA() {
   const { t } = useLocale()
@@ -35,10 +36,7 @@ export default function FinalCTA() {
 
       <footer className="border-t border-border/50">
         <div className="mx-auto max-w-[1100px] px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2 text-sm text-heading">
-            <span className="w-2 h-2 bg-primary rounded-full" />
-            {t.footer.tagline}
-          </div>
+          <Image src="/logo.jpg" alt={t.footer.tagline} width={120} height={40} className="h-8 w-auto" />
           <p className="text-xs text-muted-light">{t.footer.copyright}</p>
         </div>
       </footer>
