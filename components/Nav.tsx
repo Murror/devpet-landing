@@ -32,7 +32,7 @@ export default function Nav() {
 
         {/* Desktop nav links */}
         <div className="hidden md:flex gap-7">
-          {([{ label: t.nav.howItWorks, href: '#how-it-works' }, { label: t.nav.features, href: '#features' }]).map(link => (
+          {([{ label: t.nav.howItWorks, href: '#how-it-works' }, { label: t.nav.features, href: '#features' }, { label: t.nav.skillTree, href: '#skill-tree' }]).map(link => (
             <a key={link.href} href={link.href} className="text-sm text-muted hover:text-heading transition-colors cursor-pointer">
               {link.label}
             </a>
@@ -70,7 +70,7 @@ export default function Nav() {
             transition={{ type: 'spring', stiffness: 300, damping: 25 }}
             className="md:hidden border-t border-border/50 bg-bg/95 backdrop-blur-lg px-6 py-4 flex flex-col gap-4 overflow-hidden"
           >
-            {([{ label: t.nav.howItWorks, href: '#how-it-works' }, { label: t.nav.features, href: '#features' }]).map(link => (
+            {([{ label: t.nav.howItWorks, href: '#how-it-works' }, { label: t.nav.features, href: '#features' }, { label: t.nav.skillTree, href: '#skill-tree' }]).map(link => (
               <a key={link.href} href={link.href} className="text-sm text-muted py-2" onClick={() => setMenuOpen(false)}>
                 {link.label}
               </a>

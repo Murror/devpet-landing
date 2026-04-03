@@ -6,6 +6,7 @@
   "nav": {
     "features": "Features",
     "howItWorks": "How it works",
+    "skillTree": "Skill Tree",
     "pricing": "Pricing",
     "joinWaitlist": "Get started",
     "langEN": "EN",
@@ -30,8 +31,7 @@
     "success": "You're in! We'll keep you posted.",
     "errorDuplicate": "Already on the list.",
     "errorValidation": "Invalid email.",
-    "errorServer": "Something went wrong. Try again.",
-    "spotsLeft": "16 beta spots left"
+    "errorServer": "Something went wrong. Try again."
   },
   "whyVibeCode": {
     "title": "Sound familiar?",
@@ -102,8 +102,7 @@
   },
   "midCTA": {
     "title": "Ready to level up?",
-    "subtitle": "Join 1,504 builders.",
-    "spotsLeft": "16 spots left"
+    "subtitle": "Join 1,504 builders."
   },
   "testimonials": {
     "eyebrow": "From the beta",
@@ -167,8 +166,7 @@
     "titleAccent": "Start growing.",
     "titleEnd": "",
     "subtitle": "No credit card. Cancel anytime.",
-    "trustMeta": "1,504 builders already joined",
-    "spotsLeft": "16 spots left"
+    "trustMeta": "1,504 builders already joined"
   },
   "mockup": {
     "greeting": "Good afternoon!",

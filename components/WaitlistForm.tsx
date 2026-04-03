@@ -104,12 +104,6 @@ export default function WaitlistForm() {
           </motion.p>
         )}
       </AnimatePresence>
-      {t.form.spotsLeft && (
-        <p className="mt-2 text-[11px] text-current opacity-70 flex items-center gap-1">
-          <span className="w-1.5 h-1.5 bg-current rounded-full animate-pulse opacity-60" />
-          {t.form.spotsLeft}
-        </p>
-      )}
     </form>
   )
 }

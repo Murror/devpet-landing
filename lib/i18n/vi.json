@@ -6,6 +6,7 @@
   "nav": {
     "features": "Tính năng",
     "howItWorks": "Cách hoạt động",
+    "skillTree": "Cây kỹ năng",
     "pricing": "Bảng giá",
     "joinWaitlist": "Bắt đầu",
     "langEN": "EN",
@@ -30,8 +31,7 @@
     "success": "Xong! Chúng tôi sẽ thông báo khi ra mắt.",
     "errorDuplicate": "Đã trong danh sách.",
     "errorValidation": "Email không hợp lệ.",
-    "errorServer": "Có lỗi. Thử lại nhé.",
-    "spotsLeft": "Còn 16 cơ hội trải nghiệm beta"
+    "errorServer": "Có lỗi. Thử lại nhé."
   },
   "whyVibeCode": {
     "title": "Có phải bạn cũng mắc lỗi?",
@@ -102,8 +102,7 @@
   },
   "midCTA": {
     "title": "Sẵn sàng lên cấp?",
-    "subtitle": "Cùng 1,504 người.",
-    "spotsLeft": "Còn 16 cơ hội trải nghiệm beta"
+    "subtitle": "Cùng 1,504 người."
   },
   "testimonials": {
     "eyebrow": "Từ beta",
@@ -167,8 +166,7 @@
     "titleAccent": "Và bắt đầu phát triển.",
     "titleEnd": "",
     "subtitle": "Không cần thẻ. Hủy bất cứ lúc nào.",
-    "trustMeta": "1,504 người đã tham gia",
-    "spotsLeft": "Còn 16 cơ hội trải nghiệm beta"
+    "trustMeta": "1,504 người đã tham gia"
   },
   "mockup": {
     "greeting": "Chào buổi chiều!",
