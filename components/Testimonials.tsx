@@ -44,7 +44,7 @@ export default function Testimonials() {
         </div>
 
         <ScrollReveal>
-          <CharacterScene name="Luna" color="#534AB7" />
+          <CharacterScene name="Byte" color="#534AB7" />
         </ScrollReveal>
       </div>
     </section>

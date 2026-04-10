@@ -3,12 +3,16 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import CharacterSvg from './CharacterSvg'
+import SpriteAnimator from './SpriteAnimator'
+import { SPRITE_CHARACTERS, type SpriteState } from '@/lib/spriteConfig'
 
 interface CharacterSceneProps {
   name: string
   color: string
   className?: string
   withBackground?: boolean
+  /** Sprite animation state — if the character has sprites, this controls which animation plays */
+  spriteState?: SpriteState
 }
 
 // Deterministic pseudo-random to avoid hydration mismatch
@@ -177,9 +181,12 @@ function StaticNoise({ color }: { color: string }) {
 }
 
 /* ── Main component ── */
-export default function CharacterScene({ name, color, className = '', withBackground = false }: CharacterSceneProps) {
+export default function CharacterScene({ name, color, className = '', withBackground = false, spriteState = 'happy' }: CharacterSceneProps) {
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
+
+  const spriteSet = SPRITE_CHARACTERS[name]
+  const spriteAnim = spriteSet?.[spriteState] ?? (spriteSet ? Object.values(spriteSet)[0] : undefined)
 
   return (
     <div
@@ -263,9 +270,20 @@ export default function CharacterScene({ name, color, className = '', withBackgr
         </>
       )}
 
-      {/* Character SVG — CSS animations inside SVG handle head/arms/legs/tail/eyes */}
-      <div className="w-[65%] h-[65%] relative z-10">
-        <CharacterSvg name={name} className="w-full h-full drop-shadow-lg" />
+      {/* Character — sprite sheet (if available) or fallback to SVG */}
+      <div className="w-[65%] h-[65%] relative z-10 flex items-center justify-center">
+        {spriteAnim ? (
+          <SpriteAnimator
+            src={spriteAnim.src}
+            frameCount={spriteAnim.frameCount}
+            cols={spriteAnim.cols}
+            fps={spriteAnim.fps}
+            loop={spriteAnim.loop}
+            className="drop-shadow-lg"
+          />
+        ) : (
+          <CharacterSvg name={name} className="w-full h-full drop-shadow-lg" />
+        )}
       </div>
     </div>
   )
