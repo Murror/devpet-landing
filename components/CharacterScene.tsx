@@ -199,8 +199,6 @@ export default function CharacterScene({ name, color, className = '', withBackgr
           {name === 'Byte' && (
             <>
               <FloatingParticles color={color} count={6} seed={1} />
-              <PulseRing color={color} delay={0} scale={1.1} />
-              <PulseRing color={color} delay={1.2} scale={1.2} />
             </>
           )}
 
@@ -213,8 +211,6 @@ export default function CharacterScene({ name, color, className = '', withBackgr
 
           {name === 'Sage' && (
             <>
-              <PulseRing color={color} delay={0} scale={1.08} />
-              <PulseRing color={color} delay={1.5} scale={1.12} />
               <FloatingParticles color={color} count={3} seed={3} />
             </>
           )}
@@ -227,7 +223,6 @@ export default function CharacterScene({ name, color, className = '', withBackgr
 
           {name === 'Crash' && (
             <>
-              <ImpactWaves color={color} />
               <FloatingParticles color={color} count={3} seed={5} />
             </>
           )}

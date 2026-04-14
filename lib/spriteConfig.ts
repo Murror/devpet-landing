@@ -16,9 +16,9 @@ export type SpriteSet = Partial<Record<SpriteState, SpriteAnimation>>
 export const SPRITE_CHARACTERS: Record<string, SpriteSet> = {
   Byte: {
     happy: {
-      src: `${basePath}/sprites/byte/happy.png`,
-      frameCount: 6,
-      fps: 6,
+      src: `${basePath}/sprites/byte/happy-smooth.png`,
+      frameCount: 14,
+      fps: 7,
       loop: true,
     },
     // sad: { src: `${basePath}/sprites/byte/sad.png`, frameCount: 4, fps: 6, loop: true },
@@ -29,41 +29,41 @@ export const SPRITE_CHARACTERS: Record<string, SpriteSet> = {
   },
   Sage: {
     sleeping: {
-      src: `${basePath}/sprites/sage/sleeping.png`,
-      frameCount: 6,
-      fps: 4,
+      src: `${basePath}/sprites/sage/sleeping-smooth.png`,
+      frameCount: 12,
+      fps: 6,
       loop: true,
     },
   },
   Glitch: {
     walking: {
-      src: `${basePath}/sprites/glitch/walking.png`,
-      frameCount: 6,
-      fps: 6,
+      src: `${basePath}/sprites/glitch/walking-smooth.png`,
+      frameCount: 12,
+      fps: 7,
       loop: true,
     },
   },
   Crash: {
     happy: {
-      src: `${basePath}/sprites/crash/happy.png`,
-      frameCount: 6,
-      fps: 6,
+      src: `${basePath}/sprites/crash/happy-smooth.png`,
+      frameCount: 15,
+      fps: 7,
       loop: true,
     },
   },
   Null: {
     idle: {
-      src: `${basePath}/sprites/null/idle.png`,
-      frameCount: 6,
-      fps: 6,
+      src: `${basePath}/sprites/null/idle-smooth.png`,
+      frameCount: 18,
+      fps: 7,
       loop: true,
     },
   },
   Nova: {
     idle: {
-      src: `${basePath}/sprites/nova/idle.png`,
-      frameCount: 6,
-      fps: 6,
+      src: `${basePath}/sprites/nova/idle-smooth.png`,
+      frameCount: 18,
+      fps: 7,
       loop: true,
     },
   },
