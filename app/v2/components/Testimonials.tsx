@@ -94,12 +94,15 @@ export default function Testimonials() {
     const update = () => {
       rafId = null
       const vh = window.innerHeight
-      // 60% of viewport height on each side — longer than the Skill
-      // Tree's 45% ramp so the reveal reads more gradually (cards
-      // felt too snappy at the shorter ramp). A longer ramp means
-      // more scroll distance is required to move an element from
-      // progress 0 → 1, which feels slower.
-      const ramp = vh * 0.6
+      // Entry ramp 60% of viewport height, shaped so the reveal feels
+      // deliberate (longer than Skill Tree's 45%). Exit ramp is tighter
+      // (25%) and GATED behind rect.top < 0 — an element still in view
+      // but sitting near the top of the viewport should be at progress
+      // 1, not fading out. Without the gate the cards snap-aligned at
+      // the top of the section were stuck at 60–80% opacity, which
+      // read as soft / washed-out edges and a pink-tinted card bg.
+      const entryRamp = vh * 0.6
+      const exitRamp = vh * 0.25
       for (const { el, stagger } of targets) {
         const rect = el.getBoundingClientRect()
         // The stagger offset pushes this element's entry ramp back by
@@ -108,9 +111,12 @@ export default function Testimonials() {
         // row position.
         const entry = Math.max(
           0,
-          Math.min(1, (vh - rect.top - stagger) / ramp)
+          Math.min(1, (vh - rect.top - stagger) / entryRamp)
         )
-        const exit = Math.max(0, Math.min(1, rect.bottom / ramp))
+        const exit =
+          rect.top >= 0
+            ? 1
+            : Math.max(0, Math.min(1, rect.bottom / exitRamp))
         const progress = Math.min(entry, exit)
         el.style.setProperty('--scroll-progress', progress.toFixed(3))
       }

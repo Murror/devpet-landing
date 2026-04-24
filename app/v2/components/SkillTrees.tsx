@@ -162,16 +162,20 @@ export default function SkillTrees() {
     const update = () => {
       rafId = null
       const vh = window.innerHeight
-      // Size of the entry/exit ramps — 45% of the viewport height on
-      // each side. A longer ramp means more scroll distance is
-      // required to go from progress 0 → 1, which reads as a slower
-      // reveal. Bumped up from 25% because at the shorter ramp the
-      // cards appeared too abruptly during a normal scroll.
-      const ramp = vh * 0.45
+      // Entry ramp 45% of viewport; exit ramp 25% and gated behind
+      // rect.top < 0 so elements sitting near (but still inside) the
+      // top of the viewport don't get treated as "exiting" and stuck
+      // at partial opacity. Same fix we applied to Final CTA and
+      // Testimonials for the same symptom.
+      const entryRamp = vh * 0.45
+      const exitRamp = vh * 0.25
       for (const el of targets) {
         const rect = el.getBoundingClientRect()
-        const entry = Math.max(0, Math.min(1, (vh - rect.top) / ramp))
-        const exit = Math.max(0, Math.min(1, rect.bottom / ramp))
+        const entry = Math.max(0, Math.min(1, (vh - rect.top) / entryRamp))
+        const exit =
+          rect.top >= 0
+            ? 1
+            : Math.max(0, Math.min(1, rect.bottom / exitRamp))
         const progress = Math.min(entry, exit)
         el.style.setProperty('--scroll-progress', progress.toFixed(3))
       }
