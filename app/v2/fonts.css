@@ -89,10 +89,25 @@
   src: url('/fonts/upheaval/upheavtt.ttf') format('truetype');
 }
 
+/* VT323 — monospaced terminal/CRT face from Google Fonts (SIL OFL,
+   see /public/fonts/vt323/OFL.txt). Used as the primary body face
+   site-wide via --font-display so prose, captions, and quotes pick
+   up the retro-terminal voice that matches the pixel-art branding.
+   PP Neue Montreal stays in the cascade as a fallback so layout
+   doesn't shift if VT323 is still loading or fails to fetch. */
+@font-face {
+  font-family: 'VT323';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/vt323/VT323-Regular.ttf') format('truetype');
+}
+
 /* Scoped typography tokens — only apply under .v2-root so the existing
    landing at / keeps its Varela Round setup. */
 .v2-root {
   --font-display:
+    'VT323',
     'PP Neue Montreal',
     'Inter',
     system-ui,
