@@ -752,19 +752,23 @@ html {
   display: flex;
   /* V-shape choreography: pets top-align into a fixed-height
      box, then per-pet translateY pushes each one down into its
-     Framer-specified tier. Fixed container height = 220 (pet
-     height) + 160 (V depth) so the whole V lives inside the
-     box and nothing overflows into adjacent content. */
+     Framer-specified tier. Container height = 220 (pet height)
+     + 60 (V depth) — the V was previously 160px deep, but on
+     viewports where (nav + headline + subhead + pets + paddings)
+     summed past 100vh the deeper pets at the bottom of the V
+     (byte / fox / yellow) ended up clipped below the fold. The
+     shallower V keeps the row's bottom edge inside the viewport
+     while preserving the staggered baseline silhouette. */
   align-items: flex-start;
   justify-content: center;
   gap: clamp(12px, 2.2vw, 32px);
-  min-height: 380px;
+  min-height: 280px;
   /* Auto top-margin pushes the pets to the bottom of the hero's
      flex container while the headline + subhead stay anchored to
      the top — leftover viewport height falls into the gap between
      them instead of above the headline. The bottom margin keeps a
      consistent breathing buffer above the next section's edge. */
-  margin: auto 0 clamp(20px, 4.5vh, 48px);
+  margin: auto 0 clamp(12px, 2.4vh, 24px);
   flex-wrap: nowrap;
 }
 
@@ -838,12 +842,16 @@ html {
      Yellow    65    Red 106    Penguin 160
    Normalised so Pink/Penguin sit flush with the container top
    (translateY 0) and the middle drops by up to 160px at Byte. */
+/* Per-pet vertical offsets — proportionally scaled from the
+   original V (0/50/95/160/95/50/0) to a shallower V (0/20/40/60/40/20/0)
+   so the pets row fits inside the viewport on typical Mac /
+   laptop heights without losing the staggered Framer baseline. */
 .v2-hero-pet--pink    { transform: translateY(0); }
-.v2-hero-pet--owl     { transform: translateY(50px); }
-.v2-hero-pet--fox     { transform: translateY(95px); }
-.v2-hero-pet--byte    { transform: translateY(160px); }
-.v2-hero-pet--yellow  { transform: translateY(95px); }
-.v2-hero-pet--red     { transform: translateY(50px); }
+.v2-hero-pet--owl     { transform: translateY(20px); }
+.v2-hero-pet--fox     { transform: translateY(40px); }
+.v2-hero-pet--byte    { transform: translateY(60px); }
+.v2-hero-pet--yellow  { transform: translateY(40px); }
+.v2-hero-pet--red     { transform: translateY(20px); }
 .v2-hero-pet--penguin { transform: translateY(0); }
 
 /* Per-pet bob timing — staggered durations + delays so the row
