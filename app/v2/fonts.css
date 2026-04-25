@@ -507,11 +507,11 @@ html {
 
 .v2-nav-links a {
   font-family: var(--font-pixel);
-  font-size: 17px;
+  font-size: 19px;
   font-weight: 500;
   color: var(--v2-text-primary);
   text-transform: uppercase;
-  letter-spacing: 0.024em; /* ~0.4px at 17px */
+  letter-spacing: 0.024em; /* ~0.46px at 19px */
   text-decoration: none;
   line-height: 1;
   /* Position + padding so the ::after outline (see below) has room
