@@ -138,11 +138,6 @@ export default function Product() {
         <div className="v2-product-left">
           <p className="v2-product-eyebrow">PRODUCT</p>
 
-          <div className="v2-product-labels">
-            <span className="v2-product-label">codepet</span>
-            <span className="v2-product-sublabel">agentic coding</span>
-          </div>
-
           <h3 className="v2-product-heading">who we are</h3>
 
           <p className="v2-product-body">

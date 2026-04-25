@@ -1083,7 +1083,10 @@ html {
    copy. Scaled up slightly because Minecraft reads smaller at the
    same px size than the PP Neue Montreal it replaces. */
 .v2-product-heading {
-  font-family: var(--font-pixel);
+  /* Heavy pixel-display face — same stack as the hero headline so
+     "who we are" reads as the section's "game title" voice instead
+     of the lighter VT323 body type. */
+  font-family: 'Upheaval TT', 'Minecraft', monospace;
   font-weight: 500;
   font-size: clamp(48px, 5.25vw, 70px);
   letter-spacing: -0.02em;
@@ -1980,23 +1983,24 @@ html {
    share the same chunky silhouette. */
 .v2-getgood .v2-corner-label,
 .v2-skilltrees .v2-corner-label {
-  font-size: 20px;
+  /* Sized to match the PRODUCT eyebrow on the green section so all
+     three section markers share the same visual weight. */
+  font-size: 40px;
   font-weight: 500;
   letter-spacing: -0.03em;
   gap: 10px;
   /* Collapse the flex line-box to the em height so align-items: center
-     measures against the same box the Minecraft glyphs actually live in. */
+     measures against the same box the pixel glyphs actually live in. */
   line-height: 1;
 }
 .v2-getgood .v2-corner-label::before,
 .v2-skilltrees .v2-corner-label::before {
-  /* Sized to match Minecraft's cap height at 20px font (~14px).
-     Matching the height of the actual visible caps — rather than
-     the full line-box — means `align-items: center` on the flex
-     parent lines the square up with the letters' optical center
-     by default, no transform nudge needed. */
-  width: 14px;
-  height: 14px;
+  /* Square scaled with the font-size bump (was 14px @ 20px font).
+     Still matching cap-height rather than full line-box so flex
+     align-items: center pins the marker to the letters' optical
+     centre without a transform nudge. */
+  width: 28px;
+  height: 28px;
 }
 
 .v2-getgood .v2-corner-label { color: #000000; }
