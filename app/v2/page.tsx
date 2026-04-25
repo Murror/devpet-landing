@@ -9,10 +9,12 @@ import Testimonials from './components/Testimonials'
 import FinalCta from './components/FinalCta'
 import Footer from './components/Footer'
 import InstallPrompt from './components/InstallPrompt'
+import CopyGuard from './components/CopyGuard'
 
 export default function V2LandingPage() {
   return (
     <main id="top" className="relative bg-black text-white">
+      <CopyGuard />
       <Nav />
       <InstallPrompt />
       <Hero />

@@ -3569,3 +3569,55 @@ html {
 @media (display-mode: standalone) {
   .v2-install-pill { display: none; }
 }
+
+/* ── Copy-protection guard ────────────────────────────────────────
+   Discourages casual copy-paste / drag-and-drop scraping of the
+   marketing surface. NOT a security measure — anyone with View
+   Source, DevTools, a screenshot, or a "save as" command can still
+   pull content. The point is to stop drive-by drag-onto-Figma and
+   highlight-and-copy of the headline / body copy.
+
+   Scoped to .v2-root so the rest of the app keeps default browser
+   selection behaviour.
+
+   What's locked:
+     • Text selection (user-select: none) on every element
+     • Image drag (cursor + WebKit/Mozilla user-drag) on <img>
+     • Long-press context menu on iOS (-webkit-touch-callout)
+
+   What stays selectable (so the form actually works):
+     • <input>, <textarea>, contenteditable — typing requires
+       caret + selection.
+     • .v2-allow-select escape hatch for any element we want to
+       opt back in to copying. */
+.v2-root,
+.v2-root * {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.v2-root input,
+.v2-root textarea,
+.v2-root [contenteditable="true"],
+.v2-root .v2-allow-select,
+.v2-root .v2-allow-select * {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+  -webkit-touch-callout: default;
+}
+
+.v2-root img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  /* Pointer events stay on so hover effects (pet bob, button
+     highlights) keep working — only the drag handle is disabled. */
+  pointer-events: auto;
+}
