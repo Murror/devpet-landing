@@ -699,7 +699,7 @@ html {
      design pass — leaves more vertical room for the pets row to
      sit comfortably on shorter viewports. The clamp below
      preserves fluid scaling on small screens. */
-  font-size: clamp(48px, min(9.5vw, 16vh), 100px);
+  font-size: clamp(48px, min(9.5vw, 16vh), 96px);
   /* Framer inspector: Line 0.8em. */
   line-height: 0.8;
   letter-spacing: 0;
@@ -877,7 +877,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
   font-style: normal;
   font-weight: 400;
-  font-size: clamp(48px, min(9.5vw, 16vh), 100px);
+  font-size: clamp(48px, min(9.5vw, 16vh), 96px);
   line-height: 0.8;
   letter-spacing: 0;
   text-transform: uppercase;
