@@ -581,14 +581,13 @@ html {
   padding: clamp(16px, 4vh, 48px) 48px clamp(20px, 4.5vh, 56px);
   display: flex;
   flex-direction: column;
-  /* Anchor headline + subhead to the TOP (just below the padding
-     that clears the nav) and the pets row to the BOTTOM, with any
-     leftover viewport height distributed BETWEEN them rather than
-     above the headline. Previously justify-content: center pushed
-     the headline ~30–40% down the viewport on tall screens, which
-     read as a big empty blue gap below the nav. The `margin-top:
-     auto` on .v2-hero-pets below pushes the pets to the bottom. */
-  justify-content: flex-start;
+  /* Center the whole hero composition (headline + subhead + pets)
+     as a single group within the available height. With the
+     headline cap reduced to 96px and the V depth shrunk to 60px,
+     the column fits comfortably in 100vh − 136px even on shorter
+     laptop heights, so vertical centering puts the block visually
+     centred between the nav band and the next section's edge. */
+  justify-content: center;
   text-align: center;
   box-sizing: border-box;
   /* Clip the bottom bloom to the hero bounds so the soft light
@@ -765,12 +764,11 @@ html {
   justify-content: center;
   gap: clamp(12px, 2.2vw, 32px);
   min-height: 280px;
-  /* Auto top-margin pushes the pets to the bottom of the hero's
-     flex container while the headline + subhead stay anchored to
-     the top — leftover viewport height falls into the gap between
-     them instead of above the headline. The bottom margin keeps a
-     consistent breathing buffer above the next section's edge. */
-  margin: auto 0 clamp(12px, 2.4vh, 24px);
+  /* Pets row sits as a normal flex item below the headline +
+     subhead; the parent .v2-hero centres the whole group. A
+     small margin separates the pets visually from the subhead
+     above and from the next section's edge below. */
+  margin: clamp(16px, 3vh, 32px) 0 clamp(12px, 2.4vh, 24px);
   flex-wrap: nowrap;
 }
 
