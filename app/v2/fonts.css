@@ -220,7 +220,10 @@
    anchored section lands cleanly below the nav. Per-section values
    = nav clearance + that section's negative margin compensation. */
 :root {
-  --v2-nav-clearance: 140px;
+  /* Sticky nav is now ~124px tall (was 136px before the wordmark
+     resize); 130px gives a 6px breathing buffer between the nav's
+     bottom edge and any section's top after a scroll-margin jump. */
+  --v2-nav-clearance: 130px;
 }
 .v2-product,
 .v2-mindset,
@@ -3112,7 +3115,7 @@ html {
   /* Open Sans — see .v2-product-body for rationale. */
   font-family: 'Open Sans', 'VT323', system-ui, -apple-system, sans-serif;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.2;
   letter-spacing: -0.01em;
   color: #000;
@@ -3128,19 +3131,19 @@ html {
      .v2-testimonials-name and .v2-testimonials-role below since
      neither overrides font-family. */
   font-family: 'Open Sans', 'VT323', system-ui, -apple-system, sans-serif;
-  font-size: 19px;
+  font-size: 17px;
   line-height: 1.2;
   letter-spacing: -0.01em;
   text-align: center;
 }
 
 .v2-testimonials-name {
-  font-weight: 500;
+  font-weight: 300;
   color: #4A4A4A;
 }
 
 .v2-testimonials-role {
-  font-weight: 400;
+  font-weight: 200;
   color: #737373;
 }
 
