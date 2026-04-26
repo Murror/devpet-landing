@@ -695,9 +695,11 @@ html {
   -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
-  /* Framer inspector: Size 140px. Cap matches exactly; the clamp
-     below preserves fluid scaling on smaller viewports. */
-  font-size: clamp(48px, min(9.5vw, 16vh), 140px);
+  /* Cap reduced from the Framer 140px reference to 100px per
+     design pass — leaves more vertical room for the pets row to
+     sit comfortably on shorter viewports. The clamp below
+     preserves fluid scaling on small screens. */
+  font-size: clamp(48px, min(9.5vw, 16vh), 100px);
   /* Framer inspector: Line 0.8em. */
   line-height: 0.8;
   letter-spacing: 0;
@@ -866,15 +868,16 @@ html {
 .v2-hero-pet--penguin .v2-hero-pet-bob { animation-duration: 3.1s; animation-delay: 1.0s;  }
 
 .v2-hero-subhead {
-  /* Matches the headline 1:1 — Framer treats all three lines as
-     one H1 block at the same 140px size, so subhead scales with
-     the headline and shares its line-height. */
+  /* Matches the headline 1:1 — three lines render as one H1
+     block sharing the same clamp(...100px) cap and line-height
+     so the WITH YOUR CREW row stays visually contiguous with
+     LEARN TO BUILD / AGENTIC CODE above. */
   font-family: 'Upheaval TT', 'Minecraft', monospace;
   -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: grayscale;
   font-style: normal;
   font-weight: 400;
-  font-size: clamp(48px, min(9.5vw, 16vh), 140px);
+  font-size: clamp(48px, min(9.5vw, 16vh), 100px);
   line-height: 0.8;
   letter-spacing: 0;
   text-transform: uppercase;
