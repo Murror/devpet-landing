@@ -2397,6 +2397,35 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Card tagline — the short emphasised promise that sits between
+   the pixel label and the longer description body. Open Sans
+   like the rest of the body prose, slightly bolder than the
+   description so it reads as the card's lead line. */
+.v2-getgood-card-tagline {
+  font-family: 'Open Sans', 'VT323', system-ui, -apple-system, sans-serif;
+  font-weight: 600;
+  font-size: clamp(14px, 1.4vw, 18px);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: #FFFFFF;
+  text-align: center;
+  margin: clamp(8px, 1.2vh, 14px) 0 clamp(4px, 0.6vh, 8px);
+}
+
+/* Card description body — supporting prose under the tagline.
+   Lighter weight + slightly muted white so the tagline stays
+   the first thing the eye lands on inside each card. */
+.v2-getgood-card-body {
+  font-family: 'Open Sans', 'VT323', system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  font-size: clamp(12px, 1.15vw, 15px);
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+  color: rgba(255, 255, 255, 0.78);
+  text-align: center;
+  margin: 0;
+}
+
 .v2-getgood-body {
   max-width: 940px;
   margin: 0 auto clamp(40px, 4vw, 64px);

@@ -22,10 +22,30 @@ import { useEffect, useRef, useState } from 'react'
  * The nav "Get Good" link points to this section's id=`get-good`.
  */
 const cards = [
-  { icon: '/v2/get-good/icon-skill-map.png',        label: 'SKILL MAP' },
-  { icon: '/v2/get-good/icon-your-companion.svg',   label: 'YOUR COMPANION' },
-  { icon: '/v2/get-good/icon-real-practice.png',    label: 'REAL PRACTICE' },
-  { icon: '/v2/get-good/icon-honest-insights.png',  label: 'HONEST INSIGHTS' },
+  {
+    icon: '/v2/get-good/icon-skill-map.png',
+    label: 'SKILL MAP',
+    tagline: 'Know exactly what to learn next.',
+    body: '16 skills across 4 tiers map a clear path from your first line of code to your first shipped product.',
+  },
+  {
+    icon: '/v2/get-good/icon-your-companion.svg',
+    label: 'YOUR COMPANION',
+    tagline: 'Built to keep you building.',
+    body: 'Crash, Nova, Glitch, and more — each pet teaches specific skills and grows with you as you practice.',
+  },
+  {
+    icon: '/v2/get-good/icon-real-practice.png',
+    label: 'REAL PRACTICE',
+    tagline: 'Real challenges, real tools.',
+    body: 'Every challenge happens in Cursor, VS Code, or Claude Code — the same workspaces you ship from.',
+  },
+  {
+    icon: '/v2/get-good/icon-honest-insights.png',
+    label: 'HONEST INSIGHTS',
+    tagline: 'See your weak spots clearly.',
+    body: 'Error trends, prompt success rates, streak data. Your companion surfaces what the numbers really mean — and what to practice next.',
+  },
 ] as const
 
 export default function GetGood() {
@@ -65,6 +85,10 @@ export default function GetGood() {
       <div className="v2-getgood-inner">
         <h2 className="v2-getgood-headline">CODE.GROW.LEARN</h2>
 
+        <p className="v2-getgood-body">
+          Everything you need to actually get good.
+        </p>
+
         <div className="v2-getgood-cards">
           {cards.map((card) => (
             <div key={card.label} className="v2-getgood-card">
@@ -79,15 +103,11 @@ export default function GetGood() {
                 />
               </div>
               <p className="v2-getgood-card-label">{card.label}</p>
+              <p className="v2-getgood-card-tagline">{card.tagline}</p>
+              <p className="v2-getgood-card-body">{card.body}</p>
             </div>
           ))}
         </div>
-
-        <p className="v2-getgood-body">
-          Codepet is the whole loop in one place. A skill map across four tiers:
-          Foundations, Context &amp; Structure, Develop, Expert — tells you
-          exactly what to learn next. Your companion coaches you through each one.
-        </p>
 
         {/* Pixel-art pill CTA — same two-layer pattern as Product
             and Mindset buttons. Outer <a> owns the drop-shadow
