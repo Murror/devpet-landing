@@ -550,8 +550,14 @@ html {
      top padding + less bottom padding → glyph sits optically
      centered inside the ::after outline. */
   position: relative;
-  display: inline-block;
-  padding: 9px 10px 3px;
+  /* Flex centering so the label sits dead-centre inside the ::after
+     outline regardless of the font's vertical metrics. The previous
+     asymmetric padding (9px top / 3px bottom) was tuned for
+     Minecraft's top-heavy glyphs and read as off-centre with VT323. */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
   -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: none;
   /* Smooth swap into the hover fill — bg + text both transition
@@ -568,7 +574,11 @@ html {
   content: '';
   position: absolute;
   inset: 0;
-  border: 1px solid currentColor;
+  /* Hard-coded black outline so the rectangle stays the same colour
+     regardless of the link's hover fill (red / yellow / green) or
+     the text colour. Previously bound to currentColor, which made
+     the border invert with the text on hover. */
+  border: 1px solid #000000;
   opacity: 0;
   transition: opacity 0.2s cubic-bezier(0.22, 1, 0.36, 1);
   pointer-events: none;
@@ -579,15 +589,32 @@ html {
   opacity: 1;
 }
 
-/* Hover fill — Codepet Purple background + white text on top of
-   the existing rectangular outline. Same brand purple as the
-   wordmark next to these links, so the hover reads as a "the
-   brand has stepped onto this label" colour shift. The
-   ::after border becomes white via currentColor inheritance,
-   keeping the outline visible against the new purple fill. */
-.v2-nav-link:hover,
-.v2-nav-link:focus-visible {
-  background-color: #7B6BD8;
+/* Per-link hover fills — each section gets its own brand colour
+   so the hover reads as "you're about to enter the X section." All
+   three pair white text on the saturated fill, with the shared
+   black outline (.v2-nav-link::after above) drawing on top. */
+.v2-nav-link[href="#product"]:hover,
+.v2-nav-link[href="#product"]:focus-visible {
+  /* Stats-triangle red — same #F83C00 used by the rotating triangle
+     in the Stats band. */
+  background-color: #F83C00;
+  color: #FFFFFF;
+}
+
+.v2-nav-link[href="#get-good"]:hover,
+.v2-nav-link[href="#get-good"]:focus-visible {
+  /* Get Good section ground — same warm #FCBE1D yellow as the
+     section's own band. Black text instead of white because yellow
+     + white is too low-contrast. */
+  background-color: #FCBE1D;
+  color: #000000;
+}
+
+.v2-nav-link[href="#skill-trees"]:hover,
+.v2-nav-link[href="#skill-trees"]:focus-visible {
+  /* Product-section green — same #029902 as the Product band's
+     CTA pill. */
+  background-color: #029902;
   color: #FFFFFF;
 }
 
