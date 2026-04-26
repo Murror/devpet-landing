@@ -2407,7 +2407,7 @@ html {
      .v2-skilltrees-* / .v2-product-body naming we already covered. */
   font-family: 'Open Sans', 'VT323', system-ui, -apple-system, sans-serif;
   font-weight: 500;
-  font-size: clamp(20px, 2.4vw, 36px);
+  font-size: 30px;
   line-height: 1.2;
   letter-spacing: -0.04em;
   /* Black on yellow — swapped from the old white-on-dark palette. */
@@ -3035,7 +3035,7 @@ html {
   font-family: var(--font-pixel);
   font-weight: 500;
   font-style: normal;
-  font-size: 45px;
+  font-size: 56px;
   line-height: 1.1;
   letter-spacing: -0.03em;
   color: #FFFFFF;
@@ -3053,7 +3053,7 @@ html {
   font-family: var(--font-pixel);
   font-weight: 500;
   font-style: normal;
-  font-size: 45px;
+  font-size: 56px;
   line-height: 1.1;
   letter-spacing: -0.04em;
   color: rgba(0, 0, 0, 0.7);
