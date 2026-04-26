@@ -509,7 +509,11 @@ html {
   font-family: var(--font-pixel);
   font-size: 19px;
   font-weight: 500;
-  color: var(--v2-text-primary);
+  /* Black so the nav links read with maximum contrast against
+     the white nav band. Previously bound to --v2-text-primary
+     (white), which only worked when the nav had a dark fill —
+     on the new white ground it would render invisible. */
+  color: #000000;
   text-transform: uppercase;
   letter-spacing: 0.024em; /* ~0.46px at 19px */
   text-decoration: none;
