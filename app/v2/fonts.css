@@ -2542,16 +2542,22 @@ html {
 }
 
 .v2-skilltrees-intro {
-  /* Widen the container so the muted second sentence keeps on one
-     line at desktop widths (the earlier 1100px cap was wrapping
-     "efficiency." onto its own line). Falls back to full viewport
-     minus padding on narrower screens. */
+  /* Wide container so the two-sentence intro fits comfortably on
+     two lines at desktop widths (was wrapping the word
+     "efficiency." onto its own third line at the previous 40px
+     cap). Falls back to full viewport minus padding on narrower
+     screens. */
   max-width: min(1600px, calc(100vw - 96px));
   margin: 0 auto clamp(64px, 7vw, 100px);
   /* Open Sans body face — see .v2-product-body for the rationale. */
   font-family: 'Open Sans', 'VT323', system-ui, -apple-system, sans-serif;
   font-weight: 500;
-  font-size: clamp(24px, 2.95vw, 40px);
+  /* Cap reduced from 40px to 30px so the second sentence ('From
+     the first call to final delivery, every step is designed for
+     clarity and efficiency.') fits on a single line at standard
+     desktop widths instead of orphaning 'efficiency.' on its
+     own row. Min and vw scale reduced proportionally. */
+  font-size: clamp(20px, 2.2vw, 30px);
   line-height: 1.2;
   letter-spacing: -0.04em;
   text-align: center;
@@ -2775,22 +2781,25 @@ html {
     drop-shadow(-4px 0 0 var(--tier-border))
     drop-shadow(0 4px 0 var(--tier-border))
     drop-shadow(0 -4px 0 var(--tier-border));
-  /* Minecraft, bumped up from Framer's 24px to fill the larger disc */
-  font-family: var(--font-pixel);
+  /* Upheaval TT — same heavy pixel display face as the hero
+     headline, so the tier numerals read with the brand's
+     'game title' weight inside the disc. Minecraft + monospace
+     stay in the cascade as fallbacks during font load. */
+  font-family: 'Upheaval TT', 'Minecraft', monospace;
   font-size: clamp(30px, 2.8vw, 38px);
   font-weight: 500;
   letter-spacing: -0.03em;
   line-height: 1;
   text-align: center;
   margin-bottom: clamp(20px, 2.2vw, 32px);
-  /* Minecraft is a pixel face — keep rendering crisp, no antialiasing */
+  /* Pixel face — keep rendering crisp, no antialiasing */
   -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: none;
-  /* Minecraft glyphs carry asymmetric top padding in their metrics,
-     which makes the digit read as sitting above center. A small
-     padding-top on a border-box container nudges it back to optical
-     center without distorting the circle. */
-  padding-top: 0.15em;
+  /* Padding-top reset — the parent's flex `align-items: center` +
+     `justify-content: center` now does the optical centring. The
+     previous 0.15em nudge was a Minecraft-specific metrics fix; on
+     Upheaval TT it would push the digit below centre. */
+  padding-top: 0;
 }
 
 .v2-skilltrees-card-title {
