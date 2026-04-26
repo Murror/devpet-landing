@@ -3436,8 +3436,10 @@ html {
    ─────────────────────────────────────────────────────────── */
 .v2-footer {
   position: relative;
-  background: #1C40CF;
-  color: var(--v2-text-primary);
+  /* White ground per design pass — replaces the previous brand-
+     blue band so the footer reads as a calm closing surface. */
+  background: #FFFFFF;
+  color: #000000;
   padding: clamp(48px, 5vw, 80px) 48px clamp(32px, 3vw, 48px);
 }
 
@@ -3469,12 +3471,15 @@ html {
 
 .v2-footer-copyright {
   margin: 0;
-  /* Open Sans — see .v2-product-body for rationale. */
-  font-family: 'Open Sans', 'VT323', system-ui, -apple-system, sans-serif;
+  /* VT323 retro-terminal face — matches the rest of the footer
+     and the page's small captions / eyebrows. */
+  font-family: var(--font-pixel);
   font-weight: 400;
   font-size: clamp(11px, 1vw, 13px);
   letter-spacing: -0.01em;
-  color: rgba(255, 255, 255, 0.6);
+  /* Black on white per design pass — was a translucent white
+     when the footer ground was brand blue. */
+  color: #000000;
   -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: none;
 }
@@ -3502,10 +3507,13 @@ html {
 }
 
 .v2-footer-link {
-  color: var(--v2-text-primary);
+  /* Black on white per design pass — was bound to
+     --v2-text-primary (white) when the footer ground was blue. */
+  color: #000000;
   text-decoration: none;
-  /* Open Sans — see .v2-product-body for rationale. */
-  font-family: 'Open Sans', 'VT323', system-ui, -apple-system, sans-serif;
+  /* VT323 retro-terminal face — matches the copyright + the rest
+     of the page's small captions / eyebrows. */
+  font-family: var(--font-pixel);
   font-weight: 500;
   font-size: clamp(14px, 1.3vw, 17px);
   letter-spacing: -0.01em;
