@@ -2400,7 +2400,12 @@ html {
 .v2-getgood-body {
   max-width: 940px;
   margin: 0 auto clamp(40px, 4vw, 64px);
-  font-family: var(--font-pixel);
+  /* Open Sans body face — see .v2-product-body for the rationale.
+     Was previously bound to var(--font-pixel) (VT323) which was
+     missed in the earlier Open-Sans-for-prose passes because the
+     class name follows the .v2-getgood-* prefix instead of the
+     .v2-skilltrees-* / .v2-product-body naming we already covered. */
+  font-family: 'Open Sans', 'VT323', system-ui, -apple-system, sans-serif;
   font-weight: 500;
   font-size: clamp(20px, 2.4vw, 36px);
   line-height: 1.2;
