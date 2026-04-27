@@ -3959,9 +3959,11 @@ html {
   }
   .v2-hero-headline,
   .v2-hero-subhead {
-    /* Smaller cap on mobile — 44px so the lines feel readable
-       without dominating the viewport. */
-    font-size: clamp(28px, 9vw, 44px);
+    /* Fixed 40px on mobile per design pass — was a fluid
+       clamp(28px, 9vw, 44px). Pinning the size means the title
+       reads consistently across phone widths instead of scaling
+       up to 44px on tablets and down to 35px on a 390px iPhone. */
+    font-size: 40px;
     /* Explicit center alignment — without this the headline can
        inherit a left-leaning rhythm from elsewhere on mobile.
        width: 100% ensures each line's flex/block box spans the
@@ -4264,7 +4266,8 @@ html {
   }
   .v2-hero-headline,
   .v2-hero-subhead {
-    font-size: clamp(32px, 12vw, 48px);
+    /* Match the 768px rule — fixed 40px on phones too. */
+    font-size: 40px;
   }
   .v2-hero-pets {
     gap: 2px;
