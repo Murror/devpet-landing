@@ -1252,7 +1252,9 @@ html {
   line-height: 1.2;
   letter-spacing: -0.01em;
   color: #FFFFFF;
-  margin: 0 0 clamp(28px, 3.5vw, 48px);
+  /* Wider gap before the integrations row so the body paragraph
+     and the platform list read as separate beats. */
+  margin: 0 0 clamp(40px, 4.5vw, 64px);
   max-width: 560px;
   -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: none;
@@ -1272,7 +1274,8 @@ html {
   font-size: 20px;
   color: #FFFFFF;
   letter-spacing: -0.01em;
-  margin: 0 0 12px;
+  /* Bumped 12 -> 20 so the caption breathes before the logo row. */
+  margin: 0 0 20px;
   -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: none;
 }
@@ -1281,10 +1284,13 @@ html {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: clamp(18px, 2.4vw, 32px);
+  gap: clamp(24px, 3vw, 44px);
   list-style: none;
   padding: 0;
-  margin: 0 0 clamp(32px, 4vw, 56px);
+  /* Roomier gap before the form below so the integrations list
+     and the waitlist input read as separate sections of the
+     left column. */
+  margin: 0 0 clamp(48px, 5.5vw, 80px);
 }
 
 .v2-product-integrations li {
@@ -1716,7 +1722,9 @@ html {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: end;
-  gap: clamp(16px, 3vw, 48px);
+  /* Wider gap so each stat (numeral + label) reads as its own
+     islanded statement instead of crowding its neighbours. */
+  gap: clamp(24px, 3.5vw, 64px);
 }
 
 .v2-stat {
@@ -2270,7 +2278,9 @@ html {
 .v2-getgood-cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: clamp(16px, 2vw, 24px);
+  /* Wider gap so each card reads as its own object on the yellow
+     band rather than four tightly-packed cells. */
+  gap: clamp(24px, 2.8vw, 40px);
   margin-bottom: clamp(56px, 6vw, 88px);
 }
 
@@ -2630,7 +2640,9 @@ html {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: repeat(4, auto);
-  gap: clamp(20px, 3vw, 48px) clamp(40px, 6vw, 96px);
+  /* Wider row + column gaps so the 4 tier cards have visible
+     breathing space between them on the black band. */
+  gap: clamp(28px, 3.5vw, 56px) clamp(48px, 7vw, 112px);
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -3061,7 +3073,9 @@ html {
   padding: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: clamp(24px, 3vw, 40px);
+  /* Wider gap so the three quote cards have clear separation on
+     the pink band. */
+  gap: clamp(32px, 3.6vw, 56px);
 }
 
 .v2-testimonials-item {
@@ -3291,7 +3305,9 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(14px, 1.5vw, 20px);
+  /* Wider gap between input and submit so the form reads as two
+     deliberate steps instead of a tight stack. */
+  gap: clamp(20px, 2.2vw, 32px);
 }
 
 .v2-finalcta-input {
