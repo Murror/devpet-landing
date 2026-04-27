@@ -3918,14 +3918,31 @@ html {
     /* Smaller cap on mobile — 44px so the lines feel readable
        without dominating the viewport. */
     font-size: clamp(28px, 9vw, 44px);
+    /* Explicit center alignment — without this the headline can
+       inherit a left-leaning rhythm from elsewhere on mobile.
+       width: 100% ensures each line's flex/block box spans the
+       parent so text-align actually centres glyphs. */
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
   }
-  /* Sparkle moved to BOTTOM-LEFT on mobile — sits just above /
-     beside the 'CREW' line of the headline instead of pinned to
-     the top-left corner of the hero. */
+  .v2-hero-headline .line {
+    /* Each line is a block-level span — display: block + text-
+       align: center keeps every line centred in its own row. */
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
+  /* Sparkle pinned to the LEFT of the 'WITH YOUR CREW' line — sits
+     between the AGENTIC CODE row and the CREW row on the left
+     flank of the headline (roughly where the user circled in the
+     reference). top: 38% lands it just above the subhead line at
+     a phone aspect ratio; left: 3% hugs the edge so it doesn't
+     collide with the centred headline glyphs. */
   .v2-hero-deco--sparkle-tl {
-    left: 6%;
-    top: auto;
-    bottom: 28%;
+    left: 3%;
+    top: 38%;
+    bottom: auto;
     width: clamp(40px, 10vw, 64px);
   }
   /* Heart stays top-right but tucked tighter to the corner. */
