@@ -4338,10 +4338,13 @@ html {
   }
   .v2-mindset-eyebrow {
     font-size: 18px;
-    text-align: center;
-    /* Same belt-and-braces auto margins as the headline so the
-       "Codepet" eyebrow is guaranteed to centre regardless of
-       how its containing block computes width. */
+    /* Bulletproof centring: span the parent (display: block +
+       width: 100%) so text-align: center actually has the full
+       column to centre against, then re-affirm text-align with
+       !important to defeat any cascade that might land here. */
+    display: block;
+    width: 100%;
+    text-align: center !important;
     margin-left: auto;
     margin-right: auto;
   }
@@ -4558,7 +4561,11 @@ html {
   .v2-hero-pet-img {
     width: clamp(28px, 11.5vw, 56px) !important;
   }
-  .v2-mindset-headline,
+  /* .v2-mindset-headline removed from this group — the 768px
+     mobile rule (clamp 18,4.8vw,28) is correct for phones, and
+     this 480px rule was overriding it back up to ~39px because
+     it parses later in the file. The other three headlines stay
+     here because they DO want a size bump at <=480px. */
   .v2-getgood-headline,
   .v2-skilltrees-headline,
   .v2-finalcta-headline {
