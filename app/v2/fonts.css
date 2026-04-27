@@ -3903,15 +3903,15 @@ html {
 
   /* ── Hero ─────────────────────────────────────────────────── */
   .v2-hero {
-    /* Mobile hero gets a shorter min-height (smaller nav) and
-       tighter top padding so the pets row stays visible above
-       the fold. */
-    min-height: calc(100vh - 70px);
-    min-height: calc(100dvh - 70px);
-    padding: clamp(8px, 2vh, 16px) 16px clamp(12px, 2vh, 20px);
-    /* Centre the column tighter so the headline + pets sit as
-       one balanced block on portrait screens. */
-    justify-content: center;
+    /* Mobile hero collapses to its content height — no more
+       100vh min-height that left big empty bands above and below
+       the headline + pets cluster. The section now sits at
+       intrinsic height with small padding on either end, and
+       justify-content: flex-start anchors the headline near the
+       nav so there's no centring gap above it. */
+    min-height: 0;
+    padding: clamp(20px, 4vh, 40px) 16px clamp(24px, 4vh, 40px);
+    justify-content: flex-start;
   }
   .v2-hero-headline,
   .v2-hero-subhead {
@@ -3933,15 +3933,15 @@ html {
     text-align: center;
     width: 100%;
   }
-  /* Sparkle pinned to the LEFT of the 'WITH YOUR CREW' line — sits
-     between the AGENTIC CODE row and the CREW row on the left
-     flank of the headline (roughly where the user circled in the
-     reference). top: 38% lands it just above the subhead line at
-     a phone aspect ratio; left: 3% hugs the edge so it doesn't
-     collide with the centred headline glyphs. */
+  /* Sparkle pinned to the LEFT of the headline — moved up one
+     notch from the previous top: 38% (which sat next to CREW)
+     to top: 28% so it now lines up with the WITH YOUR / AGENTIC
+     CODE rows instead of dropping toward the pets. left: 3%
+     hugs the edge so it doesn't collide with the centred
+     headline glyphs. */
   .v2-hero-deco--sparkle-tl {
     left: 3%;
-    top: 38%;
+    top: 28%;
     bottom: auto;
     width: clamp(40px, 10vw, 64px);
   }
