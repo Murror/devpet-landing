@@ -4316,13 +4316,13 @@ html {
   .v2-mindset {
     padding: 96px 20px;
   }
-  /* Headline pinned to a flat 40px on mobile per design pass.
+  /* Headline pinned to a flat 35px on mobile per design pass.
      white-space: normal (overrides the default `nowrap` on the
      desktop `.line` rule) so the longest line "mindset before
      you" can wrap onto multiple visual rows at this larger size
      instead of overflowing the viewport on narrow phones. */
   .v2-mindset-headline {
-    font-size: 40px;
+    font-size: 35px;
     line-height: 1.05;
     text-align: center;
     margin-left: auto;
