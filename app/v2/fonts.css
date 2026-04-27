@@ -4434,33 +4434,29 @@ html {
      touch narrower than the section column. */
   .v2-getgood-cards {
     grid-template-columns: 1fr;
-    gap: 20px;
-    /* Inset the whole grid from the section's edges so each card
-       reads as narrower than the full viewport — gives the
-       yellow band breathing room around the cards. */
-    padding: 0 8px;
+    gap: 18px;
+    /* Wider grid inset (8px → 28px each side) so the card itself
+       is noticeably narrower than the viewport — this is what
+       reduces the WIDTH per the design pass. */
+    padding: 0 28px;
   }
   .v2-getgood-card {
-    aspect-ratio: 4 / 5;
-    padding: 24px 22px;
+    /* Aspect 4:5 → 5:6 — slightly less portrait, which combined
+       with the now-narrower card width drops the rendered card
+       height from ~437px to ~310px on a 390px phone. */
+    aspect-ratio: 5 / 6;
+    padding: 20px 18px;
     align-items: center;
     justify-content: space-between;
     text-align: center;
   }
   .v2-getgood-card-icon {
-    /* Icon capped at 60% height so it reads larger inside the
-       shorter card — was 55% on the taller 3:4 layout. */
     width: 100%;
     max-height: 60%;
     align-self: center;
   }
   .v2-getgood-card-label {
-    /* Title shrunk to clamp(22,6vw,30) — at ~23px on a 390px
-       phone it sits comfortably below the icon without
-       crowding the bottom of the now-shorter card. Was
-       clamp(32,9vw,44) which read oversized once the card got
-       smaller. */
-    font-size: clamp(22px, 6vw, 30px);
+    font-size: clamp(20px, 5.4vw, 26px);
     line-height: 1;
     align-self: center;
     text-align: center;
