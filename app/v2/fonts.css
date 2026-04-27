@@ -4070,40 +4070,122 @@ html {
     align-items: flex-start;
   }
   .v2-product-inner {
-    /* Two-column desktop grid collapses into a single stack — copy
-       on top, the byte sprite + coin scene below.
-       The desktop scale-reveal animation (transform: scale(0.5→1)
-       driven by --enter-p as the section enters view) was the real
-       culprit behind the giant empty green band on mobile: scale
-       doesn't affect layout, so the section reserved the FULL
-       natural height of the inner while visually rendering the
-       content at half-size, leaving ~half the section's height
-       as empty green padding. On phones the slow reveal is more
-       distracting than effective, so neutralise it: opacity stays
-       at 1, no scale, no transition. The section now collapses
-       cleanly to its content height. */
-    grid-template-columns: 1fr;
-    gap: clamp(24px, 6vw, 48px);
+    /* Switch from grid to flex column on mobile so individual
+       items can be reordered with `order:` — needed to slot the
+       byte sprite between the PRODUCT eyebrow and the WHO WE ARE
+       heading without restructuring the JSX.
+       display: contents on .v2-product-left dissolves it from
+       layout, so its children (eyebrow, heading, body, etc.)
+       become direct children of this flex container and can each
+       carry their own order/align-self.
+       Scale-reveal animation also disabled (see prior commit):
+       transform: scale(0.5→1) driven by --enter-p doesn't shrink
+       the layout box, so the section reserved the inner's full
+       natural height while visually rendering content at half-
+       size — that was the giant empty green band. */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(16px, 4vw, 28px);
     opacity: 1;
     transform: none;
     transition: none;
   }
-  .v2-product-eyebrow {
-    font-size: 28px;
+  .v2-product-left {
+    /* Dissolve so children (.v2-product-eyebrow / heading / body /
+       integrates / integrations / form) become direct flex items
+       of .v2-product-inner. Required for per-item `order:`. */
+    display: contents;
   }
+  /* PRODUCT eyebrow — pinned to the LEFT corner with a small
+     section-badge size while everything else below it centres.
+     Was 28px on mobile + a 24-80px margin-bottom; now 16px and
+     hugged to the column's flex-start edge via align-self. */
+  .v2-product-eyebrow {
+    order: 1;
+    align-self: flex-start;
+    font-size: 16px;
+    margin: 0;
+  }
+  /* Byte sprite + coin column lives between the eyebrow and the
+     headline now (was at the bottom in the desktop grid). order:2
+     puts it second in the flex column. min-height: 0 + width: 100%
+     drop the desktop's reserved 240–360px green band so the column
+     collapses to the byte's intrinsic height. */
+  .v2-product-right {
+    order: 2;
+    min-height: 0;
+    width: 100%;
+    align-self: stretch;
+  }
+  .v2-product-byte {
+    /* Slightly smaller than the previous mobile clamp(180px, 56vw,
+       260px) — the user asked for a small scale-down now that the
+       byte sits inline above the headline rather than alongside it. */
+    width: clamp(140px, 42vw, 200px);
+  }
+  /* WHO WE ARE heading + body + Integrates + integrations list
+     all centered on mobile per design pass. align-self: stretch
+     makes each item span the column so text-align: center actually
+     centres the glyphs (without stretch each item shrinks to its
+     intrinsic width and `text-align: center` is a no-op). */
   .v2-product-heading {
+    order: 3;
+    align-self: stretch;
+    text-align: center;
     font-size: clamp(36px, 9vw, 56px);
+    margin: 0;
   }
   .v2-product-body {
+    order: 4;
+    align-self: stretch;
+    text-align: center;
     font-size: clamp(16px, 4vw, 22px);
     max-width: 100%;
-    margin-bottom: clamp(24px, 5vw, 36px);
+    margin: 0;
   }
   .v2-product-integrates {
+    order: 5;
+    align-self: stretch;
+    text-align: center;
     font-size: 16px;
+    margin: 0;
+  }
+  .v2-product-integrations {
+    order: 6;
+    align-self: stretch;
+    justify-content: center;
+    margin: 0;
   }
   .v2-product-integrations li {
     font-size: clamp(14px, 3.6vw, 18px);
+  }
+  /* Email + waitlist button — stacked vertically and centred on
+     mobile, with a tighter max-width so the form reads as a tidy
+     compact pair instead of two full-width slabs. Input and button
+     both shrink to 44px tall (was 52px) and use a smaller label
+     size so they fit a phone column comfortably. */
+  .v2-product-form {
+    order: 7;
+    align-self: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 320px;
+    gap: 12px;
+  }
+  .v2-product-input {
+    flex: 0 0 auto;
+    width: 100%;
+    height: 44px;
+    font-size: 14px;
+    padding: 0 16px;
+  }
+  .v2-product-submit-body {
+    height: 44px;
+    font-size: 18px;
+    padding: 0 22px;
   }
 
   /* ── Stats ────────────────────────────────────────────────── */
