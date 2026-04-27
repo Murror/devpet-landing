@@ -4465,7 +4465,12 @@ html {
     aspect-ratio: 5 / 6;
     padding: 20px 18px;
     align-items: center;
-    justify-content: space-between;
+    /* Was `space-between` (icon flush at top, label flush at
+       bottom) which pushed the icon visually upward. `center`
+       clusters icon + label as a centred group, then a small
+       gap between them keeps the rhythm. */
+    justify-content: center;
+    gap: 16px;
     text-align: center;
   }
   .v2-getgood-card-icon {
