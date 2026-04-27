@@ -4638,6 +4638,73 @@ html {
     width: clamp(100px, 28vw, 140px);
   }
 
+  /* ── Mobile performance optimizations ───────────────────────
+     The prior pass piled up several continuous animations and
+     long scroll-linked transitions that read fine on a desktop
+     GPU but stutter on mobile during scroll. The block below
+     trims the most expensive items on phone — the visual impact
+     is small but the frame-rate gain is significant. */
+
+  /* 1. Disable the continuous bob keyframe on every pet / deco /
+        orb. 7 hero pets + 2 hero decos + 4 mindset orbs running
+        their own keyframes constantly was the single biggest
+        scroll-time cost. Static positions on mobile.
+        Hover scale on pets is also removed since touch devices
+        don't really hover. */
+  .v2-hero-pet-bob,
+  .v2-hero-deco-img,
+  .v2-product-byte,
+  .v2-product-coin {
+    animation: none !important;
+  }
+  .v2-hero-pet:hover .v2-hero-pet-img,
+  .v2-hero-pet:focus-within .v2-hero-pet-img {
+    transform: none;
+  }
+
+  /* 2. Stats decorative shapes had a 0.5s ease-out transition
+        on transform/opacity. On scroll-driven --enter-p that
+        creates a 500ms rubber-band lag behind the actual scroll
+        position, reading as choppy "follow-the-finger" motion.
+        Drop to 0.12s linear so the shape sits closer to the
+        scroll position with just enough smoothing to take the
+        edge off frame jumps. */
+  .v2-stats-shape {
+    transition:
+      opacity 0.12s linear,
+      transform 0.12s linear;
+  }
+
+  /* 3. Get Good cards: drop the drop-shadow filter on hover
+        (expensive repaint, and there's no hover on touch
+        devices anyway). The light-up alpha change still
+        animates so taps feel responsive. */
+  .v2-getgood.is-in-view .v2-getgood-card:hover {
+    filter: none;
+  }
+
+  /* 4. Mindset orb parallax: zero out the per-orb drift speeds
+        so the four orbs sit static instead of being repainted
+        on every scroll frame. The drop-in entrance is preserved;
+        only the continuous parallax is muted. */
+  .v2-mindset-orb {
+    --spd-x: 0px !important;
+    --spd-y: 0px !important;
+  }
+
+  /* 5. Mark scroll-linked containers as paint-contained so any
+        per-frame style writes inside them don't invalidate the
+        rest of the page. `contain: layout paint` lets the
+        browser scope re-layout/repaint to the section bounds. */
+  .v2-product,
+  .v2-stats,
+  .v2-mindset,
+  .v2-skilltrees,
+  .v2-testimonials,
+  .v2-getgood {
+    contain: layout paint;
+  }
+
   /* ── Testimonials ─────────────────────────────────────────── */
   .v2-testimonials {
     padding: 96px 20px;
