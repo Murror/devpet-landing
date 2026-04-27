@@ -4417,18 +4417,91 @@ html {
   .v2-getgood {
     padding: clamp(64px, 12vw, 120px) 20px clamp(80px, 16vw, 140px);
   }
+  /* Headline matched to the Product section's "who we are"
+     heading: clamp(36px, 9vw, 56px). Was clamp(42, 11vw, 64) which
+     was noticeably larger than Product's heading on the same
+     phone — equalising both gives the page a single editorial
+     voice across the green and yellow bands. */
   .v2-getgood-headline {
-    font-size: clamp(42px, 11vw, 64px);
+    font-size: clamp(36px, 9vw, 56px);
   }
+  /* Cards stacked single-column on mobile (was 2-col grid),
+     matching the reference pattern where each card takes the
+     full viewport width and stacks vertically. Aspect-ratio
+     loosened to 4/3 so the card is wider-than-tall — gives the
+     icon room to read large and lets the label sit clearly at
+     the bottom (the desktop 323:440 portrait was tuned for the
+     4-up grid; at full mobile width it became uncomfortably
+     tall). */
   .v2-getgood-cards {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .v2-getgood-card {
+    aspect-ratio: 4 / 3;
+    padding: 24px 20px 20px;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .v2-getgood-card-icon {
+    /* Let the icon fill more of the card vertically since the
+       card is now wider — was capped at 68% on desktop where
+       cards were portrait. */
+    max-height: 78%;
   }
   .v2-getgood-card-label {
     font-size: clamp(16px, 4vw, 22px);
+    /* Bottom-left aligned label per reference. align-self: flex-
+       start moves it to the column's start edge; the card's
+       align-items: flex-start above does the same horizontally. */
+    align-self: flex-start;
+    text-align: left;
+    width: 100%;
   }
   .v2-getgood-body {
     font-size: clamp(16px, 4vw, 22px);
+  }
+  /* Get Good CTA matched to the Product section's mobile button
+     so all three pixel-pill CTAs (Product / Mindset / Get Good)
+     share one mobile visual language: 40px tall body, 15px label,
+     20px padding, 3px outline, 3px bevel, plus a clip-path
+     re-cut for a 40px-tall pill (the desktop's 52px-tuned path
+     would otherwise chop the bottom corners off). */
+  .v2-getgood-cta {
+    filter:
+      drop-shadow( 3px 0 0 #1E1848)
+      drop-shadow(-3px 0 0 #1E1848)
+      drop-shadow(0  3px 0 #1E1848)
+      drop-shadow(0 -3px 0 #1E1848);
+  }
+  .v2-getgood-cta-body {
+    height: 40px;
+    font-size: 15px;
+    padding: 0 20px;
+    box-shadow:
+      inset 0  3px 0 rgba(255, 255, 255, 0.22),
+      inset 0 -3px 0 rgba(0, 0, 0, 0.35);
+    clip-path: polygon(
+      16px 0,             calc(100% - 16px) 0,
+      calc(100% - 12px) 0,  calc(100% - 12px) 4px,
+      calc(100% - 8px)  4px, calc(100% - 8px)  8px,
+      calc(100% - 4px)  8px, calc(100% - 4px) 12px,
+      100% 12px,
+      100% 28px,
+      calc(100% - 4px)  28px, calc(100% - 4px)  32px,
+      calc(100% - 8px)  32px, calc(100% - 8px)  36px,
+      calc(100% - 12px) 36px, calc(100% - 12px) 40px,
+      calc(100% - 16px) 40px,
+      16px 40px,
+      12px 40px, 12px 36px,
+      8px  36px, 8px  32px,
+      4px  32px, 4px  28px,
+      0 28px,
+      0 12px,
+      4px  12px, 4px  8px,
+      8px  8px,  8px  4px,
+      12px 4px,  12px 0
+    );
   }
 
   /* ── Skill Trees ──────────────────────────────────────────── */
@@ -4556,12 +4629,11 @@ html {
   .v2-hero-pet-img {
     width: clamp(28px, 11.5vw, 56px) !important;
   }
-  /* .v2-mindset-headline removed from this group — the 768px
-     mobile rule (clamp 18,4.8vw,28) is correct for phones, and
-     this 480px rule was overriding it back up to ~39px because
-     it parses later in the file. The other three headlines stay
-     here because they DO want a size bump at <=480px. */
-  .v2-getgood-headline,
+  /* .v2-mindset-headline AND .v2-getgood-headline removed from
+     this group — the 768px mobile rules are correct for phones,
+     and this 480px rule was overriding them back up via source
+     order. Get Good now matches the Product heading; Mindset is
+     a flat 30px. The other two headlines stay here. */
   .v2-skilltrees-headline,
   .v2-finalcta-headline {
     font-size: clamp(32px, 10vw, 44px);
