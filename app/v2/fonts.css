@@ -4429,7 +4429,12 @@ html {
     top: 24px;
     transform: translateX(-50%);
     font-size: 16px;
-    letter-spacing: 0;
+    /* Match the Product eyebrow exactly: weight 500 (was 700,
+       which read as visibly chunkier even at the same px size)
+       and letter-spacing -0.03em (was 0). With these two
+       overrides aligned, the two eyebrows now render identically. */
+    font-weight: 500;
+    letter-spacing: -0.03em;
   }
   .v2-getgood .v2-corner-label--tl::before {
     width: 10px;
