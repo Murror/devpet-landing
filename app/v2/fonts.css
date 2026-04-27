@@ -3983,18 +3983,15 @@ html {
     text-align: center;
     width: 100%;
   }
-  /* Sparkle pinned to the LEFT EDGE, vertically aligned with the
-     subhead's "WITH YOUR" / "CREW" lines (the lower half of the
-     headline block). Anchored from the bottom so the position
-     tracks the hero's intrinsic height: the pets row claims
-     ~144px at the bottom, leaving CREW around 170px-from-bottom
-     and WITH YOUR around 210px-from-bottom — `bottom` clamped
-     into that band lands the sparkle in the area circled. */
+  /* Sparkle as the symmetric mirror of the heart at top-right:
+     same top offset (20px), same width clamp, same vertical
+     band — pinned to left:4% so the two decorations bracket
+     the headline block as matching corner ornaments. */
   .v2-hero-deco--sparkle-tl {
     left: 4%;
-    top: auto;
-    bottom: clamp(180px, 44vw, 230px);
-    width: clamp(28px, 7vw, 44px);
+    top: 20px;
+    bottom: auto;
+    width: clamp(24px, 6vw, 36px);
   }
   /* Heart pinned to the top-right corner of the hero. Bumped from
      top: 4px to top: 20px so the deco's -12px bob translate stays
