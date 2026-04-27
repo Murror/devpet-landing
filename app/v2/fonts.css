@@ -4450,7 +4450,11 @@ html {
     max-height: 78%;
   }
   .v2-getgood-card-label {
-    font-size: clamp(16px, 4vw, 22px);
+    /* Bumped from clamp(16,4vw,22) -> clamp(22,6vw,30) — was
+       hitting the 16px lower bound on a 390px phone, which read
+       as small relative to the large card. Now renders ~23px on
+       a 390px phone for a more readable card title. */
+    font-size: clamp(22px, 6vw, 30px);
     /* Bottom-left aligned label per reference. align-self: flex-
        start moves it to the column's start edge; the card's
        align-items: flex-start above does the same horizontally. */
