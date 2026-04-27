@@ -4425,38 +4425,45 @@ html {
   .v2-getgood-headline {
     font-size: clamp(36px, 9vw, 56px);
   }
-  /* Cards stacked single-column on mobile (was 2-col grid),
-     matching the reference pattern where each card takes the
-     full viewport width and stacks vertically. Aspect-ratio
-     loosened to 4/3 so the card is wider-than-tall — gives the
-     icon room to read large and lets the label sit clearly at
-     the bottom (the desktop 323:440 portrait was tuned for the
-     4-up grid; at full mobile width it became uncomfortably
-     tall). */
+  /* Cards on mobile match the pixels.xyz reference pattern:
+     tall portrait cards stacked single-column, with the icon
+     pinned to the top half and the label as a large pixel title
+     at the bottom-left. Card has generous internal padding and
+     a substantial dark band between the icon and the label. */
   .v2-getgood-cards {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 24px;
   }
   .v2-getgood-card {
-    aspect-ratio: 4 / 3;
-    padding: 24px 20px 20px;
+    /* Portrait 3:4 aspect — taller than wide, matching the
+       pixels.xyz GUILDS / FARM card silhouette. Was 4:3 (a
+       landscape mistake from the previous pass). */
+    aspect-ratio: 3 / 4;
+    padding: 28px 28px 32px;
+    /* Top-anchored layout: icon up top, generous gap, label
+       at the bottom-left. justify-content: space-between pushes
+       icon and label to opposite ends of the column. */
     align-items: flex-start;
+    justify-content: space-between;
     text-align: left;
   }
   .v2-getgood-card-icon {
-    /* Let the icon fill more of the card vertically since the
-       card is now wider — was capped at 68% on desktop where
-       cards were portrait. */
-    max-height: 78%;
+    /* Icon occupies the top ~half of the card, not the whole
+       column — leaves the dark band below it for the big label
+       (matches pixels.xyz where the screenshot/illustration sits
+       only in the upper portion). align-self: center horizontally
+       centres the icon within the card's padding box. */
+    max-height: 50%;
+    align-self: center;
   }
   .v2-getgood-card-label {
-    /* Bumped from clamp(16,4vw,22) -> clamp(22,6vw,30) — was
-       hitting the 16px lower bound on a 390px phone, which read
-       as small relative to the large card. Now renders ~23px on
-       a 390px phone for a more readable card title. */
-    font-size: clamp(22px, 6vw, 30px);
-    /* Bottom-left aligned label per reference. align-self: flex-
-       start moves it to the column's start edge; the card's
+    /* Big pixel title per reference — bumped to clamp(32,9vw,44)
+       so the label reads as the dominant element below the icon.
+       At 390px wide, 9vw = 35.1px → renders ~35px. */
+    font-size: clamp(32px, 9vw, 44px);
+    line-height: 1;
+    /* Bottom-left aligned label per reference. align-self:
+       flex-start moves it to the column's start edge; the card's
        align-items: flex-start above does the same horizontally. */
     align-self: flex-start;
     text-align: left;
