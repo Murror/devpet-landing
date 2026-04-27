@@ -4097,13 +4097,14 @@ html {
        of .v2-product-inner. Required for per-item `order:`. */
     display: contents;
   }
-  /* PRODUCT eyebrow — pinned to the LEFT corner with a small
-     section-badge size while everything else below it centres.
-     Was 28px on mobile + a 24-80px margin-bottom; now 16px and
-     hugged to the column's flex-start edge via align-self. */
+  /* PRODUCT eyebrow — small section-badge size, now CENTERED in
+     the column instead of pinned to the left corner. align-self:
+     center pulls it to the column's centre and text-align: center
+     centres the bullet + label inside the inline-flex. */
   .v2-product-eyebrow {
     order: 1;
-    align-self: flex-start;
+    align-self: center;
+    text-align: center;
     font-size: 16px;
     margin: 0;
   }
@@ -4161,10 +4162,9 @@ html {
     font-size: clamp(14px, 3.6vw, 18px);
   }
   /* Email + waitlist button — stacked vertically and centred on
-     mobile, with a tighter max-width so the form reads as a tidy
-     compact pair instead of two full-width slabs. Input and button
-     both shrink to 44px tall (was 52px) and use a smaller label
-     size so they fit a phone column comfortably. */
+     mobile. max-width tightened from 320px → 296px so the input
+     reads as one character shorter (≈ one ch at the 14px font
+     size used by the input placeholder). */
   .v2-product-form {
     order: 7;
     align-self: center;
@@ -4172,8 +4172,8 @@ html {
     align-items: center;
     justify-content: center;
     width: 100%;
-    max-width: 320px;
-    gap: 12px;
+    max-width: 296px;
+    gap: 14px;
   }
   .v2-product-input {
     flex: 0 0 auto;
@@ -4182,10 +4182,35 @@ html {
     font-size: 14px;
     padding: 0 16px;
   }
+  /* Pixel-art waitlist button — chunky redesign per reference:
+     thicker outer outline (4px each side, was 2px) so the dark
+     navy frame around the black body reads as a deliberate
+     pixel-art border instead of a hairline. Body grows to 48px
+     tall (was 44px) with bigger horizontal padding so the
+     stepped pill silhouette has more visual weight, and the
+     inner bevel widens to 6px top/bottom for a more pronounced
+     highlight + shadow. */
+  .v2-product-submit {
+    /* Four zero-blur drop-shadows compose into a single 4px
+       solid outline that hugs the clip-path silhouette. The
+       inner span keeps the clip; this layer just paints the
+       border via filter. */
+    filter:
+      drop-shadow( 4px 0 0 #1E1848)
+      drop-shadow(-4px 0 0 #1E1848)
+      drop-shadow(0  4px 0 #1E1848)
+      drop-shadow(0 -4px 0 #1E1848);
+  }
   .v2-product-submit-body {
-    height: 44px;
+    height: 48px;
     font-size: 18px;
-    padding: 0 22px;
+    padding: 0 28px;
+    /* Stronger bevel — 6px highlight band on top, 6px shadow
+       on bottom (was 4px) so the pixel-art chunkiness reads
+       even at small mobile sizes. */
+    box-shadow:
+      inset 0  6px 0 rgba(255, 255, 255, 0.22),
+      inset 0 -6px 0 rgba(0, 0, 0, 0.4);
   }
 
   /* ── Stats ────────────────────────────────────────────────── */
