@@ -3908,10 +3908,15 @@ html {
        the headline + pets cluster. The section now sits at
        intrinsic height with small padding on top, ZERO padding-
        bottom so the pets row sits flush against the next section
-       (no empty white band between hero and Product). */
+       (no empty white band between hero and Product).
+       align-items: center keeps every direct child (headline,
+       subhead, pets row) horizontally centred regardless of its
+       own width — without this, child widths < 100% would hug
+       the flex-start edge and the column would lean left. */
     min-height: 0;
     padding: clamp(20px, 4vh, 40px) 16px 0;
     justify-content: flex-start;
+    align-items: center;
   }
   .v2-hero-headline,
   .v2-hero-subhead {
@@ -3921,10 +3926,14 @@ html {
     /* Explicit center alignment — without this the headline can
        inherit a left-leaning rhythm from elsewhere on mobile.
        width: 100% ensures each line's flex/block box spans the
-       parent so text-align actually centres glyphs. */
+       parent so text-align actually centres glyphs. Auto margins
+       belt-and-braces the centring inside any flex parent that
+       might otherwise pin the block to flex-start. */
     text-align: center;
     width: 100%;
     max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
   }
   .v2-hero-headline .line {
     /* Each line is a block-level span — display: block + text-
@@ -3933,15 +3942,18 @@ html {
     text-align: center;
     width: 100%;
   }
-  /* Sparkle pinned to the LEFT of the headline — moved up another
-     notch (28% -> 18%) so it lines up with the AGENTIC CODE row
-     instead of dropping further down. left: 3% hugs the edge so
-     it doesn't collide with the centred headline glyphs. */
+  /* Sparkle as a TOP-LEFT corner ornament — symmetric mirror of
+     the heart on the right. Previously pinned at left:3% / top:18%
+     it overlapped the AGENTIC CODE glyphs and pulled the visual
+     centre of the hero leftward. Moving it to the top-left corner
+     (top: 4px / left: 4%) and shrinking it to match the heart's
+     scale lets the headline column read as cleanly centred between
+     two small corner ornaments. */
   .v2-hero-deco--sparkle-tl {
-    left: 3%;
-    top: 18%;
+    left: 4%;
+    top: 4px;
     bottom: auto;
-    width: clamp(40px, 10vw, 64px);
+    width: clamp(24px, 6vw, 36px);
   }
   /* Heart pinned to the very top-right corner of the hero, ABOVE
      the headline, so it stops colliding with the right end of
@@ -3981,13 +3993,21 @@ html {
 
   /* ── Product (Section 3) ──────────────────────────────────── */
   .v2-product {
-    padding: 64px 20px;
+    /* On mobile the desktop's `min-height: 100vh` left a huge
+       green band that dominated the screen — fine on a 1440 desk
+       comp, way too tall on a 390px phone. Drop it to `auto` so
+       the green band collapses to its intrinsic content height,
+       and tighten the vertical padding so the section reads as a
+       tidy card rather than a viewport-eating slab. The corner
+       radius stays via the desktop rule. */
+    min-height: 0;
+    padding: clamp(40px, 8vw, 64px) 20px clamp(48px, 10vw, 80px);
   }
   .v2-product-inner {
     /* Two-column desktop grid collapses into a single stack — copy
        on top, the byte sprite + coin scene below. */
     grid-template-columns: 1fr;
-    gap: clamp(32px, 8vw, 56px);
+    gap: clamp(24px, 6vw, 48px);
   }
   .v2-product-eyebrow {
     font-size: 28px;
