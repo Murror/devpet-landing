@@ -3970,8 +3970,17 @@ html {
        intrinsic content height instead of a fixed 220px box —
        the previous fixed min-height left ~100px of empty space
        below the deepest pet (byte at the V dip), which read as
-       a white band before the next section. */
+       a white band before the next section.
+       width: 100% is critical: the hero's `align-items: center`
+       would otherwise shrink this flex row to its intrinsic
+       content width (7 wrappers × 170px ≈ 1200px) and the hero's
+       `overflow: hidden` would clip every pet except the middle
+       pair. Pinning width: 100% (and align-self: stretch as a
+       second line of defence) keeps the row spanning the viewport
+       so all 7 pets remain visible. */
     min-height: auto;
+    width: 100%;
+    align-self: stretch;
     gap: clamp(4px, 1.4vw, 12px);
     /* Margin-bottom dropped to 0 so the pets row sits flush
        against the section boundary below. */
@@ -3986,8 +3995,16 @@ html {
   .v2-hero-pet--yellow  { transform: translateY(40px); }
   .v2-hero-pet--red     { transform: translateY(20px); }
   .v2-hero-pet--penguin { transform: translateY(0); }
+  /* Outer wrapper shrinks on mobile too — the desktop 170×220
+     box was the actual culprit behind the row overflowing the
+     viewport on phones. Match the wrapper to the image clamp so
+     all 7 pets fit comfortably across a ~390px screen. */
+  .v2-hero-pet {
+    width: clamp(40px, 11vw, 84px);
+    height: auto;
+  }
   .v2-hero-pet-img {
-    width: clamp(40px, 11vw, 84px) !important;
+    width: 100% !important;
     height: auto !important;
   }
 
