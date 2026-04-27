@@ -4253,35 +4253,20 @@ html {
   }
 
   /* ── Stats ──────────────────────────────────────────────────
-     Mobile-only overhaul: each shape now frames its corresponding
-     stat (triangle → 1,504, square → 70%, circle → 2x) so the
-     numerals are readable inside their decorative backdrops, and
-     the slide-in directions are re-mapped per the new design pass:
-       • Triangle  → still slides in from the LEFT
-       • Square    → slides in from the RIGHT (was from the TOP)
-       • Circle    → slides in from the BOTTOM (was from the RIGHT)
-     Wrap padding is also tightened: previously reserved 160px of
-     top padding so the shapes could stack above the stats; the new
-     per-stat layout doesn't need that buffer. */
+     Mobile-only redesign: drop the decorative shapes entirely and
+     recolour the numerals to match the shape palette they used to
+     sit behind. The result reads as a tight, type-only stack — no
+     overlapping silhouettes to manage at narrow widths. Labels
+     all switch to solid black so they sit cleanly under each
+     coloured numeral on the white ground. */
   .v2-stats-wrap {
+    /* No shapes to clear → tighter padding all round. */
     padding: 32px 20px 40px;
     border-radius: 24px;
   }
   .v2-stats-inner {
     grid-template-columns: 1fr;
-    /* Larger gap so each stat sits in its own vertical "zone"
-       wide enough for the shape behind it to read as a frame
-       rather than a bleed across multiple stats. */
-    gap: clamp(80px, 22vw, 140px);
-  }
-  .v2-stat {
-    /* Lift each stat into its own stacking context above the
-       shapes — without an explicit z-index here the absolutely
-       positioned shapes (z-index: 1) can paint OVER the stat's
-       white-on-coloured numeral, which is what was hiding 1,504
-       and 2x/faster. */
-    position: relative;
-    z-index: 2;
+    gap: clamp(40px, 10vw, 64px);
   }
   .v2-stat-number {
     font-size: clamp(64px, 18vw, 120px);
@@ -4289,47 +4274,33 @@ html {
   .v2-stat-label {
     font-size: clamp(24px, 6vw, 40px);
   }
-  /* Triangle frames the FIRST stat (1,504/builders). Apex up so
-     the white "1,504" reads against the red. Centred horizontally
-     and pinned to the top of the wrap so it sits behind stat 1. */
-  .v2-stats-shape--triangle {
-    width: 240px;
-    height: 240px;
-    aspect-ratio: auto;
-    left: calc(50% - 120px);
-    top: 8px;
-    --dx: -150px;
-    --dy: 0;
-    --rot: -6deg;
+  /* Hide every decorative shape on mobile — the per-stat colour
+     does the work the shapes used to do. */
+  .v2-stats-shape {
+    display: none !important;
   }
-  /* Square frames the MIDDLE stat (70%/success rate) — sits at the
-     vertical centre of the wrap. Slide-in axis flipped from --dy
-     (was Slide In Top) to --dx: 150 (Slide In Right). */
-  .v2-stats-shape--square {
-    width: 200px;
-    height: 200px;
-    aspect-ratio: auto;
-    left: calc(50% - 100px);
-    top: calc(50% - 100px);
-    --dx: 150px;
-    --dy: 0;
-    --rot: 8deg;
+  /* Per-stat numeral colours mirror the shape palette:
+       • 1,504        → red    (#F83C00, was triangle fill)
+       • 70%          → yellow (#FCBE1D, was square fill)
+       • 2x           → blue   (#1C40CF, was circle fill)
+     !important is required because Stats.tsx applies the colour
+     inline via `style={{ color: stat.color }}` (white/black for
+     the on-shape desktop comp), and inline styles otherwise win
+     over a stylesheet rule. */
+  .v2-stat:nth-child(1) .v2-stat-number {
+    color: #F83C00 !important;
   }
-  /* Circle frames the LAST stat (2x/faster). Pinned to the bottom
-     of the wrap so the "2x" white numeral sits inside the blue
-     ground. Slide-in axis flipped from --dx: 150 (was Slide In
-     Right) to --dy: 150 (Slide In Bottom). */
-  .v2-stats-shape--circle {
-    width: 220px;
-    height: 220px;
-    aspect-ratio: auto;
-    left: calc(50% - 110px);
-    right: auto;
-    top: auto;
-    bottom: 8px;
-    --dx: 0;
-    --dy: 150px;
-    --rot: 0deg;
+  .v2-stat:nth-child(2) .v2-stat-number {
+    color: #FCBE1D !important;
+  }
+  .v2-stat:nth-child(3) .v2-stat-number {
+    color: #1C40CF !important;
+  }
+  /* All labels → solid black on mobile. Same !important reason
+     as above (Stats.tsx writes white/grey labels inline for the
+     desktop on-shape composition). */
+  .v2-stat-label {
+    color: #000000 !important;
   }
 
   /* ── Mindset ──────────────────────────────────────────────── */
