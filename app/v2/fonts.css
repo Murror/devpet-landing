@@ -4695,9 +4695,15 @@ html {
   /* 5. Mark scroll-linked containers as paint-contained so any
         per-frame style writes inside them don't invalidate the
         rest of the page. `contain: layout paint` lets the
-        browser scope re-layout/repaint to the section bounds. */
+        browser scope re-layout/repaint to the section bounds.
+        IMPORTANT: .v2-stats is intentionally excluded because it
+        has a `::after` pseudo-element pinned at `bottom: -32px`
+        that paints a white strip BELOW its bounds to fill the
+        Mindset section's rounded-corner cutouts. `contain: paint`
+        would clip that pseudo to the section box, exposing the
+        page's black bg-black through the cutouts (the two black
+        triangles at the seam between Stats and Mindset). */
   .v2-product,
-  .v2-stats,
   .v2-mindset,
   .v2-skilltrees,
   .v2-testimonials,
