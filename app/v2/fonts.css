@@ -4761,17 +4761,83 @@ html {
   .v2-finalcta {
     padding: 96px 20px;
   }
-  .v2-finalcta-headline {
-    font-size: clamp(36px, 9vw, 56px);
+  /* Title + subtitle matched to the hero headline on mobile:
+     flat 40px, white-space: normal so long lines wrap inside
+     the viewport instead of overflowing (was nowrap and
+     getting cut off mid-word). The previous mobile rule
+     targeted `.v2-finalcta-headline` which doesn't exist as
+     a class — the actual elements are `.v2-finalcta-title`
+     and `.v2-finalcta-subtitle`. */
+  .v2-finalcta-title,
+  .v2-finalcta-subtitle {
+    font-size: 40px;
+    line-height: 1.05;
+    white-space: normal;
+    max-width: 100%;
+  }
+  /* Email input matched to the Product section's mobile input:
+     44px tall, 14px font, 16px horizontal padding, full width
+     within the form's 296px max-width container. */
+  .v2-finalcta-form {
+    max-width: 296px;
+    width: 100%;
+    margin: 0 auto;
+    gap: 12px;
   }
   .v2-finalcta-input {
     width: 100%;
-    height: 64px;
-    font-size: 16px;
+    height: 44px;
+    font-size: 14px;
+    padding: 0 16px;
+    border-radius: 22px;
+    text-align: left;
   }
+  /* Submit button matched to the Product section's mobile pill:
+     40px tall body, 15px label, 20px padding, 3px navy outer
+     outline (was 8px black), 3px highlight + 3px shadow inner
+     bevel (was a 6px-band red gradient), and the same 40px-
+     tuned pixel-pill clip-path used on Product / Mindset /
+     Get Good. Background swapped from the red gradient to a
+     solid black to match the Product submit. */
   .v2-finalcta-submit {
-    font-size: 16px;
-    padding: 14px 24px;
+    width: auto;
+    min-width: 0;
+    padding: 0 20px;
+    height: 40px;
+    background: #000000;
+    color: #FFFFFF;
+    font-size: 15px;
+    letter-spacing: 0.024em;
+    text-transform: uppercase;
+    box-shadow:
+      inset 0  3px 0 rgba(255, 255, 255, 0.22),
+      inset 0 -3px 0 rgba(0, 0, 0, 0.4);
+    filter:
+      drop-shadow( 3px 0 0 #1E1848)
+      drop-shadow(-3px 0 0 #1E1848)
+      drop-shadow(0  3px 0 #1E1848)
+      drop-shadow(0 -3px 0 #1E1848);
+    clip-path: polygon(
+      16px 0,             calc(100% - 16px) 0,
+      calc(100% - 12px) 0,  calc(100% - 12px) 4px,
+      calc(100% - 8px)  4px, calc(100% - 8px)  8px,
+      calc(100% - 4px)  8px, calc(100% - 4px) 12px,
+      100% 12px,
+      100% 28px,
+      calc(100% - 4px)  28px, calc(100% - 4px)  32px,
+      calc(100% - 8px)  32px, calc(100% - 8px)  36px,
+      calc(100% - 12px) 36px, calc(100% - 12px) 40px,
+      calc(100% - 16px) 40px,
+      16px 40px,
+      12px 40px, 12px 36px,
+      8px  36px, 8px  32px,
+      4px  32px, 4px  28px,
+      0 28px,
+      0 12px,
+      4px  12px, 4px  8px,
+      8px  8px,  8px  4px,
+      12px 4px,  12px 0
+    );
   }
 
   /* ── Footer ───────────────────────────────────────────────── */
