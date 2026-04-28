@@ -115,97 +115,69 @@ const orbs = [
 export default function SkillTrees() {
   const sectionRef = useRef<HTMLElement | null>(null)
 
-  // Scroll-linked reveal — each card's opacity + translateY are tied
-  // directly to how far it has scrolled through the viewport, so the
-  // cards appear/disappear continuously as the user scrolls (not a
-  // one-shot trigger).
+  // Per-element IntersectionObserver-driven reveal.
   //
-  // For each card on every scroll frame we compute a progress value
-  // in [0, 1]:
-  //   • 0 while the card is fully below the viewport (hidden,
-  //     shifted down by 150px)
-  //   • ramps up as the card enters from the bottom, hitting 1 once
-  //     its top has moved 25% into the viewport (fully visible, in
-  //     place)
-  //   • stays at 1 while the card is comfortably in view
-  //   • ramps back down as the card exits off the top (bottom edge
-  //     from 25% down → 0)
-  //   • 0 once the card has scrolled fully above the viewport
+  // Previous implementation read getBoundingClientRect for every
+  // .v2-skilltrees-reveal target on every scroll frame and wrote
+  // a --scroll-progress CSS variable per element, which the CSS
+  // then mapped to opacity + transform. The per-frame layout reads
+  // + style writes were the source of the up/down scroll stutter
+  // the user reported.
   //
-  // We write that number to a CSS custom property (--scroll-progress)
-  // on the card so the CSS can drive opacity + transform off of it.
-  // requestAnimationFrame coalesces scroll events so we never do
-  // more work than one frame.
+  // New approach: each target element gets its own IntersectionObserver
+  // entry. When the element crosses into view (gated by rootMargin
+  // so it has to be meaningfully on-screen, not just peeking in
+  // from below), we add `.is-revealed` and the CSS handles the
+  // transition. The browser owns the timing — no scroll listener,
+  // no per-frame work, no stutter on reverse scroll.
+  //
+  // Trade-off: the reveal no longer reverses when scrolling back
+  // up. Once a card is revealed, it stays revealed. This matches
+  // every other section on the site that uses class-toggle reveals
+  // (Hero entrance, Get Good cards) and is the right call for
+  // mobile perf — scroll-scrubbed animations were always going to
+  // be expensive to keep smooth on phone hardware.
   useEffect(() => {
     const section = sectionRef.current
     if (!section) return
-    // Every element we want scroll-linked shares the `.v2-skilltrees-reveal`
-    // class. Today that's the intro paragraph + each of the 4 cards, but
-    // anything marked reveal will pick up the same behavior.
     const targets = Array.from(
       section.querySelectorAll<HTMLElement>('.v2-skilltrees-reveal')
     )
     if (targets.length === 0) return
 
-    // Respect users who've opted out of motion — skip the linking and
-    // just show the content at its resting state.
+    // Respect reduced-motion users — show everything immediately.
     const prefersReduced = window.matchMedia(
       '(prefers-reduced-motion: reduce)'
     ).matches
     if (prefersReduced) {
-      for (const el of targets) el.style.setProperty('--scroll-progress', '1')
+      for (const el of targets) el.classList.add('is-revealed')
       return
     }
 
-    let rafId: number | null = null
-
-    // Mobile gets a tighter entry ramp + a delayed trigger so each
-    // card reveals as it actually scrolls into view, instead of all
-    // four cards beginning to fade in simultaneously when the section
-    // first enters the viewport (the wider 45% desktop ramp made
-    // overlapping reveals at narrow heights).
-    const isMobile = window.matchMedia('(max-width: 768px)').matches
-
-    const update = () => {
-      rafId = null
-      const vh = window.innerHeight
-      // Desktop: 45% ramp, no trigger threshold (legacy feel).
-      // Mobile: 18% ramp + start at 25% inside viewport so elements
-      // only begin animating once they're meaningfully on-screen.
-      const entryRamp = vh * (isMobile ? 0.18 : 0.45)
-      const triggerOffset = isMobile ? vh * 0.25 : 0
-      const exitRamp = vh * 0.25
-      for (const el of targets) {
-        const rect = el.getBoundingClientRect()
-        // (vh - triggerOffset) - rect.top: how far past the trigger
-        // line the element's top is. Positive = entering / entered;
-        // negative = still below the trigger line.
-        const entry = Math.max(
-          0,
-          Math.min(1, ((vh - triggerOffset) - rect.top) / entryRamp)
-        )
-        const exit =
-          rect.top >= 0
-            ? 1
-            : Math.max(0, Math.min(1, rect.bottom / exitRamp))
-        const progress = Math.min(entry, exit)
-        el.style.setProperty('--scroll-progress', progress.toFixed(3))
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed')
+            // Once revealed, stop observing this element — no
+            // need to keep paying the IntersectionObserver tax
+            // for elements that are already done animating.
+            observer.unobserve(entry.target)
+          }
+        }
+      },
+      {
+        // Element only triggers when its top has scrolled into the
+        // upper 75% of the viewport — same threshold feel as the
+        // old scroll-driven version's 25% trigger offset, just
+        // expressed via rootMargin instead of a per-frame check.
+        rootMargin: '0px 0px -25% 0px',
+        threshold: 0,
       }
-    }
+    )
 
-    const schedule = () => {
-      if (rafId === null) rafId = requestAnimationFrame(update)
-    }
-
-    update() // initial paint — set values before first scroll
-    window.addEventListener('scroll', schedule, { passive: true })
-    window.addEventListener('resize', schedule)
-
-    return () => {
-      window.removeEventListener('scroll', schedule)
-      window.removeEventListener('resize', schedule)
-      if (rafId !== null) cancelAnimationFrame(rafId)
-    }
+    for (const el of targets) observer.observe(el)
+    return () => observer.disconnect()
   }, [])
 
   return (

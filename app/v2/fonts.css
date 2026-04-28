@@ -2690,15 +2690,25 @@ html {
    element naturally appears as it scrolls in from the bottom and
    disappears as it scrolls off the top — no CSS transition needed
    because the value is driven by scroll position itself. */
+/* Class-toggle reveal driven by IntersectionObserver in
+   SkillTrees.tsx. Was a scroll-scrubbed animation that read
+   `--scroll-progress` from JS every frame; that version
+   stuttered on mobile because the rAF tick was reading
+   getBoundingClientRect for 9 elements (forces layout) and
+   writing CSS vars per scroll frame. Now: each element just
+   transitions between two states when `.is-revealed` is
+   added — browser owns the timing, no per-frame work. */
 .v2-skilltrees-reveal {
-  --scroll-progress: 0;
-  opacity: var(--scroll-progress);
-  transform: translate3d(
-    0,
-    calc((1 - var(--scroll-progress)) * 150px),
-    0
-  );
+  opacity: 0;
+  transform: translate3d(0, 80px, 0);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform, opacity;
+}
+.v2-skilltrees-reveal.is-revealed {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
 }
 
 .v2-skilltrees-card {
@@ -2927,14 +2937,16 @@ html {
   -moz-osx-font-smoothing: none;
 }
 
-/* Reduced-motion users — SkillTrees.tsx short-circuits to
-   progress=1 on mount, but belt-and-suspenders: also zero the
-   transform at the CSS level so every reveal target is locked in
-   place regardless of JS state. */
+/* Reduced-motion users — SkillTrees.tsx adds .is-revealed on
+   every target immediately on mount, but belt-and-suspenders:
+   also pin opacity 1 + no transform here so every reveal target
+   is locked in place regardless of JS state, and disable the
+   transition so the change is instant. */
 @media (prefers-reduced-motion: reduce) {
   .v2-skilltrees-reveal {
-    --scroll-progress: 1;
+    opacity: 1;
     transform: none;
+    transition: none;
   }
 }
 
