@@ -4709,7 +4709,11 @@ html {
     gap: 18px;
   }
   .v2-skilltrees-card {
-    padding: 18px 16px;
+    /* Bottom padding bumped from 18px to 28px so the body text
+       doesn't crowd the card's lower edge — the whole card grows
+       slightly taller, giving the prose more breathing room
+       beneath. */
+    padding: 18px 16px 28px;
   }
   .v2-skilltrees-card-title {
     font-size: clamp(18px, 4.5vw, 22px);
