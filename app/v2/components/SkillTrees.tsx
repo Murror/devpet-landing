@@ -159,19 +159,31 @@ export default function SkillTrees() {
 
     let rafId: number | null = null
 
+    // Mobile gets a tighter entry ramp + a delayed trigger so each
+    // card reveals as it actually scrolls into view, instead of all
+    // four cards beginning to fade in simultaneously when the section
+    // first enters the viewport (the wider 45% desktop ramp made
+    // overlapping reveals at narrow heights).
+    const isMobile = window.matchMedia('(max-width: 768px)').matches
+
     const update = () => {
       rafId = null
       const vh = window.innerHeight
-      // Entry ramp 45% of viewport; exit ramp 25% and gated behind
-      // rect.top < 0 so elements sitting near (but still inside) the
-      // top of the viewport don't get treated as "exiting" and stuck
-      // at partial opacity. Same fix we applied to Final CTA and
-      // Testimonials for the same symptom.
-      const entryRamp = vh * 0.45
+      // Desktop: 45% ramp, no trigger threshold (legacy feel).
+      // Mobile: 18% ramp + start at 25% inside viewport so elements
+      // only begin animating once they're meaningfully on-screen.
+      const entryRamp = vh * (isMobile ? 0.18 : 0.45)
+      const triggerOffset = isMobile ? vh * 0.25 : 0
       const exitRamp = vh * 0.25
       for (const el of targets) {
         const rect = el.getBoundingClientRect()
-        const entry = Math.max(0, Math.min(1, (vh - rect.top) / entryRamp))
+        // (vh - triggerOffset) - rect.top: how far past the trigger
+        // line the element's top is. Positive = entering / entered;
+        // negative = still below the trigger line.
+        const entry = Math.max(
+          0,
+          Math.min(1, ((vh - triggerOffset) - rect.top) / entryRamp)
+        )
         const exit =
           rect.top >= 0
             ? 1
