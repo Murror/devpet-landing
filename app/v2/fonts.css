@@ -3935,27 +3935,24 @@ html {
 
   /* ── Hero ─────────────────────────────────────────────────── */
   .v2-hero {
-    /* Mobile hero centres its content vertically within the
-       available viewport (below the sticky nav) instead of
-       hugging the top. min-height: calc(100vh - 124px) gives
-       the section room to centre against; justify-content:
-       center anchors the headline + pets cluster to the
-       vertical middle of that band. padding-bottom stays at 0
-       so the pets row remains flush against the Product
-       section below — the centring happens by adding space
-       ABOVE the content, not below.
+    /* Hero sits at its intrinsic content height — no min-height
+       inflation. The previous pass added `min-height:
+       calc(100vh - 124px)` to centre the content vertically,
+       but that ballooned the section and left huge empty bands
+       above and below the headline. We're back to content-
+       height with a slightly larger top padding so the headline
+       has breathing room from the nav without bottom gap.
+       padding-bottom stays at 0 so the pets row remains flush
+       against the Product section below.
        align-items: center keeps every direct child (headline,
        subhead, pets row) horizontally centred regardless of
-       its own width — without this, child widths < 100% would
-       hug the flex-start edge and the column would lean left.
+       its own width.
        overflow: visible (overrides desktop's `hidden`) so the
-       heart deco's bob animation — which translates -12px
-       upward — doesn't clip against the top edge during scroll
-       on iOS Safari. */
-    min-height: calc(100vh - 124px);
-    min-height: calc(100dvh - 124px);
-    padding: 0 16px 0;
-    justify-content: center;
+       heart deco's bob animation doesn't clip against the top
+       edge during iOS Safari scroll. */
+    min-height: 0;
+    padding: clamp(40px, 8vh, 80px) 16px 0;
+    justify-content: flex-start;
     align-items: center;
     overflow: visible;
   }
