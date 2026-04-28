@@ -74,6 +74,14 @@ export async function POST(req: Request) {
       privateKeyLen: privateKey?.length ?? 0,
       privateKeyStartsWithBegin:
         privateKey?.startsWith('-----BEGIN') ?? false,
+      // Vercel auto-sets these so we can tell whether the function
+      // has access to ANY env vars or just specifically can't see ours
+      vercelEnv: process.env.VERCEL_ENV ?? null,
+      nodeEnv: process.env.NODE_ENV ?? null,
+      // Names of GOOGLE_* env vars actually visible to the function
+      googleEnvKeys: Object.keys(process.env).filter((k) =>
+        k.startsWith('GOOGLE_')
+      ),
     }
     console.error('Missing Google Sheets env vars', diag)
     // TEMPORARY: include diag in response body so we can diagnose without
