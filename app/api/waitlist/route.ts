@@ -82,6 +82,34 @@ export async function POST(req: Request) {
       googleEnvKeys: Object.keys(process.env).filter((k) =>
         k.startsWith('GOOGLE_')
       ),
+      // ALL non-Vercel-internal env var names visible at runtime, sorted.
+      // Useful for verifying which vars are actually set vs which the
+      // dashboard claims are set.
+      allCustomEnvKeys: Object.keys(process.env)
+        .filter(
+          (k) =>
+            !k.startsWith('VERCEL_') &&
+            !k.startsWith('AWS_') &&
+            !k.startsWith('NEXT_') &&
+            ![
+              'PATH',
+              'PWD',
+              'HOME',
+              'NODE_ENV',
+              'TZ',
+              'LANG',
+              'HOSTNAME',
+              'TERM',
+              '_',
+              'SHLVL',
+              'OLDPWD',
+              'NOW_REGION',
+              'TURBO_REMOTE_ONLY',
+              'TURBO_RUN_SUMMARY',
+              'EDGE_RUNTIME',
+            ].includes(k)
+        )
+        .sort(),
     }
     console.error('Missing Google Sheets env vars', diag)
     // TEMPORARY: include diag in response body so we can diagnose without
