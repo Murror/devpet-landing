@@ -140,7 +140,9 @@ export default function FinalCta() {
         let&rsquo;s talk the future of coding.
       </h2>
       <p className="v2-finalcta-subtitle v2-finalcta-reveal">
-        stop guessing. start growing.
+        stop guessing.
+        <br />
+        start growing.
       </p>
 
       <form
