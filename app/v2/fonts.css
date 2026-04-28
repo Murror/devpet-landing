@@ -4513,7 +4513,7 @@ html {
 
   /* ── Get Good ─────────────────────────────────────────────── */
   .v2-getgood {
-    padding: clamp(64px, 12vw, 120px) 20px clamp(80px, 16vw, 140px);
+    padding: clamp(64px, 12vw, 120px) 18px clamp(80px, 16vw, 140px);
   }
   /* "GET GOOD" eyebrow matched to the Product section's PRODUCT
      eyebrow: centred horizontally at the top of the section,
@@ -4655,7 +4655,7 @@ html {
 
   /* ── Skill Trees ──────────────────────────────────────────── */
   .v2-skilltrees {
-    padding: 96px 20px;
+    padding: 96px 18px;
   }
   /* SKILL TREE eyebrow matches PRODUCT and GET GOOD on mobile:
      centred horizontally, 16px, weight 500, letter-spacing
