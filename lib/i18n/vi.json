@@ -682,111 +682,111 @@
   },
   "v2": {
     "nav": {
-      "product": "Product",
-      "getGood": "Get Good",
-      "skillTree": "Skill Tree",
-      "startJourney": "Start Your Journey",
-      "homeAria": "Codepet home",
-      "primaryAria": "Primary",
-      "openMenu": "Open menu",
-      "closeMenu": "Close menu",
+      "product": "VỀ CODEPET",
+      "getGood": "LÊN TRÌNH",
+      "skillTree": "KỸ NĂNG",
+      "startJourney": "Bắt đầu hành trình",
+      "homeAria": "Trang chủ Codepet",
+      "primaryAria": "Chính",
+      "openMenu": "Mở menu",
+      "closeMenu": "Đóng menu",
       "wordmarkAlt": "Codepet",
-      "home": "Home"
+      "home": "Trang chủ"
     },
     "hero": {
-      "titleLine1": "Learn to build",
-      "titleLine2": "agentic code",
-      "subhead": "with your crew"
+      "titleLine1": "HỌC CÁCH XÂY DỰNG",
+      "titleLine2": "CODE AGECTIC CODE",
+      "subhead": "CÙNG NHỮNG NGƯỜI BẠN"
     },
     "product": {
-      "eyebrow": "PRODUCT",
-      "heading": "who we are",
-      "bodyLead": "Codepet is a macOS application that helps people develop their thinking and",
-      "bodyEm": "ship products of their own",
-      "bodyTrail": ". Guided agentic coding, adaptive feedback, and a daily-practice loop turn early exposure to programming into durable skill.",
-      "integratesWith": "Integrates with:",
-      "integrationsAria": "Integrations",
+      "eyebrow": "SẢN PHẨM",
+      "heading": "CODEPET LÀ AI",
+      "bodyLead": "Codepet là ứng dụng được thiết kế để giúp bạn phát triển tư duy và",
+      "bodyEm": "có thể ra mắt sản phẩm thật sự của riêng mình",
+      "bodyTrail": ". Bạn sẽ được hướng dẫn Lập trình agentic coding, chủ động phản hồi nhưng không áp đặt, cùng bạn luyện tập hằng ngày để thiết lập những bước đầu với lập trình trở thành kỹ năng cứng.",
+      "integratesWith": "Tích hợp với:",
+      "integrationsAria": "Tích hợp",
       "integrationCursor": "Cursor",
       "integrationVscode": "VS code",
       "integrationWindsurf": "Windsurf"
     },
     "stats": {
-      "builders": "builders",
-      "successRate": "success rate",
-      "faster": "faster"
+      "builders": "thành viên",
+      "successRate": "tỷ lệ thành công",
+      "faster": "nhanh hơn"
     },
     "mindset": {
       "eyebrow": "Codepet",
-      "titleLine1": "Shape the",
-      "titleLine2": "mindset before you",
-      "titleLine3": "build product",
-      "cta": "Join the waitlist",
-      "ctaAria": "Join the Codepet waitlist"
+      "titleLine1": "Hãy Hình thành tư duy",
+      "titleLine2": "trước khi bạn",
+      "titleLine3": "tạo sản phẩm",
+      "cta": "Tham gia danh sách chờ",
+      "ctaAria": "Tham gia danh sách chờ Codepet"
     },
     "getGood": {
-      "cornerLabel": "Get Good",
-      "headline": "CODE.GROW.LEARN",
-      "cardSkillMap": "SKILL MAP",
-      "cardYourCompanion": "YOUR COMPANION",
-      "cardRealPractice": "REAL PRACTICE",
-      "cardHonestInsights": "HONEST INSIGHTS",
-      "body": "Everything you need to actually get good. A skill map across four tiers tells you exactly what to learn next. Your companion will keep you building. Every challenge happens in Cursor, VS Code, or Claude Code, and honest insights surface your weak spots so you know what to practice next.",
-      "cta": "Join the waitlist",
-      "ctaAria": "Join the Codepet waitlist"
+      "cornerLabel": "LÊN TRÌNH",
+      "headline": "CODE.PHÁT TRIỂN.HỌC HỎI",
+      "cardSkillMap": "BẢN ĐỒ KỸ NĂNG",
+      "cardYourCompanion": "BẠN ĐỒNG HÀNH",
+      "cardRealPractice": "THỰC CHIẾN",
+      "cardHonestInsights": "PHẢN HỒI CHÂN THẬT",
+      "body": "Mọi thứ bạn cần để thật sự giỏi: Bản đồ kỹ năng để chỉ rõ điều bạn cần thực hiện tiếp theo. Người đồng hành sẽ cùng bạn xuyên suốt phiên làm việc. Tất cả dự án của bạn đều được ghi nhận trực tiếp trong khi làm việc cùng Cursor, VS Code, Claude Code, cùng những phản hồi sâu sắc chỉ ra điểm thiếu sót mà bạn có thể khắc phục cho dự án của chính mình.",
+      "cta": "Tham gia danh sách chờ",
+      "ctaAria": "Tham gia danh sách chờ Codepet"
     },
     "skillTrees": {
-      "cornerLabel": "Skill Tree",
-      "introLead": "A simple and efficient workflow to bring your vision to life.",
-      "introMuted": "From the first call to final delivery, every step is designed for clarity and efficiency.",
-      "tier1Title": "Foundations",
-      "tier1Body": "Every builder starts here. You will learn to ask AI for what you actually want, read errors without panic, find your way around your editor, and start spotting sharp code from sloppy — one small win at a time.",
-      "tier2Title": "Context & Structure",
-      "tier2Body": "Now you are feeding AI the right fuel. Set up context that sticks, write rules files your pet actually follows, document as you build, and lay out projects that scale instead of collapsing on you.",
-      "tier3Title": "Develop",
-      "tier3Body": "This is where your reps start paying off. Move fluently between Cursor, Claude Code, and VS Code, keep scope from sprawling, reuse a design system instead of redrawing it, and iterate on prompts until they sing.",
-      "tier4Title": "Expert",
-      "tier4Body": "The tier you earn. Think in user personas, stretch context windows without losing the plot, architect AI into your product, and build a second brain that compounds every project you ship."
+      "cornerLabel": "KỸ NĂNG",
+      "introLead": "Một quy trình đơn giản và hiệu quả để biến ý tưởng của bạn thành hiện thực.",
+      "introMuted": "Từ bước đầu tiên đến khi hình thành sản phẩm, mỗi giai đoạn đều được hướng dẫn rõ ràng và hiệu quả.",
+      "tier1Title": "Nền tảng",
+      "tier1Body": "Tất cả các bạn đều có thể bắt đầu ở đây. Bạn sẽ được học cách yêu cầu AI đúng thứ mình cần, đọc lỗi mà không hoang mang, làm chủ editor, và bắt đầu phân biệt để lựa chọn cần làm gì tiếp theo cho dự án của mình — từng bước một.",
+      "tier2Title": "Bối cảnh & Cấu trúc",
+      "tier2Body": "Bạn cần thiết lập các thông tin cơ bản của dự án với Codepet. Thiết lập bối cảnh, viết file rules mà Codepet cần phải nắm, ghi nhận quá trình trong lúc xây dựng, và bố trí dự án có thể mở rộng hơn trong tương lai mà không chỉ dừng lại một điểm.",
+      "tier3Title": "Phát triển",
+      "tier3Body": "Đây là lúc mà bạn thực chiến. Bạn có thể làm việc linh hoạt giữa Cursor, Claude Code và VS Code, tự quản lý phạm vi của dự án, tái sử dụng hệ thống đã được thiết kế, và liên tục nâng cấp kỹ năng cho đến khi sản phẩm hoạt động tốt nhất có thể.",
+      "tier4Title": "Chuyên gia",
+      "tier4Body": "Thành quả mà bạn đạt được: Tư duy theo user persona, tận dụng context window mà không bị lạc hướng, thiết kế kiến trúc AI vào sản phẩm, và xây dựng bộ não thứ hai cộng hưởng theo từng sản phẩm bạn ra mắt."
     },
     "testimonials": {
-      "title": "real results from the beta",
-      "subtitle": "three stories. real change.",
-      "item1Quote": "“40% broken prompts to just 12%. the pet makes me persistent.”",
+      "title": "kết quả thực từ bản beta",
+      "subtitle": "ba câu chuyện. thay đổi thật.",
+      "item1Quote": "“40% prompt hỏng giảm còn 12%. Codepet đã giúp tôi kiên trì.”",
       "item1Name": "sarah k.",
-      "item1Role": "designer who codes",
-      "item2Quote": "“shipped my first saas in 6 weeks. 0 to $200 mrr.”",
+      "item1Role": "designer học code",
+      "item2Quote": "“ra mắt saas đầu tiên trong 6 tuần. từ 0 đến $200 mrr.”",
       "item2Name": "wei c.",
       "item2Role": "indie dev",
-      "item3Quote": "“6 prompts for auth → 1. hours saved, more shipped.”",
+      "item3Quote": "“6 prompt cho auth → tiết kiệm hàng giờ và ra sản phẩm nhiều hơn.”",
       "item3Name": "alex r.",
       "item3Role": "solo founder"
     },
     "finalCta": {
-      "titleLine1": "let’s talk the",
-      "titleLine2": "future of coding.",
-      "subtitleLine1": "stop guessing.",
-      "subtitleLine2": "start growing."
+      "titleLine1": "cùng nói về",
+      "titleLine2": "tương lai của lập trình.",
+      "subtitleLine1": "đừng suy nghĩ nữa.",
+      "subtitleLine2": "hãy bắt đầu phát triển."
     },
     "form": {
       "placeholder": "name@gmail.com",
-      "emailAria": "Email address",
-      "waitlistAria": "Join the waitlist",
-      "submit": "Join the waitlist",
-      "loading": "Joining…",
-      "success": "Thanks — you’re in!",
-      "duplicate": "You’re already in!",
-      "successSubtitle": "We’ll email you when Codepet launches.",
-      "errorValidation": "Please enter a valid email address.",
-      "errorServer": "Something went wrong. Try again in a moment?"
+      "emailAria": "Địa chỉ email",
+      "waitlistAria": "Tham gia danh sách chờ",
+      "submit": "Tham gia ngay",
+      "loading": "Đang tham gia…",
+      "success": "Cảm ơn — bạn đã vào!",
+      "duplicate": "Bạn đã ở trong danh sách!",
+      "successSubtitle": "Chúng tôi sẽ gửi email khi Codepet ra mắt.",
+      "errorValidation": "Vui lòng nhập địa chỉ email hợp lệ.",
+      "errorServer": "Có lỗi xảy ra. Thử lại sau ít phút nhé?"
     },
     "footer": {
-      "copyright": "© 2026 All right reserved",
+      "copyright": "© 2026 Mọi quyền đã được bảo lưu",
       "wordmarkAlt": "Codepet",
-      "navAria": "Footer"
+      "navAria": "Chân trang"
     },
     "installPrompt": {
-      "cta": "Install Codepet",
-      "regionAria": "Install Codepet",
-      "dismissAria": "Dismiss install prompt"
+      "cta": "Cài đặt Codepet",
+      "regionAria": "Cài đặt Codepet",
+      "dismissAria": "Đóng lời mời cài đặt"
     }
   }
 }
