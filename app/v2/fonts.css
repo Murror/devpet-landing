@@ -243,6 +243,17 @@
   font-family: 'DearPix', 'VT323', monospace;
 }
 
+/* Stats labels in Vietnamese — Vietnamese phrases ("tỷ lệ thành
+   công", "thành viên", "nhanh hơn") are noticeably longer than
+   their English counterparts ("success rate", "builders", "faster"),
+   so the original clamp() size made the middle label wrap to two
+   lines and clip behind the yellow square. Trim the size ~60% for
+   Vietnamese only — keeps the layout balanced without changing
+   the English version. */
+.v2-root--vi .v2-stat-label {
+  font-size: clamp(18px, 2.4vw, 38px);
+}
+
 /* ── Full-viewport sections ──────────────────────────────────
    Each major content section below should fill at least the
    viewport height so that when the reader scrolls onto it, the
