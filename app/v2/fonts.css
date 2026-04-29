@@ -216,8 +216,28 @@
   font-family: 'DearPix', 'Upheaval TT', 'Minecraft', monospace;
 }
 
+/* Open Sans body-text elements stay in Open Sans even on Vietnamese
+   visits. These are standard Latin body copy where Open Sans's
+   diacritics already render cleanly; swapping to DearPix would make
+   long paragraphs feel chunky and hurt readability. The selector
+   has the same specificity (0,2,0) as the generic v2- rule above
+   but appears later in the cascade, so it wins. */
+.v2-root--vi .v2-product-body,
+.v2-root--vi .v2-product-integrates,
+.v2-root--vi .v2-product-integrations li,
+.v2-root--vi .v2-mindset-eyebrow,
+.v2-root--vi .v2-getgood-body,
+.v2-root--vi .v2-skilltrees-intro,
+.v2-root--vi .v2-skilltrees-card-body,
+.v2-root--vi .v2-testimonials-quote,
+.v2-root--vi .v2-testimonials-attr,
+.v2-root--vi .v2-testimonials-name,
+.v2-root--vi .v2-testimonials-role {
+  font-family: 'Open Sans', 'VT323', system-ui, -apple-system, sans-serif;
+}
+
 /* Form inputs in Vietnamese — keep the same DearPix face for
-   visual consistency. */
+   visual consistency with the surrounding pixel UI. */
 .v2-root--vi input,
 .v2-root--vi textarea {
   font-family: 'DearPix', 'VT323', monospace;
