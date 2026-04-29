@@ -1469,6 +1469,16 @@ html {
   color: #C8371C;
 }
 
+/* Success subtitle — sits below the confirmation pill once the user
+   has joined. Quiet, supportive copy, off-black so it doesn't fight
+   the pill for attention. */
+.v2-product-msg--success {
+  color: #2D2B26;
+  opacity: 0.78;
+  font-size: 14px;
+  letter-spacing: 0.01em;
+}
+
 /* ── Right column: decorative Byte + coin scatter ───────────── */
 .v2-product-right {
   position: relative;
@@ -3408,6 +3418,14 @@ html {
 
 .v2-finalcta-msg--error {
   color: #F07A79;
+}
+
+/* Success subtitle on the final CTA's dark band — light grey at
+   reduced opacity so it reads as quiet supporting copy beside the
+   loud "Thanks — you're in!" pill. */
+.v2-finalcta-msg--success {
+  color: #FFFFFF;
+  opacity: 0.7;
 }
 
 .v2-finalcta-submit {

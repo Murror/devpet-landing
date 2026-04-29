@@ -182,31 +182,39 @@ export default function Product() {
           </ul>
 
           <form
-            className="v2-product-form"
+            className={
+              'v2-product-form' + (done ? ' v2-product-form--done' : '')
+            }
             onSubmit={handleSubmit}
             noValidate
             aria-label="Join the waitlist"
           >
-            <input
-              type="email"
-              name="email"
-              required
-              autoComplete="email"
-              placeholder="name@gmail.com"
-              className={
-                'v2-product-input' +
-                (validationError ? ' v2-product-input--error' : '')
-              }
-              aria-label="Email address"
-              aria-invalid={validationError || state === 'error'}
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value)
-                if (validationError) setValidationError(false)
-                if (state === 'error') setState('idle')
-              }}
-              disabled={loading || done}
-            />
+            {/* Hide the email input once the user has successfully joined
+                (success or duplicate). The pixel-pill button below carries
+                the confirmation copy on its own — leaving the disabled
+                input visible just clutters the success state. */}
+            {!done && (
+              <input
+                type="email"
+                name="email"
+                required
+                autoComplete="email"
+                placeholder="name@gmail.com"
+                className={
+                  'v2-product-input' +
+                  (validationError ? ' v2-product-input--error' : '')
+                }
+                aria-label="Email address"
+                aria-invalid={validationError || state === 'error'}
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value)
+                  if (validationError) setValidationError(false)
+                  if (state === 'error') setState('idle')
+                }}
+                disabled={loading}
+              />
+            )}
             <button
               type="submit"
               className="v2-product-submit"
@@ -218,6 +226,16 @@ export default function Product() {
                   doesn't crop the outline filter. */}
               <span className="v2-product-submit-body">{buttonLabel}</span>
             </button>
+
+            {/* Subtitle that appears once they're in — gives the success
+                state context (when to expect to hear from us) so the
+                button isn't a dead end. aria-live so screen readers
+                announce it on success. */}
+            {done && (
+              <p className="v2-product-msg v2-product-msg--success" aria-live="polite">
+                We&rsquo;ll email you when Codepet launches.
+              </p>
+            )}
 
             {validationError && (
               <p

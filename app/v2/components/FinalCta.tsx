@@ -149,30 +149,37 @@ export default function FinalCta() {
 
       <form
         id="waitlist"
-        className="v2-finalcta-form v2-finalcta-reveal"
+        className={
+          'v2-finalcta-form v2-finalcta-reveal' +
+          (done ? ' v2-finalcta-form--done' : '')
+        }
         onSubmit={handleSubmit}
         noValidate
       >
-        <input
-          type="email"
-          name="email"
-          required
-          autoComplete="email"
-          placeholder="name@gmail.com"
-          className={
-            'v2-finalcta-input' +
-            (validationError ? ' v2-finalcta-input--error' : '')
-          }
-          aria-label="Email address"
-          aria-invalid={validationError || state === 'error'}
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value)
-            if (validationError) setValidationError(false)
-            if (state === 'error') setState('idle')
-          }}
-          disabled={loading || done}
-        />
+        {/* Hide the email input once they're in (success or duplicate).
+            See Product.tsx for the same pattern + rationale. */}
+        {!done && (
+          <input
+            type="email"
+            name="email"
+            required
+            autoComplete="email"
+            placeholder="name@gmail.com"
+            className={
+              'v2-finalcta-input' +
+              (validationError ? ' v2-finalcta-input--error' : '')
+            }
+            aria-label="Email address"
+            aria-invalid={validationError || state === 'error'}
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value)
+              if (validationError) setValidationError(false)
+              if (state === 'error') setState('idle')
+            }}
+            disabled={loading}
+          />
+        )}
         <button
           type="submit"
           className="v2-finalcta-submit"
@@ -180,6 +187,15 @@ export default function FinalCta() {
         >
           {buttonLabel}
         </button>
+
+        {done && (
+          <p
+            className="v2-finalcta-msg v2-finalcta-msg--success"
+            aria-live="polite"
+          >
+            We&rsquo;ll email you when Codepet launches.
+          </p>
+        )}
 
         {validationError && (
           <p className="v2-finalcta-msg v2-finalcta-msg--error" role="alert">
