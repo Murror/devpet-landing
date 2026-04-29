@@ -182,7 +182,10 @@ export default function FinalCta() {
         )}
         <button
           type="submit"
-          className="v2-finalcta-submit"
+          className={
+            'v2-finalcta-submit' +
+            (done ? ' v2-finalcta-submit--done' : '')
+          }
           disabled={loading || done}
         >
           {buttonLabel}

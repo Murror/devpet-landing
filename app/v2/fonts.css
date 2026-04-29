@@ -1458,6 +1458,15 @@ html {
   cursor: not-allowed;
 }
 
+/* Success state — the button is still `disabled` (to prevent
+   double-submits) but visually it should look fully solid, not
+   dimmed. Restoring opacity 1 makes "THANKS — YOU'RE IN!" read as
+   a proud confirmation pill rather than a faded "loading" pill. */
+.v2-product-submit--done:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
 .v2-product-msg {
   flex: 1 0 100%;
   margin: 4px 0 0;
@@ -3512,9 +3521,18 @@ html {
   transform: translateY(-1px);
 }
 
-.v2-finalcta-submit:disabled {
+/* Disabled state for non-success disables (loading, etc.) — grey
+   it out so the user knows they can't click. The `:not(--done)`
+   scope means the success state DOES NOT pick up these greys; it
+   keeps the button's full red-gradient look so "Thanks — you're
+   in!" reads as a confirmation, not a faded loading state. */
+.v2-finalcta-submit:disabled:not(.v2-finalcta-submit--done) {
   background: #D9D9D9;
   color: #555;
+  cursor: default;
+}
+
+.v2-finalcta-submit--done:disabled {
   cursor: default;
 }
 

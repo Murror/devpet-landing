@@ -217,13 +217,18 @@ export default function Product() {
             )}
             <button
               type="submit"
-              className="v2-product-submit"
+              className={
+                'v2-product-submit' +
+                (done ? ' v2-product-submit--done' : '')
+              }
               disabled={loading || done}
             >
               {/* Inner span carries the clip-path + body colour;
                   outer button gets the drop-shadow black outline.
                   Same pattern as the nav CTA — splits so the clip
-                  doesn't crop the outline filter. */}
+                  doesn't crop the outline filter. The --done modifier
+                  cancels the disabled-state dimming so the success
+                  pill keeps its full pixel-art colour. */}
               <span className="v2-product-submit-body">{buttonLabel}</span>
             </button>
 
