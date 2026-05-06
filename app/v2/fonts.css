@@ -376,9 +376,9 @@ html {
 
    Use these values verbatim in @media rules:
 
-     @media (max-width: 767.98px)  { /* mobile */ }
-     @media (min-width: 768px)     { /* tablet + desktop */ }
-     @media (min-width: 1200px)    { /* desktop */ }
+     @media (max-width: 767.98px)   → mobile
+     @media (min-width: 768px)      → tablet + desktop
+     @media (min-width: 1200px)     → desktop
 
    Sub-tier media queries (e.g. 480 / 560 / 960 / 980) exist for
    per-section fine-tuning — they sit INSIDE one of the three
