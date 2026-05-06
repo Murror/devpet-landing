@@ -5476,6 +5476,22 @@ html {
     display: none;
   }
 
+  /* Nav CTA — restore desktop sizing on iPad. The mobile @media
+     block above shrinks the body to 36px height with 12px font
+     and zero vertical padding, but the clip-path polygon on
+     .v2-nav-cta-body is hardcoded for a 40-tall pill. At 36px
+     the polygon coords point past the actual element edges,
+     producing the visible blank-red band beneath the text. iPad
+     has plenty of width for the full-size desktop pill, so we
+     just override the mobile shrinks back to their desktop
+     defaults — geometry matches the polygon and the bevel reads
+     correctly. */
+  .v2-nav-cta-body {
+    font-size: 15px;
+    padding: 13px 28px 12px;
+    height: 40px;
+  }
+
   /* Hero — give the section bottom breathing room at tablet so the
      V-shape pets row (byte sits ~60px below the row baseline) does
      not push pixels into the green Product section underneath. The
