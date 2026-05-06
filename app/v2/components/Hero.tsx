@@ -99,8 +99,19 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* Hero CTA removed per brief — the persistent "Start Your Journey"
-          button now lives in the nav (right side). */}
+      {/* Mobile-only "Start your journey" CTA, placed under the pets row.
+          On tablet/desktop the nav CTA is visible at the top right; on
+          phones the nav CTA shrinks (768) or hides (480), so we surface
+          a clear in-flow CTA here instead. Reuses the nav CTA's pixel-
+          pill classes for the body styling — see fonts.css for the
+          mobile-only show rules. */}
+      <a
+        href="#waitlist"
+        className="v2-nav-cta v2-hero-mobile-cta"
+        aria-label={t.v2.nav.startJourney}
+      >
+        <span className="v2-nav-cta-body">{t.v2.nav.startJourney}</span>
+      </a>
     </section>
   )
 }

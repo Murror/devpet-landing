@@ -696,6 +696,17 @@ html {
 
 .v2-nav-cta:focus-visible { outline: none; }
 
+/* ── Hero mobile CTA ───────────────────────────────────────────
+   Same visual as the nav CTA (red pixel-art pill) but placed in
+   the hero flow under the pets row. Hidden by default; shown only
+   on mobile via the @media block at the bottom of this file.
+   Carries .v2-nav-cta on the wrapper so it inherits the drop-
+   shadow border + the body's pixel-pill clip-path/colors without
+   re-declaring all of that here. */
+.v2-hero-mobile-cta {
+  display: none;
+}
+
 .v2-nav-links {
   display: flex;
   align-items: center;
@@ -4267,6 +4278,25 @@ html {
   .v2-hero-pet-img {
     width: 100% !important;
     height: auto !important;
+  }
+  /* ── Hero mobile CTA — show below the pets row ────────────────
+     On phones the nav CTA shrinks (≤768) or hides entirely (≤480),
+     so visitors lose the "Start your journey" call-to-action above
+     the fold. This in-flow CTA replaces it: same pixel pill, but
+     centered under the pets. Body sizing matches the desktop nav
+     CTA (40px tall, 15px font) so the existing clip-path polygon
+     stays valid. We force `display: inline-block` on the body even
+     under the 480 portrait override (which hides the nav body). */
+  .v2-hero-mobile-cta {
+    display: inline-block;
+    align-self: center;
+    margin: clamp(20px, 5vw, 36px) auto clamp(8px, 2vw, 20px);
+  }
+  .v2-hero-mobile-cta .v2-nav-cta-body {
+    display: inline-block !important;
+    font-size: 15px;
+    height: 40px;
+    padding: 13px 28px 12px;
   }
 
   /* ── Product (Section 3) ──────────────────────────────────── */
