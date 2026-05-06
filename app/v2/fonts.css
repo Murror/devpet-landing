@@ -5433,4 +5433,14 @@ html {
   .v2-hero-pets {
     margin-bottom: clamp(8px, 1.5vw, 20px);
   }
+
+  /* Hero headline + subhead — the mobile rules pin both to a fixed
+     40px, which reads as small on a 768-wide iPad (40px is sized
+     for a 390px iPhone). At tablet, scale up to a comfortable
+     reading size that still leaves room for the pets row. At
+     768px wide the clamp lands near 64px; at 1199px it's near 80px. */
+  .v2-hero-headline,
+  .v2-hero-subhead {
+    font-size: clamp(56px, 8.4vw, 80px);
+  }
 }
