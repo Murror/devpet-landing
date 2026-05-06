@@ -2547,13 +2547,18 @@ html {
 
 .v2-getgood-headline {
   /* Framer: Upheaval TT (BRK), Regular 400, 80px, black, line-height
-     1.2em, letter-spacing 0. Same pixel display face as the Mindset
-     and Product labels so the retro type system stays consistent. */
+     1.2em. Same pixel display face as the Mindset and Product labels
+     so the retro type system stays consistent.
+
+     Letter-spacing was 0 — bumped to 0.05em so the periods in
+     "CODE.PHÁT TRIỂN.HỌC HỎI" have visible breathing room from
+     the surrounding glyphs (the pixel font's natural advance is
+     tight enough that "E.P" and "N.H" read as one cluster). */
   font-family: 'Upheaval TT', 'Minecraft', monospace;
   font-weight: 400;
   font-size: clamp(44px, 5.6vw, 80px);
   line-height: 1.2;
-  letter-spacing: 0;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: #000000;
   /* Bottom margin trimmed from clamp(56px, 6vw, 88px) → clamp(32px,
