@@ -5460,6 +5460,18 @@ html {
   .v2-getgood-card-label {
     font-size: clamp(18px, 2.4vw, 26px);
   }
+
+  /* GetGood body paragraph — match the Product body's gutter so
+     both sections share the same horizontal inset. The desktop
+     rule sets max-width: 940 with no side padding, which on iPad
+     pushes the prose almost edge-to-edge of the section. */
+  .v2-getgood-body {
+    max-width: 640px;
+    padding-left: clamp(24px, 4vw, 64px);
+    padding-right: clamp(24px, 4vw, 64px);
+    margin-left: auto;
+    margin-right: auto;
+  }
   /* Icon container — let the image take more of the card height
      (was capped at 60% in the mobile rule). At iPad scale 70-75%
      reads as a deliberate hero image instead of a small inset
