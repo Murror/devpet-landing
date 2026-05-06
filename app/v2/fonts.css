@@ -5787,11 +5787,15 @@ html {
      triển.") fits inside the section padding without overflow. */
   .v2-finalcta-title,
   .v2-finalcta-subtitle {
-    font-size: clamp(26px, 3.4vw, 36px);
+    /* Bumped from clamp(26,3.4vw,36) so the headline reads with
+       more weight at iPad scale. Side padding tightened slightly
+       to give the longer subtitle ('Đừng suy nghĩ nữa. hãy bắt
+       đầu phát triển.') room to fit on one line at the new size. */
+    font-size: clamp(30px, 4vw, 42px);
     line-height: 1.15;
     white-space: nowrap;
-    padding-left: clamp(16px, 2.5vw, 32px);
-    padding-right: clamp(16px, 2.5vw, 32px);
+    padding-left: clamp(8px, 1.5vw, 24px);
+    padding-right: clamp(8px, 1.5vw, 24px);
   }
   /* Inline the mobile-break span so the second half stays on the
      same line as the first half. */
