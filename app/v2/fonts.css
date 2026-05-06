@@ -5433,24 +5433,38 @@ html {
    768px (source-order cascade for equally-specific selectors).
    ──────────────────────────────────────────────────────────── */
 @media (min-width: 768px) and (max-width: 1199px) {
-  /* GetGood — 4 portrait cards in a 2x2 grid (was 1-col on mobile). */
+  /* GetGood — 4 portrait cards in a 2x2 grid (was 1-col on mobile).
+     Constrain the grid further so cards read as compact tiles
+     centered in the section rather than sized-to-viewport. */
   .v2-getgood-cards {
     grid-template-columns: repeat(2, 1fr);
-    gap: clamp(20px, 2.5vw, 32px);
-    /* Drop the mobile-only 28px side padding so the cards reach
-       toward the section edges at iPad widths. */
+    gap: clamp(16px, 2vw, 24px);
+    /* Tighter cap (was 600). At iPad portrait this leaves wide
+       yellow bands either side and renders each card around
+       220x220 in the 2-col grid. */
+    max-width: 460px;
+    margin-left: auto;
+    margin-right: auto;
     padding: 0;
   }
   .v2-getgood-card {
-    /* Slightly less portrait than mobile (5/6) so two cards in a
-       row fit comfortably without each taking 90% of the viewport
-       height. 4/5 keeps the card readable but more compact. */
-    aspect-ratio: 4 / 5;
-    /* Loosen the inside padding compared to the mobile rule
-       (which uses 20/18) so icon + label have room to breathe
-       at iPad scale rather than feeling cramped. */
-    padding: clamp(28px, 3vw, 44px) clamp(20px, 2.5vw, 32px);
-    gap: clamp(20px, 2.5vw, 32px);
+    aspect-ratio: 1 / 1;
+    /* Tightened padding to suit the smaller box. */
+    padding: clamp(16px, 2vw, 24px) clamp(12px, 1.6vw, 20px);
+    gap: clamp(10px, 1.4vw, 16px);
+  }
+  /* Tighten icon + label for the smaller card. The earlier tablet
+     bumps (icon 92 percent, label clamp 28-40) were tuned for the
+     600-wide grid; at 460-wide the same values overpower the
+     box. Bring them back to a moderate scale. */
+  .v2-getgood-card-icon {
+    max-height: 64%;
+  }
+  .v2-getgood-card-icon img {
+    max-width: 84%;
+  }
+  .v2-getgood-card-label {
+    font-size: clamp(20px, 2.6vw, 28px);
   }
   /* Icon container — let the image take more of the card height
      (was capped at 60% in the mobile rule). At iPad scale 70-75%
