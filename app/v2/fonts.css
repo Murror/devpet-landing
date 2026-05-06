@@ -4290,7 +4290,12 @@ html {
   .v2-hero-mobile-cta {
     display: inline-block;
     align-self: center;
-    margin: clamp(20px, 5vw, 36px) auto clamp(8px, 2vw, 20px);
+    /* Tightened top + a bit more bottom so the pill sits visually
+       balanced between the pets row above and the green Product
+       section below — was margin-top: clamp(20,5vw,36) which left
+       a noticeably larger gap above the button than below it on
+       a 390px iPhone. */
+    margin: clamp(6px, 1.5vw, 14px) auto clamp(20px, 5vw, 36px);
   }
   .v2-hero-mobile-cta .v2-nav-cta-body {
     display: inline-block !important;
