@@ -5598,4 +5598,43 @@ html {
     width: clamp(80px, 11vw, 116px);
     left: 26%;
   }
+
+  /* ── Mindset section iPad polish ────────────────────────────
+     Orbs (heart/diamond/gem/egg) at the four corners — bumped
+     ~30 percent so they read as deliberate decorative anchors
+     against the larger headline below, not tiny pip stickers. */
+  .v2-mindset-orb--tl {
+    width: clamp(120px, 16vw, 200px);
+  }
+  .v2-mindset-orb--tr {
+    width: clamp(140px, 18vw, 240px);
+  }
+  .v2-mindset-orb--bl {
+    width: clamp(124px, 16.5vw, 220px);
+  }
+  .v2-mindset-orb--br {
+    width: clamp(132px, 17.5vw, 232px);
+  }
+
+  /* Mindset headline — currently the desktop clamp(56,7.2vw,112)
+     evaluates to ~55-86px on iPad, and each `.line` span is
+     `display: block; white-space: nowrap`, forcing the headline
+     onto 3 separate, often-narrow lines. At tablet, let the
+     three spans flow inline so the browser can wrap the full
+     phrase to 2 lines naturally. Slight letter-spacing bump
+     (~0.04em) opens the pixel glyphs for readability. */
+  .v2-mindset-headline {
+    font-size: clamp(48px, 7vw, 72px);
+    line-height: 1.05;
+    letter-spacing: 0.04em;
+  }
+  .v2-mindset-headline .line {
+    display: inline;
+    white-space: normal;
+  }
+  /* Restore a single space between spans (JSX collapses adjacent
+     elements without one when they go inline). */
+  .v2-mindset-headline .line + .line::before {
+    content: ' ';
+  }
 }
