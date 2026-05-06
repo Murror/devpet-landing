@@ -5527,6 +5527,21 @@ html {
     font-size: clamp(56px, 8.4vw, 80px);
   }
 
+  /* Sparkle + heart decorations — the mobile rules pin both to
+     top: 20px (right under the nav) which leaves a big empty band
+     between them and the headline on iPad. Drop them down to sit
+     visually adjacent to the headline's first line, and bump
+     their size a notch so they don't read as tiny next to the
+     bigger tablet-tier headline. */
+  .v2-hero-deco--sparkle-tl {
+    top: clamp(96px, 14vw, 160px);
+    width: clamp(40px, 5.5vw, 64px);
+  }
+  .v2-hero-deco--heart-tr {
+    top: clamp(96px, 14vw, 160px);
+    width: clamp(40px, 5.5vw, 64px);
+  }
+
   /* ── Product section iPad polish ────────────────────────────
      Body paragraph: add side padding so the prose doesn't touch
      the section edges, and let the measure breathe a bit wider
