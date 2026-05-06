@@ -4299,9 +4299,16 @@ html {
   }
   .v2-hero-mobile-cta .v2-nav-cta-body {
     display: inline-block !important;
-    font-size: 15px;
+    /* Pixel font reads cleanest at multiples of 8 — bump to 16px
+       (was 15) so glyph edges land on integer pixel rows. Wider
+       horizontal padding (32 vs 28) gives the button more presence
+       under the mobile headline. Vertical padding rebalanced to
+       12/12 so the 16px text centers exactly inside the 40px body
+       (16 + 12 + 12 = 40); this keeps the existing clip-path
+       polygon (hardcoded for 40px height) valid. */
+    font-size: 16px;
     height: 40px;
-    padding: 13px 28px 12px;
+    padding: 12px 32px;
   }
 
   /* ── Product (Section 3) ──────────────────────────────────── */
