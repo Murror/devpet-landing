@@ -5531,6 +5531,22 @@ html {
   .v2-skilltrees-orb img {
     width: clamp(180px, 24vw, 240px);
   }
+  /* Tighten the cards themselves so the row height shrinks and
+     the orb's vertical centre sits right next to the card body's
+     vertical centre (matching the macOS row rhythm). The desktop
+     defaults — title 30, body 25, padding 24-40 — make the card
+     tall when the column is narrow on iPad. */
+  .v2-skilltrees-card {
+    padding: clamp(20px, 2.4vw, 32px);
+  }
+  .v2-skilltrees-card-title {
+    font-size: clamp(22px, 2.6vw, 28px);
+    margin-bottom: clamp(8px, 1.2vw, 14px);
+  }
+  .v2-skilltrees-card-body {
+    font-size: clamp(15px, 1.9vw, 18px);
+    line-height: 1.45;
+  }
 
   /* Product Byte — cap size at tablet so the sprite doesn't bleed
      past the green band into the eyebrow above. The mobile rule
