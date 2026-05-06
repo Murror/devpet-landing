@@ -5830,4 +5830,20 @@ html {
     display: inline-block;
     font-size: clamp(15px, 1.8vw, 18px);
   }
+
+  /* Tame the 100vh sections so the footer surfaces sooner on
+     iPad. The desktop default sets every coloured band to
+     min-height: 100vh which on a 1024-tall portrait viewport
+     leaves ~600px of empty space below the centred content
+     before the next section begins — the user has to scroll a
+     long way to reach the footer. Drop the floor to content-
+     height + reasonable padding so the page reads as a stack of
+     tightly-packed sections at iPad scale. */
+  .v2-mindset,
+  .v2-getgood,
+  .v2-skilltrees,
+  .v2-testimonials,
+  .v2-finalcta {
+    min-height: auto;
+  }
 }
