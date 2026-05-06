@@ -5817,22 +5817,35 @@ html {
   }
 
   /* Footer nav — explicitly show the link list at iPad so it
-     can't accidentally collapse. The mobile @media block leaves
-     the nav visible but `flex-wrap: wrap` plus the narrow column
-     can push the links off-screen if something else has injected
-     overflow. Force visible flex + wrapping with a clear gap. */
+     can't accidentally collapse, AND bump it above the brand
+     (logo + copyright) so the four nav links appear right at
+     the start of the white footer band — visible without
+     scrolling all the way past the logo. */
+  .v2-footer-inner {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: clamp(24px, 3vw, 40px);
+  }
   .v2-footer-nav {
+    order: -1;
     display: block !important;
+    width: 100%;
+    justify-self: center !important;
   }
   .v2-footer-links {
     display: flex !important;
     flex-wrap: wrap;
     gap: clamp(16px, 2.5vw, 32px);
-    justify-content: flex-start;
+    justify-content: center !important;
   }
   .v2-footer-link {
     display: inline-block;
     font-size: clamp(15px, 1.8vw, 18px);
+  }
+  .v2-footer-brand {
+    align-items: center;
+    text-align: center;
   }
 
   /* Tame the 100vh sections so the footer surfaces sooner on
