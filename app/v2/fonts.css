@@ -457,9 +457,13 @@ html {
   position: absolute;
   /* Land the sprite feet on the visible grass path. Iterated
      from 9 (sinking) -> 18 (still sinking) -> 26 (floating in
-     the trees) -> 14, which lines up the foot baseline with
-     the mushroom bases on the path. */
-  bottom: 14%;
+     the trees) -> 14 (still floating at bushline on real
+     viewport) -> 6, which sits the foot baseline on the same
+     band as the mushroom stems. The forest-bg PNG is anchored
+     at `center bottom / cover`, so the grass band is always
+     glued to the bottom of the panel — a low percentage maps
+     reliably onto the grass regardless of panel height. */
+  bottom: 6%;
   left: 0;
   /* Same size for all three so the trio reads as a uniform
      line of companions. */
