@@ -6,6 +6,25 @@
   body {
     @apply text-text font-sans antialiased;
   }
+  /* Real-device parity fixes — these only show up on physical
+     iPhone / iPad / Android, not in most desktop browser
+     emulators, so they're easy to miss during preview. */
+  html {
+    /* Prevent iOS Safari from auto-zooming text on rotation. */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  /* Kill the grey flash that mobile Safari / Chrome paint on
+     tap. Brand surfaces drive their own active states; the
+     default highlight reads as a glitch. */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  /* Fall back from sticky to relative on iOS when the parent
+     of a sticky element has transform / filter / overflow:
+     hidden — those break sticky on iOS and the element
+     positions weirdly. We don't preempt this here, but the
+     pattern is documented for when it bites. */
 }
 
 /* ── Pixel button — stepped 8-bit corners ── */

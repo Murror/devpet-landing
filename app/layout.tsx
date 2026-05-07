@@ -6,6 +6,16 @@ import './globals.css'
 
 const varelaRound = Varela_Round({ weight: '400', subsets: ['latin'], variable: '--font-varela' })
 
+export const viewport = {
+  // viewport-fit: cover lets env(safe-area-inset-*) values
+  // resolve to non-zero on iPhone notch / Dynamic Island / iPad
+  // home-indicator bands. Without this, full-bleed elements
+  // can't honour safe areas and content slips under the notch.
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover' as const,
+}
+
 export const metadata: Metadata = {
   title: 'Codepet — The AI coding school with your pet',
   description: 'Learn to vibecode with your companion. 16 skills, 4 tiers, and a pet that grows as you do.',
@@ -56,19 +66,25 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   // the @font-face files download — what users were seeing as a
   // "wrong font" flash on first visit.
   //
+  // We use the woff2 versions (auto-converted from the source ttf/otf
+  // files) — they're 4–7× smaller than the originals, so they download
+  // before the swap timeout in nearly all cases. The font-face
+  // declarations in fonts.css list woff2 first with the originals as
+  // fallback for any browser that doesn't speak woff2 (effectively none).
+  //
   // We pick which display font to preload based on the resolved
   // initial locale so we never waste bytes on the unused one:
-  //   • EN visits → preload Upheaval TT (English hero headline)
-  //   • VI visits → preload DearPix (Vietnamese hero headline)
+  //   • EN visits → preload Upheaval TT (English hero headline, 11KB)
+  //   • VI visits → preload DearPix (Vietnamese hero headline, 77KB)
   // VT323 is preloaded for both since the body text uses it everywhere.
   //
   // `crossOrigin="anonymous"` is required for `as="font"` preloads
   // even when the font is same-origin (per the spec). Without it
   // browsers ignore the preload.
   const displayFontHref =
-    initialLocale === 'vi' ? '/fonts/dearpix/dearpix.otf' : '/fonts/upheaval/upheavtt.ttf'
-  const displayFontType =
-    initialLocale === 'vi' ? 'font/otf' : 'font/ttf'
+    initialLocale === 'vi'
+      ? '/fonts/dearpix/dearpix.woff2'
+      : '/fonts/upheaval/upheavtt.woff2'
 
   return (
     <html lang={initialLocale}>
@@ -77,14 +93,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           rel="preload"
           href={displayFontHref}
           as="font"
-          type={displayFontType}
+          type="font/woff2"
           crossOrigin="anonymous"
         />
         <link
           rel="preload"
-          href="/fonts/vt323/VT323-Regular.ttf"
+          href="/fonts/vt323/VT323-Regular.woff2"
           as="font"
-          type="font/ttf"
+          type="font/woff2"
           crossOrigin="anonymous"
         />
         {process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN && (

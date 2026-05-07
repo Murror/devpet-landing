@@ -73,8 +73,28 @@ export default function ProfileSurvey({ email, onComplete }: Props) {
   const submitLabel = submitting ? survey.submitting : survey.submit
 
   // Lock body scroll while the modal is open + close on ESC.
+  // iOS Safari doesn't honour `overflow: hidden` on body to
+  // prevent scrolling — the URL-bar collapse + overscroll bounce
+  // still let the page move underneath the modal. The reliable
+  // cross-browser fix is to pin the body to its current scroll
+  // position with `position: fixed; top: -scrollY` and restore
+  // when the modal closes. Works on desktop, Android Chrome,
+  // iOS Safari, and Safari on iPad.
   useEffect(() => {
-    const prevOverflow = document.body.style.overflow
+    const scrollY = window.scrollY
+    const prev = {
+      position: document.body.style.position,
+      top: document.body.style.top,
+      left: document.body.style.left,
+      right: document.body.style.right,
+      overflow: document.body.style.overflow,
+      width: document.body.style.width,
+    }
+    document.body.style.position = 'fixed'
+    document.body.style.top = `-${scrollY}px`
+    document.body.style.left = '0'
+    document.body.style.right = '0'
+    document.body.style.width = '100%'
     document.body.style.overflow = 'hidden'
 
     function onKey(e: KeyboardEvent) {
@@ -82,7 +102,15 @@ export default function ProfileSurvey({ email, onComplete }: Props) {
     }
     window.addEventListener('keydown', onKey)
     return () => {
-      document.body.style.overflow = prevOverflow
+      document.body.style.position = prev.position
+      document.body.style.top = prev.top
+      document.body.style.left = prev.left
+      document.body.style.right = prev.right
+      document.body.style.width = prev.width
+      document.body.style.overflow = prev.overflow
+      // Restore the scroll position the user was at before the
+      // modal opened — without this they jump to the top.
+      window.scrollTo(0, scrollY)
       window.removeEventListener('keydown', onKey)
     }
   }, [onComplete, submitting])

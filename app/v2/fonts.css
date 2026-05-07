@@ -455,11 +455,11 @@ html {
    vertically as they go. */
 .v2-survey-walker {
   position: absolute;
-  /* Lift the sprites so they stand on top of the grass band
-     rather than sinking into it. With bottom: 26%, the feet
-     line up with the bases of the foreground mushrooms — the
-     pet silhouettes read as upright, walking on the path. */
-  bottom: 26%;
+  /* Land the sprite feet on the visible grass path. Iterated
+     from 9 (sinking) -> 18 (still sinking) -> 26 (floating in
+     the trees) -> 14, which lines up the foot baseline with
+     the mushroom bases on the path. */
+  bottom: 14%;
   left: 0;
   /* Same size for all three so the trio reads as a uniform
      line of companions. */
@@ -574,9 +574,11 @@ html {
   z-index: 2;
   transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
 }
-.v2-survey-close:hover {
-  background: rgba(30, 24, 72, 0.06);
-  border-color: rgba(30, 24, 72, 0.4);
+@media (hover: hover) {
+  .v2-survey-close:hover {
+    background: rgba(30, 24, 72, 0.06);
+    border-color: rgba(30, 24, 72, 0.4);
+  }
 }
 .v2-survey-close:active {
   transform: scale(0.95);
@@ -731,8 +733,10 @@ html {
   cursor: pointer;
   transition: border-color 0.15s ease, background 0.15s ease;
 }
-.v2-survey-tile:hover {
-  border-color: rgba(123, 107, 216, 0.5);
+@media (hover: hover) {
+  .v2-survey-tile:hover {
+    border-color: rgba(123, 107, 216, 0.5);
+  }
 }
 .v2-survey-tile--on {
   background: #EEEDFE;
@@ -822,9 +826,11 @@ html {
   color: #5F5E5A;
   cursor: pointer;
 }
-.v2-survey-skip:hover {
-  border-color: rgba(30, 24, 72, 0.4);
-  color: #1E1848;
+@media (hover: hover) {
+  .v2-survey-skip:hover {
+    border-color: rgba(30, 24, 72, 0.4);
+    color: #1E1848;
+  }
 }
 .v2-survey-skip:disabled {
   opacity: 0.5;
@@ -6127,9 +6133,13 @@ html {
      shows its own "Start your journey" pill at top right (visible
      starting at 481px wide). The 768 mobile block above sets this
      to display: inline-block, which would otherwise leak through
-     into the tablet tier and give iPad two visible CTAs. */
+     into the tablet tier and give iPad two visible CTAs.
+     !important needed because at exactly 768px both the mobile
+     (max-width: 768) and tablet (min-width: 768) media queries
+     fire — without !important, source-order alone wasn't winning
+     consistently across browsers / iPad widths. */
   .v2-hero-mobile-cta {
-    display: none;
+    display: none !important;
   }
 
   /* Nav CTA — restore desktop sizing on iPad. The mobile @media
