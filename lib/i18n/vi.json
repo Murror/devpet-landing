@@ -803,6 +803,8 @@
       "signupForFamily": "Cho thành viên gia đình",
       "familyAgeLabel": "Tuổi của thành viên gia đình",
       "familyAgePlaceholder": "Chọn nhóm tuổi",
+      "needsLabel": "Bạn muốn Codepet giúp gì cho mình?",
+      "needsPlaceholder": "Ví dụ: học cách yêu cầu AI viết code đúng ý, làm dự án cá nhân, lên trình lập trình…",
       "skip": "Bỏ qua",
       "submit": "Gửi",
       "submitting": "Đang gửi…",

@@ -441,12 +441,14 @@ html {
   image-rendering: crisp-edges;
 }
 
-/* Three companions stand together in the centre of the scene,
+/* Three companions stand on the grass in the centre of the scene
    with each one running a slow idle bob so the panel still has
-   life. Replaces the earlier walk-across animation per design. */
+   life. The grass band on the new forest-bg art occupies roughly
+   the bottom ~12 percent of the panel — bottom: 9% lands the
+   sprite feet on the grass surface rather than floating above it. */
 .v2-survey-walker {
   position: absolute;
-  bottom: 22%;
+  bottom: 9%;
   width: 18%;
   max-width: 88px;
   /* Idle bob keyframe — gentle vertical pump so the pixel art
@@ -649,6 +651,17 @@ html {
 }
 .v2-survey-input:disabled {
   cursor: not-allowed;
+}
+.v2-survey-textarea {
+  /* Override the 44px fixed height — needs flexible vertical space
+     for multi-line free-text input. Padding-top so first line of
+     placeholder doesn't sit at the very edge. */
+  height: auto;
+  min-height: 88px;
+  padding: 12px 14px;
+  line-height: 1.5;
+  font-family: inherit;
+  resize: vertical;
 }
 
 .v2-survey-grid2 {

@@ -35,6 +35,7 @@ interface ProfileBody {
   sourceOther?: string
   signupFor?: string
   familyAge?: string
+  needs?: string
 }
 
 export async function POST(req: Request) {
@@ -63,6 +64,7 @@ export async function POST(req: Request) {
     sourceOther: cleanString(body.sourceOther, 120),
     signupFor,
     familyAge: cleanString(body.familyAge, 32),
+    needs: cleanString(body.needs, 500),
   }
 
   const webhookUrl = process.env.GOOGLE_SHEET_PROFILE_WEBHOOK_URL

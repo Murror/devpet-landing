@@ -803,6 +803,8 @@
       "signupForFamily": "For a family member",
       "familyAgeLabel": "Family member's age",
       "familyAgePlaceholder": "Select an age range",
+      "needsLabel": "What do you hope Codepet helps you with?",
+      "needsPlaceholder": "e.g. prompting AI to ship code I actually want, building a side project, getting better at debugging…",
       "skip": "Skip",
       "submit": "Submit",
       "submitting": "Submitting…",

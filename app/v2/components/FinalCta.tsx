@@ -147,7 +147,7 @@ export default function FinalCta() {
       setState('idle')
       setEmail('')
       setSurveyDone(false)
-    }, 2000)
+    }, 6000)
     return () => clearTimeout(timer)
   }, [done, surveyDone])
 

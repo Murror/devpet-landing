@@ -54,6 +54,7 @@ export default function ProfileSurvey({ email, onComplete }: Props) {
   const [sourceOther, setSourceOther] = useState('')
   const [signupFor, setSignupFor] = useState<SignupFor>('self')
   const [familyAge, setFamilyAge] = useState('')
+  const [needs, setNeeds] = useState('')
   const [state, setState] = useState<SurveyState>('idle')
 
   // Track when the component is mounted so we can render via
@@ -101,6 +102,7 @@ export default function ProfileSurvey({ email, onComplete }: Props) {
           sourceOther: source === 'Other' || source === 'Khác' ? sourceOther : undefined,
           signupFor,
           familyAge: signupFor === 'family' ? familyAge || undefined : undefined,
+          needs: needs.trim() || undefined,
         }),
       })
       if (!res.ok) throw new Error('profile post failed')
@@ -301,6 +303,19 @@ export default function ProfileSurvey({ email, onComplete }: Props) {
                   <option key={opt} value={opt}>{opt}</option>
                 ))}
               </select>
+            </div>
+
+            <div className="v2-survey-field">
+              <label className="v2-survey-label" htmlFor="survey-needs">{survey.needsLabel}</label>
+              <textarea
+                id="survey-needs"
+                className="v2-survey-input v2-survey-textarea"
+                value={needs}
+                onChange={(e) => setNeeds(e.target.value)}
+                placeholder={survey.needsPlaceholder}
+                rows={3}
+                maxLength={500}
+              />
             </div>
 
             {state === 'error' && (
