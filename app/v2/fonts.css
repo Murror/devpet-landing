@@ -455,7 +455,12 @@ html {
    vertically as they go. */
 .v2-survey-walker {
   position: absolute;
-  bottom: 9%;
+  /* Land the sprite feet on the visible grass band of the
+     forest art (the strip with the mushrooms and the rock).
+     The grass sits roughly 14-20 percent up from the panel
+     bottom, so 18% places the feet on the path itself rather
+     than below it. */
+  bottom: 18%;
   left: 0;
   /* Same size for all three so the trio reads as a uniform
      line of companions. */
