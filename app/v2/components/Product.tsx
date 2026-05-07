@@ -128,11 +128,14 @@ export default function Product() {
 
   const done = state === 'success' || state === 'duplicate'
   const loading = state === 'loading'
-  // Progressive profiling — once email is captured, swap the form area
-  // to the survey panel. Survey calls onComplete on either skip or
-  // submit; we then drop into the final thank-you message below.
+  // Progressive profiling — once the user reaches "done" (either a
+  // fresh signup OR a duplicate-already-in-list), swap the form to
+  // the optional survey. Returning visitors who already submitted
+  // an email get a chance to add profile info too. The survey
+  // calls onComplete on either skip or submit, then we drop into
+  // the final thank-you message below.
   const [surveyDone, setSurveyDone] = useState(false)
-  const showSurvey = done && state === 'success' && !surveyDone
+  const showSurvey = done && !surveyDone
 
   let buttonLabel = t.v2.form.submit
   if (loading) buttonLabel = t.v2.form.loading
