@@ -438,7 +438,13 @@ html {
      even before the forest PNG is added. The PNG, when present,
      overrides this layer entirely. background-position bottom
      so the grass band stays anchored when the panel stretches
-     vertically (clouds get cropped instead of the foreground). */
+     vertically (clouds get cropped instead of the foreground).
+
+     `cover` scales the PNG to cover the banner regardless of
+     panel size; per-breakpoint rules below override the position
+     so the visible crop changes with the banner's aspect ratio
+     (more sky shows on landscape banners, more grass on the
+     portrait/landscape image column). */
   background:
     url('/v2/survey/forest-bg.png') center bottom / cover no-repeat,
     linear-gradient(
@@ -620,44 +626,65 @@ html {
    ──────────────────────────────────────────────────────────── */
 
 /* Tablet landscape — keep two columns, give the form more room.
-   The image column drops from 360px to 300px and the modal
-   max-width pulls in from 880 to 840 so the panel sits with a
-   bit more breathing room from the edges. */
+   The image column drops from 360px to 320px (still showing the
+   full forest scene including trees + sky because the column
+   spans the full modal height) and the modal max-width pulls in
+   from 880 to 860 so the panel sits with a bit more breathing
+   room from the edges. */
 @media (min-width: 1024px) and (max-width: 1199.98px) {
   .v2-survey-modal {
-    grid-template-columns: minmax(0, 300px) minmax(0, 540px);
-    max-width: 840px;
+    grid-template-columns: minmax(0, 320px) minmax(0, 540px);
+    max-width: 860px;
   }
 }
 
 /* Tablet portrait — stack to single column with the forest as a
-   200–220px banner above the form. The two-column layout starts
-   to feel cramped here because the form column would be < 420px
-   wide once the image column claims its share. */
+   banner above the form. Modal sized at 720px so the form column
+   reads at desktop-comfortable width (had been too pinched at
+   600px on iPad portrait). The two-column layout starts to feel
+   cramped at < 1024px because the form column would be < 420px
+   once the image column claims its share, so we stack instead.
+
+   The banner uses an aspect-ratio constraint plus a max-height
+   so it scales proportionally with the modal width (taller on
+   wider iPads, shorter on narrower ones) without ever eating
+   more than ~36% of the modal's vertical real estate. */
 @media (min-width: 768px) and (max-width: 1023.98px) {
   .v2-survey-modal {
     grid-template-columns: 1fr;
-    grid-template-rows: minmax(180px, 220px) minmax(0, 1fr);
-    max-width: 600px;
-    height: min(720px, calc(100vh - 32px));
-    height: min(720px, calc(100dvh - 32px));
+    /* `auto` for the banner row lets the image's aspect-ratio
+       drive its height (instead of being forced to 220px). */
+    grid-template-rows: auto minmax(0, 1fr);
+    max-width: 720px;
+    height: min(760px, calc(100vh - 32px));
+    height: min(760px, calc(100dvh - 32px));
   }
   .v2-survey-image {
-    /* Banner mode — let the bottom of the scene meet the form
-       edge cleanly. The walkers' bottom: 6% still lands them on
-       the grass band because the PNG is positioned at
-       `center bottom`. */
+    /* 16:5 aspect — wide-screen banner that reads as a horizontal
+       strip of forest/grass. At 720px wide that's 225px tall;
+       at 768px (smaller iPads) it's 240px. Capped at 260px so
+       the form always has at least 500px below it. */
+    aspect-ratio: 16 / 5;
+    max-height: 260px;
     min-height: 0;
+  }
+  .v2-survey-scene-bg {
+    /* Centered crop — at 16:5 the source PNG is squished
+       vertically with `cover`, so showing the middle band
+       (trees + grass) reads better than the bottom (just grass).
+       The walkers stay glued to grass via bottom: 6% on the
+       walker layer below, independent of the bg crop. */
+    background-position: center 70%, center;
   }
   .v2-survey-walker {
     /* Sprites get smaller real estate vertically here, so cap
        the absolute size a bit smaller than desktop to keep the
        trio in proportion with the banner. */
-    max-width: 60px;
-    width: 12%;
+    max-width: 64px;
+    width: 11%;
   }
   .v2-survey-pane {
-    padding: 28px 28px 24px;
+    padding: 28px 32px 24px;
   }
 }
 
@@ -673,16 +700,32 @@ html {
   }
   .v2-survey-modal {
     grid-template-columns: 1fr;
-    grid-template-rows: minmax(140px, 160px) minmax(0, 1fr);
+    /* `auto` row for the banner — aspect-ratio on the image
+       below drives the height so the banner scales with the
+       phone width (taller on Plus / Pro Max, shorter on SE). */
+    grid-template-rows: auto minmax(0, 1fr);
     max-width: 480px;
     border-radius: 12px;
     height: min(680px, calc(100vh - 16px));
     height: min(680px, calc(100dvh - 16px));
   }
   .v2-survey-image {
-    /* Banner band on top of the form. min-height: 0 lets the
-       grid row's max-height (160px) actually cap it. */
-    min-height: 0;
+    /* 5:2 aspect — at iPhone 12 Pro width (390px screen, 374px
+       modal after the 8px gutters), banner is ~150px tall. At
+       iPhone Pro Max widths (430px screen, 414px modal) it's
+       ~165px. Capped at 180px so very wide foldable / tablet
+       boundary phones don't lose form real estate to a tall
+       banner. */
+    aspect-ratio: 5 / 2;
+    max-height: 180px;
+    min-height: 120px;
+  }
+  .v2-survey-scene-bg {
+    /* Show a bit more of the scene than `center bottom` would
+       at this short height — `center 75%` reveals the bushes
+       above the grass while keeping the path visible at the
+       bottom edge for the walking pets. */
+    background-position: center 75%, center;
   }
   .v2-survey-walker {
     /* Smaller pets so the trio stays in proportion with the
