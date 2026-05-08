@@ -18,9 +18,12 @@ import { NextResponse } from 'next/server'
  *
  * Forwarded to GOOGLE_SHEET_PROFILE_WEBHOOK_URL, an Apps Script web-
  * app that upserts the row in the Codepet Signup Email sheet by
- * email. If the env var isn't set (preview deploys without
- * configured webhook), we log the payload and return ok — that lets
- * the UI flow be testable without backend wiring.
+ * email. Falls back to GOOGLE_SHEET_WEBHOOK_URL when the profile-
+ * specific var isn't set, because the unified Apps Script (which
+ * routes by payload shape) is typically reachable at the same URL
+ * the signup endpoint uses. If neither env var is set (preview
+ * deploys without backend wiring), we log the payload and return
+ * ok so the UI flow stays testable.
  */
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -67,7 +70,13 @@ export async function POST(req: Request) {
     needs: cleanString(body.needs, 500),
   }
 
-  const webhookUrl = process.env.GOOGLE_SHEET_PROFILE_WEBHOOK_URL
+  // Prefer the profile-specific URL; fall back to the shared
+  // signup URL since the unified Apps Script handles both shapes.
+  // This avoids requiring teams to configure two env vars when one
+  // suffices.
+  const webhookUrl =
+    process.env.GOOGLE_SHEET_PROFILE_WEBHOOK_URL ||
+    process.env.GOOGLE_SHEET_WEBHOOK_URL
   if (!webhookUrl) {
     // Preview-friendly fallback: log + accept so the UI flow works
     // without any backend configuration.
