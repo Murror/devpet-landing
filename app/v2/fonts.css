@@ -549,7 +549,9 @@ html {
    and scrolls internally if the form is taller than the modal. */
 .v2-survey-pane {
   position: relative;
-  padding: clamp(28px, 3vw, 40px) clamp(24px, 3vw, 36px);
+  /* Tightened vertical padding from clamp(28, 3vw, 40) — 32px
+     top/bottom on desktop gives room without feeling airy. */
+  padding: clamp(24px, 2.4vw, 32px) clamp(24px, 3vw, 36px);
   overflow-y: auto;
   /* Stop scroll from chaining to the document underneath when the
      pane hits its top/bottom — without this, mobile users who
@@ -561,7 +563,7 @@ html {
   height: 100%;
   /* Pad the bottom a touch more so the last field's focus ring
      doesn't sit flush against the scroll edge. */
-  padding-bottom: clamp(28px, 3vw, 40px);
+  padding-bottom: clamp(24px, 2.4vw, 32px);
   /* Custom scrollbar styling so it feels intentional rather than
      OS-default chunky. Falls back gracefully on Firefox. */
   scrollbar-width: thin;
@@ -893,7 +895,10 @@ html {
   color: #04342C;
   border-radius: 8px;
   padding: 10px 12px;
-  margin-bottom: clamp(16px, 1.6vw, 22px);
+  /* Tightened from clamp(16, 1.6vw, 22) — at 16px the banner
+     reads as the first item in the form group rather than a
+     floating header with a deep gap below. */
+  margin-bottom: clamp(12px, 1.2vw, 16px);
 }
 .v2-survey-tick {
   flex: 0 0 auto;
@@ -926,7 +931,11 @@ html {
 .v2-survey-form {
   display: flex;
   flex-direction: column;
-  gap: clamp(14px, 1.6vw, 20px);
+  /* Tightened from clamp(14, 1.6vw, 20) — at 18px between fields
+     the form reads as one cohesive group instead of feeling like
+     a stack of disconnected sections, and trims ~14px from the
+     overall modal height when all six fields are showing. */
+  gap: clamp(12px, 1.4vw, 18px);
 }
 
 .v2-survey-field {
@@ -934,9 +943,14 @@ html {
   flex-direction: column;
   gap: 6px;
 }
+/* Family-age field collapses entirely when signup mode is "self".
+   Earlier iteration just dimmed it (opacity 0.45) and disabled
+   pointer events, but leaving the empty greyed band visible
+   created an awkward dead zone in the form — most users sign up
+   for themselves, so most users were seeing wasted space. Now
+   it disappears outright until they toggle to "family". */
 .v2-survey-field--family.v2-survey-field--off {
-  opacity: 0.45;
-  pointer-events: none;
+  display: none;
 }
 
 .v2-survey-label {
