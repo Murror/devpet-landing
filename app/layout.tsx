@@ -110,34 +110,44 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             src="https://plausible.io/js/script.js"
           />
         )}
-        {/* Google Analytics 4 — loads only when
-            NEXT_PUBLIC_GA_MEASUREMENT_ID is set in Vercel env so
-            preview / local builds stay quiet. Uses gtag.js
-            directly (not the Firebase SDK) to keep the payload
-            small; the same GA4 Measurement ID can be linked to a
-            Firebase project so events still appear in Firebase
-            Analytics dashboards. */}
-        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
-          <>
-            <script
-              async
-              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
-            />
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}', {
-                    anonymize_ip: true,
-                    cookie_flags: 'SameSite=None;Secure'
-                  });
-                `,
-              }}
-            />
-          </>
-        )}
+        {/* Google Analytics 4 — uses gtag.js directly (not the
+            Firebase SDK) to keep the payload small. The Measurement
+            ID is `G-6CBHLCG5LK` from the Codepet GA4 property in
+            Firebase; hard-coded here as a fallback so any
+            deployment of this codebase (Vercel project A, project
+            B, or self-hosted) ships GA tracking by default without
+            needing an env var configured on each platform.
+
+            `NEXT_PUBLIC_GA_MEASUREMENT_ID` still wins when set —
+            useful for: (a) overriding to a staging GA property,
+            (b) setting to "disabled" to opt a preview build out,
+            or (c) future re-branding without a code change. */}
+        {(() => {
+          const gaId =
+            process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-6CBHLCG5LK'
+          if (gaId === 'disabled') return null
+          return (
+            <>
+              <script
+                async
+                src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+              />
+              <script
+                dangerouslySetInnerHTML={{
+                  __html: `
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', '${gaId}', {
+                      anonymize_ip: true,
+                      cookie_flags: 'SameSite=None;Secure'
+                    });
+                  `,
+                }}
+              />
+            </>
+          )
+        })()}
       </head>
       <body className={varelaRound.variable}>
         <LocaleProvider initialLocale={initialLocale}>
