@@ -802,7 +802,7 @@
         "Newsletter",
         "Other"
       ],
-      "sourceOtherPlaceholder": "Other source (optional)",
+      "sourceOtherPlaceholder": "Other source",
       "signupForLabel": "Who are you signing up for?",
       "signupForSelf": "For myself",
       "signupForFamily": "For a family member",
@@ -815,7 +815,8 @@
       "submitting": "Submitting…",
       "done": "Got it — thank you!",
       "doneSubtitle": "We’ll email you when Codepet launches.",
-      "errorServer": "Something went wrong. Try again in a moment?"
+      "errorServer": "Something went wrong. Try again in a moment?",
+      "errorMustComplete": "Please fill out the form before closing."
     },
     "footer": {
       "copyright": "© 2026 All right reserved",

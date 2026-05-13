@@ -33,7 +33,7 @@ import { useLocale } from '@/lib/LocaleProvider'
  * env webhook isn't set the route logs the payload and returns ok.
  */
 
-type SurveyState = 'idle' | 'submitting' | 'error'
+type SurveyState = 'idle' | 'submitting' | 'error' | 'mustComplete'
 
 type SignupFor = 'self' | 'family'
 
@@ -108,8 +108,15 @@ export default function ProfileSurvey({ email, onComplete }: Props) {
     document.body.style.width = '100%'
     document.body.style.overflow = 'hidden'
 
+    // ESC no longer exits — the survey is required, so we surface
+    // the same "must complete" warning the X button + backdrop
+    // click do. Visitors complete by hitting Submit; there is no
+    // bail-out path.
     function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape' && !submitting) onComplete()
+      if (e.key === 'Escape' && !submitting) {
+        e.preventDefault()
+        triggerMustComplete()
+      }
     }
     window.addEventListener('keydown', onKey)
     return () => {
@@ -151,8 +158,17 @@ export default function ProfileSurvey({ email, onComplete }: Props) {
     }
   }
 
-  function handleSkip() {
-    onComplete()
+  // Trying to dismiss without submitting → flash a warning. The
+  // form is required (no skip path), so X / backdrop click / ESC
+  // all route here. Auto-clears after 3 s so a previously-shown
+  // warning doesn't linger if the visitor goes back to filling
+  // the form.
+  function triggerMustComplete() {
+    if (submitting) return
+    setState('mustComplete')
+    setTimeout(() => {
+      setState((prev) => (prev === 'mustComplete' ? 'idle' : prev))
+    }, 3000)
   }
 
   // Source "Other" is the LAST option in both vi.json and en.json.
@@ -161,10 +177,11 @@ export default function ProfileSurvey({ email, onComplete }: Props) {
 
   const fam = signupFor === 'family'
 
-  // Backdrop click → skip. Stop propagation on the modal panel so
-  // clicks inside the form don't bubble up and dismiss.
+  // Backdrop click no longer dismisses — same gate as the X
+  // button. Stop propagation on the modal panel so clicks inside
+  // the form don't bubble up and trigger the warning.
   function onBackdropClick() {
-    if (!submitting) onComplete()
+    triggerMustComplete()
   }
 
   // Don't render anything during SSR — portal target (document.body)
@@ -222,11 +239,15 @@ export default function ProfileSurvey({ email, onComplete }: Props) {
 
         {/* ── Right column: form ─────────────────────────────────── */}
         <div className="v2-survey-pane">
+          {/* X button no longer dismisses — survey is required.
+              Clicking it surfaces the "please fill out the form"
+              warning. Kept in place so the modal still has the
+              visual affordance of a close control. */}
           <button
             type="button"
             className="v2-survey-close"
-            aria-label={survey.skip}
-            onClick={handleSkip}
+            aria-label={survey.errorMustComplete}
+            onClick={triggerMustComplete}
             disabled={submitting}
           >
             <span aria-hidden="true">×</span>
@@ -362,16 +383,13 @@ export default function ProfileSurvey({ email, onComplete }: Props) {
             {state === 'error' && (
               <p className="v2-survey-error" role="alert">{survey.errorServer}</p>
             )}
+            {state === 'mustComplete' && (
+              <p className="v2-survey-error" role="alert">{survey.errorMustComplete}</p>
+            )}
 
+            {/* Skip button removed — survey is required. Submit is
+                the only path that dismisses the modal. */}
             <div className="v2-survey-actions">
-              <button
-                type="button"
-                className="v2-survey-skip"
-                onClick={handleSkip}
-                disabled={submitting}
-              >
-                {survey.skip}
-              </button>
               <button type="submit" className="v2-survey-submit" disabled={submitting}>
                 <span className="v2-survey-submit-body">{submitLabel}</span>
               </button>

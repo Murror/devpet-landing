@@ -802,7 +802,7 @@
         "Newsletter",
         "Khác"
       ],
-      "sourceOtherPlaceholder": "Nguồn khác (tuỳ chọn)",
+      "sourceOtherPlaceholder": "Nguồn khác",
       "signupForLabel": "Bạn đăng ký cho ai?",
       "signupForSelf": "Cho chính mình",
       "signupForFamily": "Cho thành viên gia đình",
@@ -815,7 +815,8 @@
       "submitting": "Đang gửi…",
       "done": "Đã ghi nhận. Cảm ơn bạn!",
       "doneSubtitle": "Chúng tôi sẽ email khi Codepet ra mắt.",
-      "errorServer": "Có lỗi xảy ra. Thử lại sau nhé?"
+      "errorServer": "Có lỗi xảy ra. Thử lại sau nhé?",
+      "errorMustComplete": "Vui lòng điền đầy đủ thông tin trước khi đóng."
     },
     "footer": {
       "copyright": "© 2026 Mọi quyền đã được bảo lưu",
