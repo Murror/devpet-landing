@@ -88,15 +88,17 @@ export default function FinalCta() {
 
   return (
     <section id="final-cta" ref={sectionRef} className="v2-finalcta">
-      {/* Single-line title. Previous waitlist version split the
-          title across two lines via .v2-finalcta-mobile-break so
-          mobile could break naturally — the academy title is
-          short enough to render on one line at all viewports. */}
+      {/* Title + subtitle each render as ONE line on desktop and
+          TWO lines on mobile via the `.v2-finalcta-mobile-break`
+          span — the wrapping span gets `display: block` only
+          inside the mobile media query (see fonts.css). */}
       <h2 className="v2-finalcta-title v2-finalcta-reveal">
-        {t.v2.finalCta.academyTitle}
+        {t.v2.finalCta.titleLine1}{' '}
+        <span className="v2-finalcta-mobile-break">{t.v2.finalCta.titleLine2}</span>
       </h2>
       <p className="v2-finalcta-subtitle v2-finalcta-reveal">
-        {t.v2.finalCta.academyDesc}
+        {t.v2.finalCta.subtitleLine1}{' '}
+        <span className="v2-finalcta-mobile-break">{t.v2.finalCta.subtitleLine2}</span>
       </p>
 
       {/* Pixel-pill CTA — same submit-style classes as the old
