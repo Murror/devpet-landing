@@ -785,7 +785,7 @@
     },
     "survey": {
       "title": "Thanks — you’re on the list!",
-      "subtitle": "Help us tailor Codepet to you (optional).",
+      "subtitle": "Help us tailor Codepet to you.",
       "ageLabel": "Your age",
       "agePlaceholder": "Select an age range",
       "ageOptions": ["Under 18", "18 – 24", "25 – 34", "35 – 44", "45 – 54", "55 +"],

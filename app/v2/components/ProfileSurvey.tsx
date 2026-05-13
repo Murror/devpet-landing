@@ -69,6 +69,17 @@ export default function ProfileSurvey({ email, onComplete }: Props) {
     setMounted(true)
   }, [])
 
+  // Green success banner auto-dismisses 1 s after the modal opens.
+  // The survey is now required, so we don't want the
+  // congratulations message to compete with the form copy for
+  // long — flashing it briefly is enough confirmation that the
+  // email was accepted before we hand attention to the fields.
+  const [bannerVisible, setBannerVisible] = useState(true)
+  useEffect(() => {
+    const timer = setTimeout(() => setBannerVisible(false), 1000)
+    return () => clearTimeout(timer)
+  }, [])
+
   const submitting = state === 'submitting'
   const submitLabel = submitting ? survey.submitting : survey.submit
 
@@ -221,13 +232,15 @@ export default function ProfileSurvey({ email, onComplete }: Props) {
             <span aria-hidden="true">×</span>
           </button>
 
-          <div className="v2-survey-banner">
-            <span className="v2-survey-tick" aria-hidden="true">✓</span>
-            <div>
-              <p className="v2-survey-banner-title">{survey.title}</p>
-              <p className="v2-survey-banner-subtitle">{survey.subtitle}</p>
+          {bannerVisible && (
+            <div className="v2-survey-banner">
+              <span className="v2-survey-tick" aria-hidden="true">✓</span>
+              <div>
+                <p className="v2-survey-banner-title">{survey.title}</p>
+                <p className="v2-survey-banner-subtitle">{survey.subtitle}</p>
+              </div>
             </div>
-          </div>
+          )}
 
           <form className="v2-survey-form" onSubmit={handleSubmit}>
             <div className="v2-survey-field">
