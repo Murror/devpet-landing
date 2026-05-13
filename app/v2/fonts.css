@@ -3335,6 +3335,15 @@ html {
   color: #9538CF;
 }
 
+/* In-heading placement — the CTA lives inside the heading column
+   (next to title + subtitle), so it sits directly below the
+   subtitle line, left-aligned with the heading text. The base
+   rule centred the CTA via `margin: auto`; this overrides that
+   to keep it flush-left in the heading flow. */
+.v2-testimonials-cta--inHeader {
+  margin: clamp(20px, 2.4vw, 32px) 0 0;
+}
+
 /* Orbs — each positioned per the Framer composition. Sizes are
    fluid so they shrink proportionally with the viewport.
 

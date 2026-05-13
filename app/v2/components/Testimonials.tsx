@@ -130,6 +130,18 @@ export default function Testimonials() {
         <header className="v2-testimonials-heading v2-testimonials-reveal">
           <h2 className="v2-testimonials-title">{t.v2.testimonials.title}</h2>
           <p className="v2-testimonials-subtitle">{t.v2.testimonials.subtitle}</p>
+          {/* CTA placed inside the heading column so it sits in the
+              same left-column grid track as the title/subtitle,
+              directly underneath the subtitle. The .v2-testimonials-inner
+              uses a two-column grid (heading | cards) on desktop —
+              nesting the CTA here keeps it in the left track. */}
+          <a
+            href="#product"
+            className="v2-testimonials-cta v2-testimonials-cta--inHeader"
+            aria-label={t.v2.testimonials.ctaAria}
+          >
+            <span className="v2-testimonials-cta-body">{t.v2.testimonials.cta}</span>
+          </a>
         </header>
 
         <ul className="v2-testimonials-list">
@@ -166,19 +178,6 @@ export default function Testimonials() {
             </li>
           ))}
         </ul>
-
-        {/* Codepet signup CTA — pixel-pill matching the section
-            chain. Purple-on-pink so it sits cleanly against the
-            testimonials band. Points to #product where the email
-            form lives. Sits at the bottom of the section, after
-            the three quote cards. */}
-        <a
-          href="#product"
-          className="v2-testimonials-cta"
-          aria-label={t.v2.testimonials.ctaAria}
-        >
-          <span className="v2-testimonials-cta-body">{t.v2.testimonials.cta}</span>
-        </a>
       </div>
     </section>
   )
