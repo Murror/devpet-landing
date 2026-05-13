@@ -132,18 +132,6 @@ export default function Testimonials() {
           <p className="v2-testimonials-subtitle">{t.v2.testimonials.subtitle}</p>
         </header>
 
-        {/* CTA placed RIGHT BELOW the heading — primary action sits
-            above the social proof so visitors see it without
-            scrolling past the three quote cards. The .v2-testimonials-cta
-            class has its own margin-top + bottom for this layout. */}
-        <a
-          href="#product"
-          className="v2-testimonials-cta v2-testimonials-cta--top"
-          aria-label={t.v2.testimonials.ctaAria}
-        >
-          <span className="v2-testimonials-cta-body">{t.v2.testimonials.cta}</span>
-        </a>
-
         <ul className="v2-testimonials-list">
           {/* Loop variable renamed to `item` to avoid colliding with
               the `t` translation alias from useLocale(). */}
@@ -179,6 +167,18 @@ export default function Testimonials() {
           ))}
         </ul>
 
+        {/* Codepet signup CTA — pixel-pill matching the section
+            chain. Purple-on-pink so it sits cleanly against the
+            testimonials band. Points to #product where the email
+            form lives. Sits at the bottom of the section, after
+            the three quote cards. */}
+        <a
+          href="#product"
+          className="v2-testimonials-cta"
+          aria-label={t.v2.testimonials.ctaAria}
+        >
+          <span className="v2-testimonials-cta-body">{t.v2.testimonials.cta}</span>
+        </a>
       </div>
     </section>
   )

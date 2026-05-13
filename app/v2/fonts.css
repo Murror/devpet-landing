@@ -3335,14 +3335,6 @@ html {
   color: #9538CF;
 }
 
-/* Top-placement modifier — when the testimonials CTA sits BELOW
-   the heading instead of below the quote cards. Tighter margin
-   above (it follows directly from the heading) and adds margin
-   below to separate it from the quote cards that follow. */
-.v2-testimonials-cta--top {
-  margin: clamp(20px, 2.4vw, 36px) auto clamp(40px, 5vw, 64px);
-}
-
 /* Orbs — each positioned per the Framer composition. Sizes are
    fluid so they shrink proportionally with the viewport.
 
