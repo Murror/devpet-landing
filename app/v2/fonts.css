@@ -1710,6 +1710,16 @@ html {
   color: #FFFFFF;
 }
 
+/* Academy link is an external cross-site link (not a section
+   anchor), so it doesn't get the section-coloured background fill
+   that the in-page anchors use. Instead just the text turns
+   Codepet Purple on hover — a calmer treatment that signals
+   "going somewhere else" rather than "scrolling to a section." */
+.v2-nav-link[href*="codepet-academy"]:hover,
+.v2-nav-link[href*="codepet-academy"]:focus-visible {
+  color: #7B6BD8;
+}
+
 .v2-nav-link:focus { outline: none; }  /* suppress default focus ring; ::after handles it */
 
 @media (prefers-reduced-motion: reduce) {
