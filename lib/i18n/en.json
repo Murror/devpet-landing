@@ -251,7 +251,7 @@
       {
         "name": "Zero",
         "species": "Code wraith",
-        "badge": "Silent Optimiser",
+        "badge": "Silent Optimizer",
         "color": "#444441",
         "quote": "The fastest code is code that doesn't run.",
         "role": "Refactor nudges"
@@ -707,7 +707,7 @@
       "integratesWith": "Integrates with:",
       "integrationsAria": "Integrations",
       "integrationCursor": "Cursor",
-      "integrationVscode": "VS code",
+      "integrationVscode": "VS Code",
       "integrationWindsurf": "Windsurf"
     },
     "stats": {
@@ -819,7 +819,7 @@
       "errorMustComplete": "Please fill out the form before closing."
     },
     "footer": {
-      "copyright": "© 2026 All right reserved",
+      "copyright": "© 2026 All rights reserved",
       "wordmarkAlt": "Codepet",
       "navAria": "Footer"
     },
