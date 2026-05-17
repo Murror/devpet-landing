@@ -782,7 +782,7 @@
       "successSubtitle": "We’ll email you when Codepet launches.",
       "errorValidation": "Please enter a valid email address.",
       "errorServer": "Something went wrong. Try again in a moment?",
-      "macTrialNotice": "Heads up: the first trial will be available for MacBook only."
+      "macTrialNotice": "The first beta will be tested on Mac."
     },
     "survey": {
       "title": "Thanks — you’re on the list!",
@@ -812,7 +812,7 @@
       "computerLabel": "What kind of computer do you use?",
       "computerOptions": ["Mac", "Windows", "Other"],
       "computerOtherPlaceholder": "Tell us which one",
-      "computerNotice": "Heads up: the first trial will be available for MacBook only.",
+      "computerNotice": "The first beta will be tested on Mac.",
       "needsLabel": "What do you hope Codepet helps you with?",
       "needsPlaceholder": "e.g. prompting AI to ship code I actually want, building a side project, getting better at debugging…",
       "skip": "Skip",

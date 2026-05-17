@@ -1103,18 +1103,19 @@ html {
   letter-spacing: 0;
 }
 
-/* MacBook-only trial heads-up shown below the computer-type field.
-   Soft Codepet-purple tint so it reads as a friendly note rather
-   than a validation error. */
+/* MacBook trial heads-up below the computer-type field — plain
+   quiet helper text, no box. Lives on the white survey card so
+   the muted off-black gives just enough contrast without shouting. */
 .v2-survey-notice {
   margin: 8px 0 0;
-  padding: 8px 12px;
-  background: rgba(123, 107, 216, 0.08);
-  border: 1px solid rgba(123, 107, 216, 0.28);
-  border-radius: 6px;
-  color: #534AB7;
-  font-size: 14px;
+  padding: 0;
+  background: none;
+  border: none;
+  color: #2D2B26;
+  opacity: 0.65;
+  font-size: 13px;
   letter-spacing: 0;
+  line-height: 1.4;
 }
 
 .v2-survey-actions {
@@ -2619,19 +2620,20 @@ html {
   letter-spacing: 0.01em;
 }
 
-/* MacBook-only trial notice — small heads-up shown before submit.
-   Codepet purple tint + soft tinted background so it reads as a
-   helpful note rather than an error. */
+/* MacBook trial heads-up — plain quiet note shown before submit.
+   No box, no border — just slightly dimmed body copy that sits
+   under the CTA without competing for attention. Cream-toned so
+   it has enough contrast on the green Product section. */
 .v2-product-msg--notice {
-  margin-top: 6px;
-  padding: 8px 12px;
-  background: rgba(123, 107, 216, 0.10);
-  border: 1px solid rgba(123, 107, 216, 0.30);
-  border-radius: 8px;
-  color: #534AB7;
-  opacity: 0.92;
+  margin: 6px 0 0;
+  padding: 0;
+  background: none;
+  border: none;
+  color: #F7F5FC;
+  opacity: 0.78;
   font-size: 13px;
   letter-spacing: 0.01em;
+  line-height: 1.4;
 }
 
 /* ── Right column: decorative Byte + coin scatter ───────────── */

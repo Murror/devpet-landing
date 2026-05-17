@@ -782,7 +782,7 @@
       "successSubtitle": "Chúng tôi sẽ gửi email khi Codepet ra mắt.",
       "errorValidation": "Vui lòng nhập địa chỉ email hợp lệ.",
       "errorServer": "Có lỗi xảy ra. Thử lại sau ít phút nhé?",
-      "macTrialNotice": "Lưu ý: bản dùng thử đầu tiên chỉ dành cho MacBook."
+      "macTrialNotice": "Bản beta đầu tiên sẽ được thử nghiệm trên Mac."
     },
     "survey": {
       "title": "Cảm ơn — bạn đã vào danh sách!",
@@ -812,7 +812,7 @@
       "computerLabel": "Bạn dùng loại máy tính nào?",
       "computerOptions": ["Mac", "Windows", "Loại khác"],
       "computerOtherPlaceholder": "Bạn dùng máy gì?",
-      "computerNotice": "Lưu ý: bản dùng thử đầu tiên chỉ dành cho MacBook.",
+      "computerNotice": "Bản beta đầu tiên sẽ được thử nghiệm trên Mac.",
       "needsLabel": "Bạn muốn Codepet giúp gì cho mình?",
       "needsPlaceholder": "Ví dụ: học cách yêu cầu AI viết code đúng ý, làm dự án cá nhân, lên trình lập trình…",
       "skip": "Bỏ qua",

@@ -413,7 +413,6 @@ export default function ProfileSurvey({ email, onComplete }: Props) {
                   maxLength={64}
                 />
               )}
-              <p className="v2-survey-notice">{survey.computerNotice}</p>
             </div>
 
             <div className="v2-survey-field">
