@@ -781,7 +781,8 @@
       "duplicate": "Bạn đã ở trong danh sách!",
       "successSubtitle": "Chúng tôi sẽ gửi email khi Codepet ra mắt.",
       "errorValidation": "Vui lòng nhập địa chỉ email hợp lệ.",
-      "errorServer": "Có lỗi xảy ra. Thử lại sau ít phút nhé?"
+      "errorServer": "Có lỗi xảy ra. Thử lại sau ít phút nhé?",
+      "macTrialNotice": "Lưu ý: bản dùng thử đầu tiên chỉ dành cho MacBook."
     },
     "survey": {
       "title": "Cảm ơn — bạn đã vào danh sách!",
@@ -808,6 +809,10 @@
       "signupForFamily": "Cho thành viên gia đình",
       "familyAgeLabel": "Tuổi của thành viên gia đình",
       "familyAgePlaceholder": "Chọn nhóm tuổi",
+      "computerLabel": "Bạn dùng loại máy tính nào?",
+      "computerOptions": ["Mac", "Windows", "Loại khác"],
+      "computerOtherPlaceholder": "Bạn dùng máy gì?",
+      "computerNotice": "Lưu ý: bản dùng thử đầu tiên chỉ dành cho MacBook.",
       "needsLabel": "Bạn muốn Codepet giúp gì cho mình?",
       "needsPlaceholder": "Ví dụ: học cách yêu cầu AI viết code đúng ý, làm dự án cá nhân, lên trình lập trình…",
       "skip": "Bỏ qua",

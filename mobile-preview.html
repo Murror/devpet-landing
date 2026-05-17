@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Codepet — Mobile Preview</title>
+
+<!--
+  Self-contained mobile preview of the Codepet /v2 landing.
+  Drop this file into Framer (Code Component → import HTML), or
+  open it directly in a browser at iPhone-width to inspect the
+  mobile layout. All image assets reference https://code-pet.com
+  so the file stays portable. Font files load from the same host.
+
+  Sections (top to bottom):
+    1. Nav (hamburger + wordmark)
+    2. Hero (headline, sparkle/heart, 7 pets)
+    3. Product (green band, 1 column)
+    4. Stats (white band, 1 column)
+    5. Mindset (purple band)
+    6. Get Good (yellow band, 2-col cards)
+    7. Skill Trees (black band, stacked tier cards)
+    8. Testimonials (pink band, stacked quote cards)
+    9. Final CTA (purple band)
+   10. Footer (white band)
+-->
+
+<style>
+  /* ── Fonts ──────────────────────────────────────────────── */
+  @font-face {
+    font-family: 'VT323';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('https://code-pet.com/fonts/vt323/VT323-Regular.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'Upheaval TT';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('https://code-pet.com/fonts/upheaval/upheavtt.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 300 800;
+    font-stretch: 75% 100%;
+    font-display: swap;
+    src: url('https://code-pet.com/fonts/open-sans/OpenSans-Variable.ttf') format('truetype');
+  }
+
+  /* ── Tokens ─────────────────────────────────────────────── */
+  :root {
+    --bg-hero:    #FFFFFF;
+    --bg-product: #029902;
+    --bg-stats:   #FFFFFF;
+    --bg-mindset: #7B6BD8;
+    --bg-getgood: #FCBE1D;
+    --bg-skill:   #000000;
+    --bg-quote:   #FF8CC9;
+    --bg-final:   #7B6BD8;
+    --bg-footer:  #FFFFFF;
+    --ink:        #1E1848;
+    --purple:     #7B6BD8;
+    --red:        #F83C00;
+    --blue:       #1C40CF;
+    --pink-card:  #F2F2F2;
+    --quote-bg-1: #F2F2F2;
+    --quote-bg-2: #F0E5EC;
+    --quote-bg-3: #FAD7E0;
+    --font-pixel: 'VT323', 'Courier New', monospace;
+    --font-display: 'Upheaval TT', 'Courier New', monospace;
+    --font-body: 'Open Sans', system-ui, -apple-system, sans-serif;
+  }
+
+  /* ── Base reset ─────────────────────────────────────────── */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg-hero);
+    color: #000;
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+  img { display: block; max-width: 100%; image-rendering: pixelated; }
+  ul { list-style: none; }
+  a { text-decoration: none; color: inherit; }
+  button { background: none; border: none; font: inherit; color: inherit; cursor: pointer; }
+
+  /* ── Nav ────────────────────────────────────────────────── */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: #FFFFFF;
+    color: #000;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .nav-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 14px 16px;
+    max-width: 100%;
+  }
+  .nav-hamburger {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 8px;
+    justify-self: start;
+  }
+  .nav-hamburger span {
+    display: block;
+    height: 3px;
+    background: #000;
+    width: 100%;
+  }
+  .nav-wordmark img {
+    height: 40px;
+    width: auto;
+    justify-self: center;
+  }
+  .nav-wordmark { justify-self: center; }
+
+  /* ── Hero ───────────────────────────────────────────────── */
+  .hero {
+    position: relative;
+    background: var(--bg-hero);
+    padding: 28px 16px 0;
+    overflow: hidden;
+    text-align: center;
+  }
+  .hero-deco-sparkle,
+  .hero-deco-heart {
+    position: absolute;
+    pointer-events: none;
+  }
+  .hero-deco-sparkle {
+    /* Symmetric mirror of the heart at top-right. */
+    left: 4%;
+    top: 20px;
+    bottom: auto;
+    width: clamp(24px, 6vw, 36px);
+  }
+  .hero-deco-heart {
+    /* Bumped top from 4px to 20px so any -12px bob (or iOS scroll
+       reflow) doesn't push the heart past the hero's top edge. */
+    right: 4%;
+    top: 20px;
+    width: clamp(24px, 6vw, 36px);
+  }
+  .hero-headline {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 0.85;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: #000;
+    text-align: center;
+    width: 100%;
+    margin: 0;
+  }
+  .hero-headline .line { display: block; }
+  .hero-subhead {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 0.85;
+    text-transform: uppercase;
+    color: #000;
+    text-align: center;
+    margin: 0;
+  }
+  .hero-pets {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 28px;
+    flex-wrap: nowrap;
+  }
+  .hero-pet { width: clamp(40px, 11vw, 84px); height: auto; }
+  .hero-pet--owl     { transform: translateY(20px); }
+  .hero-pet--fox     { transform: translateY(40px); }
+  .hero-pet--byte    { transform: translateY(60px); }
+  .hero-pet--yellow  { transform: translateY(40px); }
+  .hero-pet--red     { transform: translateY(20px); }
+
+  /* ── Product (green band, full-width section) ───────────── */
+  .product {
+    /* Tightened vertical padding so the green band doesn't read as
+       a viewport-eating slab on phones — it now collapses to its
+       intrinsic content height with comfortable breathing room. */
+    background: var(--bg-product);
+    padding: 48px 20px 56px;
+    color: #FFFFFF;
+  }
+  .product-eyebrow {
+    font-family: var(--font-pixel);
+    font-size: 28px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    margin: 0 0 12px;
+  }
+  .product-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #FFF;
+    margin-right: 10px;
+    transform: translateY(-4px);
+  }
+  .product-heading {
+    font-family: 'Upheaval TT', 'Minecraft', monospace;
+    font-weight: 500;
+    font-size: clamp(36px, 9vw, 56px);
+    letter-spacing: -0.02em;
+    color: #FFF;
+    line-height: 1.05;
+    margin: 0 0 24px;
+  }
+  .product-body {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: clamp(16px, 4vw, 22px);
+    line-height: 1.4;
+    color: #FFF;
+    margin: 0 0 28px;
+  }
+  .product-body em { font-style: italic; font-weight: 700; }
+  .product-integrates {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 16px;
+    color: #FFF;
+    margin: 0 0 16px;
+  }
+  .product-integrations {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin: 0 0 32px;
+  }
+  .product-integrations li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(14px, 3.6vw, 18px);
+    color: #FFF;
+  }
+  .product-integrations li img { width: 20px; height: 20px; }
+
+  /* Generic pixel button — shared across waitlist CTAs */
+  .pixel-btn {
+    display: inline-block;
+    padding: 0 24px;
+    height: 48px;
+    line-height: 48px;
+    font-family: var(--font-pixel);
+    font-weight: 500;
+    font-size: 18px;
+    color: #FFF;
+    text-transform: uppercase;
+    letter-spacing: 0.024em;
+    border: 4px solid #1E1848;
+    text-align: center;
+  }
+  .pixel-btn--green  { background: #029902; }
+  .pixel-btn--red    { background: #E24B4A; }
+  .pixel-btn--blue   { background: #1C40CF; }
+
+  /* ── Stats (1-column on mobile) ────────────────────────── */
+  .stats {
+    background: var(--bg-stats);
+    padding: 56px 20px;
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 64px;
+    max-width: 480px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .stat-number {
+    font-family: 'Upheaval TT', monospace;
+    font-size: clamp(64px, 18vw, 120px);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: #FFF;
+  }
+  .stat-label {
+    font-family: var(--font-pixel);
+    font-size: clamp(24px, 6vw, 40px);
+    color: #8C8C8C;
+    line-height: 1;
+  }
+  /* Decorative shape behind each stat */
+  .stat-shape {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 16px;
+  }
+  .stat-shape--triangle {
+    background: var(--red);
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    color: #FFF;
+  }
+  .stat-shape--square {
+    background: #FCBE1D;
+    transform: rotate(8deg);
+  }
+  .stat-shape--circle {
+    background: var(--blue);
+    border-radius: 50%;
+    color: #FFF;
+  }
+  .stat-shape .stat-number { color: inherit; }
+
+  /* ── Mindset (purple band) ──────────────────────────────── */
+  .mindset {
+    background: var(--bg-mindset);
+    padding: 96px 20px;
+    text-align: center;
+    color: #FFF;
+    position: relative;
+    overflow: hidden;
+  }
+  .mindset-eyebrow {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 18px;
+    color: #FFF;
+    margin: 0 0 16px;
+  }
+  .mindset-headline {
+    font-family: 'Upheaval TT', monospace;
+    font-size: clamp(42px, 11vw, 64px);
+    line-height: 1.05;
+    color: #FFF;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin: 0 0 32px;
+  }
+  .mindset-headline .line { display: block; }
+
+  /* ── Get Good (yellow band) ─────────────────────────────── */
+  .getgood {
+    background: var(--bg-getgood);
+    padding: 96px 20px 120px;
+    color: #000;
+    position: relative;
+  }
+  .getgood-eyebrow {
+    font-family: var(--font-pixel);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #000;
+    margin-bottom: 24px;
+  }
+  .getgood-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: #000;
+    margin-right: 10px;
+    transform: translateY(-2px);
+  }
+  .getgood-headline {
+    font-family: 'Upheaval TT', monospace;
+    font-size: clamp(42px, 11vw, 64px);
+    text-align: center;
+    line-height: 1.1;
+    margin: 0 0 32px;
+  }
+  .getgood-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .getgood-card {
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 20px;
+    padding: 24px 16px;
+    text-align: center;
+    color: #FFF;
+  }
+  .getgood-card-icon { width: 80%; height: auto; margin: 0 auto 16px; }
+  .getgood-card-label {
+    font-family: 'Upheaval TT', monospace;
+    font-size: clamp(16px, 4vw, 22px);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    color: #FFF;
+  }
+  .getgood-body {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: clamp(16px, 4vw, 22px);
+    line-height: 1.3;
+    text-align: center;
+    margin: 0 0 32px;
+    color: #000;
+  }
+  .getgood-cta {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    width: max-content;
+  }
+
+  /* ── Skill Trees (black band) ───────────────────────────── */
+  .skilltrees {
+    background: var(--bg-skill);
+    padding: 96px 20px;
+    color: #FFF;
+    text-align: center;
+  }
+  .skilltrees-eyebrow {
+    font-family: var(--font-pixel);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #FFF;
+    margin-bottom: 24px;
+  }
+  .skilltrees-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: #FFF;
+    margin-right: 10px;
+    transform: translateY(-2px);
+  }
+  .skilltrees-headline {
+    font-family: 'Upheaval TT', monospace;
+    font-size: clamp(42px, 11vw, 64px);
+    margin: 0 0 24px;
+    line-height: 1.05;
+    text-transform: uppercase;
+  }
+  .skilltrees-intro {
+    font-family: var(--font-body);
+    font-size: clamp(16px, 4vw, 22px);
+    line-height: 1.3;
+    color: #B0B0B0;
+    text-align: center;
+    margin: 0 0 48px;
+  }
+  .skilltrees-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .skilltrees-card {
+    border-radius: 20px;
+    padding: 24px;
+    color: #FFF;
+    text-align: left;
+  }
+  .skilltrees-card--1 { background: #B73635; }
+  .skilltrees-card--2 { background: #1A6F2C; }
+  .skilltrees-card--3 { background: #5C3FB0; }
+  .skilltrees-card--4 { background: #1C40CF; }
+  .skilltrees-card-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background: #FFF;
+    color: #000;
+    font-family: 'Upheaval TT', monospace;
+    font-size: 32px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+  }
+  .skilltrees-card-title {
+    font-family: 'Upheaval TT', monospace;
+    font-size: 28px;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+  }
+  .skilltrees-card-body {
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.4;
+  }
+
+  /* ── Testimonials (pink band) ───────────────────────────── */
+  .testimonials {
+    background: var(--bg-quote);
+    padding: 96px 20px;
+    color: #000;
+    text-align: center;
+  }
+  .testimonials-title,
+  .testimonials-subtitle {
+    font-family: var(--font-pixel);
+    font-weight: 500;
+    font-size: clamp(32px, 8vw, 44px);
+    line-height: 1.1;
+    margin: 0;
+  }
+  .testimonials-title { color: #FFF; }
+  .testimonials-subtitle { color: rgba(0,0,0,0.7); margin-bottom: 32px; }
+  .testimonials-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .testimonials-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .testimonials-pet { width: clamp(80px, 22vw, 120px); height: auto; }
+  .testimonials-card {
+    background: var(--quote-bg-1);
+    border-radius: 16px;
+    padding: 24px 20px;
+    width: 100%;
+  }
+  .testimonials-quote {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 1.2;
+    text-align: center;
+    color: #000;
+    margin: 0 0 16px;
+  }
+  .testimonials-attr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    text-align: center;
+  }
+  .testimonials-name { font-weight: 300; color: #4A4A4A; }
+  .testimonials-role { font-weight: 200; color: #737373; }
+
+  /* ── Final CTA (purple band) ────────────────────────────── */
+  .finalcta {
+    background: var(--bg-final);
+    padding: 96px 20px;
+    color: #FFF;
+    text-align: center;
+  }
+  .finalcta-headline {
+    font-family: 'Upheaval TT', monospace;
+    font-size: clamp(36px, 9vw, 56px);
+    line-height: 1.05;
+    text-transform: uppercase;
+    margin: 0 0 32px;
+  }
+  .finalcta-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+  .finalcta-input {
+    width: 100%;
+    height: 56px;
+    border-radius: 28px;
+    padding: 0 24px;
+    background: #EEE;
+    border: none;
+    font-size: 16px;
+    font-family: var(--font-body);
+  }
+
+  /* ── Footer (white band) ────────────────────────────────── */
+  .footer {
+    background: var(--bg-footer);
+    padding: 56px 20px 32px;
+    color: #000;
+  }
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .footer-logo { width: 64px; height: auto; }
+  .footer-copyright {
+    font-family: var(--font-pixel);
+    font-weight: 400;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.6);
+    margin-top: 16px;
+  }
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-link {
+    font-family: var(--font-pixel);
+    font-weight: 500;
+    font-size: 14px;
+    color: #000;
+  }
+
+  /* ── Constrain preview to phone width when opened in
+        a desktop browser, so it actually looks like mobile.  */
+  @media (min-width: 480px) {
+    body {
+      max-width: 390px;
+      margin: 0 auto;
+      box-shadow: 0 0 40px rgba(0,0,0,0.1);
+    }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ── Nav ────────────────────────────────────────────── -->
+  <nav class="nav" aria-label="Primary">
+    <div class="nav-inner">
+      <button class="nav-hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="#top" class="nav-wordmark" aria-label="Codepet home">
+        <img src="https://code-pet.com/v2/codepet-wordmark.png" alt="Codepet" />
+      </a>
+      <span></span>
+    </div>
+  </nav>
+
+  <!-- ── Hero ───────────────────────────────────────────── -->
+  <section class="hero">
+    <img class="hero-deco-sparkle" src="https://code-pet.com/v2/hero-deco/sparkle.png" alt="" aria-hidden="true" />
+    <img class="hero-deco-heart"   src="https://code-pet.com/v2/hero-deco/heart.png"   alt="" aria-hidden="true" />
+    <h1 class="hero-headline">
+      <span class="line">Learn to build</span>
+      <span class="line">agentic code</span>
+    </h1>
+    <p class="hero-subhead">with your crew</p>
+    <div class="hero-pets" role="presentation">
+      <img class="hero-pet hero-pet--pink"    src="https://code-pet.com/v2/pets/1-pink-bear.png"    alt="" />
+      <img class="hero-pet hero-pet--owl"     src="https://code-pet.com/v2/pets/2-green-owl.png"    alt="" />
+      <img class="hero-pet hero-pet--fox"     src="https://code-pet.com/v2/pets/3-orange-fox.png"   alt="" />
+      <img class="hero-pet hero-pet--byte"    src="https://code-pet.com/v2/pets/4-purple-byte.png"  alt="" />
+      <img class="hero-pet hero-pet--yellow"  src="https://code-pet.com/v2/pets/5-yellow-bear.png"  alt="" />
+      <img class="hero-pet hero-pet--red"     src="https://code-pet.com/v2/pets/6-red-bear.png"     alt="" />
+      <img class="hero-pet hero-pet--penguin" src="https://code-pet.com/v2/pets/7-blue-penguin.png" alt="" />
+    </div>
+  </section>
+
+  <!-- ── Product (green band) ───────────────────────────── -->
+  <section class="product">
+    <p class="product-eyebrow">PRODUCT</p>
+    <h3 class="product-heading">who we are</h3>
+    <p class="product-body">
+      Codepet is a macOS application that helps people develop their thinking
+      and <em>ship products of their own</em>. Guided agentic coding, adaptive
+      feedback, and a daily-practice loop turn early exposure to programming
+      into durable skill.
+    </p>
+    <p class="product-integrates">Integrates with:</p>
+    <ul class="product-integrations">
+      <li>Cursor</li>
+      <li>VS code</li>
+      <li>Windsurf</li>
+    </ul>
+    <a href="#waitlist" class="pixel-btn pixel-btn--green">Join the waitlist</a>
+  </section>
+
+  <!-- ── Stats (white band) ─────────────────────────────── -->
+  <section class="stats">
+    <div class="stats-grid">
+      <div class="stat-shape stat-shape--triangle">
+        <div class="stat">
+          <span class="stat-number">1,504</span>
+          <span class="stat-label" style="color:#FFF">builders</span>
+        </div>
+      </div>
+      <div class="stat">
+        <span class="stat-number" style="color:#000">70%</span>
+        <span class="stat-label">success rate</span>
+      </div>
+      <div class="stat-shape stat-shape--circle">
+        <div class="stat">
+          <span class="stat-number">2x</span>
+          <span class="stat-label" style="color:#FFF">faster</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Mindset (purple band) ──────────────────────────── -->
+  <section class="mindset">
+    <p class="mindset-eyebrow">Codepet</p>
+    <h2 class="mindset-headline">
+      <span class="line">Shape the</span>
+      <span class="line">mindset before you</span>
+      <span class="line">build product</span>
+    </h2>
+    <a href="#waitlist" class="pixel-btn pixel-btn--green">Join the waitlist</a>
+  </section>
+
+  <!-- ── Get Good (yellow band) ─────────────────────────── -->
+  <section class="getgood">
+    <p class="getgood-eyebrow">Get Good</p>
+    <h2 class="getgood-headline">CODE.GROW.LEARN</h2>
+    <div class="getgood-cards">
+      <div class="getgood-card">
+        <img class="getgood-card-icon" src="https://code-pet.com/v2/get-good/icon-skill-map.png" alt="" />
+        <p class="getgood-card-label">SKILL MAP</p>
+      </div>
+      <div class="getgood-card">
+        <img class="getgood-card-icon" src="https://code-pet.com/v2/get-good/icon-your-companion.svg" alt="" />
+        <p class="getgood-card-label">YOUR COMPANION</p>
+      </div>
+      <div class="getgood-card">
+        <img class="getgood-card-icon" src="https://code-pet.com/v2/get-good/icon-real-practice.png" alt="" />
+        <p class="getgood-card-label">REAL PRACTICE</p>
+      </div>
+      <div class="getgood-card">
+        <img class="getgood-card-icon" src="https://code-pet.com/v2/get-good/icon-honest-insights.png" alt="" />
+        <p class="getgood-card-label">HONEST INSIGHTS</p>
+      </div>
+    </div>
+    <p class="getgood-body">
+      Everything you need to actually get good. A skill map across four tiers
+      tells you exactly what to learn next. Your companion will keep you
+      building. Every challenge happens in Cursor, VS Code, or Claude Code,
+      and honest insights surface your weak spots so you know what to
+      practice next.
+    </p>
+    <a href="#waitlist" class="pixel-btn pixel-btn--blue getgood-cta">Join the waitlist</a>
+  </section>
+
+  <!-- ── Skill Trees (black band) ───────────────────────── -->
+  <section class="skilltrees">
+    <p class="skilltrees-eyebrow">Skill Tree</p>
+    <h2 class="skilltrees-headline">CODE.GROW.LEARN</h2>
+    <p class="skilltrees-intro">
+      A simple and efficient workflow to bring your vision to life. From the
+      first call to final delivery, every step is designed for clarity and
+      efficiency.
+    </p>
+    <div class="skilltrees-cards">
+      <article class="skilltrees-card skilltrees-card--1">
+        <span class="skilltrees-card-number">1</span>
+        <h3 class="skilltrees-card-title">Foundations</h3>
+        <p class="skilltrees-card-body">
+          Every builder starts here. You'll learn to ask AI for what you
+          actually want, read errors without panic, find your way around
+          your editor, and start spotting sharp code from sloppy — one
+          small win at a time.
+        </p>
+      </article>
+      <article class="skilltrees-card skilltrees-card--2">
+        <span class="skilltrees-card-number">2</span>
+        <h3 class="skilltrees-card-title">Context</h3>
+        <p class="skilltrees-card-body">
+          Now you're feeding AI the right fuel. Set up context that sticks,
+          write specs that get followed, structure projects so the model
+          (and future you) can navigate them.
+        </p>
+      </article>
+      <article class="skilltrees-card skilltrees-card--3">
+        <span class="skilltrees-card-number">3</span>
+        <h3 class="skilltrees-card-title">Develop</h3>
+        <p class="skilltrees-card-body">
+          The tier where you ship. End-to-end flows, debugging strategies,
+          handling edge cases, refactoring with intent — turning prompts
+          into products.
+        </p>
+      </article>
+      <article class="skilltrees-card skilltrees-card--4">
+        <span class="skilltrees-card-number">4</span>
+        <h3 class="skilltrees-card-title">Expert</h3>
+        <p class="skilltrees-card-body">
+          The tier you earn. Think in user personas, stretch context windows,
+          orchestrate multi-step agents, mentor others through their first
+          ship.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ── Testimonials (pink band) ───────────────────────── -->
+  <section class="testimonials">
+    <h2 class="testimonials-title">real results from the beta</h2>
+    <p class="testimonials-subtitle">three stories. real change.</p>
+    <ul class="testimonials-list">
+      <li class="testimonials-item">
+        <img class="testimonials-pet" src="https://code-pet.com/v2/pets/5-yellow-bear.png" alt="" />
+        <figure class="testimonials-card" style="background:var(--quote-bg-1)">
+          <blockquote class="testimonials-quote">"40% broken prompts to just 12%. the pet makes me persistent."</blockquote>
+          <figcaption class="testimonials-attr">
+            <span class="testimonials-name">sarah k.</span>
+            <span class="testimonials-role">designer who codes</span>
+          </figcaption>
+        </figure>
+      </li>
+      <li class="testimonials-item">
+        <img class="testimonials-pet" src="https://code-pet.com/v2/pets/2-green-owl.png" alt="" />
+        <figure class="testimonials-card" style="background:var(--quote-bg-2)">
+          <blockquote class="testimonials-quote">"shipped my first saas in 6 weeks. 0 to $200 mrr."</blockquote>
+          <figcaption class="testimonials-attr">
+            <span class="testimonials-name">wei c.</span>
+            <span class="testimonials-role">indie dev</span>
+          </figcaption>
+        </figure>
+      </li>
+      <li class="testimonials-item">
+        <img class="testimonials-pet" src="https://code-pet.com/v2/pets/7-blue-penguin.png" alt="" />
+        <figure class="testimonials-card" style="background:var(--quote-bg-3)">
+          <blockquote class="testimonials-quote">"6 prompts for auth → 1. hours saved, more shipped."</blockquote>
+          <figcaption class="testimonials-attr">
+            <span class="testimonials-name">alex r.</span>
+            <span class="testimonials-role">solo founder</span>
+          </figcaption>
+        </figure>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ── Final CTA (purple band) ────────────────────────── -->
+  <section class="finalcta" id="waitlist">
+    <h2 class="finalcta-headline">
+      let's talk the future of coding.<br>
+      stop guessing. start growing.
+    </h2>
+    <form class="finalcta-form" onsubmit="return false;">
+      <input class="finalcta-input" type="email" placeholder="name@gmail.com" />
+      <button class="pixel-btn pixel-btn--red" type="submit">JOIN THE WAITLIST</button>
+    </form>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <img class="footer-logo" src="https://code-pet.com/v2/logo/codepet-c.png" alt="Codepet" />
+        <p class="footer-copyright">© 2026 All right reserved</p>
+      </div>
+      <ul class="footer-links">
+        <li><a class="footer-link" href="#top">Home</a></li>
+        <li><a class="footer-link" href="#product">Product</a></li>
+        <li><a class="footer-link" href="#get-good">Get Good</a></li>
+        <li><a class="footer-link" href="#skill-trees">Skill Tree</a></li>
+      </ul>
+    </div>
+  </footer>
+
+</body>
+</html>

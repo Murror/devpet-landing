@@ -54,6 +54,8 @@ export default function ProfileSurvey({ email, onComplete }: Props) {
   const [sourceOther, setSourceOther] = useState('')
   const [signupFor, setSignupFor] = useState<SignupFor>('self')
   const [familyAge, setFamilyAge] = useState('')
+  const [computer, setComputer] = useState('')
+  const [computerOther, setComputerOther] = useState('')
   const [needs, setNeeds] = useState('')
   const [state, setState] = useState<SurveyState>('idle')
 
@@ -148,6 +150,13 @@ export default function ProfileSurvey({ email, onComplete }: Props) {
           sourceOther: source === 'Other' || source === 'Khác' ? sourceOther : undefined,
           signupFor,
           familyAge: signupFor === 'family' ? familyAge || undefined : undefined,
+          computer: computer || undefined,
+          // Free-text only carried when the user picked the trailing
+          // "Other / Loại khác" option from the computer toggles.
+          computerOther:
+            computer === 'Other' || computer === 'Loại khác'
+              ? computerOther || undefined
+              : undefined,
           needs: needs.trim() || undefined,
         }),
       })
@@ -366,6 +375,45 @@ export default function ProfileSurvey({ email, onComplete }: Props) {
                   <option key={opt} value={opt}>{opt}</option>
                 ))}
               </select>
+            </div>
+
+            {/* Computer-type field — radio tile group (Mac / Windows /
+                Other) using the same .v2-survey-tile pattern as gender,
+                followed by an inline "Other" text input when the trailing
+                option is picked, and a small notice clarifying that the
+                first trial is MacBook-only. */}
+            <div className="v2-survey-field">
+              <label className="v2-survey-label">{survey.computerLabel}</label>
+              <div className="v2-survey-grid2">
+                {survey.computerOptions.map((opt) => (
+                  <label
+                    key={opt}
+                    className={`v2-survey-tile${computer === opt ? ' v2-survey-tile--on' : ''}`}
+                  >
+                    <input
+                      type="radio"
+                      name="survey-computer"
+                      value={opt}
+                      checked={computer === opt}
+                      onChange={() => setComputer(opt)}
+                      className="v2-survey-radio-input"
+                    />
+                    <span className="v2-survey-radio" aria-hidden="true" />
+                    <span>{opt}</span>
+                  </label>
+                ))}
+              </div>
+              {(computer === 'Other' || computer === 'Loại khác') && (
+                <input
+                  type="text"
+                  className="v2-survey-input v2-survey-input--inline"
+                  placeholder={survey.computerOtherPlaceholder}
+                  value={computerOther}
+                  onChange={(e) => setComputerOther(e.target.value)}
+                  maxLength={64}
+                />
+              )}
+              <p className="v2-survey-notice">{survey.computerNotice}</p>
             </div>
 
             <div className="v2-survey-field">

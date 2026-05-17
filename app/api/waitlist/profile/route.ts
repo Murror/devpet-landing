@@ -38,6 +38,8 @@ interface ProfileBody {
   sourceOther?: string
   signupFor?: string
   familyAge?: string
+  computer?: string
+  computerOther?: string
   needs?: string
 }
 
@@ -67,6 +69,8 @@ export async function POST(req: Request) {
     sourceOther: cleanString(body.sourceOther, 120),
     signupFor,
     familyAge: cleanString(body.familyAge, 32),
+    computer: cleanString(body.computer, 32),
+    computerOther: cleanString(body.computerOther, 64),
     needs: cleanString(body.needs, 500),
   }
 

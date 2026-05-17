@@ -290,6 +290,16 @@ export default function Product() {
                 {t.v2.form.errorServer}
               </p>
             )}
+
+            {/* MacBook trial notice — informs visitors before they
+                submit that the first trial is Mac-only. Hidden after
+                successful submit since they'll see the same info
+                inside the survey modal. */}
+            {!done && (
+              <p className="v2-product-msg v2-product-msg--notice">
+                {t.v2.form.macTrialNotice}
+              </p>
+            )}
           </form>
           )}
         </div>
