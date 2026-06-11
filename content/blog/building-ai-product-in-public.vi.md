@@ -1,8 +1,8 @@
 ---
-title: "Xây dựng sản phẩm AI một cách công khai: Năm đầu tiên của Codepet dạy chúng tôi điều gì"
-description: "Câu chuyện thật về việc xây dựng một ứng dụng macOS dùng AI — những canh bạc thành công, những tính năng phải xóa bỏ, và lời khuyên cho bất kỳ ai đang làm sản phẩm với AI hôm nay."
+title: "Build in public: Một năm đầu làm sản phẩm AI đã dạy tụi mình điều gì"
+description: "Chuyện thật về việc làm một app macOS chạy bằng AI — những ván cược ăn tiền, những tính năng phải xoá thẳng tay, và vài lời cho bất kỳ ai đang làm sản phẩm AI lúc này."
 date: "2026-06-09"
-updated: "2026-06-09"
+updated: "2026-06-11"
 category: "building-ai-products"
 author: "Nguyen"
 authorTitle: "Nhà sáng lập, Codepet"
@@ -10,60 +10,60 @@ tags: ["ai-products", "building-in-public", "startups", "macos"]
 featured: true
 ---
 
-Khi bắt đầu làm Codepet, lời giới thiệu của chúng tôi gói gọn trong một câu: một AI dạy bạn xây dựng phần mềm thật, chứ không chỉ hoàn thành các bài hướng dẫn. Một năm sau, câu đó vẫn nguyên vẹn — nhưng gần như mọi thứ *bên dưới* nó đã được viết lại ít nhất hai lần.
+Hồi mới bắt tay làm Codepet, tụi mình tóm cả sản phẩm trong đúng một câu: một AI dạy bạn làm phần mềm thật, chứ không phải cày cho xong mấy bài hướng dẫn. Một năm trôi qua, câu đó vẫn y nguyên — nhưng gần như mọi thứ *nằm dưới* nó thì đã viết lại ít nhất hai lần.
 
-Đây là phiên bản không hào nhoáng của câu chuyện. Những canh bạc thành công, những thứ thất bại, và những bài học chúng tôi cứ phải học đi học lại.
+Đây là phiên bản không màu mè của câu chuyện: ván nào ăn, ván nào thua, và những bài học mà tụi mình cứ phải học đi học lại.
 
-## Bắt đầu từ vòng lặp nhỏ nhất nhưng có sức sống
+## Hãy bắt đầu từ vòng lặp nhỏ nhất mà vẫn "có hồn"
 
-Nguyên mẫu đầu tiên của chúng tôi rất tham vọng và chết yểu. Nó có giáo trình, cây kỹ năng, tám người bạn đồng hành, và một lộ trình — nhưng tất cả đều vô nghĩa, vì vòng lặp cốt lõi chưa hề thú vị.
+Bản prototype đầu tiên vừa tham vọng vừa… chết yểu. Nó có giáo trình, có skill tree, có tám người bạn đồng hành, có cả một lộ trình hoành tráng — mà rốt cuộc vô nghĩa, bởi cái vòng lặp cốt lõi chẳng có gì vui.
 
-Thứ cuối cùng tạo ra khác biệt lại nhỏ đến mức ngượng ngùng: viết một dòng code, nhận ngay một phản ứng *cụ thể* từ thú cưng của bạn. Không phải "Giỏi lắm!" mà là "Cái `useEffect` đó sẽ chạy mỗi lần render đấy — muốn xem tại sao không?"
+Thứ cuối cùng làm nên khác biệt lại nhỏ đến mức hơi quê: bạn gõ một dòng code, thú cưng phản ứng lại ngay, mà phản ứng *đúng chỗ*. Không phải kiểu "Giỏi lắm!", mà là "Cái `useEffect` này chạy lại mỗi lần render đó nha — coi thử vì sao không?"
 
-> Đơn vị của một sản phẩm AI không phải là tính năng. Đó là một vòng lặp đủ ngắn để cảm giác như một cuộc trò chuyện.
+> Đơn vị của một sản phẩm AI không phải là tính năng. Nó là một vòng lặp đủ ngắn để cảm giác như đang trò chuyện.
 
-Khi vòng lặp đó có sức sống, mọi thứ khác mới có chỗ để bám vào. Chúng tôi xóa ba tháng làm giáo trình và chẳng hề tiếc.
+Khi cái vòng lặp đó "có hồn", mọi thứ còn lại mới có chỗ bám vào. Tụi mình xoá luôn ba tháng làm giáo trình, mà chẳng tiếc tí nào.
 
-### Chúng tôi học được gì
+### Rút ra được gì
 
-- **Demo vòng lặp, đừng demo lộ trình.** Nếu tương tác cốt lõi 30 giây không khiến người ta nghiêng người về phía trước, thì thêm tính năng cũng không cứu nổi.
-- **Tốc độ là một tính năng.** Một câu trả lời đúng đến sau bốn giây sẽ thua một câu trả lời đủ tốt đến trong 400ms. Chúng tôi đã bỏ công sức kỹ thuật thật sự chỉ để thú cưng *phản ứng nhanh*.
+- **Demo cái vòng lặp, đừng demo lộ trình.** Nếu 30 giây tương tác cốt lõi không khiến người ta nhổm người tới, thì thêm bao nhiêu tính năng cũng vô ích.
+- **Tốc độ cũng là một tính năng.** Một câu trả lời đúng nhưng tới sau bốn giây sẽ thua một câu "tạm ổn" tới trong 400ms. Tụi mình đổ công sức kỹ thuật thật sự chỉ để thú cưng *phản hồi cho nhanh*.
 
-## Coi mô hình là một thành phần, không phải là sản phẩm
+## Coi model là một mảnh ghép, đừng coi nó là cả sản phẩm
 
-Thời gian đầu chúng tôi quá tập trung vào prompt. Vấn đề nào nhìn cũng giống vấn đề về prompt. Cái bẫy là prompt khiến ta *cảm giác* mình đang tiến bộ — chỉnh một chút, được câu trả lời tốt hơn, rồi ship.
+Giai đoạn đầu tụi mình bị ám ảnh prompt. Vấn đề gì nhìn cũng ra vấn đề prompt. Cái bẫy nằm ở chỗ: chỉnh prompt cho ta *cảm giác* đang tiến bộ — sửa tí, ra câu trả lời ngon hơn, rồi ship.
 
-Cách nhìn lại giúp chúng tôi: **mô hình chỉ là một thành phần trong hệ thống**, và phần lớn chất lượng đến từ mọi thứ *xung quanh* nó — việc lấy đúng code của người dùng, giao diện phản hồi, trí nhớ về điều họ đã vật lộn hôm qua, và những rào chắn ngăn AI cầm tay chỉ việc quá mức.
+Góc nhìn cứu tụi mình là: **model chỉ là một mảnh ghép trong cả hệ thống.** Phần lớn chất lượng đến từ những thứ *xung quanh* nó — lấy đúng đoạn code của người dùng, giao diện phản hồi, trí nhớ về thứ họ vật lộn hôm qua, và mấy "hàng rào" ngăn AI cầm tay chỉ việc quá đà.
 
 Vài quyết định cụ thể:
 
-- Chúng tôi quản lý phiên bản prompt như quản lý code, kèm theo eval. Một thay đổi prompt cải thiện một trường hợp nhưng âm thầm làm hỏng năm trường hợp khác là cách phổ biến nhất để một sản phẩm AI thụt lùi.
-- Chúng tôi ghi lại mọi tương tác mà người dùng *không đồng ý* với thú cưng. Những lần bất đồng đó là tập dữ liệu giàu tín hiệu nhất chúng tôi có.
-- Chúng tôi dùng mô hình mạnh nhất cho những khoảnh khắc cần suy luận sâu, và mô hình nhanh, rẻ hơn cho trò chuyện. Người dùng không phân biệt được mô hình nào trả lời — nhưng họ biết khi nào nó chậm.
+- Tụi mình quản lý prompt y như quản lý code, kèm eval đàng hoàng. Một thay đổi prompt làm tốt hơn một ca nhưng âm thầm phá hỏng năm ca khác — đó là cách phổ biến nhất khiến một sản phẩm AI đi lùi.
+- Tụi mình ghi lại mọi lần người dùng *không đồng ý* với thú cưng. Mấy khoảnh khắc "cãi" đó là tập dữ liệu nhiều tín hiệu nhất tụi mình có.
+- Việc nào cần suy luận sâu thì dùng model mạnh nhất, còn tám chuyện linh tinh thì dùng model nhanh và rẻ hơn. Người dùng không biết model nào trả lời đâu — nhưng họ biết ngay khi nó chậm.
 
-## Hãy ship phiên bản còn ngượng ngùng
+## Cứ ship cái phiên bản còn thấy hơi quê
 
-Phiên bản Codepet mà chúng tôi thấy tự hào sẽ ship trễ sáu tháng. Phiên bản khiến chúng tôi hơi ngượng lại ship đúng hạn và dạy cho chúng tôi điều gì thực sự sai — mà điều đó chưa bao giờ đúng như chúng tôi dự đoán.
+Phiên bản Codepet mà tụi mình tự hào thì phải sáu tháng nữa mới ra. Phiên bản khiến tụi mình hơi ngại lại ra đúng hẹn — và dạy cho tụi mình biết thứ gì *thật sự* sai, mà thứ đó chưa bao giờ giống dự đoán ban đầu.
 
-Làm sản phẩm một cách công khai buộc phải như vậy. Khi bạn đã nói ra rằng thứ này ship trong tháng này, thì "chỉnh thêm một sprint nữa" không còn miễn phí.
+Build in public ép bạn phải vậy. Một khi đã lỡ nói "cái này tháng này ra", thì câu "chỉnh thêm một sprint nữa thôi" không còn miễn phí.
 
-### Những tính năng chúng tôi đã xóa
+### Những tính năng tụi mình đã xoá
 
-| Tính năng | Lý do bị khai tử |
+| Tính năng | Vì sao bị "khai tử" |
 | --- | --- |
-| Một IDE đầy đủ trong ứng dụng | Người dùng đã có VS Code; chúng tôi đang cạnh tranh với chính mình |
-| Mục tiêu hằng ngày theo chuỗi streak | Tạo cảm giác tội lỗi, không tạo động lực — retention *giảm* |
-| Tự động sinh câu hỏi trắc nghiệm | Cảm giác như đi học; cả mục đích là để thoát khỏi điều đó |
+| Một IDE đầy đủ ngay trong app | Người dùng có VS Code rồi; hoá ra tụi mình tự cạnh tranh với chính mình |
+| Mục tiêu mỗi ngày kiểu streak | Tạo cảm giác tội lỗi chứ không tạo động lực — retention còn *tụt* |
+| Tự sinh câu hỏi trắc nghiệm | Y như đi học lại; mà cả mục đích là để thoát khỏi cái cảm giác đó |
 
-Mỗi thứ đó đều có vẻ thiết yếu trên lộ trình. Tiếp xúc với người dùng thật khai tử chúng chỉ trong vài ngày.
+Cái nào trên giấy cũng có vẻ thiết yếu. Vậy mà chỉ cần chạm vào người dùng thật, vài ngày là rõ cái nào nên bỏ.
 
-## Điều chúng tôi muốn nói nếu bạn đang làm sản phẩm với AI
+## Nếu bạn đang làm sản phẩm AI, đây là vài điều tụi mình muốn nói
 
-1. **Tìm vòng lặp trước.** Mọi thứ cộng dồn từ một tương tác cốt lõi thực sự tốt. Đừng xây nhà thờ trước khi nhóm được đống lửa.
-2. **Đo lường sự bất đồng.** Những khoảnh khắc AI sai — và người dùng biết — đáng giá hơn cả trăm log của kịch bản suôn sẻ.
-3. **Đặt tốc độ là điều không thể thương lượng.** Với người dùng, "thông minh" và "nhanh" gần như là cùng một trục.
-4. **Viết ra gu thẩm mỹ của bạn.** Khi đội ngũ lớn lên, "đầu ra tốt" không còn hiển nhiên. Chúng tôi duy trì một tài liệu sống mô tả thế nào là một phản hồi tuyệt vời của thú cưng, kèm ví dụ.
+1. **Tìm cái vòng lặp trước đã.** Mọi thứ dồn lại từ một tương tác cốt lõi đủ ngon. Đừng lo làm cái to khi cái lõi còn chưa chạy.
+2. **Đo cả những lần AI sai.** Khoảnh khắc AI trả lời sai mà người dùng nhận ra, đáng giá hơn cả trăm log của những lần "xuôi chèo mát mái".
+3. **Đừng thương lượng về tốc độ.** Với người dùng, "thông minh" và "nhanh" gần như là cùng một thứ.
+4. **Viết ra cái "gu" của mình.** Đội đông lên, "đầu ra tốt" không còn hiển nhiên nữa. Tụi mình giữ một tài liệu sống mô tả thế nào là một câu trả lời hay của thú cưng, kèm ví dụ hẳn hoi.
 
-Sau một năm, Codepet vẫn là một ứng dụng macOS giúp mọi người xây dựng những thứ thật bằng AI. Nhưng giờ chúng tôi đã biết *câu nào* bên dưới mới là điều quan trọng — và chúng tôi đến được đó bằng cách ship, quan sát, và sẵn sàng xóa bỏ chính những ý tưởng hay của mình.
+Một năm rồi, Codepet vẫn là một app macOS giúp mọi người làm ra thứ thật bằng AI. Khác là giờ tụi mình biết *câu nào* nằm dưới mới là câu quan trọng — và để tới được đó, tụi mình đã ship, đã quan sát, và sẵn sàng xoá luôn cả những ý tưởng tâm đắc của mình.
 
-Nếu bạn đang xây dựng thứ gì đó tương tự, chúng tôi rất muốn trao đổi. Bài tiếp theo trong loạt bài này sẽ đi sâu vào bộ khung eval mà chúng tôi dùng để giữ chất lượng của thú cưng không trôi dạt khi các mô hình bên dưới thay đổi.
+Nếu bạn cũng đang làm thứ gì tương tự, tụi mình rất muốn nghe. Bài tới trong series này sẽ mổ xẻ bộ eval mà tụi mình dùng để giữ chất lượng của thú cưng không bị "trôi" mỗi khi model bên dưới thay đổi.
