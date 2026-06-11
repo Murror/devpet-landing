@@ -57,13 +57,13 @@ export default function BlogV2Nav({
 
         <ul id="blog-nav-menu" className="v2-nav-links">
           <li>
-            <a href="/#product" className="v2-nav-link" onClick={close}>{t.product}</a>
+            <Link href="/#product" className="v2-nav-link" onClick={close}>{t.product}</Link>
           </li>
           <li>
-            <a href="/#get-good" className="v2-nav-link" onClick={close}>{t.getGood}</a>
+            <Link href="/#get-good" className="v2-nav-link" onClick={close}>{t.getGood}</Link>
           </li>
           <li>
-            <a href="/#skill-trees" className="v2-nav-link" onClick={close}>{t.skillTree}</a>
+            <Link href="/#skill-trees" className="v2-nav-link" onClick={close}>{t.skillTree}</Link>
           </li>
           <li>
             <Link href={blogIndexPath(locale)} className="v2-nav-link" onClick={close}>{t.blog}</Link>
@@ -107,9 +107,9 @@ export default function BlogV2Nav({
               <line x1="2" y1="12" x2="22" y2="12" />
             </svg>
           </Link>
-          <a href="/#product" className="v2-nav-cta" onClick={close}>
+          <Link href="/#product" className="v2-nav-cta" onClick={close}>
             <span className="v2-nav-cta-body">{t.startJourney}</span>
-          </a>
+          </Link>
         </div>
       </div>
     </nav>

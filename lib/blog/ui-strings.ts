@@ -33,6 +33,14 @@ export interface BlogStrings {
   ctaTitle: string
   ctaBody: string
   ctaButton: string
+  newsletterTitle: string
+  newsletterBody: string
+  newsletterPlaceholder: string
+  newsletterButton: string
+  newsletterSuccess: string
+  newsletterDuplicate: string
+  newsletterError: string
+  newsletterInvalid: string
 }
 
 const STRINGS: Record<Locale, BlogStrings> = {
@@ -63,6 +71,15 @@ const STRINGS: Record<Locale, BlogStrings> = {
     ctaBody:
       'Codepet is a macOS app that coaches you from your first line of code to a shipped product — with an AI crew that grows as you do.',
     ctaButton: 'Get Codepet',
+    newsletterTitle: 'Insights in your inbox',
+    newsletterBody:
+      'New essays on building AI products, user research, and the second brain — straight to your inbox. No spam.',
+    newsletterPlaceholder: 'Enter your email',
+    newsletterButton: 'Subscribe',
+    newsletterSuccess: "You're in — watch your inbox.",
+    newsletterDuplicate: "You're already subscribed.",
+    newsletterError: 'Something went wrong. Try again.',
+    newsletterInvalid: 'Please enter a valid email.',
   },
   vi: {
     brandHome: 'Codepet',
@@ -91,6 +108,15 @@ const STRINGS: Record<Locale, BlogStrings> = {
     ctaBody:
       'Codepet là ứng dụng macOS đồng hành cùng bạn từ dòng code đầu tiên đến sản phẩm hoàn chỉnh — với một đội AI lớn lên cùng bạn.',
     ctaButton: 'Tải Codepet',
+    newsletterTitle: 'Nhận bài viết qua email',
+    newsletterBody:
+      'Những bài viết mới về xây dựng sản phẩm AI, nghiên cứu người dùng và bộ não thứ hai — gửi thẳng vào hộp thư của bạn. Không spam.',
+    newsletterPlaceholder: 'Nhập email của bạn',
+    newsletterButton: 'Đăng ký',
+    newsletterSuccess: 'Đã đăng ký — hãy để ý hộp thư nhé.',
+    newsletterDuplicate: 'Bạn đã đăng ký rồi.',
+    newsletterError: 'Có lỗi xảy ra. Vui lòng thử lại.',
+    newsletterInvalid: 'Vui lòng nhập email hợp lệ.',
   },
 }
 

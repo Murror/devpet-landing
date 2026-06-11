@@ -11,7 +11,8 @@ const ACCENT_CLASS: Record<string, string> = {
   premium: 'blog-accent-premium',
 }
 
-export default function PostCard({
+/** Large lead story: text panel on the left, big cover art on the right. */
+export default function FeaturedCard({
   post,
   locale,
 }: {
@@ -22,35 +23,28 @@ export default function PostCard({
   const accentClass = category ? ACCENT_CLASS[category.accent] : ''
 
   return (
-    <Link href={postPath(locale, post.slug)} className="blog-card">
-      <div className="blog-card-cover">
-        {post.cover ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={post.cover} alt={post.coverAlt || ''} loading="lazy" />
-        ) : (
-          <CoverArt slug={post.slug} category={post.category} />
-        )}
+    <Link href={postPath(locale, post.slug)} className="blog-featured">
+      <div className="blog-featured-text">
         {category && (
-          <span className={`blog-card-badge ${accentClass}`}>
+          <span className={`blog-featured-cat ${accentClass}`}>
             {category.label[locale]}
           </span>
         )}
-      </div>
-
-      <div className="blog-card-body">
+        <h2 className="blog-featured-title">{post.title}</h2>
+        <p className="blog-featured-excerpt">{post.description}</p>
         <div className="blog-card-meta">
           <span>{formatDate(post.date, locale)}</span>
           <span className="blog-dot" />
           <span>{formatReadingTime(post.readingMinutes, locale)}</span>
         </div>
-        <h3 className="blog-card-title">{post.title}</h3>
-        <p className="blog-card-excerpt">{post.description}</p>
-        <div className="blog-card-author">
-          <span className="blog-avatar" aria-hidden="true">
-            {post.author.charAt(0)}
-          </span>
-          <span>{post.author}</span>
-        </div>
+      </div>
+      <div className="blog-featured-cover">
+        {post.cover ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={post.cover} alt={post.coverAlt || ''} />
+        ) : (
+          <CoverArt slug={post.slug} category={post.category} />
+        )}
       </div>
     </Link>
   )

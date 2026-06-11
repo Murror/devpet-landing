@@ -11,6 +11,7 @@ import {
 import { getCategory } from '@/lib/blog/categories'
 import { blogStrings } from '@/lib/blog/ui-strings'
 import PostCard from './PostCard'
+import CoverArt from './CoverArt'
 
 const ACCENT_CLASS: Record<string, string> = {
   primary: 'blog-accent-primary',
@@ -67,13 +68,17 @@ export default function ArticleView({
           )}
         </div>
 
-        {post.cover && (
+        {post.cover ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             className="blog-article-cover"
             src={post.cover}
             alt={post.coverAlt || ''}
           />
+        ) : (
+          <div className="blog-article-cover">
+            <CoverArt slug={post.slug} category={post.category} />
+          </div>
         )}
 
         {post.toc.length >= 3 && (
