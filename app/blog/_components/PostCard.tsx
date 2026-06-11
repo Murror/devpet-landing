@@ -45,12 +45,6 @@ export default function PostCard({
         </div>
         <h3 className="blog-card-title">{post.title}</h3>
         <p className="blog-card-excerpt">{post.description}</p>
-        <div className="blog-card-author">
-          <span className="blog-avatar" aria-hidden="true">
-            {post.author.charAt(0)}
-          </span>
-          <span>{post.author}</span>
-        </div>
       </div>
     </Link>
   )
