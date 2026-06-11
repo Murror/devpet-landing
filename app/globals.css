@@ -369,7 +369,8 @@
 
 /* ── Article page ── */
 .blog-article { max-width: 44rem; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
-.blog-article-back { display: inline-block; color: var(--blog-muted); font-size: 0.88rem; font-weight: 600; text-decoration: none; margin-bottom: 1.75rem; }
+.blog-article-back { display: block; color: var(--blog-muted); font-size: 0.88rem; font-weight: 600; text-decoration: none; margin-bottom: 1.5rem; }
+.blog-article-cat { display: inline-block; }
 .blog-article-back:hover { color: var(--blog-ink); }
 .blog-article-cat { font-family: var(--blog-label); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; }
 .blog-article-title {

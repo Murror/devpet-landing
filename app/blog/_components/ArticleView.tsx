@@ -53,11 +53,7 @@ export default function ArticleView({
         <p className="blog-article-dek">{post.description}</p>
 
         <div className="blog-article-byline">
-          <span>
-            {s.by} <strong>{post.author}</strong>
-            {post.authorTitle ? `, ${post.authorTitle}` : ''}
-          </span>
-          <span className="dot">{formatDate(post.date, locale)}</span>
+          <span>{formatDate(post.date, locale)}</span>
           <span className="dot">
             {formatReadingTime(post.readingMinutes, locale)}
           </span>
