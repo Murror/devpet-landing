@@ -437,16 +437,16 @@
 
 /* ── Cover-art animations (CoverArt.tsx) — subtle, looping, GPU-friendly
    (transform/opacity only). Disabled under prefers-reduced-motion. ── */
-@keyframes cv-float   { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
-@keyframes cv-sway    { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(5px, -8px); } }
-@keyframes cv-twinkle { 0%, 100% { opacity: 0.25; } 50% { opacity: 0.95; } }
+@keyframes cv-float   { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-24px) scale(1.05); } }
+@keyframes cv-sway    { 0% { transform: translate(0, 0) rotate(-4deg); } 50% { transform: translate(12px, -16px) rotate(5deg); } 100% { transform: translate(0, 0) rotate(-4deg); } }
+@keyframes cv-twinkle { 0%, 100% { opacity: 0.1; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.25); } }
 @keyframes cv-spin    { to { transform: rotate(360deg); } }
 
-.blog-root svg .cv-float   { animation: cv-float 7s ease-in-out infinite; transform-box: fill-box; transform-origin: center; will-change: transform; }
-.blog-root svg .cv-sway    { animation: cv-sway 8s ease-in-out infinite; will-change: transform; }
-.blog-root svg .cv-twinkle { animation: cv-twinkle 3.6s ease-in-out infinite; }
-.blog-root svg .cv-spin    { animation: cv-spin 60s linear infinite; transform-box: view-box; }
-.blog-root svg .cv-spin-slow { animation: cv-spin 110s linear infinite; transform-box: view-box; }
+.blog-root svg .cv-float   { animation: cv-float 4.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; will-change: transform; }
+.blog-root svg .cv-sway    { animation: cv-sway 4.8s ease-in-out infinite; transform-box: fill-box; transform-origin: center; will-change: transform; }
+.blog-root svg .cv-twinkle { animation: cv-twinkle 2.1s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.blog-root svg .cv-spin    { animation: cv-spin 26s linear infinite; transform-box: view-box; }
+.blog-root svg .cv-spin-slow { animation: cv-spin 48s linear infinite; transform-box: view-box; }
 
 @media (prefers-reduced-motion: reduce) {
   .blog-root svg .cv-float,
