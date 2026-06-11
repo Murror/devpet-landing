@@ -148,14 +148,14 @@
   color: #36343F;
 }
 
-/* Blog footer in a standard sans (not the pixel display face). Needed
-   especially on VI, where `.v2-root--vi [class^="v2-"]` force-swaps every
-   v2-* element to the pixel DearPix font; these higher-specificity rules
-   (with !important as a belt-and-braces) keep the footer text readable. */
-.blog-v2 .v2-footer-copyright,
-.blog-v2 .v2-footer-link,
-.v2-root--vi.blog-v2 .v2-footer-copyright,
-.v2-root--vi.blog-v2 .v2-footer-link {
+/* Footer text in a standard sans (not the pixel display face) — SITE-WIDE
+   (landing + blog). On VI, `.v2-root--vi [class^="v2-"]` force-swaps every
+   v2-* element to the pixel DearPix font; `!important` keeps the footer
+   copyright + links readable everywhere. */
+.v2-footer-copyright,
+.v2-footer-link,
+.v2-root--vi .v2-footer-copyright,
+.v2-root--vi .v2-footer-link {
   font-family: 'Open Sans', system-ui, -apple-system, 'Segoe UI', sans-serif !important;
 }
 
