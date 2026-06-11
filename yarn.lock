@@ -2480,6 +2480,13 @@ expect@30.3.0:
     jest-mock "30.3.0"
     jest-util "30.3.0"
 
+extend-shallow@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.npmjs.org/extend-shallow/-/extend-shallow-2.0.1.tgz"
+  integrity sha512-zCnTtlxNoAiDc3gqY2aYAWFx7XWWiasuF2K8Me5WbN8otHKTUKBwjPtNpRs/rbUZm7KxWAaNj7P1a/p52GbVug==
+  dependencies:
+    is-extendable "^0.1.0"
+
 fast-deep-equal@^3.1.1, fast-deep-equal@^3.1.3:
   version "3.1.3"
   resolved "https://registry.npmjs.org/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz"
@@ -2791,6 +2798,16 @@ graceful-fs@^4.2.11:
   resolved "https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.2.11.tgz"
   integrity sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==
 
+gray-matter@^4:
+  version "4.0.3"
+  resolved "https://registry.npmjs.org/gray-matter/-/gray-matter-4.0.3.tgz"
+  integrity sha512-5v6yZd4JK3eMI3FqqCouswVqwugaA9r4dNZB1wwcmrD02QkV5H0y7XBQW8QwQqEaZY1pM9aqORSORhJRdNK44Q==
+  dependencies:
+    js-yaml "^3.13.1"
+    kind-of "^6.0.2"
+    section-matter "^1.0.0"
+    strip-bom-string "^1.0.0"
+
 handlebars@^4.7.8:
   version "4.7.8"
   resolved "https://registry.npmjs.org/handlebars/-/handlebars-4.7.8.tgz"
@@ -3061,6 +3078,11 @@ is-date-object@^1.0.5, is-date-object@^1.1.0:
   dependencies:
     call-bound "^1.0.2"
     has-tostringtag "^1.0.2"
+
+is-extendable@^0.1.0:
+  version "0.1.1"
+  resolved "https://registry.npmjs.org/is-extendable/-/is-extendable-0.1.1.tgz"
+  integrity sha512-5BMULNob1vgFX6EjQw5izWDxrecWK9AM72rugNr0TFldMOi0fj6Jk+zeKIt0xGj4cEfQIJth4w3OKWOJ4f+AFw==
 
 is-extglob@^2.1.1:
   version "2.1.1"
@@ -3770,6 +3792,11 @@ keyv@^4.5.4:
   dependencies:
     json-buffer "3.0.1"
 
+kind-of@^6.0.0, kind-of@^6.0.2:
+  version "6.0.3"
+  resolved "https://registry.npmjs.org/kind-of/-/kind-of-6.0.3.tgz"
+  integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
+
 language-subtag-registry@^0.3.20:
   version "0.3.23"
   resolved "https://registry.npmjs.org/language-subtag-registry/-/language-subtag-registry-0.3.23.tgz"
@@ -3886,6 +3913,11 @@ makeerror@1.0.12:
   integrity sha512-JmqCvUhmt43madlpFzG4BQzG2Z3m6tvQDNKdClZnO3VbIudJYmxsT0FNJMeiB2+JTSlTQTSbU8QdesVmwJcmLg==
   dependencies:
     tmpl "1.0.5"
+
+marked@^15:
+  version "15.0.12"
+  resolved "https://registry.npmjs.org/marked/-/marked-15.0.12.tgz"
+  integrity sha512-8dD6FusOQSrpv9Z1rdNMdlSgQOIP880DHqnohobOmYLElGEqAL/JvxvuxZO16r4HtjTlfPRDC1hbvxC9dPN2nA==
 
 math-intrinsics@^1.1.0:
   version "1.1.0"
@@ -4654,6 +4686,14 @@ scheduler@^0.27.0:
   resolved "https://registry.npmjs.org/scheduler/-/scheduler-0.27.0.tgz"
   integrity sha512-eNv+WrVbKu1f3vbYJT/xtiF5syA5HPIMtf9IgY/nKg0sWqzAUEvqY/xm7OcZc/qafLx/iO9FgOmeSAp4v5ti/Q==
 
+section-matter@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/section-matter/-/section-matter-1.0.0.tgz"
+  integrity sha512-vfD3pmTzGpufjScBh50YHKzEu2lxBWhVEHsNGoEXmCmn2hKGfeNLYMzCJpe8cD7gqX7TJluOVpBkAequ6dgMmA==
+  dependencies:
+    extend-shallow "^2.0.1"
+    kind-of "^6.0.0"
+
 semver@^6.3.1:
   version "6.3.1"
   resolved "https://registry.npmjs.org/semver/-/semver-6.3.1.tgz"
@@ -4999,6 +5039,11 @@ strip-ansi@^7.0.1:
   integrity sha512-yDPMNjp4WyfYBkHnjIRLfca1i6KMyGCtsVgoKe/z1+6vukgaENdgGBZt+ZmKPc4gavvEZ5OgHfHdrazhgNyG7w==
   dependencies:
     ansi-regex "^6.2.2"
+
+strip-bom-string@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/strip-bom-string/-/strip-bom-string-1.0.0.tgz"
+  integrity sha512-uCC2VHvQRYu+lMh4My/sFNmF2klFymLX1wHJeXnbEJERpV/ZsVuonzerjfrGpIGF7LBVa1O7i9kjiWvJiFck8g==
 
 strip-bom@^3.0.0:
   version "3.0.0"

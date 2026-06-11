@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { useLocale } from '@/lib/LocaleProvider'
 
@@ -196,6 +197,18 @@ export default function Nav() {
           </li>
           <li>
             <a href="#skill-trees" className="v2-nav-link" onClick={handleAnchorClick}>{t.v2.nav.skillTree}</a>
+          </li>
+          <li>
+            {/* Blog is a real route, not an in-page anchor — use Link for
+                client navigation and route to the locale-matched URL
+                (/blog for EN, /vi/blog for VI). */}
+            <Link
+              href={locale === 'vi' ? '/vi/blog' : '/blog'}
+              className="v2-nav-link"
+              onClick={() => setMenuOpen(false)}
+            >
+              {t.v2.nav.blog}
+            </Link>
           </li>
         </ul>
 

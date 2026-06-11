@@ -75,12 +75,11 @@ export function LocaleProvider({ children, initialLocale = 'en' }: LocaleProvide
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  useEffect(() => {
-    const t = messages[locale]
-    document.title = t.metadata.title
-    document.querySelector('meta[name="description"]')?.setAttribute('content', t.metadata.description)
-    document.documentElement.lang = locale === 'vi' ? 'vi' : 'en'
-  }, [locale])
+  // NB: syncing <title> / meta description / <html lang> to the locale
+  // lives in LocaleClassWrapper (a landing-only client boundary), NOT
+  // here. The provider sits in the root layout and wraps every route,
+  // including /blog and /privacy — running the title overwrite here
+  // would clobber those pages' own per-route <title> after hydration.
 
   const toggleLocale = () => {
     // Session-only toggle: flips the displayed language for the

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { headers } from 'next/headers'
 import { Varela_Round } from 'next/font/google'
 import { LocaleProvider } from '@/lib/LocaleProvider'
+import { SITE_URL } from '@/lib/site'
 import './globals.css'
 
 const varelaRound = Varela_Round({ weight: '400', subsets: ['latin'], variable: '--font-varela' })
@@ -14,9 +15,16 @@ export const viewport = {
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover' as const,
+  // themeColor belongs in the viewport export in Next 16 (a metadata
+  // export warns). Drives the browser/PWA chrome color.
+  themeColor: '#1C40CF',
 }
 
 export const metadata: Metadata = {
+  // Base URL so URL-based metadata (canonical, hreflang alternates, OG
+  // images) in this segment and below can be authored as relative paths
+  // and resolved to absolute URLs at render time.
+  metadataBase: new URL(SITE_URL),
   title: 'Codepet — The AI coding school with your pet',
   description: 'Learn to vibecode with your companion. 16 skills, 4 tiers, and a pet that grows as you do.',
   // PWA manifest — installable on macOS / Windows / Android. When the
@@ -25,7 +33,6 @@ export const metadata: Metadata = {
   // (matches the "full website, no Google chrome" experience the
   // brand wants).
   manifest: '/manifest.json',
-  themeColor: '#1C40CF',
   icons: {
     icon: [
       { url: '/icons/favicon-32.png', sizes: '32x32', type: 'image/png' },
