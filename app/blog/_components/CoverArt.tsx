@@ -14,18 +14,24 @@ import type { CategorySlug } from '@/lib/blog/categories'
 
 type Palette = { bg: [string, string]; shapes: string[] }
 
+// All drawn from the Codepet brand palette (Midnight Ink, Codepet
+// Purple, Deep Violet, Luna Lilac, Cream Lavender) — each category gets
+// a distinct hue within the purple family so covers stay on-brand.
 const PALETTES: Record<CategorySlug, Palette> = {
   'building-ai-products': {
-    bg: ['#241B52', '#7B6BD8'],
-    shapes: ['#A89BF2', '#FFFFFF', '#FB7185', '#FBBF24'],
+    // Codepet Purple
+    bg: ['#1E1848', '#7B6BD8'],
+    shapes: ['#A89BF2', '#F7F5FC', '#534AB7', '#9D8DEC'],
   },
   'user-insights': {
-    bg: ['#16224F', '#4B6CD4'],
-    shapes: ['#7C9DF5', '#FFFFFF', '#A89BF2', '#34D399'],
+    // Brand secondary blue-violet
+    bg: ['#1B2150', '#4B6CD4'],
+    shapes: ['#7C9DF5', '#F7F5FC', '#A89BF2', '#9FB6FF'],
   },
   'second-brain': {
-    bg: ['#311A57', '#7C3AED'],
-    shapes: ['#C4A6FF', '#FFFFFF', '#FB7185', '#FBBF24'],
+    // Premium violet
+    bg: ['#2A1747', '#7C3AED'],
+    shapes: ['#C4A6FF', '#F7F5FC', '#A78BFA', '#9D8DEC'],
   },
 }
 
