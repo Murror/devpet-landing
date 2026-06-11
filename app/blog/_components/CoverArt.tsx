@@ -14,24 +14,24 @@ import type { CategorySlug } from '@/lib/blog/categories'
 
 type Palette = { bg: [string, string]; shapes: string[] }
 
-// All drawn from the Codepet brand palette (Midnight Ink, Codepet
-// Purple, Deep Violet, Luna Lilac, Cream Lavender) — each category gets
-// a distinct hue within the purple family so covers stay on-brand.
+// Light tints of the Codepet brand palette (Cream Lavender / Luna Lilac
+// grounds) with mid-purple shapes — soft, airy covers, distinct hue per
+// category, all on-brand.
 const PALETTES: Record<CategorySlug, Palette> = {
   'building-ai-products': {
-    // Codepet Purple
-    bg: ['#1E1848', '#7B6BD8'],
-    shapes: ['#A89BF2', '#F7F5FC', '#534AB7', '#9D8DEC'],
+    // Lavender → lilac
+    bg: ['#F2EFFB', '#CFC4F4'],
+    shapes: ['#7B6BD8', '#A89BF2', '#534AB7', '#9D8DEC'],
   },
   'user-insights': {
-    // Brand secondary blue-violet
-    bg: ['#1B2150', '#4B6CD4'],
-    shapes: ['#7C9DF5', '#F7F5FC', '#A89BF2', '#9FB6FF'],
+    // Soft blue-lavender
+    bg: ['#EEF1FC', '#C6D0F5'],
+    shapes: ['#4B6CD4', '#7C9DF5', '#8A7BE0', '#A89BF2'],
   },
   'second-brain': {
-    // Premium violet
-    bg: ['#2A1747', '#7C3AED'],
-    shapes: ['#C4A6FF', '#F7F5FC', '#A78BFA', '#9D8DEC'],
+    // Soft violet
+    bg: ['#F4ECFC', '#DBC8F6'],
+    shapes: ['#7C3AED', '#A78BFA', '#9D8DEC', '#B89BF0'],
   },
 }
 
@@ -81,7 +81,9 @@ export default function CoverArt({
     const size = 90 + rng() * 240
     const color = pick(palette.shapes)
     const filled = rng() > 0.42
-    const opacity = filled ? 0.6 + rng() * 0.35 : 0.5 + rng() * 0.4
+    // Softer opacities so the mid-purple shapes read gently on the
+    // light lavender ground rather than as hard blocks.
+    const opacity = filled ? 0.38 + rng() * 0.3 : 0.4 + rng() * 0.32
     const stroke = Math.round(6 + rng() * 8)
     const kind = Math.floor(rng() * 4)
     const rot = Math.round(rng() * 360)
