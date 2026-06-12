@@ -573,6 +573,41 @@
   .blog-root svg .cv-blink { animation: none; }
 }
 
+/* ── Blog image animations (all motion-safe) ──
+   1) Hero background: slow ambient ken-burns drift.
+   2) Featured + post covers: zoom on hover.
+   3) Post covers: fade + rise into view on scroll (progressive — only
+      where scroll-driven animations are supported; otherwise shown as-is). */
+@keyframes blog-kenburns {
+  from { transform: scale(1.05) translate(0, 0); }
+  to   { transform: scale(1.13) translate(-1.4%, -1.4%); }
+}
+@keyframes blog-img-reveal {
+  from { opacity: 0; transform: translateY(34px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .blog-hero-bg {
+    animation: blog-kenburns 36s ease-in-out infinite alternate;
+    transform-origin: 50% 50%; will-change: transform;
+  }
+}
+
+/* Featured cover hover zoom (post-card covers already zoom on hover). */
+.blog-featured-cover svg, .blog-featured-cover img { transition: transform 0.5s ease; }
+.blog-featured:hover .blog-featured-cover svg,
+.blog-featured:hover .blog-featured-cover img { transform: scale(1.05); }
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .blog-post-card-cover {
+      animation: blog-img-reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+  }
+}
 
 /* ── Character SVG animations from DevPet showcase ── */
 
