@@ -9,7 +9,6 @@ coverAlt: "Pixel-art sunset over rolling green hills and distant mountains"
 author: "Nguyen"
 authorTitle: "Founder, Codepet"
 tags: ["ai-products", "building-in-public", "startups", "macos"]
-featured: true
 ---
 
 When we started building Codepet, the pitch fit in one sentence: an AI that teaches you to build real software, not just finish tutorials. A year later that sentence is intact, but almost everything *underneath* it has been rewritten at least twice.
