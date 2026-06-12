@@ -113,7 +113,7 @@ const STRINGS: Record<Locale, BlogStrings> = {
     ctaButton: 'Tải Codepet',
     newsletterTitle: 'Nhận bài viết qua email',
     newsletterBody:
-      'Bài viết mới về làm sản phẩm AI, thấu hiểu người dùng và nuôi một bộ não thứ hai, gửi thẳng vào hộp thư của bạn. Không spam, hủy lúc nào cũng được.',
+      'Đăng ký nhận email miễn phí về các bài viết mới nhất trên Codepet về xây dựng sản phẩm với AI, bạn có thể huỷ bất cứ lúc nào!',
     newsletterPlaceholder: 'Nhập email của bạn',
     newsletterButton: 'Đăng ký',
     newsletterSuccess: 'Đã đăng ký — hãy để ý hộp thư nhé.',
