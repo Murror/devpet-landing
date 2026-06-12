@@ -43,13 +43,10 @@ export default function BlogIndexView({
             <div className="blog-hero-main">
               <h1>{title}</h1>
               <p>{tagline}</p>
-              <a className="blog-hero-cta" href="#latest">
-                {s.latest}
-              </a>
             </div>
-            <div className="blog-hero-strip">
-              <CategoryChips locale={locale} activeSlug={activeSlug} />
-            </div>
+          </div>
+          <div className="blog-hero-tabs">
+            <CategoryChips locale={locale} activeSlug={activeSlug} />
           </div>
         </div>
       </section>
