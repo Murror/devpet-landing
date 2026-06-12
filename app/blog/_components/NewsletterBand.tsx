@@ -53,33 +53,38 @@ export default function NewsletterBand({ locale }: { locale: Locale }) {
 
   return (
     <section className="blog-newsletter" aria-label={s.newsletterTitle}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img className="blog-newsletter-bg" src="/blog/band.png" alt="" aria-hidden="true" />
+      <div className="blog-newsletter-shade" aria-hidden="true" />
       <div className="blog-newsletter-inner">
         <div className="blog-newsletter-copy">
           <h2>{s.newsletterTitle}</h2>
           <p>{s.newsletterBody}</p>
         </div>
         <form className="blog-newsletter-form" onSubmit={handleSubmit} noValidate>
-          <input
-            type="email"
-            inputMode="email"
-            autoComplete="email"
-            className="blog-newsletter-input"
-            placeholder={s.newsletterPlaceholder}
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value)
-              if (state !== 'idle' && state !== 'loading') setState('idle')
-            }}
-            aria-label={s.newsletterPlaceholder}
-            disabled={done}
-          />
-          <button
-            type="submit"
-            className="blog-newsletter-btn"
-            disabled={state === 'loading' || done}
-          >
-            {state === 'loading' ? '…' : s.newsletterButton}
-          </button>
+          <div className="blog-newsletter-pill">
+            <input
+              type="email"
+              inputMode="email"
+              autoComplete="email"
+              className="blog-newsletter-input"
+              placeholder={s.newsletterPlaceholder}
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value)
+                if (state !== 'idle' && state !== 'loading') setState('idle')
+              }}
+              aria-label={s.newsletterPlaceholder}
+              disabled={done}
+            />
+            <button
+              type="submit"
+              className="blog-newsletter-btn"
+              disabled={state === 'loading' || done}
+            >
+              {state === 'loading' ? '…' : s.newsletterButton}
+            </button>
+          </div>
           {message && (
             <p
               className={`blog-newsletter-msg${done ? ' is-ok' : ' is-err'}`}
@@ -89,6 +94,7 @@ export default function NewsletterBand({ locale }: { locale: Locale }) {
             </p>
           )}
         </form>
+        <span className="blog-newsletter-mark" aria-hidden="true">Codepet</span>
       </div>
     </section>
   )

@@ -35,10 +35,22 @@ export default function BlogIndexView({
   return (
     <main>
       <section className="blog-hero">
-        <div className="blog-container">
-          <h1>{title}</h1>
-          <p>{tagline}</p>
-          <CategoryChips locale={locale} activeSlug={activeSlug} />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img className="blog-hero-bg" src="/blog/hero.png" alt="" aria-hidden="true" />
+        <div className="blog-hero-shade" aria-hidden="true" />
+        <div className="blog-hero-wrap">
+          <div className="blog-hero-glass">
+            <div className="blog-hero-main">
+              <h1>{title}</h1>
+              <p>{tagline}</p>
+              <a className="blog-hero-cta" href="#latest">
+                {s.latest}
+              </a>
+            </div>
+            <div className="blog-hero-strip">
+              <CategoryChips locale={locale} activeSlug={activeSlug} />
+            </div>
+          </div>
         </div>
       </section>
 
@@ -57,7 +69,7 @@ export default function BlogIndexView({
           {lead && <NewsletterBand locale={locale} />}
 
           {rest.length > 0 && (
-            <div className="blog-container">
+            <div className="blog-container" id="latest">
               <p className="blog-section-label">
                 {activeSlug === 'all' ? s.latest : s.allTopics}
               </p>

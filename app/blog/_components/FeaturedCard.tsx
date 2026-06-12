@@ -3,6 +3,7 @@ import type { Locale } from '@/lib/site'
 import type { PostMeta } from '@/lib/blog/posts'
 import { postPath, formatDate, formatReadingTime } from '@/lib/blog/format'
 import { getCategory } from '@/lib/blog/categories'
+import { blogStrings } from '@/lib/blog/ui-strings'
 import CoverArt from './CoverArt'
 
 const ACCENT_CLASS: Record<string, string> = {
@@ -19,6 +20,7 @@ export default function FeaturedCard({
   post: PostMeta
   locale: Locale
 }) {
+  const s = blogStrings(locale)
   const category = getCategory(post.category)
   const accentClass = category ? ACCENT_CLASS[category.accent] : ''
 
@@ -37,6 +39,10 @@ export default function FeaturedCard({
           <span className="blog-dot" />
           <span>{formatReadingTime(post.readingMinutes, locale)}</span>
         </div>
+        <span className="blog-featured-cta">
+          {s.readMore}
+          <span aria-hidden="true"> →</span>
+        </span>
       </div>
       <div className="blog-featured-cover">
         {post.cover ? (
