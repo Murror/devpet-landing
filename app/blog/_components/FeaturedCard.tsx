@@ -41,7 +41,6 @@ export default function FeaturedCard({
         </div>
         <span className="blog-featured-cta">
           {s.readMore}
-          <span aria-hidden="true"> →</span>
         </span>
       </div>
       <div className="blog-featured-cover">

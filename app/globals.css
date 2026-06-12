@@ -319,7 +319,7 @@
 }
 .blog-featured-cover svg, .blog-featured-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 .blog-featured-cta {
-  align-self: flex-start; display: inline-flex; align-items: center;
+  align-self: flex-start; margin-top: 1.25rem; display: inline-flex; align-items: center;
   padding: 0.6rem 1.35rem; border-radius: 9999px;
   background: var(--blog-accent); color: #fff;
   font-family: var(--blog-label); font-weight: 800; font-size: 0.88rem;
