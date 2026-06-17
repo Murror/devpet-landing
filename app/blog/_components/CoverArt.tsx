@@ -392,6 +392,39 @@ function gridToPngDataUri(g: Grid): string {
   return `data:image/png;base64,${png.toString('base64')}`
 }
 
+// ── curated cover library (public/blog/library) ──
+// Posts without an explicit `cover:` in frontmatter get a real, hand-picked
+// AI-generated image instead of procedural art. Images are grouped by
+// category to match each pillar's palette, and chosen deterministically from
+// the slug so a given post always keeps the same cover (SSR-safe, stable).
+// The procedural generator below is now only the last-resort fallback used if
+// a category's pool is ever empty.
+//
+// Only on-brand pastel scenes auto-assign here; the three off-palette library
+// images COVERS.md flags (seaside-pier-mountain, tropical-beach-sailboats,
+// city-night-billboards) are left out so they only appear via an explicit
+// `cover:` in frontmatter, never as an automatic default.
+const LIBRARY: Record<CategorySlug, string[]> = {
+  'building-ai-products': [
+    'alpenglow-peaks-moon', 'mountain-lake-blue', 'train-viaduct-mountain',
+    'city-rooftops-sunset', 'fjord-dock-boat', 'town-houses-clouds',
+  ],
+  'user-insights': [
+    'seaside-tram', 'old-town-street-goldenhour', 'lakeside-village-hillside',
+    'rowboats-teal-water', 'window-rice-fields',
+  ],
+  'second-brain': [
+    'cherry-blossom-wall', 'lake-daisies-sunset', 'savanna-pink-mountains',
+    'cabins-meadow-sunset', 'cottage-hill-sun', 'balcony-still-life', 'fireplace-village-cat',
+  ],
+}
+
+function libraryCover(slug: string, category: CategorySlug): string | null {
+  const pool = LIBRARY[category] ?? []
+  if (pool.length === 0) return null
+  return `/blog/library/${pool[hashString(`${slug}|cover`) % pool.length]}.png`
+}
+
 export default function CoverArt({
   slug,
   category,
@@ -401,7 +434,10 @@ export default function CoverArt({
   category: CategorySlug
   className?: string
 }) {
-  const src = gridToPngDataUri(build(slug, category))
+  const libSrc = libraryCover(slug, category)
+  // `??` short-circuits: the heavy procedural encode only runs when no library
+  // image is available for this category.
+  const src = libSrc ?? gridToPngDataUri(build(slug, category))
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
@@ -410,7 +446,15 @@ export default function CoverArt({
       alt=""
       aria-hidden="true"
       decoding="async"
-      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', imageRendering: 'pixelated' }}
+      loading="lazy"
+      style={{
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+        display: 'block',
+        // Real images render normally; only the 256-px procedural grid wants nearest-neighbour.
+        imageRendering: libSrc ? 'auto' : 'pixelated',
+      }}
     />
   )
 }
