@@ -26,6 +26,16 @@ const nextConfig: NextConfig = {
         destination: '/',
         permanent: false,
       },
+      // Stable, branded download URL → latest GitHub release asset. The
+      // website button points here (code-pet.com/download/Codepet.dmg) so it
+      // never changes per release; only the GitHub release gets updated.
+      // `permanent: false` (307) keeps the host swappable later.
+      {
+        source: '/download/Codepet.dmg',
+        destination:
+          'https://github.com/My-Outcasts/codepet/releases/latest/download/Codepet.dmg',
+        permanent: false,
+      },
     ]
   },
   // Mount the separate Codepet Academy deployment under /academy

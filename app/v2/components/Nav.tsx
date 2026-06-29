@@ -210,6 +210,16 @@ export default function Nav() {
               {t.v2.nav.blog}
             </Link>
           </li>
+          <li>
+            {/* Direct macOS download — a real route, like Blog. */}
+            <Link
+              href="/download"
+              className="v2-nav-link"
+              onClick={() => setMenuOpen(false)}
+            >
+              {locale === 'vi' ? 'Tải về' : 'Download'}
+            </Link>
+          </li>
         </ul>
 
         <a href="#top" className="v2-nav-wordmark" aria-label={t.v2.nav.homeAria} onClick={handleAnchorClick}>
