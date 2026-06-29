@@ -209,7 +209,7 @@
 }
 .v3-hero-stage {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
@@ -218,15 +218,25 @@
   text-align: center;
   padding: 120px 0 40px;
 }
-/* Canvas constellation fills the hero behind the text */
+/* ASCII "night coder" art — the hero backdrop, behind everything */
+.v3-hero-bg {
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  opacity: 0.9;
+  filter: brightness(0.62) saturate(1.05);
+}
+/* Canvas constellation — subtle motion layer over the art */
 .v3-hero-canvas {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  z-index: 0;
+  z-index: 2;
+  opacity: 0.55;
+  mix-blend-mode: screen;
 }
-/* Radial vignette so text stays legible over the particle field */
+/* Dark scrim over the art so the headline stays legible */
 .v3-hero::after {
   content: '';
   position: absolute;
@@ -234,8 +244,8 @@
   z-index: 1;
   pointer-events: none;
   background:
-    radial-gradient(120% 80% at 50% 42%, transparent 40%, rgba(7,6,12,0.55) 100%),
-    linear-gradient(180deg, rgba(7,6,12,0.4) 0%, transparent 22%, transparent 70%, var(--v3-bg) 100%);
+    radial-gradient(110% 70% at 50% 44%, rgba(7,6,12,0.35) 0%, rgba(7,6,12,0.62) 70%, rgba(7,6,12,0.82) 100%),
+    linear-gradient(180deg, rgba(7,6,12,0.7) 0%, transparent 26%, transparent 58%, var(--v3-bg) 100%);
 }
 .v3-hero-inner { position: relative; z-index: 2; max-width: 880px; }
 

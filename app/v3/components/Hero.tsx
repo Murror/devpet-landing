@@ -32,6 +32,15 @@ export default function Hero() {
 
   return (
     <header id="top" className="v3-hero">
+      <Image
+        src="/v3/hero-ascii.jpg"
+        alt=""
+        fill
+        priority
+        unoptimized
+        className="v3-hero-bg"
+        aria-hidden="true"
+      />
       <Constellation />
 
       <div className="v3-hero-stage">

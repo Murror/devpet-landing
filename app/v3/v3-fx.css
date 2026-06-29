@@ -81,7 +81,7 @@
 /* ── Hero product window (glass app frame showing the company) ── */
 .v3-window-wrap {
   position: relative;
-  z-index: 3;
+  z-index: 4;
   margin: -24px auto 0;
   max-width: 860px;
   perspective: 1600px;
