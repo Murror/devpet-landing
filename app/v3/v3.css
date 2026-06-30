@@ -530,15 +530,25 @@
 .v3-footer-links a:hover { color: var(--v3-ink); }
 .v3-footer-copy { font-size: 12px; color: var(--v3-ink-mute); width: 100%; }
 
-/* ── Reveal-on-scroll (progressive enhancement) ── */
+/* ── Reveal-on-scroll: 3D depth cascade ──
+   Each block flies in from Z-depth with a rotateX tilt and resolves from
+   blurred → sharp. Stagger between a section's blocks comes from the
+   per-Reveal `delay` prop; heading words still cascade via SplitText. The
+   perspective is baked into the transform so no ancestor perspective is
+   needed (which would otherwise disturb the pinned gallery's sticky). */
 .v3-reveal {
   opacity: 0;
-  transform: translateY(26px);
-  transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1);
+  transform: perspective(1100px) translate3d(0, 56px, -150px) rotateX(15deg);
+  transform-origin: 50% 100%;
+  filter: blur(7px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22,1,0.36,1),
+    transform 1.05s cubic-bezier(0.22,1,0.36,1),
+    filter 0.85s ease;
 }
-.v3-reveal.is-in { opacity: 1; transform: none; }
+.v3-reveal.is-in { opacity: 1; transform: none; filter: none; }
 
 @media (prefers-reduced-motion: reduce) {
   .v3 * { animation: none !important; }
-  .v3-reveal { opacity: 1; transform: none; transition: none; }
+  .v3-reveal { opacity: 1; transform: none; filter: none; transition: none; }
 }

@@ -692,6 +692,13 @@ html.lenis, html.lenis body { height: auto; }
 }
 @keyframes v3-spin { to { --v3a: 360deg; } }
 
+/* ── Hero glass window: depth entrance on load ── */
+.v3-window-wrap { animation: v3-window-in 1.25s cubic-bezier(0.22,1,0.36,1) 0.85s both; }
+@keyframes v3-window-in {
+  0%   { opacity: 0; transform: perspective(1600px) translate3d(0, 90px, -240px) rotateX(26deg); }
+  100% { opacity: 1; transform: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .v3-nebula, .v3-grain, .v3-marquee-track { animation: none !important; }
   .v3-line-mask > span { transform: none !important; animation: none !important; }
@@ -713,4 +720,5 @@ html.lenis, html.lenis body { height: auto; }
   .v3-env-toggle { background: linear-gradient(90deg, var(--v3-accent), var(--v3-accent-2)) !important; }
   .v3-env-toggle span { left: 20px !important; background: #fff !important; }
   .v3-env-panel.is-live .v3-env-toggle { animation: none !important; }
+  .v3-window-wrap { animation: none !important; }
 }
