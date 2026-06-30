@@ -359,6 +359,34 @@
 .v3-env-name { font-family: var(--v3-sans); font-weight: 600; font-size: 15px; color: var(--v3-ink); }
 .v3-env-desc { font-size: 13px; color: var(--v3-ink-soft); margin-top: 3px; }
 
+/* Large feature image band below the text + panel (editorial, like the
+   Departments showcase). The image is swappable via ENVIRONMENT.feature. */
+.v3-env-feature {
+  position: relative;
+  margin: clamp(48px, 7vw, 96px) 0 0;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid var(--v3-line);
+  aspect-ratio: 21 / 9;
+  background: var(--v3-bg-2);
+}
+.v3-env-feature img { width: 100%; height: 100%; object-fit: cover; object-position: center 42%; }
+.v3-env-feature::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(7,6,12,0.12) 0%, transparent 32%, rgba(7,6,12,0.85) 100%);
+}
+.v3-env-feature-cap { position: absolute; left: 28px; bottom: 26px; z-index: 2; max-width: 560px; margin: 0; }
+.v3-env-feature-cap h3 {
+  font-family: var(--v3-sans); font-weight: 600;
+  font-size: clamp(20px, 2.6vw, 32px); letter-spacing: -0.02em; margin: 0 0 6px; color: var(--v3-ink);
+}
+.v3-env-feature-cap p { font-size: 14.5px; color: var(--v3-ink-soft); margin: 0; }
+@media (max-width: 720px) {
+  .v3-env-feature { aspect-ratio: 4 / 3; }
+  .v3-env-feature-cap { left: 18px; bottom: 18px; }
+}
+
 /* Toggle: OFF by default, flips ON (in the item's hue) when the panel wires
    up (.v3-env-panel.is-live). */
 .v3-env-toggle {

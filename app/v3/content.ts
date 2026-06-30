@@ -67,6 +67,13 @@ export const ENVIRONMENT = {
     { name: 'Subagents',      desc: 'Specialists Codepet hands the right job to',  color: '#A855F7' },
     { name: 'Guardrails',     desc: 'Limits you set — Codepet stays inside them',  color: '#FF6B9D' },
   ],
+  // Large feature image band below the text + panel.
+  // PLACEHOLDER `image` — swap for a real setup / connectors screenshot.
+  feature: {
+    image: '/v3/hero-ascii.jpg',
+    head: 'Your whole workspace, wired in.',
+    sub: 'Skills, connectors and subagents — switched on and ready from the very first run.',
+  },
 }
 
 // Eight departments — names, one-line needs, accent colour + cover.

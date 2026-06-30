@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useEffect, useRef, type CSSProperties } from 'react'
 import Reveal from './Reveal'
 import SplitText from './SplitText'
@@ -76,6 +77,16 @@ export default function Environment() {
           </div>
         </Reveal>
       </div>
+
+      <Reveal delay={80}>
+        <figure className="v3-env-feature v3-img-reveal" data-parallax="0.04">
+          <Image src={ENVIRONMENT.feature.image} alt="" fill sizes="(max-width: 720px) 100vw, 1180px" unoptimized />
+          <figcaption className="v3-env-feature-cap">
+            <h3>{ENVIRONMENT.feature.head}</h3>
+            <p>{ENVIRONMENT.feature.sub}</p>
+          </figcaption>
+        </figure>
+      </Reveal>
     </section>
   )
 }
