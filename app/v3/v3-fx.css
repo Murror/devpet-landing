@@ -776,10 +776,13 @@ html.lenis, html.lenis body { height: auto; }
 
 /* Department-card companion: peeks from the cover's bottom-right, haloed in
    the card's own hue. */
-.v3-dept-pet {
+/* `.v3-dept-cover img` forces 100%×cover; this more specific selector pins
+   the pet back to its real size. */
+.v3-dept-cover img.v3-dept-pet {
   position: absolute;
-  right: 10px; bottom: -15px;
-  height: 64px; width: auto;
+  right: 8px; bottom: -14px;
+  width: auto; height: 62px;
+  object-fit: contain;
   z-index: 4;
   filter:
     drop-shadow(0 0 9px color-mix(in srgb, var(--dept) 55%, transparent))
