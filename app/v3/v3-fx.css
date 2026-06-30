@@ -823,13 +823,15 @@ html.lenis, html.lenis body { height: auto; }
   justify-content: center;
   align-items: flex-end;
   flex-wrap: nowrap;
-  gap: clamp(16px, 4.2vw, 60px);
-  max-width: 1080px;
-  /* Negative bottom margin overlaps the marquee so the pets stand ON the
-     banner's top line (which scrolls its text ~30px below their feet). */
-  margin: 0 auto -10px;
+  gap: clamp(10px, 2.3vw, 32px);
+  max-width: 1000px;
+  /* The band sits AFTER the marquee; this negative top margin lifts it back
+     up so the pets' feet land on the marquee's BOTTOM line (text scrolls
+     behind them). Tracks the desktop pet height (~76px). */
+  margin: -82px auto 0;
   padding: 0 24px 0;
 }
+@media (max-width: 820px) { .v3-petband { margin-top: -56px; } }
 .v3-petband-pet {
   height: clamp(48px, 5.8vw, 76px);
   width: auto;
@@ -838,7 +840,7 @@ html.lenis, html.lenis body { height: auto; }
   animation-delay: calc(var(--i, 0) * -0.55s);
 }
 @media (max-width: 560px) {
-  .v3-petband { gap: 10px; padding-bottom: 12px; }
+  .v3-petband { gap: 8px; margin-top: -46px; }
   .v3-petband-pet { height: 40px; }
 }
 
