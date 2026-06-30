@@ -64,10 +64,10 @@ export const ENVIRONMENT = {
   // Alternating (zigzag) rows: each capability pairs an image with the option.
   // `image` values are PLACEHOLDERS — swap each for a real screenshot.
   items: [
-    { name: 'Project skills', desc: 'Abilities tuned to what you’re building',   color: '#3B82F6', image: '/v3/covers/code-pyramid.jpg'     },
-    { name: 'Connectors',     desc: 'Your services, where Codepet already works', color: '#2DD4BF', image: '/v3/covers/code-observatory.jpg' },
-    { name: 'Subagents',      desc: 'Specialists Codepet hands the right job to',  color: '#A855F7', image: '/v3/covers/code-ghibli.jpg'     },
-    { name: 'Guardrails',     desc: 'Limits you set — Codepet stays inside them',  color: '#FF6B9D', image: '/v3/covers/code-chess.jpg'      },
+    { name: 'Project skills', desc: 'Abilities tuned to what you’re building',   color: '#3B82F6', image: '/v3/covers/env-portrait.jpg' },
+    { name: 'Connectors',     desc: 'Your services, where Codepet already works', color: '#2DD4BF', image: '/v3/covers/env-cubes.jpg'    },
+    { name: 'Subagents',      desc: 'Specialists Codepet hands the right job to',  color: '#A855F7', image: '/v3/covers/env-cd.jpg'       },
+    { name: 'Guardrails',     desc: 'Limits you set — Codepet stays inside them',  color: '#FF6B9D', image: '/v3/covers/env-hand.jpg'     },
   ],
 }
 
