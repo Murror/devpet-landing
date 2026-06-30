@@ -450,17 +450,8 @@
   margin-top: 64px;
 }
 @media (max-width: 820px) { .v3-journey-path { grid-template-columns: 1fr; gap: 26px; } }
-/* the glowing connector line */
-.v3-journey-path::before {
-  content: '';
-  position: absolute;
-  top: 9px; left: 8%; right: 8%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--v3-accent), var(--v3-accent-2), var(--v3-accent), transparent);
-  opacity: 0.55;
-  filter: blur(0.3px);
-}
-@media (max-width: 820px) { .v3-journey-path::before { display: none; } }
+/* The connector line is now an explicit scroll-scrubbed rail + beam + comet
+   (.v3-journey-rail), styled in v3-fx.css. The old ::before line is gone. */
 .v3-phase { position: relative; text-align: center; padding-top: 0; }
 .v3-phase-dot {
   width: 18px; height: 18px;
