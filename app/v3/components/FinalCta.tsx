@@ -14,7 +14,6 @@ export default function FinalCta() {
     <>
       <section className="v3-final">
         <ConvergeParticles />
-        <img className="v3-pet v3-pet--final" src="/v2/pets/4-purple-byte.png" alt="" aria-hidden="true" />
         <div className="v3-final-inner">
           <Reveal>
             <h2 className="v3-final-headline">

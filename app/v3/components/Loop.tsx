@@ -34,7 +34,6 @@ export default function Loop() {
 
   return (
     <section id="loop" className="v3-section">
-      <img className="v3-pet v3-pet--loop" src="/v2/pets/4-purple-byte.png" alt="" aria-hidden="true" />
       <Reveal>
         <p className="v3-eyebrow">{LOOP.eyebrow}</p>
         <h2 className="v3-h2">
