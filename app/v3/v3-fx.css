@@ -362,7 +362,6 @@ html.lenis, html.lenis body { height: auto; }
 .v3-skewer > * {
   transform: skewY(var(--vskew, 0deg));
   transform-origin: center center;
-  will-change: transform;
 }
 
 /* ── Kinetic typography: heading words rise + fade in sequence ── */
