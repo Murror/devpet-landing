@@ -53,7 +53,10 @@
   color: var(--v3-ink);
   font-family: var(--v3-sans);
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  /* `clip` (not `hidden`) hides the full-bleed gallery overflow WITHOUT
+     turning .v3 into a scroll container — which would break the pinned
+     department gallery's position:sticky. */
+  overflow-x: clip;
 }
 
 .v3 *,

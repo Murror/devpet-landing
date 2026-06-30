@@ -18,11 +18,24 @@ export default function SmoothScroll() {
     const loop = (t: number) => { lenis.raf(t); raf = requestAnimationFrame(loop) }
     raf = requestAnimationFrame(loop)
 
+    // Parallax depth layers — elements tagged [data-parallax] drift against
+    // the scroll by a per-element speed. Cached once; recomputed each scroll.
+    const parallax = Array.from(
+      document.querySelectorAll<HTMLElement>('[data-parallax]'),
+    ).map((el) => ({ el, speed: parseFloat(el.dataset.parallax || '0') }))
+    const vh = () => window.innerHeight
+
     // Scroll-velocity skew → CSS var read by each section (.v3-skewer > *).
     lenis.on('scroll', () => {
       const vel = (lenis as { velocity?: number }).velocity ?? 0
       const v = Math.max(-0.7, Math.min(0.7, vel * 0.025))
       document.documentElement.style.setProperty('--vskew', `${v.toFixed(3)}deg`)
+
+      for (const { el, speed } of parallax) {
+        const r = el.getBoundingClientRect()
+        const center = r.top + r.height / 2 - vh() / 2
+        el.style.transform = `translate3d(0, ${(-center * speed).toFixed(1)}px, 0)`
+      }
     })
 
     // Route in-page anchors through Lenis for a smooth glide.

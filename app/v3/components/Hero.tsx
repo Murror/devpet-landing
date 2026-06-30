@@ -2,6 +2,7 @@
 
 import { useRef, type MouseEvent } from 'react'
 import Constellation from './Constellation'
+import HeroShader from './HeroShader'
 import Magnetic from './Magnetic'
 import { HERO } from '../content'
 
@@ -31,6 +32,7 @@ export default function Hero() {
   return (
     <header id="top" className="v3-hero">
       <div className="v3-hero-bg" aria-hidden="true" />
+      <HeroShader />
       <Constellation />
 
       <div className="v3-hero-stage">

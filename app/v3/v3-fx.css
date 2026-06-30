@@ -407,6 +407,115 @@ html.lenis, html.lenis body { height: auto; }
 }
 @keyframes v3-intro-line { to { width: 180px; } }
 
+/* ============================================================
+   IMMERSIVE BATCH 2 — WebGL hero, 3D tilt gallery, parallax
+   ============================================================ */
+
+/* ── WebGL aurora behind the constellation (screen-blended light) ── */
+.v3-hero-shader {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.6;
+  mix-blend-mode: screen;
+}
+
+/* ── Departments → pinned horizontal gallery ──
+   Default (mobile / no-JS / reduced-motion): a plain responsive grid.
+   JS adds `.is-pinned` above 820px to switch on the sticky sideways scroll. */
+.v3-gallery { position: relative; margin-top: 56px; }
+.v3-gallery-sticky { position: static; }
+.v3-gallery-track {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+@media (max-width: 960px) { .v3-gallery-track { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .v3-gallery-track { grid-template-columns: 1fr; } }
+.v3-gallery-rail { display: none; }
+
+.v3-gallery.is-pinned {
+  width: 100vw;
+  margin-left: calc(50% - 50vw); /* full-bleed breakout from the section column */
+  /* height is set inline by JS to create the scroll distance */
+}
+.v3-gallery.is-pinned .v3-gallery-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 32px;
+  overflow: hidden;
+}
+.v3-gallery.is-pinned .v3-gallery-track {
+  display: flex;
+  flex-wrap: nowrap;
+  grid-template-columns: none;
+  gap: 22px;
+  width: max-content;
+  padding-inline: max(32px, calc((100vw - 1180px) / 2));
+  will-change: transform;
+}
+.v3-gallery.is-pinned .v3-dept { flex: 0 0 340px; width: 340px; }
+.v3-gallery.is-pinned .v3-gallery-rail {
+  display: block;
+  width: min(1116px, calc(100vw - 64px));
+  margin: 0 auto;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--v3-line);
+  overflow: hidden;
+}
+.v3-gallery.is-pinned .v3-gallery-rail i {
+  display: block;
+  height: 100%;
+  width: calc(8% + var(--p, 0) * 92%);
+  background: linear-gradient(90deg, var(--v3-accent), var(--v3-accent-2));
+  box-shadow: 0 0 12px -2px var(--v3-accent);
+}
+
+/* ── 3D tilt + moving glare on department cards ── */
+.v3-dept--tilt {
+  transform: perspective(950px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transform-style: preserve-3d;
+  transition: transform 0.18s ease, box-shadow 0.35s ease, border-color 0.3s ease;
+}
+.v3-dept--tilt:hover {
+  transform: perspective(950px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  border-color: color-mix(in srgb, var(--dept) 55%, transparent);
+  box-shadow: 0 28px 72px -24px color-mix(in srgb, var(--dept) 78%, transparent);
+}
+.v3-dept-glare {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(circle at var(--gx, 50%) var(--gy, 50%), rgba(255,255,255,0.18), transparent 46%);
+  mix-blend-mode: screen;
+}
+.v3-dept--tilt:hover .v3-dept-glare { opacity: 1; }
+
+/* ── Cinematic image mask-reveal: covers/showcase "draw" in on scroll ── */
+.v3-img-reveal { overflow: hidden; }
+.v3-img-reveal img {
+  clip-path: inset(0 0 0 100%);
+  transform: scale(1.12);
+  transition: clip-path 1.2s cubic-bezier(0.76,0,0.24,1), transform 1.5s cubic-bezier(0.22,1,0.36,1);
+}
+.v3-reveal.is-in .v3-img-reveal img { clip-path: inset(0 0 0 0); transform: scale(1); }
+
+/* Pinned departments must not inherit the velocity skew (it would shear
+   the sticky viewport). Higher specificity than `.v3-skewer > *`. */
+.v3-skewer > .v3-no-skew { transform: none !important; }
+
 @media (prefers-reduced-motion: reduce) {
   .v3-nebula, .v3-grain, .v3-marquee-track { animation: none !important; }
   .v3-line-mask > span { transform: none !important; animation: none !important; }
@@ -417,4 +526,6 @@ html.lenis, html.lenis body { height: auto; }
   .v3-skewer > * { transform: none !important; }
   .v3-word { transform: none !important; opacity: 1 !important; }
   .v3-intro { display: none !important; }
+  .v3-dept--tilt { transform: none !important; }
+  .v3-img-reveal img { clip-path: none !important; transform: none !important; transition: none !important; }
 }
