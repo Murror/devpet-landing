@@ -387,41 +387,89 @@
   .v3-env-feature-cap { left: 18px; bottom: 18px; }
 }
 
-/* ── Environment: alternating (zigzag) image ↔ option rows ── */
+/* ── Environment: alternating (zigzag) image ↔ option rows + FX ── */
 .v3-env-intro { max-width: 720px; }
 .v3-env-zigzag {
   display: flex;
   flex-direction: column;
-  gap: clamp(40px, 6vw, 84px);
+  gap: clamp(44px, 6.5vw, 96px);
   margin-top: clamp(48px, 7vw, 88px);
 }
+/* The zigzag rows do their own directional entrance, so neutralise the
+   generic depth-cascade on their reveal wrappers. */
+.v3-reveal.v3-env-zreveal { opacity: 1; transform: none; filter: none; transition: none; }
+
 .v3-env-zrow {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(32px, 5vw, 72px);
   align-items: center;
+  transition: opacity 0.45s ease;
 }
-/* alternate: even rows put the image on the right (each row is wrapped in a
-   .v3-reveal, so target the wrapper's nth-child). */
+/* alternate: even rows put the image on the right. */
 .v3-env-zigzag > .v3-reveal:nth-child(even) .v3-env-zimg { order: 2; }
+
+/* Directional entrance: image slides in from its side, option from the other. */
+.v3-env-zimg, .v3-env-zbody { opacity: 0; }
+.v3-env-zimg { translate: -56px 0; }
+.v3-env-zbody { translate: 44px 0; }
+.v3-env-zigzag > .v3-reveal:nth-child(even) .v3-env-zimg { translate: 56px 0; }
+.v3-env-zigzag > .v3-reveal:nth-child(even) .v3-env-zbody { translate: -44px 0; }
+.v3-env-zigzag > .v3-reveal.is-in .v3-env-zimg,
+.v3-env-zigzag > .v3-reveal.is-in .v3-env-zbody { translate: 0 0; opacity: 1; }
 
 .v3-env-zimg {
   position: relative;
   aspect-ratio: 16 / 10;
   border-radius: 18px;
   overflow: hidden;
-  border: 1px solid color-mix(in srgb, var(--c) 30%, var(--v3-line));
+  border: 1px solid color-mix(in srgb, var(--c) 28%, var(--v3-line));
   box-shadow: 0 30px 70px -42px color-mix(in srgb, var(--c) 60%, transparent);
+  /* 3D cursor tilt (rx/ry set by JS) composes with the entrance translate. */
+  transform: perspective(950px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: translate 0.9s cubic-bezier(0.22,1,0.36,1), opacity 0.9s ease,
+              transform 0.25s ease, scale 0.45s ease, box-shadow 0.45s ease;
 }
-.v3-env-zimg img { width: 100%; height: 100%; object-fit: cover; }
-.v3-env-zimg::after {
-  content: '';
-  position: absolute; inset: 0;
+/* inner layer is slightly oversized so it can parallax-drift inside the frame */
+.v3-env-zimg-inner { position: absolute; inset: 0; scale: 1.12; will-change: transform; }
+.v3-env-zimg-inner img { object-fit: cover; }
+.v3-env-zimg::after { /* hue tint at the bottom */
+  content: ''; position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(180deg, transparent 45%, color-mix(in srgb, var(--c) 16%, transparent));
 }
+/* moving glare on cursor */
+.v3-env-zglare {
+  position: absolute; inset: 0; z-index: 2;
+  border-radius: inherit; pointer-events: none;
+  opacity: 0; transition: opacity 0.3s ease;
+  background: radial-gradient(circle at var(--gx, 50%) var(--gy, 50%), rgba(255,255,255,0.22), transparent 45%);
+  mix-blend-mode: screen;
+}
+.v3-env-zimg:hover .v3-env-zglare { opacity: 1; }
+/* slow animated gradient frame (conic angle via @property --v3a) */
+.v3-env-zimg::before {
+  content: ''; position: absolute; inset: 0; z-index: 3;
+  border-radius: inherit; padding: 1.5px;
+  background: conic-gradient(from var(--v3a), color-mix(in srgb, var(--c) 85%, #fff), var(--c), transparent 62%, color-mix(in srgb, var(--c) 85%, #fff));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: v3-spin 7s linear infinite;
+  pointer-events: none; opacity: 0.8;
+}
 
-.v3-env-zbody { max-width: 460px; }
+.v3-env-zbody { position: relative; z-index: 0; max-width: 460px; }
 .v3-env-zbody .v3-env-node { display: inline-block; }
+/* ghost index numeral behind the option */
+.v3-env-znum {
+  position: absolute; top: -0.55em; left: -0.06em; z-index: -1;
+  font-family: var(--v3-sans); font-weight: 800; line-height: 1;
+  font-size: clamp(86px, 11vw, 150px);
+  color: transparent;
+  -webkit-text-stroke: 1.5px color-mix(in srgb, var(--c) 34%, transparent);
+  opacity: 0.55; pointer-events: none;
+}
 .v3-env-zname {
   font-family: var(--v3-sans); font-weight: 600;
   font-size: clamp(22px, 2.8vw, 34px); letter-spacing: -0.01em;
@@ -431,16 +479,25 @@
   font-size: clamp(14px, 1.5vw, 16.5px); line-height: 1.55;
   color: var(--v3-ink-soft); margin: 0 0 20px;
 }
-/* the toggle sits ON in the row's hue */
-.v3-env-zbody .v3-env-toggle {
+/* toggle latches ON once the row has been the active (focused) row. */
+.v3-env-zrow.was-active .v3-env-toggle {
   background: linear-gradient(90deg, color-mix(in srgb, var(--c) 78%, #ffffff 22%), var(--c));
   box-shadow: 0 0 16px -2px var(--c);
 }
-.v3-env-zbody .v3-env-toggle span { left: 21px; background: #fff; }
+.v3-env-zrow.was-active .v3-env-toggle span { left: 21px; background: #fff; }
+
+/* active-row scroll focus: the centred row blooms; the others dim back. */
+.v3-env-zigzag.has-active .v3-env-zrow:not(.is-active) { opacity: 0.48; }
+.v3-env-zrow.is-active .v3-env-zimg {
+  scale: 1.035;
+  box-shadow: 0 38px 92px -38px color-mix(in srgb, var(--c) 85%, transparent);
+}
 
 @media (max-width: 760px) {
-  .v3-env-zrow { grid-template-columns: 1fr; gap: 20px; }
+  .v3-env-zrow { grid-template-columns: 1fr; gap: 18px; }
   .v3-env-zigzag > .v3-reveal:nth-child(even) .v3-env-zimg { order: 0; }
+  .v3-env-zimg, .v3-env-zigzag > .v3-reveal:nth-child(even) .v3-env-zimg,
+  .v3-env-zbody, .v3-env-zigzag > .v3-reveal:nth-child(even) .v3-env-zbody { translate: 0 24px; }
   .v3-env-zbody { max-width: none; }
 }
 
@@ -978,4 +1035,10 @@ html.lenis, html.lenis body { height: auto; }
   .v3-env-panel.is-live .v3-env-toggle { animation: none !important; }
   .v3-window-wrap { animation: none !important; }
   .v3-pet, .v3-dept-pet { animation: none !important; translate: none !important; }
+  /* zigzag setup rows */
+  .v3-env-zimg, .v3-env-zbody { opacity: 1 !important; translate: none !important; }
+  .v3-env-zimg { transform: none !important; scale: none !important; }
+  .v3-env-zimg-inner { scale: 1 !important; transform: none !important; }
+  .v3-env-zimg::before { animation: none !important; }
+  .v3-env-zigzag.has-active .v3-env-zrow:not(.is-active) { opacity: 1 !important; }
 }
