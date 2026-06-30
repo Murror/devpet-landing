@@ -177,6 +177,9 @@
   animation: v3-marquee 28s linear infinite;
 }
 .v3-marquee:hover .v3-marquee-track { animation-play-state: paused; }
+/* When the scroll-reactive JS takes over (Marquee.tsx), drop the CSS loop so
+   the two don't fight over `transform`. */
+.v3-marquee--js .v3-marquee-track { animation: none !important; }
 .v3-marquee-item {
   font-family: var(--v3-sans);
   font-weight: 600;
