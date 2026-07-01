@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Reveal from './Reveal'
 import SplitText from './SplitText'
@@ -8,25 +8,102 @@ import { LOOP } from '../content'
 
 /**
  * Loop — Codepet's core promise as a self-running cycle:
- * Execute → Deliver → Approve. Three full-bleed image cards with the step
- * text over a gradient scrim; a highlight cycles through them so the loop
- * visibly "runs" (the active card blooms + its art eases in).
- * Reduced-motion: static, all lit.
+ * Execute → Deliver → Approve. The section pins and scroll scrubs the
+ * three cards ONE AT A TIME: the centred card is large and sharp; as you
+ * scroll it flies toward you and dissolves (blur + fade) while the next
+ * rises from depth and assembles into focus. Progress dots track the beat.
+ * Below 820px / reduced-motion it falls back to a plain stacked list.
  */
 export default function Loop() {
-  const [active, setActive] = useState(0)
+  const stageRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const id = window.setInterval(
-      () => setActive((a) => (a + 1) % LOOP.steps.length),
-      2100,
-    )
-    return () => window.clearInterval(id)
+    const stage = stageRef.current
+    if (!stage) return
+    const cards = Array.from(stage.querySelectorAll<HTMLElement>('.v3-loopcard--stage'))
+    const n = cards.length
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    let active = false
+    let raf = 0
+
+    const paint = (prog: number) => {
+      cards.forEach((card, i) => {
+        const d = i - prog
+        let z: number, y: number, s: number, rot: number, op: number, blur: number
+        if (d >= 0) {
+          // current + upcoming: stacked, receding into depth
+          z = -d * 480
+          y = d * 22
+          s = Math.max(0.62, 1 - 0.08 * d)
+          rot = -d * 6
+          op = Math.max(0, 1 - d * 0.7)
+          blur = Math.min(8, d * 4)
+        } else {
+          // past: flies toward the viewer and dissolves upward
+          const a = -d
+          z = a * 560
+          y = -a * 60
+          s = 1 + a * 0.5
+          rot = a * 8
+          op = Math.max(0, 1 - a * 1.15)
+          blur = Math.min(16, a * 13)
+        }
+        card.style.transform = `translate(-50%,-50%) translate3d(0,${y.toFixed(1)}px,${z.toFixed(1)}px) rotateX(${rot.toFixed(1)}deg) scale(${s.toFixed(3)})`
+        card.style.opacity = op.toFixed(3)
+        card.style.filter = blur > 0.2 ? `blur(${blur.toFixed(1)}px)` : 'none'
+        card.style.zIndex = String(Math.round(1000 + z))
+      })
+    }
+
+    const update = () => {
+      if (!active) return
+      const top = stage.getBoundingClientRect().top + window.scrollY
+      const dist = stage.offsetHeight - window.innerHeight
+      let p = (window.scrollY - top) / Math.max(1, dist)
+      p = Math.min(1, Math.max(0, p))
+      paint(p * (n - 1))
+    }
+
+    const clearInline = () => {
+      cards.forEach((card) => {
+        card.style.transform = ''
+        card.style.opacity = ''
+        card.style.filter = ''
+        card.style.zIndex = ''
+      })
+    }
+
+    const measure = () => {
+      active = window.innerWidth > 820 && !reduce
+      stage.classList.toggle('is-pinned', active)
+      if (active) {
+        stage.style.height = `${n * window.innerHeight}px`
+        update()
+      } else {
+        stage.style.height = ''
+        clearInline()
+      }
+    }
+
+    const onScroll = () => {
+      if (!active) return
+      cancelAnimationFrame(raf)
+      raf = requestAnimationFrame(update)
+    }
+
+    measure()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', measure)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', measure)
+      cancelAnimationFrame(raf)
+    }
   }, [])
 
   return (
-    <section id="loop" className="v3-section">
+    <section id="loop" className="v3-section v3-no-skew">
       <Reveal>
         <p className="v3-eyebrow">{LOOP.eyebrow}</p>
         <h2 className="v3-h2">
@@ -36,16 +113,17 @@ export default function Loop() {
         <p className="v3-sub">{LOOP.sub}</p>
       </Reveal>
 
-      <div className="v3-loopcards">
-        {LOOP.steps.map((s, i) => (
-          <Reveal key={s.key} delay={i * 150}>
-            <article className={`v3-loopcard${active === i ? ' is-active' : ''}`}>
+      <div className="v3-loopstage" ref={stageRef}>
+        <div className="v3-loopstage-sticky">
+          {LOOP.steps.map((s, i) => (
+            <article key={s.key} className="v3-loopcard v3-loopcard--stage">
               <div className="v3-loopcard-media">
                 <Image
                   src={s.image}
                   alt=""
                   fill
-                  sizes="(max-width: 900px) 100vw, 33vw"
+                  sizes="(max-width: 900px) 100vw, 560px"
+                  priority
                   unoptimized
                 />
               </div>
@@ -58,8 +136,8 @@ export default function Loop() {
                 </div>
               </div>
             </article>
-          </Reveal>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   )

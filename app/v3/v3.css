@@ -593,6 +593,49 @@
   .v3-loopcard { height: clamp(320px, 60vw, 420px); }
 }
 
+/* ── Loop as a pinned, one-at-a-time 3D scroll transition ── */
+.v3-loopstage { position: relative; }
+.v3-loopstage-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  perspective: 1500px;
+}
+.v3-loopcard--stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(760px, 92vw);
+  height: min(700px, 84vh);
+  transform: translate(-50%, -50%);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform, opacity, filter;
+  box-shadow: 0 40px 120px -40px rgba(0, 0, 0, 0.85);
+}
+/* Fallback — not pinned (≤820px / reduced-motion): plain stacked cards. */
+.v3-loopstage:not(.is-pinned) .v3-loopstage-sticky {
+  position: static;
+  height: auto;
+  overflow: visible;
+  perspective: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: clamp(28px, 4vh, 48px);
+}
+.v3-loopstage:not(.is-pinned) .v3-loopcard--stage {
+  position: relative;
+  left: auto;
+  top: auto;
+  transform: none !important;
+  opacity: 1 !important;
+  filter: none !important;
+  width: 100%;
+  height: clamp(320px, 62vw, 440px);
+}
+
 .v3-scrollhint {
   position: absolute;
   bottom: 30px; left: 50%;
