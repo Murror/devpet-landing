@@ -109,9 +109,44 @@
   height: 620px;
   background: radial-gradient(circle at 50% 40%, rgba(124,58,237,0.28) 0%, transparent 62%);
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
 }
-.bx-hero-inner { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; }
+
+/* Ambient code-art video loop behind the hero (main index only). Darkened
+   and edge-faded so the headline stays legible; the purple halo blooms over
+   it. Reduced-motion / no-video falls back to the plain atmospheric hero. */
+.bx-hero-video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.bx-hero-video video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  opacity: 0.5;
+  -webkit-mask-image: radial-gradient(120% 100% at 50% 42%, #000 40%, transparent 82%);
+  mask-image: radial-gradient(120% 100% at 50% 42%, #000 40%, transparent 82%);
+}
+.bx-hero-video-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(90% 70% at 50% 42%, transparent 0%, rgba(7,6,12,0.55) 78%),
+    linear-gradient(180deg, rgba(7,6,12,0.55) 0%, transparent 26%, transparent 62%, var(--v3-bg) 100%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .bx-hero-video { display: none; }
+}
+
+.bx-hero-inner { position: relative; z-index: 2; max-width: 860px; margin: 0 auto; }
 .bx-hero-eyebrow {
   font-family: var(--v3-pixel);
   font-size: 12px;

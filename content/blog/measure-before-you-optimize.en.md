@@ -4,8 +4,8 @@ description: "A user told us long sessions made Codepet lag and eat memory. We k
 date: "2026-06-11"
 updated: "2026-06-11"
 category: "building-ai-products"
-cover: "/blog/measure-before-you-optimize/cover.png"
-coverAlt: "Pixel-art sun setting over the sea with a shimmering reflection"
+cover: "/blog/library/cosmic-math-cubes.jpg"
+coverAlt: "Code-art of floating cubes and equations in cosmic colours, formed from tiny characters"
 author: "Nguyen"
 authorTitle: "Founder, Codepet"
 tags: ["engineering", "performance", "swiftui", "building-in-public"]

@@ -4,8 +4,8 @@ description: "Chuyện thật về một năm làm app macOS chạy bằng AI: n
 date: "2026-06-09"
 updated: "2026-06-11"
 category: "building-ai-products"
-cover: "/blog/building-ai-product-in-public/cover.png"
-coverAlt: "Tranh pixel: hoàng hôn trên những ngọn đồi xanh và dãy núi xa"
+cover: "/blog/library/cinematic-chairs.jpg"
+coverAlt: "Cinematic code-art of a glowing room of empty chairs in gold and teal characters"
 author: "Nguyen"
 authorTitle: "Nhà sáng lập, Codepet"
 tags: ["ai-products", "building-in-public", "startups", "macos"]

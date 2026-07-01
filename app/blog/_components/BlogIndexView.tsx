@@ -51,7 +51,15 @@ export default function BlogIndexView({
 
   return (
     <main>
-      <section className="bx-hero">
+      <section className={`bx-hero${lead ? ' bx-hero--video' : ''}`}>
+        {lead && (
+          <div className="bx-hero-video" aria-hidden="true">
+            <video autoPlay muted loop playsInline preload="metadata" poster="/blog/hero/blog-hero-poster.jpg">
+              <source src="/blog/hero/blog-hero.mp4" type="video/mp4" />
+            </video>
+            <div className="bx-hero-video-scrim" />
+          </div>
+        )}
         <div className="bx-hero-inner">
           <p className="bx-hero-eyebrow">{eyebrow}</p>
           <h1 className="bx-hero-title">
