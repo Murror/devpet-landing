@@ -451,25 +451,13 @@
   color: #f8a3a3;
 }
 
-/* ── Phone tuning (≤560px): comfortable touch targets, full-width
-   CTAs, and an email field that never overflows the viewport. ── */
+/* ── Phone tuning ──
+   Buttons keep their natural (content) width and stay centred + wrapping
+   like the desktop cluster — full-width pills read as oversized on a
+   phone. We only stop the waitlist email field from overflowing narrow
+   screens; its Join button wraps beneath when there's no room on one row. */
 @media (max-width: 560px) {
-  /* Bigger tap targets (≈50px) for every pill button. */
-  .v3-btn { padding: 15px 24px; }
-
-  /* Hero + final CTA clusters stack full-width instead of wrapping. */
-  .v3-hero-cta,
-  .v3-final-cta { flex-direction: column; align-items: stretch; width: 100%; max-width: 340px; margin-inline: auto; }
-  .v3-hero-cta .v3-magnetic,
-  .v3-final-cta .v3-magnetic { width: 100%; display: block; }
-  .v3-final-cta .v3-soon-wrap { width: 100%; display: flex; }
-  .v3-hero-cta .v3-btn,
-  .v3-final-cta .v3-btn { width: 100%; justify-content: center; }
-
-  /* Waitlist: email field flexes to fill; button sits below, full width. */
-  .v3-waitlist { flex-direction: column; align-items: stretch; width: 100%; max-width: 340px; }
-  .v3-waitlist-input { min-width: 0; width: 100%; }
-  .v3-waitlist .v3-btn { width: 100%; justify-content: center; }
+  .v3-waitlist-input { min-width: 0; flex: 1 1 200px; }
 }
 
 @media (max-width: 480px) {

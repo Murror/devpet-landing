@@ -1001,6 +1001,26 @@ html.lenis, html.lenis body { height: auto; }
   100% { opacity: 1; transform: none; }
 }
 
+/* ── Mobile performance (≤820px) ──
+   Phones don't have the GPU headroom for the desktop atmosphere. We keep
+   the static look (gradients, nebula colour) but stop every continuous
+   full-screen repaint loop and the per-scroll velocity skew / parallax
+   that make touch scrolling stutter. The result matches the desktop
+   experience in feel while staying buttery on a handset. */
+@media (max-width: 820px) {
+  /* Animated film grain: a 200%×200% mix-blend overlay repainting every
+     frame — the single biggest scroll cost. Drop it on mobile. */
+  .v3-grain { display: none !important; }
+  /* Big blurred nebulae: keep them, but stop the drift animation (a
+     70px-blur element re-rasterising each frame is expensive). */
+  .v3-nebula { animation: none !important; }
+  /* Velocity skew forces a transform recalc on every section each scroll
+     frame — pure overhead on touch, where the effect is imperceptible. */
+  .v3-skewer > * { transform: none !important; }
+  /* Cursor glow is mouse-only; never needed on touch. */
+  .v3-cursor-glow { display: none !important; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .v3-nebula, .v3-grain, .v3-marquee-track { animation: none !important; }
   .v3-line-mask > span { transform: none !important; animation: none !important; }

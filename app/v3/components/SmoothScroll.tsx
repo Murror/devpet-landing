@@ -14,6 +14,12 @@ export default function SmoothScroll() {
 
     const lenis = new Lenis({ duration: 1.1, smoothWheel: true })
 
+    // On phones/tablets skip the per-scroll skew + parallax math: it forces
+    // a transform recalc on every section each frame and thrashes layout
+    // with getBoundingClientRect, which stutters touch scrolling. Native
+    // momentum + static atmosphere feels smoother there (matches desktop).
+    const light = window.matchMedia('(max-width: 820px)').matches
+
     let raf = 0
     const loop = (t: number) => { lenis.raf(t); raf = requestAnimationFrame(loop) }
     raf = requestAnimationFrame(loop)
@@ -28,10 +34,12 @@ export default function SmoothScroll() {
     // Scroll-velocity skew → CSS var read by each section (.v3-skewer > *).
     lenis.on('scroll', () => {
       const vel = (lenis as { velocity?: number }).velocity ?? 0
+      // Expose raw velocity for the scroll-reactive marquee (kept on mobile).
+      ;(window as unknown as { __v3vel?: number }).__v3vel = vel
+      if (light) return
+
       const v = Math.max(-0.7, Math.min(0.7, vel * 0.025))
       document.documentElement.style.setProperty('--vskew', `${v.toFixed(3)}deg`)
-      // Expose raw velocity for the scroll-reactive marquee.
-      ;(window as unknown as { __v3vel?: number }).__v3vel = vel
 
       for (const { el, speed } of parallax) {
         const r = el.getBoundingClientRect()
