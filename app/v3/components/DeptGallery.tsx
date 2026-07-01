@@ -10,9 +10,9 @@ type Dept = (typeof DEPARTMENTS)['items'][number]
 /**
  * DeptGallery — the eight department cards as a pinned horizontal scroll
  * gallery (the signature awwwards move): on desktop the band pins to the
- * viewport and the track slides sideways as you scroll down, with a
- * progress rail beneath. Each card tilts in 3D toward the cursor with a
- * moving glare. Below 820px (or reduced-motion) it falls back to a plain
+ * viewport and the track slides sideways as you scroll down. Each card
+ * tilts in 3D toward the cursor with a moving glare. Below 820px (or
+ * reduced-motion) it falls back to a plain
  * responsive grid — same DOM, no pinning.
  */
 export default function DeptGallery({ items }: { items: readonly Dept[] }) {
