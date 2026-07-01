@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, type FormEvent } from 'react'
+import { useState, useRef, useEffect, type FormEvent } from 'react'
 import Magnetic from './Magnetic'
 import { HERO } from '../content'
 
@@ -23,8 +23,17 @@ export default function HeroCta() {
   const [email, setEmail] = useState('')
   const [state, setState] = useState<FormState>('idle')
   // The web app isn't live yet, so "Sign Up" reveals a "launching soon"
-  // note instead of navigating anywhere.
+  // note instead of navigating anywhere. The note auto-dismisses after ~1s.
   const [showSoon, setShowSoon] = useState(false)
+  const soonTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => () => { if (soonTimer.current) clearTimeout(soonTimer.current) }, [])
+
+  function revealSoon() {
+    setShowSoon(true)
+    if (soonTimer.current) clearTimeout(soonTimer.current)
+    soonTimer.current = setTimeout(() => setShowSoon(false), 1800)
+  }
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
@@ -74,7 +83,7 @@ export default function HeroCta() {
               <button
                 type="button"
                 className="v3-btn v3-btn--ghost"
-                onClick={() => setShowSoon(true)}
+                onClick={revealSoon}
               >
                 {HERO.ctaSecondary}
               </button>

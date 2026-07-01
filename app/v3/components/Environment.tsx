@@ -1,117 +1,123 @@
 'use client'
 
 import Image from 'next/image'
-import { useEffect, useRef, type CSSProperties, type MouseEvent } from 'react'
-import Reveal from './Reveal'
-import SplitText from './SplitText'
+import { useEffect, useRef, type CSSProperties } from 'react'
 import { ENVIRONMENT } from '../content'
 
 /**
- * Environment — Codepet's guided Claude Code setup as an alternating (zigzag)
- * feature list with a stack of "wow" effects:
- *  • directional reveal — image slides in from its side, option from the other
- *  • inner parallax — the image drifts inside its frame as you scroll
- *  • 3D cursor tilt + glare on each image
- *  • active-row scroll focus — the centred row blooms; its toggle latches ON
- *  • ghost index numerals + a slow animated gradient frame
+ * Environment ("BUILT ON CLAUDE CODE") — a cinematic "universe" gallery.
+ * A pinned section whose full-bleed panels slide horizontally as you
+ * scroll: each panel is a large image with an oversized ultra-thin title
+ * anchored low, a small tagline, a ghost index numeral and a "Discover"
+ * affordance — the panel media drifts with a slow parallax as it crosses
+ * the viewport. Below 820px / reduced-motion it falls back to a stacked
+ * list (same DOM, no pinning).
  */
 export default function Environment() {
-  const zigRef = useRef<HTMLDivElement>(null)
+  const wrapRef = useRef<HTMLDivElement>(null)
+  const trackRef = useRef<HTMLDivElement>(null)
+  const railRef = useRef<HTMLDivElement>(null)
 
-  // Scroll-linked: active-row focus + inner-image parallax.
   useEffect(() => {
-    const zig = zigRef.current
-    if (!zig) return
-    const rows = Array.from(zig.querySelectorAll<HTMLElement>('.v3-env-zrow'))
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      rows.forEach((r) => r.classList.add('was-active'))
-      return
-    }
+    const wrap = wrapRef.current
+    const track = trackRef.current
+    const rail = railRef.current
+    if (!wrap || !track) return
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    let active = false
+    let maxX = 0
     let raf = 0
+
     const update = () => {
-      const vh = window.innerHeight
-      const center = vh / 2
-      let best = -1
-      let bestDist = Infinity
-      rows.forEach((row, i) => {
-        const r = row.getBoundingClientRect()
-        const rowCenter = r.top + r.height / 2
-        const inner = row.querySelector<HTMLElement>('.v3-env-zimg-inner')
-        if (inner) inner.style.transform = `translateY(${(((rowCenter - center) / vh) * 30).toFixed(1)}px)`
-        if (r.bottom > 0 && r.top < vh) {
-          const dist = Math.abs(rowCenter - center)
-          if (dist < bestDist) { bestDist = dist; best = i }
-        }
+      if (!active) return
+      const top = wrap.getBoundingClientRect().top + window.scrollY
+      const dist = wrap.offsetHeight - window.innerHeight
+      let p = (window.scrollY - top) / Math.max(1, dist)
+      p = Math.min(1, Math.max(0, p))
+      track.style.transform = `translate3d(${(-p * maxX).toFixed(1)}px,0,0)`
+      if (rail) rail.style.setProperty('--p', p.toFixed(4))
+      // Slow parallax on each panel's media as it crosses the viewport.
+      const vw = window.innerWidth
+      track.querySelectorAll<HTMLElement>('.v3-uni-media-inner').forEach((m) => {
+        const r = m.getBoundingClientRect()
+        const c = (r.left + r.width / 2 - vw / 2) / vw
+        m.style.transform = `translateX(${(c * -26).toFixed(1)}px) scale(1.12)`
       })
-      rows.forEach((row, i) => {
-        const on = i === best
-        row.classList.toggle('is-active', on)
-        if (on) row.classList.add('was-active')
-      })
-      zig.classList.toggle('has-active', best >= 0)
     }
-    const onScroll = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(update) }
-    update()
+
+    const measure = () => {
+      active = window.innerWidth > 820 && !reduce
+      wrap.classList.toggle('is-pinned', active)
+      if (active) {
+        maxX = Math.max(0, track.scrollWidth - window.innerWidth)
+        wrap.style.height = `${maxX + window.innerHeight}px`
+      } else {
+        wrap.style.height = ''
+        track.style.transform = ''
+      }
+      update()
+    }
+
+    const onScroll = () => {
+      if (!active) return
+      cancelAnimationFrame(raf)
+      raf = requestAnimationFrame(update)
+    }
+
+    measure()
     window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', update)
+    window.addEventListener('resize', measure)
     return () => {
       window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', update)
+      window.removeEventListener('resize', measure)
       cancelAnimationFrame(raf)
     }
   }, [])
 
-  // Per-image 3D tilt + glare.
-  const tilt = (e: MouseEvent<HTMLElement>) => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const el = e.currentTarget
-    const r = el.getBoundingClientRect()
-    const px = (e.clientX - r.left) / r.width
-    const py = (e.clientY - r.top) / r.height
-    el.style.setProperty('--rx', `${((0.5 - py) * 6).toFixed(2)}deg`)
-    el.style.setProperty('--ry', `${((px - 0.5) * 8).toFixed(2)}deg`)
-    el.style.setProperty('--gx', `${(px * 100).toFixed(1)}%`)
-    el.style.setProperty('--gy', `${(py * 100).toFixed(1)}%`)
-  }
-  const reset = (e: MouseEvent<HTMLElement>) => {
-    const el = e.currentTarget
-    el.style.setProperty('--rx', '0deg')
-    el.style.setProperty('--ry', '0deg')
-  }
-
   return (
-    <section id="environment" className="v3-section">
-      <Reveal>
-        <div className="v3-env-intro">
+    <section id="environment" className="v3-uni v3-no-skew" ref={wrapRef}>
+      <div className="v3-uni-sticky">
+        <div className="v3-uni-head">
           <p className="v3-eyebrow">{ENVIRONMENT.eyebrow}</p>
-          <h2 className="v3-h2">
-            <SplitText text={ENVIRONMENT.headlineLead} className="v3-lead" />{' '}
-            <SplitText text={ENVIRONMENT.headlineAccent} className="it" />
+          <h2 className="v3-uni-h2">
+            <span className="v3-lead">{ENVIRONMENT.headlineLead}</span>{' '}
+            <span className="it">{ENVIRONMENT.headlineAccent}</span>
           </h2>
-          <p className="v3-sub">{ENVIRONMENT.sub}</p>
         </div>
-      </Reveal>
 
-      <div className="v3-env-zigzag" ref={zigRef}>
-        {ENVIRONMENT.items.map((it, i) => (
-          <Reveal key={it.name} className="v3-env-zreveal">
-            <div className="v3-env-zrow" style={{ ['--c']: it.color } as CSSProperties}>
-              <div className="v3-env-zimg" onMouseMove={tilt} onMouseLeave={reset}>
-                <div className="v3-env-zimg-inner">
-                  <Image src={it.image} alt="" fill sizes="(max-width: 760px) 100vw, 560px" unoptimized />
+        <div className="v3-uni-track" ref={trackRef}>
+          {ENVIRONMENT.items.map((it, i) => (
+            <article
+              key={it.name}
+              className="v3-uni-panel"
+              style={{ ['--c']: it.color } as CSSProperties}
+            >
+              <div className="v3-uni-media">
+                <div className="v3-uni-media-inner">
+                  <Image src={it.image} alt="" fill sizes="90vw" unoptimized />
                 </div>
-                <span className="v3-env-zglare" aria-hidden="true" />
+                <span className="v3-uni-scrim" aria-hidden="true" />
               </div>
-              <div className="v3-env-zbody">
-                <span className="v3-env-znum" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-                <span className="v3-env-node" aria-hidden="true" />
-                <h3 className="v3-env-zname">{it.name}</h3>
-                <p className="v3-env-zdesc">{it.desc}</p>
-                <span className="v3-env-toggle" aria-hidden="true"><span /></span>
+              <div className="v3-uni-overlay">
+                <span className="v3-uni-num" aria-hidden="true">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <div className="v3-uni-foot">
+                  <div className="v3-uni-foot-text">
+                    <span className="v3-uni-tagline">{it.desc}</span>
+                    <h3 className="v3-uni-title">{it.name}</h3>
+                  </div>
+                  <span className="v3-uni-discover">Discover</span>
+                </div>
               </div>
-            </div>
-          </Reveal>
-        ))}
+            </article>
+          ))}
+        </div>
+
+        <div className="v3-uni-rail" ref={railRef} aria-hidden="true">
+          <i />
+        </div>
       </div>
     </section>
   )
