@@ -1027,7 +1027,13 @@ html.lenis, html.lenis body { height: auto; }
   }
   /* Compensate for the lost frost with a more opaque nav/menu fill. */
   .v3-nav { background: rgba(12, 10, 22, 0.9); }
-  .v3-nebula { animation: none !important; }
+  /* THE big one (proven by an on-device Safari timeline: compositing was
+     ~1.2s PER FRAME): three position:fixed nebulae each carried
+     filter:blur(70px). At 3x DPR that's a ~210px-radius blur on ~2000px
+     layers, which iOS re-rasterises on scroll. The nebulae are already
+     radial-gradients fading to transparent — soft glows on their own — so
+     drop the blur entirely on mobile. Composite cost collapses to ~nothing. */
+  .v3-nebula { animation: none !important; filter: none !important; }
   .v3-skewer > * { transform: none !important; }
   .v3-reveal { filter: none !important; }
 
