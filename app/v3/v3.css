@@ -807,66 +807,68 @@
 .v3-phase-note { font-size: 12.5px; color: var(--v3-ink-mute); margin: 0; }
 
 /* ============================================================
-   ROADMAP — scroll-drawn timeline (steps reveal in sequence)
+   ROADMAP — flowing line that draws itself on scroll
    ============================================================ */
 .v3-roadmap {
   position: relative;
-  max-width: 900px;
+  max-width: 860px;
   margin: clamp(40px, 6vh, 76px) auto 0;
-  padding: 12px 0;
+  height: calc(var(--rows, 5) * clamp(150px, 20vh, 200px));
 }
-.v3-roadmap-line {
+.v3-roadmap-svg {
   position: absolute;
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  transform: translateX(-50%);
-  background: var(--v3-line);
-  border-radius: 2px;
-}
-.v3-roadmap-fill {
-  position: absolute;
-  inset: 0 0 auto 0;
+  inset: 0;
   width: 100%;
-  height: calc(var(--p, 0) * 100%);
-  background: linear-gradient(180deg, var(--v3-accent-2), var(--v3-accent));
-  box-shadow: 0 0 18px rgba(124, 58, 237, 0.55);
-  border-radius: 2px;
+  height: 100%;
+  overflow: visible;
+  z-index: 0;
+}
+.v3-roadmap-svg path { fill: none; vector-effect: non-scaling-stroke; }
+.v3-rm-echo { stroke: var(--v3-line); stroke-width: 1; opacity: 0.4; }
+.v3-rm-track { stroke: var(--v3-line); stroke-width: 1.5; }
+.v3-rm-draw {
+  stroke: url(#v3-rm-grad);
+  stroke-width: 2.5;
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - var(--p, 0));
+  filter: drop-shadow(0 0 6px rgba(124, 58, 237, 0.55));
 }
 .v3-rm-step {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr 48px 1fr;
-  align-items: center;
-  margin: clamp(26px, 5.5vh, 60px) 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc((var(--i) + 0.5) / var(--rows) * 100%);
+  z-index: 1;
 }
-.v3-rm-step:first-child { margin-top: 0; }
-.v3-rm-step:last-child { margin-bottom: 0; }
-.v3-rm-card {
-  opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.v3-rm-step.is-on .v3-rm-card { opacity: 1; transform: none; }
-.v3-rm-step[data-side='left'] .v3-rm-card { grid-column: 1; text-align: right; }
-.v3-rm-step[data-side='right'] .v3-rm-card { grid-column: 3; text-align: left; }
-.v3-rm-node-wrap { grid-column: 2; display: grid; place-items: center; }
 .v3-rm-node {
-  width: 14px;
-  height: 14px;
+  position: absolute;
+  top: 0;
+  left: calc(50% + var(--nx));
+  transform: translate(-50%, -50%);
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
   background: var(--v3-bg-2);
   border: 2px solid var(--v3-line);
-  z-index: 2;
   transition: background 0.45s ease, border-color 0.45s ease, box-shadow 0.45s ease, transform 0.45s ease;
 }
 .v3-rm-step.is-on .v3-rm-node {
   background: var(--v3-accent-2);
   border-color: var(--v3-accent-2);
   box-shadow: 0 0 16px rgba(167, 139, 250, 0.85);
-  transform: scale(1.2);
+  transform: translate(-50%, -50%) scale(1.25);
 }
+.v3-rm-card {
+  position: absolute;
+  top: 0;
+  width: 40%;
+  opacity: 0;
+  transform: translateY(calc(-50% + 22px));
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.v3-rm-step.is-on .v3-rm-card { opacity: 1; transform: translateY(-50%); }
+.v3-rm-step[data-side='left'] .v3-rm-card { right: 56%; text-align: right; }
+.v3-rm-step[data-side='right'] .v3-rm-card { left: 56%; text-align: left; }
 .v3-rm-idx {
   font-family: var(--v3-pixel);
   font-size: 11px;
@@ -882,13 +884,27 @@
   margin: 6px 0;
 }
 .v3-rm-note { font-size: 14px; line-height: 1.55; color: var(--v3-ink-soft); margin: 0; }
+
 @media (max-width: 720px) {
-  .v3-roadmap-line { left: 13px; }
-  .v3-rm-step { grid-template-columns: 26px 1fr; column-gap: 16px; }
-  .v3-rm-node-wrap { grid-column: 1; }
+  /* Straighten to a left rail on small screens. */
+  .v3-roadmap { max-width: none; height: calc(var(--rows, 5) * 150px); }
+  .v3-roadmap-svg { display: none; }
+  .v3-roadmap::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--v3-line);
+  }
+  .v3-rm-node { left: 20px; }
+  .v3-rm-card,
   .v3-rm-step[data-side='left'] .v3-rm-card,
   .v3-rm-step[data-side='right'] .v3-rm-card {
-    grid-column: 2;
+    left: 44px;
+    right: auto;
+    width: calc(100% - 58px);
     text-align: left;
   }
 }

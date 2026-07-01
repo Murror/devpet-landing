@@ -1,17 +1,24 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, type CSSProperties } from 'react'
 import Reveal from './Reveal'
 import SplitText from './SplitText'
 import { JOURNEY } from '../content'
 
 /**
- * Journey — the roadmap as a scroll-drawn timeline. A central line fills
- * top→down as the section scrolls through the viewport; each phase reveals
- * in sequence (slides up + fades in, its node lights) the moment the fill
- * reaches it — so scrolling progressively "unlocks" the steps.
- * Reduced-motion: fully drawn, all steps revealed, no scrubbing.
+ * Journey — the roadmap as a flowing line that draws itself on scroll.
+ * A wavy vertical ribbon (SVG, with faint parallel echo strands) draws
+ * from top→bottom as the section scrolls; each phase rides a bend of the
+ * curve and unlocks in sequence (slides in, its node lights) the moment
+ * the draw reaches it. Reduced-motion: fully drawn, all revealed.
+ *
+ * The curve threads the node points (viewBox 300×1500): x alternates
+ * 110/190 around centre 150, so nodes sit at 50% ∓ 13.33% — matched by
+ * the HTML nodes' `--nx` offset so line and dots align at any width.
  */
+const WAVE =
+  'M150,0 C150,80 110,70 110,150 C110,320 190,280 190,450 C190,620 110,580 110,750 C110,920 190,880 190,1050 C190,1220 110,1180 110,1350 C110,1430 150,1420 150,1500'
+
 export default function Journey() {
   const roadRef = useRef<HTMLDivElement>(null)
 
@@ -31,12 +38,9 @@ export default function Journey() {
     const update = () => {
       const rect = road.getBoundingClientRect()
       const vh = window.innerHeight
-      // Fill starts when the roadmap top reaches ~80% down the viewport and
-      // completes after it has travelled ~80% of its own height upward.
       const start = vh * 0.8
       const p = Math.min(1, Math.max(0, (start - rect.top) / (rect.height * 0.8)))
       road.style.setProperty('--p', p.toFixed(4))
-      // A step unlocks once the fill has passed its centre.
       steps.forEach((s, i) => s.classList.toggle('is-on', p >= (i + 0.5) / n))
     }
     const onScroll = () => {
@@ -64,22 +68,44 @@ export default function Journey() {
         <p className="v3-sub">{JOURNEY.sub}</p>
       </Reveal>
 
-      <div className="v3-roadmap" ref={roadRef}>
-        <div className="v3-roadmap-line" aria-hidden="true">
-          <span className="v3-roadmap-fill" />
-        </div>
-        {JOURNEY.phases.map((ph, i) => (
-          <div key={ph.key} className="v3-rm-step" data-side={i % 2 === 0 ? 'left' : 'right'}>
-            <div className="v3-rm-card">
-              <span className="v3-rm-idx">0{i + 1}</span>
-              <h3 className="v3-rm-label">{ph.label}</h3>
-              <p className="v3-rm-note">{ph.note}</p>
-            </div>
-            <div className="v3-rm-node-wrap">
+      <div
+        className="v3-roadmap"
+        ref={roadRef}
+        style={{ ['--rows']: JOURNEY.phases.length } as CSSProperties}
+      >
+        <svg className="v3-roadmap-svg" viewBox="0 0 300 1500" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="v3-rm-grad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#a78bfa" />
+              <stop offset="100%" stopColor="#7c3aed" />
+            </linearGradient>
+          </defs>
+          <path className="v3-rm-echo" d={WAVE} transform="translate(9 0)" />
+          <path className="v3-rm-echo" d={WAVE} transform="translate(18 0)" />
+          <path className="v3-rm-echo" d={WAVE} transform="translate(-8 0)" />
+          <path className="v3-rm-track" d={WAVE} />
+          <path className="v3-rm-draw" d={WAVE} pathLength={1} />
+        </svg>
+
+        {JOURNEY.phases.map((ph, i) => {
+          const nx = i % 2 === 0 ? '-13.33%' : '13.33%'
+          const side = i % 2 === 0 ? 'right' : 'left'
+          return (
+            <div
+              key={ph.key}
+              className="v3-rm-step"
+              data-side={side}
+              style={{ ['--i']: i, ['--nx']: nx } as CSSProperties}
+            >
+              <div className="v3-rm-card">
+                <span className="v3-rm-idx">0{i + 1}</span>
+                <h3 className="v3-rm-label">{ph.label}</h3>
+                <p className="v3-rm-note">{ph.note}</p>
+              </div>
               <span className="v3-rm-node" />
             </div>
-          </div>
-        ))}
+          )
+        })}
       </div>
     </section>
   )
