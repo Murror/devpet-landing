@@ -393,36 +393,37 @@ function gridToPngDataUri(g: Grid): string {
 }
 
 // ── curated cover library (public/blog/library) ──
-// Posts without an explicit `cover:` in frontmatter get a real, hand-picked
-// AI-generated image instead of procedural art. Images are grouped by
-// category to match each pillar's palette, and chosen deterministically from
-// the slug so a given post always keeps the same cover (SSR-safe, stable).
-// The procedural generator below is now only the last-resort fallback used if
-// a category's pool is ever empty.
-//
-// Only on-brand pastel scenes auto-assign here; the three off-palette library
-// images COVERS.md flags (seaside-pier-mountain, tropical-beach-sailboats,
-// city-night-billboards) are left out so they only appear via an explicit
-// `cover:` in frontmatter, never as an automatic default.
+// Posts without an explicit `cover:` in frontmatter get a real, on-brand
+// image instead of procedural art. The library is now the cinematic
+// "ASCII / code-art" set that matches the dark v3 site (the same visual
+// family as the landing's department covers). Images are grouped by colour
+// mood so each pillar reads in its accent hue — cool cosmic/structured for
+// Building AI Products, blue for User Insights, pink/magenta for Second
+// Brain — and are chosen deterministically from the slug so a given post
+// always keeps the same cover (SSR-safe, stable). The procedural generator
+// below is only the last-resort fallback used if a category's pool is empty.
 const LIBRARY: Record<CategorySlug, string[]> = {
   'building-ai-products': [
-    'alpenglow-peaks-moon', 'mountain-lake-blue', 'train-viaduct-mountain',
-    'city-rooftops-sunset', 'fjord-dock-boat', 'town-houses-clouds',
+    'zoom-burst-coder', 'cosmic-whirlpool', 'cinematic-chairs',
+    'astronaut-portal', 'vinyl-record', 'cosmic-ribbons',
+    'musician-vortex', 'isometric-tunnel', 'drummer',
   ],
   'user-insights': [
-    'seaside-tram', 'old-town-street-goldenhour', 'lakeside-village-hillside',
-    'rowboats-teal-water', 'window-rice-fields',
+    'night-coder', 'night-garden-observatory', 'double-exposure-portrait',
+    'ghibli-night-scene', 'coder-on-couch', 'surreal-hand',
+    'astronaut-portrait', 'cosmic-book-reader', 'gallery-of-light',
   ],
   'second-brain': [
-    'cherry-blossom-wall', 'lake-daisies-sunset', 'savanna-pink-mountains',
-    'cabins-meadow-sunset', 'cottage-hill-sun', 'balcony-still-life', 'fireplace-village-cat',
+    'hands-cradling-sun', 'cosmic-math-cubes', 'hands-capsule',
+    'chess-dreamscape', 'retro-cd-disc', 'riso-circles',
+    'orbital-rings', 'balancing-objects', 'holographic-cd',
   ],
 }
 
 function libraryCover(slug: string, category: CategorySlug): string | null {
   const pool = LIBRARY[category] ?? []
   if (pool.length === 0) return null
-  return `/blog/library/${pool[hashString(`${slug}|cover`) % pool.length]}.png`
+  return `/blog/library/${pool[hashString(`${slug}|cover`) % pool.length]}.jpg`
 }
 
 export default function CoverArt({

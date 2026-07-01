@@ -4,8 +4,8 @@ description: "Vibe coding cho phép bạn làm phần mềm chỉ bằng cách m
 date: "2026-06-13"
 updated: "2026-06-13"
 category: "building-ai-products"
-cover: "/blog/library/alpenglow-peaks-moon.png"
-coverAlt: "Tranh pixel: những đỉnh núi nhọn ánh hồng dưới vầng trăng, rừng thông sẫm màu"
+cover: "/blog/library/musician-vortex.jpg"
+coverAlt: "Code-art of a guitarist inside a radial vortex of colourful characters"
 author: "Nguyen"
 authorTitle: "Nhà sáng lập, Codepet"
 tags: ["vibe-coding", "ai-coding", "learn-to-code", "building-ai-products"]

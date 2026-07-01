@@ -4,8 +4,8 @@ description: "Vibe coding lets you build software by describing what you want in
 date: "2026-06-13"
 updated: "2026-06-13"
 category: "building-ai-products"
-cover: "/blog/library/alpenglow-peaks-moon.png"
-coverAlt: "Pixel-art pink-lit jagged peaks under a moon, with a dark pine forest"
+cover: "/blog/library/musician-vortex.jpg"
+coverAlt: "Code-art of a guitarist inside a radial vortex of colourful characters"
 author: "Nguyen"
 authorTitle: "Founder, Codepet"
 tags: ["vibe-coding", "ai-coding", "learn-to-code", "building-ai-products"]

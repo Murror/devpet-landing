@@ -4,8 +4,8 @@ description: "Một người dùng báo rằng những session dài làm Codepet
 date: "2026-06-11"
 updated: "2026-06-11"
 category: "building-ai-products"
-cover: "/blog/measure-before-you-optimize/cover.png"
-coverAlt: "Tranh pixel: mặt trời lặn trên biển với vệt phản chiếu lung linh"
+cover: "/blog/library/cosmic-math-cubes.jpg"
+coverAlt: "Code-art of floating cubes and equations in cosmic colours, formed from tiny characters"
 author: "Nguyen"
 authorTitle: "Nhà sáng lập, Codepet"
 tags: ["engineering", "performance", "swiftui", "building-in-public"]
