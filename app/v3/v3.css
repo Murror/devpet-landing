@@ -863,15 +863,21 @@
 }
 .v3-hroad-stage.is-active { opacity: 1; transform: none; }
 .v3-hroad-title {
-  font-family: var(--v3-italic);
-  font-style: italic;
-  font-weight: 500;
+  font-family: var(--v3-sans);
+  font-weight: 600;
   font-size: clamp(52px, 9vw, 120px);
   line-height: 1.02;
+  letter-spacing: -0.02em;
   color: #fff;
   margin: 12px 0 14px;
 }
-.v3-hroad-note { font-size: clamp(16px, 1.8vw, 24px); color: var(--v3-ink-soft); margin: 0; }
+.v3-hroad-note {
+  font-family: var(--v3-italic);
+  font-style: italic;
+  font-size: clamp(18px, 2vw, 28px);
+  color: var(--v3-ink-soft);
+  margin: 0;
+}
 .v3-rm-idx { font-family: var(--v3-pixel); font-size: 12px; letter-spacing: 0.1em; color: var(--v3-accent-2); }
 
 /* Fallback — not pinned (≤820px / reduced-motion): plain vertical list. */
