@@ -1030,6 +1030,27 @@ html.lenis, html.lenis body { height: auto; }
   .v3-nebula { animation: none !important; }
   .v3-skewer > * { transform: none !important; }
   .v3-reveal { filter: none !important; }
+
+  /* Hero canvas + WebGL aurora are disabled in JS on mobile; hide the
+     elements too so their screen-blend layers don't composite at all. */
+  .v3-hero-canvas,
+  .v3-hero-shader { display: none !important; }
+  /* Filter on the full-screen hero background image = a filtered full-screen
+     layer composited during scroll. Drop it (image reads fine as-is). */
+  .v3-hero-bg { filter: none !important; }
+  /* mix-blend-mode forces offscreen compositing per element and is
+     hover-only decoration anyway — kill the glares/spotlights on touch. */
+  .v3-dept-glare,
+  .v3-env-zglare,
+  .v3-env-glare { display: none !important; }
+  /* Release layer-promotion hints on elements whose animations are inactive
+     on mobile (pinned tracks/cards) — fewer compositor layers = less memory
+     pressure and smoother scroll. */
+  .v3-uni-track,
+  .v3-uni-media-inner,
+  .v3-gallery-track,
+  .v3-loopcard--stage,
+  .v3-env-zimg-inner { will-change: auto !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {

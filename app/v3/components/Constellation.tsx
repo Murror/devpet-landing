@@ -38,6 +38,13 @@ export default function Constellation() {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
+    // Phones: skip the constellation entirely. A full-screen 2D canvas
+    // animating motes + orbiting nodes + shooting stars is a real per-frame
+    // GPU/CPU cost even confined to the hero, and it's a screen-blended
+    // layer on top of everything. The static hero image + nebula glow carry
+    // the look on mobile. (The canvas is also display:none there via CSS.)
+    if (window.matchMedia('(max-width: 820px)').matches) return
+
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     // Pause the animation loop while the hero (and its canvas) is scrolled

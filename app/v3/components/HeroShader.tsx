@@ -61,6 +61,12 @@ export default function HeroShader() {
     const gl = canvas.getContext('webgl', { antialias: false, alpha: true, premultipliedAlpha: false })
     if (!gl) return
 
+    // Phones: skip the WebGL aurora entirely — a full-screen fragment shader
+    // plus a screen-blended composite layer is a heavy GPU cost on mobile,
+    // and the nebula glow already carries the colour. (Canvas is also
+    // display:none on mobile via CSS.)
+    if (window.matchMedia('(max-width: 820px)').matches) return
+
     const compile = (type: number, src: string) => {
       const s = gl.createShader(type)!
       gl.shaderSource(s, src)
