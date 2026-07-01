@@ -3,7 +3,7 @@
 import { useRef, type MouseEvent } from 'react'
 import Constellation from './Constellation'
 import HeroShader from './HeroShader'
-import Magnetic from './Magnetic'
+import HeroCta from './HeroCta'
 import { HERO } from '../content'
 
 /**
@@ -42,16 +42,7 @@ export default function Hero() {
             <span className="v3-line-mask v3-line-mask--2"><span className="it">{HERO.headlineAccent}</span></span>
           </h1>
           <p className="v3-hero-sub">{HERO.sub}</p>
-          <div className="v3-hero-cta">
-            <Magnetic>
-              <a href="/app" className="v3-btn v3-btn--primary">
-                {HERO.ctaPrimary}
-              </a>
-            </Magnetic>
-            <Magnetic strength={0.25}>
-              <a href="#loop" className="v3-btn v3-btn--ghost">{HERO.ctaSecondary}</a>
-            </Magnetic>
-          </div>
+          <HeroCta />
         </div>
       </div>
 

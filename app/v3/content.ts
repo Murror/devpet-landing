@@ -21,10 +21,13 @@ export const HERO = {
   // The headline is split so the design can render the tail in an
   // italic accent (Playfair Display) against the pixel lead.
   headlineLead: 'Let’s build your',
-  headlineAccent: 'second brand',
+  headlineAccent: 'second brain',
   sub: 'Building something of your own means being the whole team at once. Codepet is the AI cofounder who carries it with you — so the dream never rests on you alone.',
-  ctaPrimary: 'Open the web app',
-  ctaSecondary: 'Meet byte',
+  // Web app isn't live yet, so the primary CTA collects waitlist emails
+  // and the secondary offers early access to the current web app.
+  ctaPrimary: 'Join the waitlist',
+  ctaSecondary: 'Sign Up',
+  ctaNote: 'The web app will be launched soon',
   scrollHint: 'scroll to explore',
 }
 

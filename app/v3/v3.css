@@ -306,6 +306,61 @@
 }
 .v3-hero-cta { display: flex; gap: 14px; justify-content: center; margin-top: 38px; flex-wrap: wrap; }
 
+/* Pre-launch waitlist CTA (HeroCta) — inline email capture + note. */
+.v3-hero-cta-wrap { display: flex; flex-direction: column; align-items: center; }
+.v3-hero-cta-note {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--v3-ink-mute);
+  letter-spacing: 0.01em;
+}
+.v3-waitlist {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: v3-waitlist-in 0.28s ease both;
+}
+@keyframes v3-waitlist-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.v3-waitlist-input {
+  font-family: var(--v3-sans);
+  font-size: 15px;
+  color: var(--v3-ink);
+  background: var(--v3-glass);
+  border: 1px solid var(--v3-line);
+  border-radius: 9999px;
+  padding: 13px 20px;
+  min-width: 240px;
+  backdrop-filter: blur(12px);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.v3-waitlist-input::placeholder { color: var(--v3-ink-mute); }
+.v3-waitlist-input:focus {
+  outline: none;
+  border-color: rgba(167,139,250,0.6);
+  box-shadow: 0 0 0 3px rgba(124,58,237,0.22);
+}
+.v3-waitlist-input.is-invalid {
+  border-color: rgba(248,113,113,0.7);
+  box-shadow: 0 0 0 3px rgba(248,113,113,0.18);
+}
+.v3-waitlist-msg {
+  font-size: 16px;
+  color: var(--v3-ink);
+  background: var(--v3-glass);
+  border: 1px solid rgba(167,139,250,0.35);
+  border-radius: 9999px;
+  padding: 13px 24px;
+  backdrop-filter: blur(12px);
+  animation: v3-waitlist-in 0.28s ease both;
+}
+.v3-waitlist-err {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #f8a3a3;
+}
+
 .v3-scrollhint {
   position: absolute;
   bottom: 30px; left: 50%;
