@@ -51,13 +51,12 @@ export default function BlogIndexView({
 
   return (
     <main>
-      <section className={`bx-hero${lead ? ' bx-hero--video' : ''}`}>
+      <section className={`bx-hero${lead ? ' bx-hero--media' : ''}`}>
         {lead && (
-          <div className="bx-hero-video" aria-hidden="true">
-            <video autoPlay muted loop playsInline preload="metadata" poster="/blog/hero/blog-hero-poster.jpg">
-              <source src="/blog/hero/blog-hero.mp4" type="video/mp4" />
-            </video>
-            <div className="bx-hero-video-scrim" />
+          <div className="bx-hero-bg" aria-hidden="true">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/blog/hero/hero-bg.jpg" alt="" />
+            <div className="bx-hero-bg-scrim" />
           </div>
         )}
         <div className="bx-hero-inner">

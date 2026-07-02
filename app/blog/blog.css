@@ -112,38 +112,31 @@
   z-index: 1;
 }
 
-/* Ambient code-art video loop behind the hero (main index only). Darkened
-   and edge-faded so the headline stays legible; the purple halo blooms over
-   it. Reduced-motion / no-video falls back to the plain atmospheric hero. */
-.bx-hero-video {
+/* Cinematic code-art still behind the hero (main index only). Darkened and
+   edge-faded so the headline stays legible; the purple halo blooms over it. */
+.bx-hero-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
   overflow: hidden;
 }
-.bx-hero-video video {
+.bx-hero-bg img {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  transform: translate(-50%, -50%);
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  opacity: 0.5;
-  -webkit-mask-image: radial-gradient(120% 100% at 50% 42%, #000 40%, transparent 82%);
-  mask-image: radial-gradient(120% 100% at 50% 42%, #000 40%, transparent 82%);
+  object-position: 50% 42%;
+  opacity: 0.55;
+  -webkit-mask-image: radial-gradient(125% 105% at 50% 40%, #000 38%, transparent 84%);
+  mask-image: radial-gradient(125% 105% at 50% 40%, #000 38%, transparent 84%);
 }
-.bx-hero-video-scrim {
+.bx-hero-bg-scrim {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(90% 70% at 50% 42%, transparent 0%, rgba(7,6,12,0.55) 78%),
-    linear-gradient(180deg, rgba(7,6,12,0.55) 0%, transparent 26%, transparent 62%, var(--v3-bg) 100%);
-}
-@media (prefers-reduced-motion: reduce) {
-  .bx-hero-video { display: none; }
+    radial-gradient(90% 70% at 50% 40%, transparent 0%, rgba(7,6,12,0.5) 80%),
+    linear-gradient(180deg, rgba(7,6,12,0.5) 0%, transparent 26%, transparent 60%, var(--v3-bg) 100%);
 }
 
 .bx-hero-inner { position: relative; z-index: 2; max-width: 860px; margin: 0 auto; }
