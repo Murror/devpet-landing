@@ -23,7 +23,7 @@ const playfair = Playfair_Display({
 // @font-face in v3.css — no Google fetch needed.
 
 export const metadata: Metadata = {
-  title: 'Codepet — your AI cofounder',
+  title: 'Codepet — AI teaches you to become a founder',
   description:
     'Run your whole company with AI, department by department. byte drafts and builds with you, and you approve every move. A free macOS app.',
 }
