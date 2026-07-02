@@ -614,7 +614,10 @@
   font-size: 14px;
   letter-spacing: 0.04em;
   color: var(--v3-ink);
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
+.v3-uni-discover:hover { color: #fff; }
 .v3-uni-discover::after {
   content: "";
   position: absolute;
@@ -623,7 +626,10 @@
   width: 100%;
   height: 1px;
   background: rgba(255, 255, 255, 0.5);
+  transition: background 0.2s ease;
 }
+/* Underline lights up in the panel's own accent colour on hover. */
+.v3-uni-discover:hover::after { background: var(--c, rgba(255, 255, 255, 0.9)); }
 /* Mobile: the big title and "Discover" sit side-by-side and overflow the
    narrow panel, so "Discover" gets clipped by the panel's overflow:hidden.
    Stack the footer (title, then Discover below) and trim the title to fit. */

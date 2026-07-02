@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useEffect, useRef, type CSSProperties } from 'react'
-import { ENVIRONMENT } from '../content'
+import { ENVIRONMENT, SETUP_ORDER } from '../content'
 
 /**
  * Environment ("BUILT ON CLAUDE CODE") — a cinematic "universe" gallery.
@@ -110,7 +110,9 @@ export default function Environment() {
                     <span className="v3-uni-tagline">{it.desc}</span>
                     <h3 className="v3-uni-title">{it.name}</h3>
                   </div>
-                  <span className="v3-uni-discover">Discover</span>
+                  <a href={`/setup/${SETUP_ORDER[i]}`} className="v3-uni-discover">
+                    Discover
+                  </a>
                 </div>
               </div>
             </article>
