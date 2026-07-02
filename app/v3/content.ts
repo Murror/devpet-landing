@@ -128,3 +128,56 @@ export const FOOTER = {
   ],
   copyright: '© 2026 Codepet — built by Outcasts.',
 }
+
+// Setup subpages — one focused page per ENVIRONMENT card, reached from the
+// "Discover" affordance in the pinned gallery. Each page is carried by a
+// signature hero effect + image; copy stays deliberately tight (a short
+// intro + three compact beats). Title / tagline / colour / image are pulled
+// from ENVIRONMENT.items[idx] so the card and its page never drift apart.
+export const SETUP_ORDER = ['project-skills', 'connectors', 'subagents', 'guardrails'] as const
+
+export const SETUP: Record<
+  (typeof SETUP_ORDER)[number],
+  { idx: number; intro: string; features: { t: string; d: string }[] }
+> = {
+  'project-skills': {
+    idx: 0,
+    intro:
+      'Codepet reads what you’re actually building and switches on only the abilities that fit — no blank config, no scrolling a menu of a hundred tools you’ll never touch.',
+    features: [
+      { t: 'Reads the project first', d: 'It scans your repo, your stack and your goal before it suggests a single thing.' },
+      { t: 'Turns on what fits', d: 'Only the skills your build actually needs — the rest stay out of the way.' },
+      { t: 'Grows as you do', d: 'New phase, new needs: the skill set shifts quietly with the work.' },
+    ],
+  },
+  connectors: {
+    idx: 1,
+    intro:
+      'Your services, already wired in. Codepet works where your work lives — and turns each connection on with you, one confirmed step at a time.',
+    features: [
+      { t: 'Where you already work', d: 'GitHub, your docs, your deploys — met on their own turf, not a copy.' },
+      { t: 'On with a nod', d: 'Nothing connects until you say yes. Every switch stays yours to flip.' },
+      { t: 'Context that carries', d: 'Once linked, your cofounder keeps the thread across every tool.' },
+    ],
+  },
+  subagents: {
+    idx: 2,
+    intro:
+      'Big jobs get handed to specialists. Codepet routes each task to the agent built for it — then brings the result back to one place: you.',
+    features: [
+      { t: 'The right hands', d: 'Each job goes to the agent shaped for exactly that kind of work.' },
+      { t: 'Runs in parallel', d: 'Specialists work at once, then report back to you in order.' },
+      { t: 'You stay the lead', d: 'Every handoff is visible, and the final call is always yours.' },
+    ],
+  },
+  guardrails: {
+    idx: 3,
+    intro:
+      'You draw the lines; Codepet stays inside them. Set the limits once and your cofounder moves fast without ever crossing what matters to you.',
+    features: [
+      { t: 'Limits you set', d: 'Budget, scope, tone — the boundaries are yours to define up front.' },
+      { t: 'Held automatically', d: 'Codepet checks itself against your rules before it ever acts.' },
+      { t: 'Nothing risky, quietly', d: 'Anything close to a line comes back to you first, every time.' },
+    ],
+  },
+}
