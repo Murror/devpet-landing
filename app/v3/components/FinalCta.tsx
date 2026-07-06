@@ -41,11 +41,20 @@ export default function FinalCta() {
           <div className="v3-footer-brand">Codepet</div>
           <div className="v3-footer-tag">{FOOTER.tagline}</div>
         </div>
-        <ul className="v3-footer-links">
-          {FOOTER.links.map((l) => (
-            <li key={l.href}><a href={l.href}>{l.label}</a></li>
-          ))}
-        </ul>
+        <div className="v3-footer-nav">
+          <ul className="v3-footer-links">
+            {FOOTER.links.map((l) => (
+              <li key={l.href}><a href={l.href}>{l.label}</a></li>
+            ))}
+          </ul>
+          <ul className="v3-footer-links v3-footer-social">
+            {FOOTER.social.map((l) => (
+              <li key={l.href}>
+                <a href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
         <div className="v3-footer-copy">{FOOTER.copyright}</div>
       </footer>
     </>

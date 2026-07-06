@@ -1092,9 +1092,15 @@
 }
 .v3-footer-brand { font-family: var(--v3-pixel); font-size: 14px; color: var(--v3-ink); }
 .v3-footer-tag { font-size: 13px; color: var(--v3-ink-mute); margin-top: 4px; }
-.v3-footer-links { display: flex; gap: 22px; list-style: none; margin: 0; padding: 0; }
+.v3-footer-nav { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+.v3-footer-links { display: flex; flex-wrap: wrap; gap: 22px; list-style: none; margin: 0; padding: 0; }
 .v3-footer-links a { font-size: 13.5px; color: var(--v3-ink-soft); text-decoration: none; }
 .v3-footer-links a:hover { color: var(--v3-ink); }
+.v3-footer-social { gap: 18px; }
+.v3-footer-social a { font-size: 12.5px; color: var(--v3-ink-mute); }
+@media (max-width: 640px) {
+  .v3-footer-nav { align-items: flex-start; }
+}
 .v3-footer-copy { font-size: 12px; color: var(--v3-ink-mute); width: 100%; }
 
 /* ── Reveal-on-scroll: 3D depth cascade ──

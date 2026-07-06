@@ -126,6 +126,13 @@ export const FOOTER = {
     { label: 'Privacy', href: '/privacy' },
     { label: 'Web app', href: '/app' },
   ],
+  social: [
+    { label: 'X', href: 'https://x.com/codepetapp' },
+    { label: 'Instagram', href: 'https://www.instagram.com/codepetapp/' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/company/codepet/' },
+    { label: 'GitHub', href: 'https://github.com/My-Outcasts' },
+    { label: 'Discord', href: 'https://discord.gg/k6N2TdyTb' },
+  ],
   copyright: '© 2026 Codepet — built by Outcasts.',
 }
 
