@@ -115,7 +115,8 @@ export const FINAL = {
   headlineLead: 'You don’t have to',
   headlineAccent: 'build it alone.',
   sub: 'Codepet runs free in your browser. byte is ready whenever you are.',
-  ctaPrimary: 'Open the web app',
+  ctaPrimary: 'Join our Discord',
+  ctaPrimaryHref: 'https://discord.gg/k6N2TdyTb',
   ctaSecondary: 'Read the Build Log',
 }
 
