@@ -5,6 +5,10 @@
 // lib/i18n) so they're easy to iterate on without touching the
 // production bilingual bundle. Localisation is a later pass.
 
+// The Codepet community Discord — single source of truth for the invite,
+// reused by the nav CTA, the final-section CTA, and the footer.
+export const DISCORD_INVITE = 'https://discord.gg/k6N2TdyTb'
+
 export const NAV = {
   brand: 'Codepet',
   links: [
@@ -14,7 +18,8 @@ export const NAV = {
     { label: 'Journey', href: '#journey' },
     { label: 'Blog', href: '/blog' },
   ],
-  cta: 'Open the web app',
+  cta: 'Join our Discord',
+  ctaHref: DISCORD_INVITE,
 }
 
 export const HERO = {
@@ -116,7 +121,7 @@ export const FINAL = {
   headlineAccent: 'build it alone.',
   sub: 'Codepet runs free in your browser. byte is ready whenever you are.',
   ctaPrimary: 'Join our Discord',
-  ctaPrimaryHref: 'https://discord.gg/k6N2TdyTb',
+  ctaPrimaryHref: DISCORD_INVITE,
   ctaSecondary: 'Read the Build Log',
 }
 
@@ -132,7 +137,7 @@ export const FOOTER = {
     { label: 'Instagram', href: 'https://www.instagram.com/codepetapp/' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/company/codepet/' },
     { label: 'GitHub', href: 'https://github.com/My-Outcasts' },
-    { label: 'Discord', href: 'https://discord.gg/k6N2TdyTb' },
+    { label: 'Discord', href: DISCORD_INVITE },
   ],
   copyright: '© 2026 Codepet — built by Outcasts.',
 }

@@ -4,12 +4,12 @@ import Link from 'next/link'
 import { useState } from 'react'
 import type { Locale } from '@/lib/site'
 import { blogIndexPath } from '@/lib/blog/format'
-import SoonButton from '../../v3/components/SoonButton'
+import { DISCORD_INVITE } from '../../v3/content'
 
 /**
  * BlogNav — the site's cinematic-dark floating frosted pill, adapted for
  * the blog. Matches the main landing's `.v3-nav` exactly (brand → home,
- * section anchors, purple "Open the web app" SoonButton) with two
+ * section anchors, purple "Join our Discord" CTA) with two
  * blog-specific additions:
  *   - "Blog" is the active route (it links to this locale's index).
  *   - an EN/VI globe that switches the article/locale (the blog is
@@ -93,7 +93,14 @@ export default function BlogNav({
           </li>
         </ul>
         {Globe}
-        <SoonButton className="v3-nav-cta">Open the web app</SoonButton>
+        <a
+          href={DISCORD_INVITE}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="v3-nav-cta"
+        >
+          Join our Discord
+        </a>
         <button
           type="button"
           className="v3-nav-toggle"
@@ -144,7 +151,16 @@ export default function BlogNav({
             </Link>
           </li>
         </ul>
-        <SoonButton className="v3-nav-menu-cta">Open the web app</SoonButton>
+        <a
+          href={DISCORD_INVITE}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="v3-nav-menu-cta"
+          tabIndex={open ? 0 : -1}
+          onClick={close}
+        >
+          Join our Discord
+        </a>
       </div>
     </div>
   )

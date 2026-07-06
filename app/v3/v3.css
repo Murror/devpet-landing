@@ -203,6 +203,8 @@
 }
 .v3-nav-link:hover { color: var(--v3-ink); }
 .v3-nav-cta {
+  display: inline-flex;
+  align-items: center;
   font-size: 13.5px;
   font-weight: 500;
   color: #fff;
@@ -297,13 +299,15 @@
 .v3-nav-menu-link:hover,
 .v3-nav-menu-link:active { background: var(--v3-glass-hi); color: var(--v3-ink); }
 /* Make the drawer CTA a full-width pill. */
-.v3-nav-menu .v3-soon-wrap { display: flex; margin-top: 6px; }
 .v3-nav-menu-cta {
-  flex: 1;
+  display: flex;
+  align-items: center;
   justify-content: center;
+  margin-top: 6px;
   font-size: 15px;
   font-weight: 500;
   color: #fff;
+  text-decoration: none;
   background: linear-gradient(180deg, var(--v3-accent-2), var(--v3-accent));
   padding: 13px 16px;
   border: none;
@@ -483,28 +487,6 @@
 
 @media (max-width: 480px) {
   .v3-section { padding: 76px 18px; }
-}
-
-/* SoonButton — "Open the web app" CTAs reveal a small floating
-   "launching soon" note on click (web app is pre-launch). */
-.v3-soon-wrap { position: relative; display: inline-flex; }
-.v3-soon-note {
-  position: absolute;
-  top: calc(100% + 10px);
-  left: 50%;
-  transform: translateX(-50%);
-  white-space: nowrap;
-  z-index: 5;
-  font-size: 12px;
-  color: var(--v3-ink-soft);
-  background: var(--v3-glass-hi);
-  border: 1px solid var(--v3-line);
-  padding: 7px 13px;
-  border-radius: 9999px;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 8px 30px -10px rgba(0,0,0,0.6);
-  animation: v3-waitlist-in 0.24s ease both;
-  pointer-events: none;
 }
 
 /* ============================================================

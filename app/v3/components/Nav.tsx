@@ -2,13 +2,11 @@
 
 import { useState } from 'react'
 import { NAV } from '../content'
-import SoonButton from './SoonButton'
 
 /**
  * Nav — a floating frosted pill, centred at the top.
  * Minimal by design (less-is-more): brand, a few anchors, and the
- * single "Open the web app" CTA. The web app isn't live yet, so that
- * CTA reveals a "launching soon" note instead of navigating.
+ * single "Join our Discord" CTA linking to the community invite.
  *
  * On phones (≤760px) the inline links + CTA collapse into a hamburger
  * that opens a frosted drawer below the pill, so the section anchors and
@@ -30,7 +28,14 @@ export default function Nav() {
             </li>
           ))}
         </ul>
-        <SoonButton className="v3-nav-cta">{NAV.cta}</SoonButton>
+        <a
+          href={NAV.ctaHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="v3-nav-cta"
+        >
+          {NAV.cta}
+        </a>
         <button
           type="button"
           className="v3-nav-toggle"
@@ -59,7 +64,16 @@ export default function Nav() {
             </li>
           ))}
         </ul>
-        <SoonButton className="v3-nav-menu-cta">{NAV.cta}</SoonButton>
+        <a
+          href={NAV.ctaHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="v3-nav-menu-cta"
+          tabIndex={open ? 0 : -1}
+          onClick={() => setOpen(false)}
+        >
+          {NAV.cta}
+        </a>
       </div>
     </div>
   )
