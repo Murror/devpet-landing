@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     : {}),
   title: 'Codepet — AI teaches you to become a founder',
   description:
-    'Run your whole company with AI, department by department. byte drafts and builds with you, and you approve every move. A free macOS app.',
+    'Run your whole company with AI, department by department. Codepet drafts and builds with you, and you approve every move. A free macOS app.',
   // PWA manifest — installable on macOS / Windows / Android. When the
   // visitor adds Codepet to their dock or home screen, Chrome/Safari
   // open it in a standalone window with no tab bar or URL bar
