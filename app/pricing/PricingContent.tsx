@@ -73,7 +73,12 @@ export default function PricingContent() {
   return (
     <div className={'v2-root min-h-screen' + (vi ? ' v2-root--vi' : '')}>
       <main className="mx-auto flex max-w-3xl flex-col items-center px-6 py-20 text-center">
-        <Link href="/" className="mb-10 text-sm text-muted no-underline hover:text-heading">
+        {/* NOTE ON COLOUR: `.v2-root` is a DARK shell — it sets background #000
+            and white text (app/v2/fonts.css). Anything outside a card therefore
+            needs light type. The light Tailwind tokens (text-heading, text-text)
+            are for the white card surfaces only; using them out here renders
+            near-black on black, which is exactly the live defect on /download. */}
+        <Link href="/" className="mb-10 text-sm text-muted-light no-underline hover:text-white">
           ← {vi ? 'Trang chủ' : 'Home'}
         </Link>
 
@@ -81,10 +86,10 @@ export default function PricingContent() {
           {vi ? 'Giá' : 'Pricing'}
         </span>
 
-        <h1 className="text-4xl font-bold tracking-tight text-heading sm:text-5xl">
+        <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
           {vi ? 'Dùng thử miễn phí. Trả tiền khi thấy hiệu quả.' : 'Start free. Pay when it’s working.'}
         </h1>
-        <p className="mt-4 max-w-lg text-lg text-text">
+        <p className="mt-4 max-w-lg text-lg text-muted-light">
           {vi
             ? 'Bạn trả tiền cho những gì AI thực sự làm — không phải một hạn mức cứng mỗi ngày.'
             : 'You pay for what the AI actually does, not a flat number of actions a day.'}
@@ -182,7 +187,8 @@ export default function PricingContent() {
           </p>
         </section>
 
-        <p className="mt-8 max-w-lg text-sm text-muted">
+        {/* Outside a card → light type, same reason as the header above. */}
+        <p className="mt-8 max-w-lg text-sm text-muted-light">
           {vi
             ? 'Bản dùng thử dừng lại khi hết tín dụng — không có thẻ, không tự động gia hạn.'
             : 'The trial simply stops when the credits run out. No card up front, nothing auto-renews.'}
