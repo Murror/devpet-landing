@@ -21,6 +21,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: 'weekly',
     priority: 1,
   })
+  // Pricing sits just under the home page: it is the last thing someone reads
+  // before deciding, and "codepet pricing" is a query people type directly.
+  entries.push({
+    url: absoluteUrl('/pricing'),
+    changeFrequency: 'monthly',
+    priority: 0.9,
+  })
   entries.push({
     url: absoluteUrl('/privacy'),
     changeFrequency: 'yearly',
