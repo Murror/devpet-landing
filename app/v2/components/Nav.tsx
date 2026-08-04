@@ -211,18 +211,6 @@ export default function Nav() {
             </Link>
           </li>
           <li>
-            {/* Pricing — a real route, like Blog. Sits immediately before
-                Download because it is the question people want answered
-                before they commit to installing anything. */}
-            <Link
-              href="/pricing"
-              className="v2-nav-link"
-              onClick={() => setMenuOpen(false)}
-            >
-              {locale === 'vi' ? 'Giá' : 'Pricing'}
-            </Link>
-          </li>
-          <li>
             {/* Direct macOS download — a real route, like Blog. */}
             <Link
               href="/download"
