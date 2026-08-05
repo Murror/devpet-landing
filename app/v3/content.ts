@@ -17,6 +17,10 @@ export const NAV = {
     { label: 'Departments', href: '#departments' },
     { label: 'Journey', href: '#journey' },
     { label: 'Blog', href: '/blog' },
+    // A real route, like Blog — the rest are in-page anchors. Last before the
+    // CTA because "what does it cost" is the question people want answered
+    // right before they decide.
+    { label: 'Pricing', href: '/pricing' },
   ],
   cta: 'Join our Discord',
   ctaHref: DISCORD_INVITE,

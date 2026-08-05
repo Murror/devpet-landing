@@ -43,7 +43,11 @@ export default function DownloadContent() {
   return (
     <div className={'v2-root min-h-screen' + (vi ? ' v2-root--vi' : '')}>
       <main className="mx-auto flex max-w-2xl flex-col items-center px-6 py-20 text-center">
-        <Link href="/" className="mb-10 text-sm text-muted no-underline hover:text-heading">
+        {/* NOTE ON COLOUR: `.v2-root` is a DARK shell — background #000, white
+            text (app/v2/fonts.css). The light Tailwind tokens (text-heading,
+            text-text) belong on the white card surfaces below, NOT out here:
+            #1A1A2E on #000 is unreadable, which is how this page shipped. */}
+        <Link href="/" className="mb-10 text-sm text-muted-light no-underline hover:text-white">
           ← {vi ? 'Trang chủ' : 'Home'}
         </Link>
 
@@ -51,10 +55,10 @@ export default function DownloadContent() {
           macOS
         </span>
 
-        <h1 className="text-4xl font-bold tracking-tight text-heading sm:text-5xl">
+        <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
           {vi ? 'Tải Codepet' : 'Download Codepet'}
         </h1>
-        <p className="mt-4 max-w-md text-lg text-text">
+        <p className="mt-4 max-w-md text-lg text-muted-light">
           {vi
             ? 'Người bạn đồng hành pixel-art dẫn bạn học cách lập trình agentic.'
             : 'Your pixel-art coding companion that guides you through learning to build agentic code.'}
@@ -68,7 +72,7 @@ export default function DownloadContent() {
             <AppleGlyph />
             Download for macOS
           </a>
-          <p className="text-sm text-muted">
+          <p className="text-sm text-muted-light">
             {vi ? 'Yêu cầu macOS 13 trở lên · Miễn phí' : 'Requires macOS 13 or later · Free'}
           </p>
           {!isMac && (
@@ -78,7 +82,7 @@ export default function DownloadContent() {
           )}
         </div>
 
-        <p className="mt-3 text-xs text-muted">{vi ? 'Phiên bản' : 'Version'} 1.0 (build 2)</p>
+        <p className="mt-3 text-xs text-muted-light">{vi ? 'Phiên bản' : 'Version'} 1.0 (build 2)</p>
 
         <section className="mt-14 w-full rounded-2xl border border-border bg-surface p-6 text-left">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-muted">
@@ -104,7 +108,8 @@ export default function DownloadContent() {
           </p>
         </section>
 
-        <p className="mt-8 text-sm text-muted">
+        {/* Outside the card → light type, same reason as the header. */}
+        <p className="mt-8 text-sm text-muted-light">
           {vi
             ? 'Codepet hiện chỉ hỗ trợ macOS. Windows và các nền tảng khác sẽ có trong tương lai.'
             : 'Codepet is currently available for macOS only. Windows and other platforms are on the roadmap.'}
