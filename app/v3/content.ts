@@ -36,7 +36,7 @@ export const HERO = {
   scrollHint: 'scroll to explore',
 }
 
-// How byte works — the trust loop. Speed, but you stay in the loop.
+// How Codepet works — the trust loop. Speed, but you stay in the loop.
 export const LOOP = {
   eyebrow: 'HOW CODEPET WORKS',
   headlineLead: 'Codepet does the work.',
@@ -64,7 +64,7 @@ export const LOOP = {
   ],
 }
 
-// Environment — byte's guided Claude Code setup (skills, connectors,
+// Environment — Codepet's guided Claude Code setup (skills, connectors,
 // agents). The "this is wired into your real tools" proof.
 export const ENVIRONMENT = {
   eyebrow: 'BUILT ON CLAUDE CODE',
@@ -119,7 +119,7 @@ export const JOURNEY = {
 export const FINAL = {
   headlineLead: 'You don’t have to',
   headlineAccent: 'build it alone.',
-  sub: 'Codepet runs free in your browser. byte is ready whenever you are.',
+  sub: 'Codepet runs free in your browser. Your cofounder is ready whenever you are.',
   ctaPrimary: 'Join our Discord',
   ctaPrimaryHref: DISCORD_INVITE,
   ctaSecondary: 'Read the Build Log',
