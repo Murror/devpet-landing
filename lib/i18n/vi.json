@@ -42,6 +42,29 @@
     "errorValidation": "Email không hợp lệ.",
     "errorServer": "Có lỗi. Thử lại nhé."
   },
+  "download": {
+    "metaTitle": "Tải Codepet cho macOS",
+    "metaDescription": "Codepet là ứng dụng macOS để bạn vận hành công ty của mình cùng một đội ngũ AI. Tải miễn phí, đã ký số và được Apple công chứng.",
+    "eyebrow": "macOS",
+    "title": "Vận hành công ty của bạn cùng một đội ngũ AI.",
+    "subtitle": "Bạn mô tả thứ mình đang xây. Codepet vạch lộ trình, chạy các đầu việc tạo ra sản phẩm thật, và triệu tập các phòng ban tranh luận để chốt quyết định.",
+    "cta": "Tải cho macOS",
+    "ctaMeta": "Miễn phí · cần macOS {version} trở lên · Apple Silicon và Intel",
+    "allVersions": "Tất cả phiên bản và ghi chú phát hành",
+    "installTitle": "Cài đặt",
+    "installSteps": [
+      "Mở **Codepet.dmg** rồi kéo **Codepet** vào thư mục **Applications**.",
+      "Mở **Applications**, chuột phải vào **Codepet** và chọn **Open**.",
+      "Bấm **Open** trong hộp thoại. Chỉ cần làm một lần duy nhất — từ lần sau app mở bình thường."
+    ],
+    "installNote": "Codepet được ký bằng Apple Developer ID và đã qua công chứng của Apple, nên macOS sẽ không báo là nhà phát triển lạ. Thao tác chuột phải ở lần mở đầu là điều macOS yêu cầu với mọi ứng dụng cài ngoài App Store.",
+    "gatekeeperTitle": "Nếu macOS báo không mở được",
+    "gatekeeperBody": "Vào **System Settings ▸ Privacy & Security**, kéo xuống dòng thông báo về Codepet rồi bấm **Open Anyway**.",
+    "requirementsTitle": "Trước khi bắt đầu",
+    "requirementsBody": "Codepet chạy phần AI trên **Claude Code của chính bạn**, không phải trên máy chủ của chúng tôi — code và dữ liệu công ty của bạn không rời khỏi máy, và chúng tôi không tính phí sử dụng. Đổi lại, bạn cần cài sẵn Claude Code đã đăng nhập, cùng với Node.js. Thiếu chúng thì app vẫn mở được và báo rõ đang thiếu gì, chứ không im lặng không làm gì cả.",
+    "requirementsLink": "Cài Claude Code",
+    "footerNote": "Tải về gặp trục trặc?"
+  },
   "whyVibeCode": {
     "title": "Có phải bạn cũng mắc lỗi?",
     "titleAccent": "",
@@ -783,9 +806,21 @@
       "subtitle": "Cho chúng tôi biết thêm một chút để Codepet phù hợp với bạn (không bắt buộc).",
       "ageLabel": "Tuổi của bạn",
       "agePlaceholder": "Chọn nhóm tuổi",
-      "ageOptions": ["Dưới 18", "18 – 24", "25 – 34", "35 – 44", "45 – 54", "55 trở lên"],
+      "ageOptions": [
+        "Dưới 18",
+        "18 – 24",
+        "25 – 34",
+        "35 – 44",
+        "45 – 54",
+        "55 trở lên"
+      ],
       "genderLabel": "Giới tính",
-      "genderOptions": ["Nam", "Nữ", "Khác", "Không muốn trả lời"],
+      "genderOptions": [
+        "Nam",
+        "Nữ",
+        "Khác",
+        "Không muốn trả lời"
+      ],
       "sourceLabel": "Bạn biết Codepet từ đâu?",
       "sourcePlaceholder": "Chọn một",
       "sourceOptions": [

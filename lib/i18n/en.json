@@ -42,6 +42,29 @@
     "errorValidation": "Invalid email.",
     "errorServer": "Something went wrong. Try again."
   },
+  "download": {
+    "metaTitle": "Download Codepet for macOS",
+    "metaDescription": "Codepet is a macOS app where you run your company with an AI team. Free download, signed and notarized by Apple.",
+    "eyebrow": "macOS",
+    "title": "Run your company with an AI team.",
+    "subtitle": "Describe what you are building. Codepet draws the roadmap, runs the tasks that produce real deliverables, and convenes departments to argue out the decisions.",
+    "cta": "Download for macOS",
+    "ctaMeta": "Free · requires macOS {version} or later · Apple Silicon and Intel",
+    "allVersions": "All versions and release notes",
+    "installTitle": "Installing",
+    "installSteps": [
+      "Open **Codepet.dmg** and drag **Codepet** into **Applications**.",
+      "Open **Applications**, then right-click **Codepet** and choose **Open**.",
+      "Click **Open** in the dialog. You only do this once — after that it launches normally."
+    ],
+    "installNote": "Codepet is signed with an Apple Developer ID and notarized by Apple, so macOS will not call it unidentified. The right-click on first launch is what macOS asks for any app installed from outside the App Store.",
+    "gatekeeperTitle": "If macOS says it cannot be opened",
+    "gatekeeperBody": "Open **System Settings ▸ Privacy & Security**, scroll down to the message about Codepet, and click **Open Anyway**.",
+    "requirementsTitle": "Before you start",
+    "requirementsBody": "Codepet runs its AI work on **your own Claude Code**, not on our servers — your code and your company never leave your machine, and there is no usage bill from us. That means you need Claude Code installed and signed in, plus Node.js. Without them the app still opens and tells you what is missing; it will not silently do nothing.",
+    "requirementsLink": "Get Claude Code",
+    "footerNote": "Something wrong with the download?"
+  },
   "whyVibeCode": {
     "title": "Sound familiar?",
     "titleAccent": "",
@@ -783,9 +806,21 @@
       "subtitle": "Help us tailor Codepet to you (optional).",
       "ageLabel": "Your age",
       "agePlaceholder": "Select an age range",
-      "ageOptions": ["Under 18", "18 – 24", "25 – 34", "35 – 44", "45 – 54", "55 +"],
+      "ageOptions": [
+        "Under 18",
+        "18 – 24",
+        "25 – 34",
+        "35 – 44",
+        "45 – 54",
+        "55 +"
+      ],
       "genderLabel": "Gender",
-      "genderOptions": ["Male", "Female", "Non-binary", "Prefer not to say"],
+      "genderOptions": [
+        "Male",
+        "Female",
+        "Non-binary",
+        "Prefer not to say"
+      ],
       "sourceLabel": "How did you hear about Codepet?",
       "sourcePlaceholder": "Pick one",
       "sourceOptions": [
