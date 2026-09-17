@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import { LocaleProvider } from '@/lib/LocaleProvider'
 import { DOWNLOAD_PATH, DOWNLOAD_TARGET, MIN_MACOS } from '@/lib/download'
 import DownloadPage from '@/app/download/DownloadPage'
@@ -6,6 +6,28 @@ import { Bold } from '@/app/download/Bold'
 import en from '@/lib/i18n/en.json'
 import vi from '@/lib/i18n/vi.json'
 import nextConfig from '../../next.config'
+
+/**
+ * The page asks the GitHub releases API on mount. Default it to "a release exists" so the
+ * existing cases keep describing the normal state; `mockReleases` overrides per test.
+ *
+ * Routed BY URL, not by call order: LocaleProvider also fetches (api.country.is for geo) and
+ * a one-shot mock would be spent on whichever fired first. That exact bug was live in
+ * WaitlistForm.test.tsx and made a test pass for the wrong reason.
+ */
+function mockReleases(status: number) {
+  ;(global.fetch as jest.Mock).mockImplementation((url: unknown) => {
+    if (typeof url === 'string' && url.includes('api.github.com')) {
+      return Promise.resolve({ status, ok: status === 200, json: async () => ({}) })
+    }
+    return Promise.resolve({ ok: true, status: 200, json: async () => ({ country: 'US' }) })
+  })
+}
+
+beforeEach(() => {
+  global.fetch = jest.fn()
+  mockReleases(200)
+})
 
 function renderPage(locale: 'en' | 'vi' = 'en') {
   return render(
@@ -138,5 +160,56 @@ describe('Bold', () => {
     const { container } = render(<Bold text="<img src=x onerror=alert(1)>" />)
     expect(container.querySelector('img')).toBeNull()
     expect(container.textContent).toContain('<img')
+  })
+})
+
+describe('when no release has been published', () => {
+  // The state this page is in TODAY: the packaging pipeline is ready but no .dmg has been
+  // cut, so the permalink 404s. A button that 404s does not read as "unreleased" — it reads
+  // as a broken product.
+  test('replaces the button with an honest message and somewhere to go', async () => {
+    mockReleases(404)
+    renderPage()
+    await waitFor(() => {
+      expect(screen.getByText(en.download.notYetTitle)).toBeInTheDocument()
+    })
+    expect(screen.queryByRole('link', { name: en.download.cta })).toBeNull()
+    expect(screen.getByRole('link', { name: en.download.notYetCta })).toHaveAttribute(
+      'href',
+      '/#waitlist',
+    )
+  })
+
+  test('a rate-limited or failing API leaves the button live', async () => {
+    // Fails OPEN. The API is unauthenticated (60/hour per IP), and the steady state of this
+    // page is that a release exists — hiding a working download because GitHub throttled us
+    // is the worse mistake of the two.
+    mockReleases(403)
+    renderPage()
+    await waitFor(() => {
+      expect(screen.getByRole('link', { name: en.download.cta })).toBeInTheDocument()
+    })
+    expect(screen.queryByText(en.download.notYetTitle)).toBeNull()
+  })
+
+  test('a network error leaves the button live too', async () => {
+    ;(global.fetch as jest.Mock).mockImplementation((url: unknown) =>
+      typeof url === 'string' && url.includes('api.github.com')
+        ? Promise.reject(new Error('offline'))
+        : Promise.resolve({ ok: true, status: 200, json: async () => ({ country: 'US' }) }),
+    )
+    renderPage()
+    await waitFor(() => {
+      expect(screen.getByRole('link', { name: en.download.cta })).toBeInTheDocument()
+    })
+  })
+
+  test('renders the button first rather than flashing "not yet"', () => {
+    // Optimistic on purpose. Almost every future visit happens when a release DOES exist;
+    // starting pessimistic would show the wrong answer to everyone forever in order to be
+    // briefly right today.
+    mockReleases(404)
+    renderPage()
+    expect(screen.getByRole('link', { name: en.download.cta })).toBeInTheDocument()
   })
 })

@@ -1,8 +1,9 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useLocale } from '@/lib/LocaleProvider'
-import { DOWNLOAD_PATH, RELEASES_PAGE, MIN_MACOS } from '@/lib/download'
+import { DOWNLOAD_PATH, RELEASES_PAGE, MIN_MACOS, RELEASES_API } from '@/lib/download'
 import { Bold } from './Bold'
 
 /**
@@ -24,9 +25,42 @@ import { Bold } from './Bold'
  * worse conversion rate — it is a user who installs, hits a wall, and concludes the app
  * does not work.
  */
+/**
+ * Whether a downloadable build actually exists.
+ *
+ * Starts as `true` — optimistic on purpose. Almost every future visit happens when a release
+ * DOES exist, and rendering "not released yet" first would flash the wrong answer at everyone
+ * forever to be briefly right today. Only a definitive 404 from the releases API flips it.
+ *
+ * Exported for the tests, which cannot easily drive the effect otherwise.
+ */
+export function useReleaseExists(): boolean {
+  const [exists, setExists] = useState(true)
+
+  useEffect(() => {
+    let cancelled = false
+    fetch(RELEASES_API, { headers: { Accept: 'application/vnd.github+json' } })
+      .then((res) => {
+        // 404 is the only answer that means "nothing published". Anything else — 200, a rate
+        // limit, a network failure — leaves the button alone. See RELEASES_API for why this
+        // fails open rather than closed.
+        if (!cancelled && res.status === 404) setExists(false)
+      })
+      .catch(() => {
+        /* offline or blocked: keep the button. */
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  return exists
+}
+
 export default function DownloadPage() {
   const { t } = useLocale()
   const c = t.download
+  const released = useReleaseExists()
 
   return (
     <main className="mx-auto max-w-[680px] px-6 py-16 sm:py-24">
@@ -50,23 +84,41 @@ export default function DownloadPage() {
           No `download` attribute: the response is a cross-origin redirect, and the
           attribute is silently ignored on those, so it would only be a lie in the markup. */}
       <div className="mt-10">
-        <a
-          href={DOWNLOAD_PATH}
-          className="inline-flex items-center justify-center rounded-pill bg-primary px-8 py-4 text-[17px] font-bold text-white shadow-btn transition hover:bg-primary-dark"
-        >
-          {c.cta}
-        </a>
-        <p className="mt-3 text-sm text-muted">
-          {c.ctaMeta.replace('{version}', MIN_MACOS)}
-        </p>
-        <a
-          href={RELEASES_PAGE}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-1 inline-block text-sm text-primary hover:underline"
-        >
-          {c.allVersions}
-        </a>
+        {released ? (
+          <>
+            <a
+              href={DOWNLOAD_PATH}
+              className="inline-flex items-center justify-center rounded-pill bg-primary px-8 py-4 text-[17px] font-bold text-white shadow-btn transition hover:bg-primary-dark"
+            >
+              {c.cta}
+            </a>
+            <p className="mt-3 text-sm text-muted">
+              {c.ctaMeta.replace('{version}', MIN_MACOS)}
+            </p>
+            <a
+              href={RELEASES_PAGE}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-1 inline-block text-sm text-primary hover:underline"
+            >
+              {c.allVersions}
+            </a>
+          </>
+        ) : (
+          /* No published build. Deliberately NOT a disabled-looking download button: the
+             visitor came here to get something, and a dead end is a worse answer than an
+             honest one plus somewhere to go. The waitlist already exists on the homepage. */
+          <div className="rounded-lg border border-border bg-surface p-6">
+            <p className="text-base font-bold text-heading">{c.notYetTitle}</p>
+            <p className="mt-2 text-[15px] leading-relaxed text-text">{c.notYetBody}</p>
+            <Link
+              href="/#waitlist"
+              className="mt-4 inline-flex items-center justify-center rounded-pill bg-primary px-6 py-3 text-[15px] font-bold text-white shadow-btn transition hover:bg-primary-dark"
+            >
+              {c.notYetCta}
+            </Link>
+          </div>
+        )}
       </div>
 
       {/* Installing */}

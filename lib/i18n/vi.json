@@ -63,7 +63,10 @@
     "requirementsTitle": "Trước khi bắt đầu",
     "requirementsBody": "Codepet chạy phần AI trên **Claude Code của chính bạn**, không phải trên máy chủ của chúng tôi — code và dữ liệu công ty của bạn không rời khỏi máy, và chúng tôi không tính phí sử dụng. Đổi lại, bạn cần cài sẵn Claude Code đã đăng nhập, cùng với Node.js. Thiếu chúng thì app vẫn mở được và báo rõ đang thiếu gì, chứ không im lặng không làm gì cả.",
     "requirementsLink": "Cài Claude Code",
-    "footerNote": "Tải về gặp trục trặc?"
+    "footerNote": "Tải về gặp trục trặc?",
+    "notYetTitle": "Chưa phát hành",
+    "notYetBody": "Bản dựng công khai đầu tiên đang được chuẩn bị. Để lại email và chúng tôi sẽ báo bạn ngay ngày nó lên.",
+    "notYetCta": "Đăng ký nhận tin"
   },
   "whyVibeCode": {
     "title": "Có phải bạn cũng mắc lỗi?",

@@ -38,3 +38,20 @@ export const RELEASES_PAGE = 'https://github.com/My-Outcasts/codepet/releases'
  * download 40MB to find out.
  */
 export const MIN_MACOS = '26.2'
+
+/**
+ * The releases API, asked at runtime so the page can tell "not shipped yet" apart from
+ * "shipped". Without it the button is a 404 until the first release exists, and a dead
+ * download is worse than an honest "not yet" — someone who clicks a broken button concludes
+ * the product is broken, not that it is unreleased.
+ *
+ * Same approach the app repo's GitHub Pages page already takes, deliberately: two download
+ * surfaces that disagree about whether a build exists would be its own bug.
+ *
+ * Unauthenticated, so GitHub rate-limits it to 60/hour per IP. That is why an error FAILS
+ * OPEN and leaves the button live: the steady state of this page is "a release exists", and
+ * hiding a working download because an API call was throttled is the worse mistake. Only a
+ * definitive 404 swaps the page into its unreleased state.
+ */
+export const RELEASES_API =
+  'https://api.github.com/repos/My-Outcasts/codepet/releases/latest'

@@ -63,7 +63,10 @@
     "requirementsTitle": "Before you start",
     "requirementsBody": "Codepet runs its AI work on **your own Claude Code**, not on our servers — your code and your company never leave your machine, and there is no usage bill from us. That means you need Claude Code installed and signed in, plus Node.js. Without them the app still opens and tells you what is missing; it will not silently do nothing.",
     "requirementsLink": "Get Claude Code",
-    "footerNote": "Something wrong with the download?"
+    "footerNote": "Something wrong with the download?",
+    "notYetTitle": "Not released yet",
+    "notYetBody": "The first public build is being prepared. Join the waitlist and we will tell you the day it lands.",
+    "notYetCta": "Join the waitlist"
   },
   "whyVibeCode": {
     "title": "Sound familiar?",
