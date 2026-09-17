@@ -25,6 +25,15 @@
 /** The public URL the button points at. Ours, stable, never changes. */
 export const DOWNLOAD_PATH = '/download/Codepet.dmg'
 
+/**
+ * The download PAGE, which is what links from elsewhere on the site point at.
+ *
+ * Not `DOWNLOAD_PATH`: the page carries the install steps, the Gatekeeper note and the
+ * Claude Code prerequisite. Dropping a visitor straight onto a 30MB file with none of that
+ * is how the app ends up looking broken on their machine.
+ */
+export const DOWNLOAD_PAGE = '/download'
+
 /** Where that path currently forwards to. Free to change; the path above is not. */
 export const DOWNLOAD_TARGET =
   'https://github.com/My-Outcasts/codepet/releases/latest/download/Codepet.dmg'
