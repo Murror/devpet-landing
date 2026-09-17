@@ -1,6 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import { LocaleProvider } from '@/lib/LocaleProvider'
 import { DOWNLOAD_PATH, DOWNLOAD_TARGET, MIN_MACOS, RELEASES_API } from '@/lib/download'
+import { __resetReleaseCache } from '@/lib/useReleaseAvailable'
 import DownloadContent from '@/app/download/DownloadContent'
 import nextConfig from '../../next.config'
 
@@ -27,6 +28,10 @@ function mockReleases(status: number, body: unknown = {}) {
 
 beforeEach(() => {
   global.fetch = jest.fn()
+  // The release query is deduped at module scope so one page load makes one request. That
+  // cache also spans TESTS, so without this reset the first case's answer is served to
+  // every case after it — and the unreleased ones silently assert against a released page.
+  __resetReleaseCache()
   mockReleases(200, { tag_name: 'v1.0-build2' })
 })
 

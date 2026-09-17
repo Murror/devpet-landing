@@ -1,8 +1,11 @@
 'use client'
 
 import { useState, useRef, useEffect, type FormEvent } from 'react'
+import Link from 'next/link'
 import Magnetic from './Magnetic'
 import { HERO } from '../content'
+import { useReleaseAvailable } from '@/lib/useReleaseAvailable'
+import { DOWNLOAD_PAGE } from '@/lib/download'
 
 /**
  * HeroCta — the hero call-to-action cluster while the web app is
@@ -13,6 +16,14 @@ import { HERO } from '../content'
  *
  * v3 is English-only, so copy is inline (no LocaleProvider) and the
  * signup is tagged locale: 'en'.
+ *
+ * ONCE A BUILD IS PUBLISHED the cluster flips: "Download for macOS" becomes the primary and
+ * the waitlist drops to the ghost slot. The waitlist is the right ask only while there is
+ * nothing to hand over — asking someone to wait for a thing they could be using is the
+ * worst version of this page. The flip needs no deploy; it follows the releases API.
+ *
+ * The "Sign Up" ghost button is what gets replaced, and it should be: it reveals a
+ * "launching soon" note, which stops being true at exactly the same moment.
  */
 
 type FormState = 'idle' | 'loading' | 'success' | 'duplicate' | 'error'
@@ -26,6 +37,8 @@ export default function HeroCta() {
   // note instead of navigating anywhere. The note auto-dismisses after ~1s.
   const [showSoon, setShowSoon] = useState(false)
   const soonTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  // Shared with the nav and the /download page — one request per page load.
+  const { released } = useReleaseAvailable()
 
   useEffect(() => () => { if (soonTimer.current) clearTimeout(soonTimer.current) }, [])
 
@@ -71,22 +84,41 @@ export default function HeroCta() {
         ) : !open ? (
           <>
             <Magnetic>
-              <button
-                type="button"
-                className="v3-btn v3-btn--primary"
-                onClick={() => { setShowSoon(false); setOpen(true) }}
-              >
-                {HERO.ctaPrimary}
-              </button>
+              {released ? (
+                <Link href={DOWNLOAD_PAGE} className="v3-btn v3-btn--primary">
+                  Download for macOS
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  className="v3-btn v3-btn--primary"
+                  onClick={() => { setShowSoon(false); setOpen(true) }}
+                >
+                  {HERO.ctaPrimary}
+                </button>
+              )}
             </Magnetic>
             <Magnetic strength={0.25}>
-              <button
-                type="button"
-                className="v3-btn v3-btn--ghost"
-                onClick={revealSoon}
-              >
-                {HERO.ctaSecondary}
-              </button>
+              {released ? (
+                /* The waitlist survives the flip rather than disappearing: someone on a
+                   Windows machine, or without the prerequisites to hand, still has a way to
+                   say "tell me more" instead of bouncing. */
+                <button
+                  type="button"
+                  className="v3-btn v3-btn--ghost"
+                  onClick={() => { setShowSoon(false); setOpen(true) }}
+                >
+                  {HERO.ctaPrimary}
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="v3-btn v3-btn--ghost"
+                  onClick={revealSoon}
+                >
+                  {HERO.ctaSecondary}
+                </button>
+              )}
             </Magnetic>
           </>
         ) : (

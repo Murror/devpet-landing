@@ -3,7 +3,8 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useLocale } from '@/lib/LocaleProvider'
-import { DOWNLOAD_PATH, MIN_MACOS, RELEASES_API } from '@/lib/download'
+import { DOWNLOAD_PATH, MIN_MACOS } from '@/lib/download'
+import { useReleaseAvailable } from '@/lib/useReleaseAvailable'
 
 // The comment that used to sit here named Murror/CodePet-Clean as the release host. That
 // repo is not the source of truth for this project and nothing deploys from it — the
@@ -24,45 +25,13 @@ export default function DownloadContent() {
   const vi = locale === 'vi'
   const [isMac, setIsMac] = useState(true)
 
-  // Whether a build actually exists to download. Starts true — optimistic on purpose:
-  // almost every future visit happens when a release DOES exist, so starting pessimistic
-  // would flash the wrong answer at everyone forever to be briefly right today.
-  //
-  // Only a definitive 404 flips it. A rate limit (the API is unauthenticated, 60/hour per
-  // IP), a network failure or an offline browser all leave the button alone, because hiding
-  // a working download is the worse of the two mistakes.
-  const [released, setReleased] = useState(true)
-
-  // The published version, read from the same response. This replaced a hardcoded
-  // "1.0 (build 2)" — a literal that is correct only until the next release and wrong
-  // silently thereafter, on the one page whose whole job is to hand over the current build.
-  const [version, setVersion] = useState<string | null>(null)
+  // Shared with the v3 nav and hero CTA, which ask the same question. See
+  // lib/useReleaseAvailable.ts for why it is optimistic and why the request is deduped.
+  const { released, version } = useReleaseAvailable()
 
   useEffect(() => {
     const ua = `${navigator.platform} ${navigator.userAgent}`.toLowerCase()
     setIsMac(ua.includes('mac'))
-  }, [])
-
-  useEffect(() => {
-    let cancelled = false
-    fetch(RELEASES_API, { headers: { Accept: 'application/vnd.github+json' } })
-      .then(async (res) => {
-        if (cancelled) return
-        if (res.status === 404) {
-          setReleased(false)
-          return
-        }
-        if (!res.ok) return
-        const rel = await res.json()
-        const tag = (rel?.tag_name || rel?.name || '').replace(/^v/, '')
-        if (!cancelled && tag) setVersion(tag)
-      })
-      .catch(() => {
-        /* offline or blocked: keep the button */
-      })
-    return () => {
-      cancelled = true
-    }
   }, [])
 
   const steps = vi
