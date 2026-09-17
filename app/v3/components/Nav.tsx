@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { NAV } from '../content'
-import { useRelease } from '@/lib/ReleaseProvider'
 import { DOWNLOAD_PAGE } from '@/lib/download'
 
 /**
@@ -15,14 +14,18 @@ import { DOWNLOAD_PAGE } from '@/lib/download'
  * that opens a frosted drawer below the pill, so the section anchors and
  * the CTA stay reachable on touch.
  *
- * A "Download" entry appears here once a build is actually published. Until then the
- * product has nothing to hand over and the hero's waitlist is the honest ask — but /download
- * was reachable ONLY by typing the URL, which is the same as not existing. This is the
- * standing way in, and it costs no deploy: the day a release is cut, the link appears.
+ * The "Download" entry is ALWAYS here. It was gated on a build existing, which meant that
+ * while the product was pre-launch the site had no visible way to reach /download at all —
+ * and the founder's reaction to that was exactly the right one: "where is my download
+ * button?". A nav entry is navigation, not a promise. The page it leads to is where the
+ * honest answer lives, and that page already gives one: the public build's state, and the
+ * internal test build when there is one.
+ *
+ * The HERO cta stays gated, and that distinction is the point. A hero button saying
+ * "Download for macOS" when nothing can be downloaded IS a promise, and a broken one.
  */
 export default function Nav() {
   const [open, setOpen] = useState(false)
-  const { released } = useRelease()
 
   return (
     <div className={`v3-nav-wrap${open ? ' is-open' : ''}`}>
@@ -37,11 +40,9 @@ export default function Nav() {
             </li>
           ))}
         </ul>
-        {released && (
-          <Link href={DOWNLOAD_PAGE} className="v3-nav-link">
-            Download
-          </Link>
-        )}
+        <Link href={DOWNLOAD_PAGE} className="v3-nav-link">
+          Download
+        </Link>
         <a
           href={NAV.ctaHref}
           target="_blank"
@@ -65,18 +66,16 @@ export default function Nav() {
 
       <div className="v3-nav-menu" aria-hidden={!open}>
         <ul className="v3-nav-menu-links">
-          {released && (
-            <li>
-              <Link
-                href={DOWNLOAD_PAGE}
-                className="v3-nav-menu-link"
-                tabIndex={open ? 0 : -1}
-                onClick={() => setOpen(false)}
-              >
-                Download
-              </Link>
-            </li>
-          )}
+          <li>
+            <Link
+              href={DOWNLOAD_PAGE}
+              className="v3-nav-menu-link"
+              tabIndex={open ? 0 : -1}
+              onClick={() => setOpen(false)}
+            >
+              Download
+            </Link>
+          </li>
           {NAV.links.map((l) => (
             <li key={l.href}>
               <a

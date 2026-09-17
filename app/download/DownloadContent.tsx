@@ -27,7 +27,7 @@ export default function DownloadContent() {
 
   // Resolved on the server and handed down; this component never asks. See
   // lib/releaseServer.ts for why the question cannot be answered in the browser.
-  const { released, version } = useRelease()
+  const { released, version, internal } = useRelease()
 
   useEffect(() => {
     const ua = `${navigator.platform} ${navigator.userAgent}`.toLowerCase()
@@ -109,6 +109,40 @@ export default function DownloadContent() {
             </p>
           )}
         </div>
+
+        {internal && (
+          /* Only rendered while there is no public build — see getReleaseState. It is a
+             real download, so it goes above the install steps rather than in a footnote,
+             but it leads with who it will NOT work for. "Damaged or incomplete" is what an
+             unregistered Mac shows, and reading that without warning looks like a corrupt
+             file rather than a device that was never on the list. */
+          <section className="mt-8 w-full rounded-2xl border border-border bg-surface p-6 text-left">
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted">
+              {vi ? 'Bản thử nội bộ' : 'Internal test build'}
+            </p>
+            <p className="mt-2 text-sm text-text">
+              {vi
+                ? 'Chỉ chạy trên các máy Mac đã đăng ký với tài khoản nhà phát triển. Máy khác sẽ báo “damaged or incomplete” — đó là macOS từ chối một máy chưa đăng ký, không phải file tải hỏng.'
+                : 'Runs only on Macs registered with the developer account. Any other Mac will say “damaged or incomplete” — that is macOS refusing an unregistered device, not a corrupted download.'}
+            </p>
+            <p className="mt-2 text-sm text-text">
+              {vi
+                ? 'Chưa được Apple công chứng, nên sau khi kéo vào Applications bạn phải chạy một lần:'
+                : 'It is not notarized by Apple, so after dragging it into Applications you have to run this once:'}
+            </p>
+            <code className="mt-2 block overflow-x-auto rounded-lg bg-bg px-3 py-2 text-xs text-heading">
+              xattr -dr com.apple.quarantine /Applications/codepet.app
+            </code>
+            <a
+              href={internal.page}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-block text-sm font-semibold text-primary"
+            >
+              {vi ? 'Tải bản thử' : 'Get the test build'} ({internal.tag}) →
+            </a>
+          </section>
+        )}
 
         {released && version && (
           <p className="mt-3 text-xs text-muted">

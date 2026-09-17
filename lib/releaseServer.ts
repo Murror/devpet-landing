@@ -1,10 +1,25 @@
-import { RELEASES_API } from './download'
+import { RELEASES_API, RELEASES_PAGE } from './download'
+
+export interface InternalBuild {
+  /** The prerelease's tag, e.g. `v1.0-build2-internal`. */
+  tag: string
+  /** The GitHub release page for it — not the asset, so the notes are read first. */
+  page: string
+}
 
 export interface ReleaseState {
-  /** Whether a downloadable build exists. */
+  /** Whether a build anyone can run exists. */
   released: boolean
   /** The published version with any leading `v` stripped, or null when unknown. */
   version: string | null
+  /**
+   * The newest prerelease, when there is one and no public build yet.
+   *
+   * Null once a public release exists: at that point the internal build is strictly worse
+   * for everyone — it runs on four Macs and is not notarized — so leaving it on the page
+   * would be offering a downgrade next to the real thing.
+   */
+  internal: InternalBuild | null
 }
 
 /**
@@ -40,22 +55,40 @@ const REVALIDATE_SECONDS = 300
  * server's — shared by every visitor — so per-visitor fetching was the shape that could not
  * survive traffic.
  *
- * FAILS OPEN, unchanged: only a definitive 404 means "nothing published". A rate limit, a
- * 5xx or a network error leaves the button live, because hiding a working download costs a
- * user who wanted the product, while a button that 404s is recoverable by reloading.
+ * FAILS OPEN: only a well-formed answer that contains no stable release means "nothing
+ * published". A rate limit, a 5xx, a malformed body or a network error all leave the button
+ * live, because hiding a working download costs a user who wanted the product, while a
+ * button that 404s is recoverable by reloading.
  */
 export async function getReleaseState(): Promise<ReleaseState> {
+  // Fails open on anything that is not a clear answer — see the note above.
+  const unknown: ReleaseState = { released: true, version: null, internal: null }
   try {
     const res = await fetch(RELEASES_API, {
       headers: { Accept: 'application/vnd.github+json' },
       next: { revalidate: REVALIDATE_SECONDS },
     })
-    if (res.status === 404) return { released: false, version: null }
-    if (!res.ok) return { released: true, version: null }
-    const rel = await res.json()
-    const tag = (rel?.tag_name || rel?.name || '').replace(/^v/, '')
-    return { released: true, version: tag || null }
+    if (!res.ok) return unknown
+    const list = await res.json()
+    if (!Array.isArray(list)) return unknown
+
+    // GitHub's own definition of "latest": the newest release that is neither a prerelease
+    // nor a draft. Computed here rather than asked for, so that this page and the
+    // `releases/latest/download/` permalink the button points at cannot disagree about
+    // which release is current.
+    const stable = list.find((r) => r && !r.prerelease && !r.draft)
+    const pre = list.find((r) => r && r.prerelease && !r.draft)
+
+    const internal: InternalBuild | null =
+      !stable && pre?.tag_name
+        ? { tag: pre.tag_name, page: `${RELEASES_PAGE}/tag/${pre.tag_name}` }
+        : null
+
+    if (!stable) return { released: false, version: null, internal }
+
+    const tag = (stable.tag_name || stable.name || '').replace(/^v/, '')
+    return { released: true, version: tag || null, internal: null }
   } catch {
-    return { released: true, version: null }
+    return unknown
   }
 }
