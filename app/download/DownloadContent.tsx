@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useLocale } from '@/lib/LocaleProvider'
 import { DOWNLOAD_PATH, MIN_MACOS } from '@/lib/download'
-import { useReleaseAvailable } from '@/lib/useReleaseAvailable'
+import { useRelease } from '@/lib/ReleaseProvider'
 
 // The comment that used to sit here named Murror/CodePet-Clean as the release host. That
 // repo is not the source of truth for this project and nothing deploys from it — the
@@ -25,9 +25,9 @@ export default function DownloadContent() {
   const vi = locale === 'vi'
   const [isMac, setIsMac] = useState(true)
 
-  // Shared with the v3 nav and hero CTA, which ask the same question. See
-  // lib/useReleaseAvailable.ts for why it is optimistic and why the request is deduped.
-  const { released, version } = useReleaseAvailable()
+  // Resolved on the server and handed down; this component never asks. See
+  // lib/releaseServer.ts for why the question cannot be answered in the browser.
+  const { released, version } = useRelease()
 
   useEffect(() => {
     const ua = `${navigator.platform} ${navigator.userAgent}`.toLowerCase()

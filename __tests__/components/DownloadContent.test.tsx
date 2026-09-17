@@ -1,44 +1,31 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import { LocaleProvider } from '@/lib/LocaleProvider'
-import { DOWNLOAD_PATH, DOWNLOAD_TARGET, MIN_MACOS, RELEASES_API } from '@/lib/download'
-import { __resetReleaseCache } from '@/lib/useReleaseAvailable'
+import { DOWNLOAD_PATH, DOWNLOAD_TARGET, MIN_MACOS } from '@/lib/download'
+import { ReleaseProvider } from '@/lib/ReleaseProvider'
 import DownloadContent from '@/app/download/DownloadContent'
 import nextConfig from '../../next.config'
 
 /**
- * Mock the releases endpoint BY URL, and by exact equality rather than a substring.
+ * The release answer now arrives as a VALUE from the server (see lib/releaseServer.ts), so
+ * these render the component under a provider instead of mocking fetch. That is the whole
+ * improvement in miniature: there is no request to intercept and no asynchronous flip to
+ * wait for, because the page is never in the wrong state to begin with.
  *
- * By URL because LocaleProvider also fetches (api.country.is, for geo) — a one-shot
- * `mockResolvedValueOnce` gets spent on whichever request fires first, which silently sends
- * every assertion down the wrong branch. That bug was live in WaitlistForm.test.tsx.
- *
- * By exact equality because `url.includes('api.github.com')` also matches
- * `https://api.github.com.example.com/…`; CodeQL flags it, and it would keep routing here
- * if the component were changed to call a look-alike host, so the test would stop being
- * about the URL it names.
+ * The fetch itself is tested directly in releaseServer.test.ts.
  */
-function mockReleases(status: number, body: unknown = {}) {
-  ;(global.fetch as jest.Mock).mockImplementation((url: unknown) => {
-    if (url === RELEASES_API) {
-      return Promise.resolve({ status, ok: status === 200, json: async () => body })
-    }
-    return Promise.resolve({ ok: true, status: 200, json: async () => ({ country: 'US' }) })
-  })
-}
+let release = { released: true, version: '1.0-build2' as string | null }
 
 beforeEach(() => {
   global.fetch = jest.fn()
-  // The release query is deduped at module scope so one page load makes one request. That
-  // cache also spans TESTS, so without this reset the first case's answer is served to
-  // every case after it — and the unreleased ones silently assert against a released page.
-  __resetReleaseCache()
-  mockReleases(200, { tag_name: 'v1.0-build2' })
+  release = { released: true, version: '1.0-build2' }
 })
 
 function renderPage(locale: 'en' | 'vi' = 'en') {
   return render(
     <LocaleProvider initialLocale={locale}>
-      <DownloadContent />
+      <ReleaseProvider value={release}>
+        <DownloadContent />
+      </ReleaseProvider>
     </LocaleProvider>,
   )
 }
@@ -98,7 +85,7 @@ describe('when no release has been published', () => {
   // permalink 404s. A button that 404s does not read as "unreleased" — it reads as a broken
   // product, with nowhere to go next.
   test('replaces the button with an honest message and somewhere to go', async () => {
-    mockReleases(404)
+    release = { released: false, version: null }
     renderPage()
     await waitFor(() => {
       expect(screen.getByText(/Not released yet/i)).toBeInTheDocument()
@@ -110,11 +97,11 @@ describe('when no release has been published', () => {
     )
   })
 
-  test('a rate-limited API leaves the button live', async () => {
-    // Fails OPEN. The API is unauthenticated (60/hour per IP) and the steady state of this
-    // page is that a release exists — hiding a working download because GitHub throttled us
-    // is the worse mistake of the two.
-    mockReleases(403)
+  test('an unknown version still shows the button', async () => {
+    // What a rate limit or a 5xx produces on the server: released stays true, version is
+    // unknown. The download must survive that — hiding it costs a user who wanted the
+    // product, while a stale button is recoverable by reloading.
+    release = { released: true, version: null }
     renderPage()
     await waitFor(() => {
       expect(screen.getByRole('link', { name: /Download for macOS/i })).toBeInTheDocument()
@@ -122,26 +109,7 @@ describe('when no release has been published', () => {
     expect(screen.queryByText(/Not released yet/i)).toBeNull()
   })
 
-  test('a network error leaves the button live too', async () => {
-    ;(global.fetch as jest.Mock).mockImplementation((url: unknown) =>
-      url === RELEASES_API
-        ? Promise.reject(new Error('offline'))
-        : Promise.resolve({ ok: true, status: 200, json: async () => ({ country: 'US' }) }),
-    )
-    renderPage()
-    await waitFor(() => {
-      expect(screen.getByRole('link', { name: /Download for macOS/i })).toBeInTheDocument()
-    })
-  })
 
-  test('renders the button first rather than flashing "not yet"', () => {
-    // Optimistic on purpose: almost every future visit happens when a release DOES exist,
-    // so starting pessimistic shows the wrong answer to everyone forever to be briefly
-    // right today.
-    mockReleases(404)
-    renderPage()
-    expect(screen.getByRole('link', { name: /Download for macOS/i })).toBeInTheDocument()
-  })
 })
 
 describe('the instructions a user actually needs', () => {
@@ -178,7 +146,7 @@ describe('Vietnamese', () => {
   test('translates the unreleased state too', async () => {
     // The state most likely to ship untranslated, because it is the one nobody sees while
     // developing against a repo that has releases.
-    mockReleases(404)
+    release = { released: false, version: null }
     renderPage('vi')
     await waitFor(() => {
       expect(screen.getByText(/Chưa phát hành/)).toBeInTheDocument()

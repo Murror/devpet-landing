@@ -1,6 +1,7 @@
-import { render, screen, waitFor, fireEvent } from '@testing-library/react'
-import { RELEASES_API, DOWNLOAD_PAGE } from '@/lib/download'
-import { __resetReleaseCache } from '@/lib/useReleaseAvailable'
+import { render, screen, fireEvent } from '@testing-library/react'
+import { DOWNLOAD_PAGE } from '@/lib/download'
+import { ReleaseProvider, useRelease } from '@/lib/ReleaseProvider'
+import type { ReleaseState } from '@/lib/releaseServer'
 import Nav from '@/app/v3/components/Nav'
 import HeroCta from '@/app/v3/components/HeroCta'
 
@@ -9,26 +10,23 @@ import HeroCta from '@/app/v3/components/HeroCta'
  * was reachable only by typing the URL, which is the same as not existing. These cover the
  * two entry points added for that, and the rule they share: they appear only once a build
  * is actually published.
+ *
+ * The state arrives as a value from the server, so there is nothing to mock and nothing
+ * asynchronous to wait for. Every assertion below is on the FIRST render, which is the
+ * property that matters: the previous version shipped the wrong CTA and corrected it after
+ * hydration.
  */
-function mockReleases(status: number, body: unknown = { tag_name: 'v1.0-build2' }) {
-  ;(global.fetch as jest.Mock).mockImplementation((url: unknown) =>
-    url === RELEASES_API
-      ? Promise.resolve({ status, ok: status === 200, json: async () => body })
-      : Promise.resolve({ ok: true, status: 200, json: async () => ({ country: 'US' }) }),
-  )
+const RELEASED: ReleaseState = { released: true, version: '1.0-build2' }
+const UNRELEASED: ReleaseState = { released: false, version: null }
+
+function renderWith(value: ReleaseState, ui: React.ReactNode) {
+  return render(<ReleaseProvider value={value}>{ui}</ReleaseProvider>)
 }
 
-beforeEach(() => {
-  global.fetch = jest.fn()
-  // Without this the module-level dedupe cache carries one test's answer into the next.
-  __resetReleaseCache()
-  mockReleases(200)
-})
-
 describe('the v3 nav', () => {
-  test('offers Download once a build exists', async () => {
-    render(<Nav />)
-    const links = await screen.findAllByRole('link', { name: 'Download' })
+  test('offers Download once a build exists', () => {
+    renderWith(RELEASED, <Nav />)
+    const links = screen.getAllByRole('link', { name: 'Download' })
     expect(links.length).toBeGreaterThan(0)
     // The PAGE, not the .dmg: it carries the install steps, the Gatekeeper note and the
     // Claude Code prerequisite. A visitor dropped straight onto a 30MB file gets none of it.
@@ -36,104 +34,65 @@ describe('the v3 nav', () => {
     expect(links.some((l) => l.getAttribute('href')!.endsWith('.dmg'))).toBe(false)
   })
 
-  test('reaches phones as well as desktop', async () => {
-    // The hamburger drawer is the ONLY nav below 760px. An entry that exists solely in the
-    // desktop pill is invisible to every mobile visitor — which is most of them.
-    //
-    // The drawer carries `aria-hidden` while closed (main's own pattern for every nav
-    // link), so it is absent from the accessibility tree until opened. Opening it is both
-    // what a phone user does and the only way to see what they would see.
-    render(<Nav />)
-    await screen.findAllByRole('link', { name: 'Download' })
+  test('reaches phones as well as desktop', () => {
+    // The hamburger drawer is the ONLY nav below 760px, so an entry in the desktop pill
+    // alone is invisible to most visitors. The drawer carries `aria-hidden` while closed
+    // (main's own pattern), so opening it is both what a phone user does and the only way
+    // to see what they would see.
+    renderWith(RELEASED, <Nav />)
     fireEvent.click(screen.getByRole('button', { name: /open menu/i }))
-    await waitFor(() => {
-      expect(screen.getAllByRole('link', { name: 'Download' })).toHaveLength(2)
-    })
+    expect(screen.getAllByRole('link', { name: 'Download' })).toHaveLength(2)
   })
 
-  test('hides it while nothing is published', async () => {
-    mockReleases(404)
-    render(<Nav />)
-    await waitFor(() => {
-      expect(screen.queryByRole('link', { name: 'Download' })).toBeNull()
-    })
+  test('hides it while nothing is published', () => {
+    renderWith(UNRELEASED, <Nav />)
+    expect(screen.queryByRole('link', { name: 'Download' })).toBeNull()
   })
 })
 
 describe('the v3 hero CTA', () => {
-  test('leads with the download once a build exists', async () => {
-    render(<HeroCta />)
-    const primary = await screen.findByRole('link', { name: /Download for macOS/i })
+  test('leads with the download once a build exists', () => {
+    renderWith(RELEASED, <HeroCta />)
+    const primary = screen.getByRole('link', { name: /Download for macOS/i })
     expect(primary).toHaveAttribute('href', DOWNLOAD_PAGE)
     expect(primary.className).toContain('v3-btn--primary')
   })
 
-  test('keeps the waitlist reachable after the flip', async () => {
+  test('keeps the waitlist reachable after the flip', () => {
     // Someone on Windows, or without the prerequisites to hand, still needs a way to say
     // "tell me more" rather than bouncing off a button they cannot use.
-    render(<HeroCta />)
-    await screen.findByRole('link', { name: /Download for macOS/i })
+    renderWith(RELEASED, <HeroCta />)
     expect(screen.getByRole('button', { name: /Join the waitlist/i })).toBeInTheDocument()
   })
 
-  test('drops the "Sign Up" ghost, whose note stops being true', async () => {
+  test('drops the "Sign Up" ghost, whose note stops being true', () => {
     // It revealed a "launching soon" message — false from the moment there is something to
     // launch, which is the same moment this flip happens.
-    render(<HeroCta />)
-    await screen.findByRole('link', { name: /Download for macOS/i })
+    renderWith(RELEASED, <HeroCta />)
     expect(screen.queryByRole('button', { name: /^Sign Up$/i })).toBeNull()
   })
 
-  test('stays on the waitlist while nothing is published', async () => {
-    mockReleases(404)
-    render(<HeroCta />)
-    await waitFor(() => {
-      expect(screen.getByRole('button', { name: /Join the waitlist/i })).toBeInTheDocument()
-    })
+  test('stays on the waitlist while nothing is published — on the FIRST render', () => {
+    // The bug this replaces: the server sent "Download for macOS" as the primary CTA with
+    // no build in existence, and only the client corrected it. Measured on production.
+    // Asserting synchronously is the test; anything that needed `waitFor` would mean the
+    // wrong CTA had been painted first.
+    renderWith(UNRELEASED, <HeroCta />)
+    expect(screen.getByRole('button', { name: /Join the waitlist/i })).toBeInTheDocument()
     expect(screen.queryByRole('link', { name: /Download for macOS/i })).toBeNull()
     // The pre-launch pairing is untouched: waitlist primary, "Sign Up" ghost.
     expect(screen.getByRole('button', { name: /^Sign Up$/i })).toBeInTheDocument()
   })
 })
 
-describe('the shared release query', () => {
-  test('is made once for the whole page, not once per component', async () => {
-    // Three components ask this question and the GitHub API is unauthenticated — 60 requests
-    // per hour per IP. Three fetches per page load spends that budget three times as fast
-    // for no extra information, and on a shared or carrier IP the limit is reached by
-    // visitors who are not the same person.
-    render(
-      <>
-        <Nav />
-        <HeroCta />
-      </>,
-    )
-    await screen.findAllByRole('link', { name: 'Download' })
-    const releaseCalls = (global.fetch as jest.Mock).mock.calls.filter(
-      ([url]) => url === RELEASES_API,
-    )
-    expect(releaseCalls).toHaveLength(1)
-  })
-
-  test('a rate limit leaves both entry points live', async () => {
-    // Fails OPEN. Hiding a working download because GitHub throttled one request loses a
-    // user who wanted the product; a button that 404s once is recoverable by reloading.
-    mockReleases(403)
-    render(<HeroCta />)
-    await waitFor(() => {
-      expect(screen.getByRole('link', { name: /Download for macOS/i })).toBeInTheDocument()
-    })
-  })
-
-  test('a network error leaves them live too', async () => {
-    ;(global.fetch as jest.Mock).mockImplementation((url: unknown) =>
-      url === RELEASES_API
-        ? Promise.reject(new Error('offline'))
-        : Promise.resolve({ ok: true, status: 200, json: async () => ({ country: 'US' }) }),
-    )
-    render(<HeroCta />)
-    await waitFor(() => {
-      expect(screen.getByRole('link', { name: /Download for macOS/i })).toBeInTheDocument()
-    })
+describe('the provider', () => {
+  test('refuses to render a consumer without one', () => {
+    // Defaulting to `{ released: true }` would turn a forgotten provider into a permanent,
+    // silent Download button on a page with nothing to download — the exact failure this
+    // change removes. It must not be reachable by omission.
+    const Consumer = () => <>{String(useRelease().released)}</>
+    const spy = jest.spyOn(console, 'error').mockImplementation(() => {})
+    expect(() => render(<Consumer />)).toThrow(/ReleaseProvider/)
+    spy.mockRestore()
   })
 })

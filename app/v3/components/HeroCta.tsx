@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, type FormEvent } from 'react'
 import Link from 'next/link'
 import Magnetic from './Magnetic'
 import { HERO } from '../content'
-import { useReleaseAvailable } from '@/lib/useReleaseAvailable'
+import { useRelease } from '@/lib/ReleaseProvider'
 import { DOWNLOAD_PAGE } from '@/lib/download'
 
 /**
@@ -37,8 +37,7 @@ export default function HeroCta() {
   // note instead of navigating anywhere. The note auto-dismisses after ~1s.
   const [showSoon, setShowSoon] = useState(false)
   const soonTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
-  // Shared with the nav and the /download page — one request per page load.
-  const { released } = useReleaseAvailable()
+  const { released } = useRelease()
 
   useEffect(() => () => { if (soonTimer.current) clearTimeout(soonTimer.current) }, [])
 

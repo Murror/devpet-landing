@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { NAV } from '../content'
-import { useReleaseAvailable } from '@/lib/useReleaseAvailable'
+import { useRelease } from '@/lib/ReleaseProvider'
 import { DOWNLOAD_PAGE } from '@/lib/download'
 
 /**
@@ -22,7 +22,7 @@ import { DOWNLOAD_PAGE } from '@/lib/download'
  */
 export default function Nav() {
   const [open, setOpen] = useState(false)
-  const { released } = useReleaseAvailable()
+  const { released } = useRelease()
 
   return (
     <div className={`v3-nav-wrap${open ? ' is-open' : ''}`}>
