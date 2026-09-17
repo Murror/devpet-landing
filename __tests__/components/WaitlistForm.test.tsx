@@ -24,9 +24,13 @@ global.fetch = jest.fn()
  * error state is what a broken mock produces. A test that cannot fail is worse than a
  * missing one, because it is counted.
  */
+const GEO_API = 'https://api.country.is'
+
 function mockWaitlist(response: unknown) {
   ;(global.fetch as jest.Mock).mockImplementation((url: unknown) => {
-    if (typeof url === 'string' && url.includes('api.country.is')) {
+    // Exact match, not a substring: see the note in DownloadPage.test.tsx. This is the
+    // URL LocaleProvider actually requests.
+    if (url === GEO_API) {
       return Promise.resolve({ ok: true, status: 200, json: async () => ({ country: 'US' }) })
     }
     return Promise.resolve(response)

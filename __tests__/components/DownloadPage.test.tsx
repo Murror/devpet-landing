@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import { LocaleProvider } from '@/lib/LocaleProvider'
-import { DOWNLOAD_PATH, DOWNLOAD_TARGET, MIN_MACOS } from '@/lib/download'
+import { DOWNLOAD_PATH, DOWNLOAD_TARGET, MIN_MACOS, RELEASES_API } from '@/lib/download'
 import DownloadPage from '@/app/download/DownloadPage'
 import { Bold } from '@/app/download/Bold'
 import en from '@/lib/i18n/en.json'
@@ -17,7 +17,12 @@ import nextConfig from '../../next.config'
  */
 function mockReleases(status: number) {
   ;(global.fetch as jest.Mock).mockImplementation((url: unknown) => {
-    if (typeof url === 'string' && url.includes('api.github.com')) {
+    // Exact equality against the imported constant, not `.includes('api.github.com')`.
+    // A substring test also matches `https://api.github.com.example.com/…`, which CodeQL
+    // flags as incomplete URL sanitization — correctly, even in a mock: it means the test
+    // would keep routing here if the page were changed to call a look-alike host, so the
+    // assertion would no longer be about the URL it claims to be about.
+    if (url === RELEASES_API) {
       return Promise.resolve({ status, ok: status === 200, json: async () => ({}) })
     }
     return Promise.resolve({ ok: true, status: 200, json: async () => ({ country: 'US' }) })
@@ -194,7 +199,7 @@ describe('when no release has been published', () => {
 
   test('a network error leaves the button live too', async () => {
     ;(global.fetch as jest.Mock).mockImplementation((url: unknown) =>
-      typeof url === 'string' && url.includes('api.github.com')
+      url === RELEASES_API
         ? Promise.reject(new Error('offline'))
         : Promise.resolve({ ok: true, status: 200, json: async () => ({ country: 'US' }) }),
     )
