@@ -3,11 +3,12 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useLocale } from '@/lib/LocaleProvider'
+import { DOWNLOAD_PATH, MIN_MACOS, RELEASES_API } from '@/lib/download'
 
-// Stable branded URL — redirects (see next.config.ts) to the latest GitHub
-// release asset on Murror/CodePet-Clean. Resolves once the first release is
-// published via scripts/release-github.sh (in the app repo).
-const DMG_URL = '/download/Codepet.dmg'
+// The comment that used to sit here named Murror/CodePet-Clean as the release host. That
+// repo is not the source of truth for this project and nothing deploys from it — the
+// release lives on My-Outcasts/codepet. See lib/download.ts, which now holds the URL once
+// so this file and next.config.ts cannot drift.
 
 const AppleGlyph = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -23,9 +24,45 @@ export default function DownloadContent() {
   const vi = locale === 'vi'
   const [isMac, setIsMac] = useState(true)
 
+  // Whether a build actually exists to download. Starts true — optimistic on purpose:
+  // almost every future visit happens when a release DOES exist, so starting pessimistic
+  // would flash the wrong answer at everyone forever to be briefly right today.
+  //
+  // Only a definitive 404 flips it. A rate limit (the API is unauthenticated, 60/hour per
+  // IP), a network failure or an offline browser all leave the button alone, because hiding
+  // a working download is the worse of the two mistakes.
+  const [released, setReleased] = useState(true)
+
+  // The published version, read from the same response. This replaced a hardcoded
+  // "1.0 (build 2)" — a literal that is correct only until the next release and wrong
+  // silently thereafter, on the one page whose whole job is to hand over the current build.
+  const [version, setVersion] = useState<string | null>(null)
+
   useEffect(() => {
     const ua = `${navigator.platform} ${navigator.userAgent}`.toLowerCase()
     setIsMac(ua.includes('mac'))
+  }, [])
+
+  useEffect(() => {
+    let cancelled = false
+    fetch(RELEASES_API, { headers: { Accept: 'application/vnd.github+json' } })
+      .then(async (res) => {
+        if (cancelled) return
+        if (res.status === 404) {
+          setReleased(false)
+          return
+        }
+        if (!res.ok) return
+        const rel = await res.json()
+        const tag = (rel?.tag_name || rel?.name || '').replace(/^v/, '')
+        if (!cancelled && tag) setVersion(tag)
+      })
+      .catch(() => {
+        /* offline or blocked: keep the button */
+      })
+    return () => {
+      cancelled = true
+    }
   }, [])
 
   const steps = vi
@@ -61,16 +98,42 @@ export default function DownloadContent() {
         </p>
 
         <div className="mt-10 flex flex-col items-center gap-3">
-          <a
-            href={DMG_URL}
-            className="inline-flex items-center gap-2.5 rounded-2xl bg-primary px-8 py-4 text-base font-semibold text-white no-underline shadow-[0_4px_0_#2D2466] transition hover:translate-y-px hover:shadow-[0_3px_0_#2D2466]"
-          >
-            <AppleGlyph />
-            Download for macOS
-          </a>
-          <p className="text-sm text-muted">
-            {vi ? 'Yêu cầu macOS 13 trở lên · Miễn phí' : 'Requires macOS 13 or later · Free'}
-          </p>
+          {released ? (
+            <>
+              <a
+                href={DOWNLOAD_PATH}
+                className="inline-flex items-center gap-2.5 rounded-2xl bg-primary px-8 py-4 text-base font-semibold text-white no-underline shadow-[0_4px_0_#2D2466] transition hover:translate-y-px hover:shadow-[0_3px_0_#2D2466]"
+              >
+                <AppleGlyph />
+                Download for macOS
+              </a>
+              <p className="text-sm text-muted">
+                {vi
+                  ? `Yêu cầu macOS ${MIN_MACOS} trở lên · Miễn phí`
+                  : `Requires macOS ${MIN_MACOS} or later · Free`}
+              </p>
+            </>
+          ) : (
+            /* No published build yet. Deliberately not a disabled-looking download button:
+               the visitor came here to get something, and a dead end is a worse answer than
+               an honest one plus somewhere to go. */
+            <div className="w-full max-w-md rounded-2xl border border-border bg-surface p-6 text-left">
+              <p className="font-semibold text-heading">
+                {vi ? 'Chưa phát hành' : 'Not released yet'}
+              </p>
+              <p className="mt-2 text-sm text-text">
+                {vi
+                  ? 'Bản dựng công khai đầu tiên đang được chuẩn bị. Để lại email và chúng tôi sẽ báo bạn ngay ngày nó lên.'
+                  : 'The first public build is being prepared. Join the waitlist and we will tell you the day it lands.'}
+              </p>
+              <Link
+                href="/#waitlist"
+                className="mt-4 inline-flex items-center rounded-2xl bg-primary px-6 py-3 text-sm font-semibold text-white no-underline shadow-[0_4px_0_#2D2466] transition hover:translate-y-px hover:shadow-[0_3px_0_#2D2466]"
+              >
+                {vi ? 'Đăng ký nhận tin' : 'Join the waitlist'}
+              </Link>
+            </div>
+          )}
           {!isMac && (
             <p className="text-sm font-medium text-primary">
               {vi ? 'Codepet hiện chỉ có trên macOS.' : 'Codepet is currently available for macOS only.'}
@@ -78,7 +141,11 @@ export default function DownloadContent() {
           )}
         </div>
 
-        <p className="mt-3 text-xs text-muted">{vi ? 'Phiên bản' : 'Version'} 1.0 (build 2)</p>
+        {released && version && (
+          <p className="mt-3 text-xs text-muted">
+            {vi ? 'Phiên bản' : 'Version'} {version}
+          </p>
+        )}
 
         <section className="mt-14 w-full rounded-2xl border border-border bg-surface p-6 text-left">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-muted">
@@ -102,6 +169,25 @@ export default function DownloadContent() {
               ? 'Codepet đã được Apple công chứng (notarized) — đây chỉ là xác nhận một lần, không có cảnh báo “unidentified developer”.'
               : 'Codepet is notarized by Apple, so this is just a one-time confirmation — no “unidentified developer” warning.'}
           </p>
+        </section>
+
+        <section className="mt-6 w-full rounded-2xl border border-primary-tint bg-primary-tint/40 p-6 text-left">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-muted">
+            {vi ? 'Trước khi bắt đầu' : 'Before you start'}
+          </h2>
+          <p className="mt-3 text-sm text-text">
+            {vi
+              ? 'Codepet chạy phần AI trên Claude Code của chính bạn, không phải trên máy chủ của chúng tôi — code và dữ liệu công ty của bạn không rời khỏi máy, và chúng tôi không tính phí sử dụng. Đổi lại, bạn cần cài sẵn Claude Code đã đăng nhập, cùng với Node.js. Thiếu chúng thì app vẫn mở được và báo rõ đang thiếu gì.'
+              : 'Codepet runs its AI work on your own Claude Code, not on our servers — your code and your company never leave your machine, and there is no usage bill from us. That means you need Claude Code installed and signed in, plus Node.js. Without them the app still opens and tells you what is missing.'}
+          </p>
+          <a
+            href="https://claude.com/claude-code"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 inline-block text-sm font-semibold text-primary"
+          >
+            {vi ? 'Cài Claude Code' : 'Get Claude Code'} →
+          </a>
         </section>
 
         <p className="mt-8 text-sm text-muted">

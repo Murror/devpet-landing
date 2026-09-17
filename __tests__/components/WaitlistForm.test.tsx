@@ -11,6 +11,32 @@ function renderForm() {
 
 global.fetch = jest.fn()
 
+/**
+ * Mock the waitlist endpoint BY URL rather than by call order.
+ *
+ * `mockResolvedValueOnce` was the bug. LocaleProvider fetches `api.country.is` on mount to
+ * detect the visitor's locale, and that call happens FIRST — so the one-shot mock was spent
+ * on geo detection, WaitlistForm's own fetch got `jest.fn()`'s default `undefined`, and
+ * `res.json()` threw into the component's catch. Every test here landed in the error state
+ * no matter what it had mocked.
+ *
+ * That made the 500 test pass for the wrong reason: it asserts the error state, and the
+ * error state is what a broken mock produces. A test that cannot fail is worse than a
+ * missing one, because it is counted.
+ */
+const GEO_API = 'https://api.country.is'
+
+function mockWaitlist(response: unknown) {
+  ;(global.fetch as jest.Mock).mockImplementation((url: unknown) => {
+    // Exact match, not a substring: see the note in DownloadPage.test.tsx. This is the
+    // URL LocaleProvider actually requests.
+    if (url === GEO_API) {
+      return Promise.resolve({ ok: true, status: 200, json: async () => ({ country: 'US' }) })
+    }
+    return Promise.resolve(response)
+  })
+}
+
 afterEach(() => jest.clearAllMocks())
 
 test('renders email input and submit button', () => {
@@ -24,11 +50,13 @@ test('shows validation error for invalid email', async () => {
   renderForm()
   await user.type(screen.getByPlaceholderText('your@email.com'), 'notanemail')
   fireEvent.click(screen.getByRole('button', { name: /join waitlist/i }))
-  expect(await screen.findByText('Please enter a valid email address.')).toBeInTheDocument()
+  // Copy, not behaviour: `form.errorValidation` in en.json is "Invalid email." — the
+  // longer sentence this used to assert is gone.
+  expect(await screen.findByText('Invalid email.')).toBeInTheDocument()
 })
 
 test('shows success message on 200 response', async () => {
-  ;(global.fetch as jest.Mock).mockResolvedValueOnce({
+    mockWaitlist({
     ok: true,
     status: 200,
     json: async () => ({ success: true }),
@@ -37,14 +65,20 @@ test('shows success message on 200 response', async () => {
   renderForm()
   await user.type(screen.getByPlaceholderText('your@email.com'), 'user@example.com')
   fireEvent.click(screen.getByRole('button', { name: /join waitlist/i }))
-  expect(await screen.findByText(/you're on the list/i)).toBeInTheDocument()
+  // Same: `form.success` now reads "You're in! We'll keep you posted."
+  expect(await screen.findByText(/you're in/i)).toBeInTheDocument()
 })
 
 test('shows duplicate message on 409 response', async () => {
-  ;(global.fetch as jest.Mock).mockResolvedValueOnce({
-    ok: false,
-    status: 409,
-    json: async () => ({ error: 'Already on the waitlist' }),
+  // The CONTRACT changed, not just the words. `app/api/waitlist/route.ts:71` answers a
+  // duplicate with HTTP 200 and `{ status: 'duplicate' }` in the body; the 409-plus-`error`
+  // shape this used to mock no longer exists anywhere. WaitlistForm keys off `data.status`,
+  // so the old mock fell through to the generic error branch — the component was right and
+  // the test was describing a dead API.
+    mockWaitlist({
+    ok: true,
+    status: 200,
+    json: async () => ({ status: 'duplicate' }),
   })
   const user = userEvent.setup()
   renderForm()
@@ -54,7 +88,7 @@ test('shows duplicate message on 409 response', async () => {
 })
 
 test('shows server error message on 500 response', async () => {
-  ;(global.fetch as jest.Mock).mockResolvedValueOnce({
+    mockWaitlist({
     ok: false,
     status: 500,
     json: async () => ({ error: 'Something went wrong' }),

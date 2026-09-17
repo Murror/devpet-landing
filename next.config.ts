@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { DOWNLOAD_PATH, DOWNLOAD_TARGET } from "./lib/download";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
@@ -38,10 +39,13 @@ const nextConfig: NextConfig = {
       // website button points here (code-pet.com/download/Codepet.dmg) so it
       // never changes per release; only the GitHub release gets updated.
       // `permanent: false` (307) keeps the host swappable later.
+      //
+      // The two values come from lib/download.ts, which the /download page imports too.
+      // They have to agree — a page whose button points somewhere this rule does not cover
+      // is a 404 while both files look individually correct.
       {
-        source: '/download/Codepet.dmg',
-        destination:
-          'https://github.com/My-Outcasts/codepet/releases/latest/download/Codepet.dmg',
+        source: DOWNLOAD_PATH,
+        destination: DOWNLOAD_TARGET,
         permanent: false,
       },
     ]

@@ -7,7 +7,7 @@ import DownloadContent from './DownloadContent'
 export const metadata: Metadata = {
   title: 'Download Codepet for macOS',
   description:
-    'Download Codepet — your AI coding companion for macOS. Free, requires macOS 13 or later.',
+    'Download Codepet — your AI coding companion for macOS. Free, requires macOS 26.2 or later.',
 }
 
 export default function DownloadPage() {
