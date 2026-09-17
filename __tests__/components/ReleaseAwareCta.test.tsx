@@ -16,15 +16,15 @@ import HeroCta from '@/app/v3/components/HeroCta'
  * property that matters: the previous version shipped the wrong CTA and corrected it after
  * hydration.
  */
-const RELEASED: ReleaseState = { released: true, version: '1.0-build2' }
-const UNRELEASED: ReleaseState = { released: false, version: null }
+const RELEASED: ReleaseState = { released: true, version: '1.0-build2', internal: null }
+const UNRELEASED: ReleaseState = { released: false, version: null, internal: null }
 
 function renderWith(value: ReleaseState, ui: React.ReactNode) {
   return render(<ReleaseProvider value={value}>{ui}</ReleaseProvider>)
 }
 
 describe('the v3 nav', () => {
-  test('offers Download once a build exists', () => {
+  test('links to the page, not the file', () => {
     renderWith(RELEASED, <Nav />)
     const links = screen.getAllByRole('link', { name: 'Download' })
     expect(links.length).toBeGreaterThan(0)
@@ -44,9 +44,12 @@ describe('the v3 nav', () => {
     expect(screen.getAllByRole('link', { name: 'Download' })).toHaveLength(2)
   })
 
-  test('hides it while nothing is published', () => {
+  test('is there even while nothing is published', () => {
+    // It was gated, and the result was a site with no visible way to reach /download at
+    // all during the entire pre-launch window. A nav entry is navigation, not a promise —
+    // the page it leads to is where the honest answer lives.
     renderWith(UNRELEASED, <Nav />)
-    expect(screen.queryByRole('link', { name: 'Download' })).toBeNull()
+    expect(screen.getAllByRole('link', { name: 'Download' }).length).toBeGreaterThan(0)
   })
 })
 

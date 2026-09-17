@@ -62,5 +62,14 @@ export const MIN_MACOS = '26.2'
  * hiding a working download because an API call was throttled is the worse mistake. Only a
  * definitive 404 swaps the page into its unreleased state.
  */
+/**
+ * The release LIST, not `/releases/latest`.
+ *
+ * One request now answers two questions: is there a public build (the newest entry that is
+ * neither a prerelease nor a draft — GitHub's own definition of "latest", computed here so
+ * the page and the permalink cannot disagree), and is there an internal test build (the
+ * newest prerelease). Asking `/releases/latest` could only answer the first, and it answers
+ * it with a 404 that is indistinguishable from the repo having no releases at all.
+ */
 export const RELEASES_API =
-  'https://api.github.com/repos/My-Outcasts/codepet/releases/latest'
+  'https://api.github.com/repos/My-Outcasts/codepet/releases?per_page=20'

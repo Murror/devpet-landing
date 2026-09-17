@@ -2,6 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react'
 import { LocaleProvider } from '@/lib/LocaleProvider'
 import { DOWNLOAD_PATH, DOWNLOAD_TARGET, MIN_MACOS } from '@/lib/download'
 import { ReleaseProvider } from '@/lib/ReleaseProvider'
+import type { ReleaseState } from '@/lib/releaseServer'
 import DownloadContent from '@/app/download/DownloadContent'
 import nextConfig from '../../next.config'
 
@@ -13,11 +14,11 @@ import nextConfig from '../../next.config'
  *
  * The fetch itself is tested directly in releaseServer.test.ts.
  */
-let release = { released: true, version: '1.0-build2' as string | null }
+let release: ReleaseState = { released: true, version: '1.0-build2', internal: null }
 
 beforeEach(() => {
   global.fetch = jest.fn()
-  release = { released: true, version: '1.0-build2' }
+  release = { released: true, version: '1.0-build2', internal: null }
 })
 
 function renderPage(locale: 'en' | 'vi' = 'en') {
@@ -85,7 +86,7 @@ describe('when no release has been published', () => {
   // permalink 404s. A button that 404s does not read as "unreleased" — it reads as a broken
   // product, with nowhere to go next.
   test('replaces the button with an honest message and somewhere to go', async () => {
-    release = { released: false, version: null }
+    release = { released: false, version: null, internal: null }
     renderPage()
     await waitFor(() => {
       expect(screen.getByText(/Not released yet/i)).toBeInTheDocument()
@@ -101,7 +102,7 @@ describe('when no release has been published', () => {
     // What a rate limit or a 5xx produces on the server: released stays true, version is
     // unknown. The download must survive that — hiding it costs a user who wanted the
     // product, while a stale button is recoverable by reloading.
-    release = { released: true, version: null }
+    release = { released: true, version: null, internal: null }
     renderPage()
     await waitFor(() => {
       expect(screen.getByRole('link', { name: /Download for macOS/i })).toBeInTheDocument()
@@ -146,7 +147,7 @@ describe('Vietnamese', () => {
   test('translates the unreleased state too', async () => {
     // The state most likely to ship untranslated, because it is the one nobody sees while
     // developing against a repo that has releases.
-    release = { released: false, version: null }
+    release = { released: false, version: null, internal: null }
     renderPage('vi')
     await waitFor(() => {
       expect(screen.getByText(/Chưa phát hành/)).toBeInTheDocument()
@@ -156,5 +157,45 @@ describe('Vietnamese', () => {
   test('translates the Claude Code prerequisite', async () => {
     renderPage('vi')
     expect(await screen.findByText(/Claude Code của chính bạn/)).toBeInTheDocument()
+  })
+})
+
+describe('the internal test build', () => {
+  const INTERNAL = {
+    tag: 'v1.0-build2-internal',
+    page: 'https://github.com/My-Outcasts/codepet/releases/tag/v1.0-build2-internal',
+  }
+
+  test('is offered, with the quarantine step, while no public build exists', () => {
+    release = { released: false, version: null, internal: INTERNAL }
+    renderPage()
+    expect(screen.getByText(/Internal test build/i)).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /Get the test build/i })).toHaveAttribute(
+      'href',
+      INTERNAL.page,
+    )
+    // Undiscoverable otherwise: anything arriving by download is quarantined, and this
+    // build is not notarized, so without the command it simply will not open.
+    expect(screen.getByText(/xattr -dr com\.apple\.quarantine/)).toBeInTheDocument()
+  })
+
+  test('says who it will NOT work for, before the link', () => {
+    // "damaged or incomplete" is what an unregistered Mac shows. Read without warning it
+    // looks like a corrupt file rather than a device that was never on the list.
+    release = { released: false, version: null, internal: INTERNAL }
+    renderPage()
+    expect(screen.getByText(/damaged or incomplete/i)).toBeInTheDocument()
+  })
+
+  test('is translated', () => {
+    release = { released: false, version: null, internal: INTERNAL }
+    renderPage('vi')
+    expect(screen.getByText(/Bản thử nội bộ/)).toBeInTheDocument()
+  })
+
+  test('is absent when there is none', () => {
+    release = { released: false, version: null, internal: null }
+    renderPage()
+    expect(screen.queryByText(/Internal test build/i)).toBeNull()
   })
 })
