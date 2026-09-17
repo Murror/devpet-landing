@@ -109,7 +109,7 @@ export default function GetGood() {
             outline, inner <span> owns the clip-path silhouette and
             the blue body fill. */}
         <a
-          href="#waitlist"
+          href="#product"
           className="v2-getgood-cta"
           aria-label={t.v2.getGood.ctaAria}
         >

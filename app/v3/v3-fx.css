@@ -1,0 +1,1104 @@
+/* ============================================================
+   /v3 — effects layer (awwwards-grade polish)
+   Atmosphere (grain + nebula), marquee, hero product window,
+   3D tilt, richer department cards, image reveals.
+   Loaded after v3.css.
+   ============================================================ */
+
+/* ── Atmosphere: drifting nebula glows + film grain ── */
+.v3-atmos {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.v3-nebula {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.5;
+  will-change: transform;
+}
+.v3-nebula--a {
+  width: 60vw; height: 60vw;
+  top: -18vw; left: -12vw;
+  background: radial-gradient(circle, rgba(124,58,237,0.5), transparent 62%);
+  animation: v3-drift-a 26s ease-in-out infinite;
+}
+.v3-nebula--b {
+  width: 52vw; height: 52vw;
+  top: 38%; right: -16vw;
+  background: radial-gradient(circle, rgba(37,99,235,0.4), transparent 62%);
+  animation: v3-drift-b 32s ease-in-out infinite;
+}
+.v3-nebula--c {
+  width: 46vw; height: 46vw;
+  bottom: -16vw; left: 26%;
+  background: radial-gradient(circle, rgba(255,107,157,0.28), transparent 62%);
+  animation: v3-drift-c 38s ease-in-out infinite;
+}
+@keyframes v3-drift-a { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(8vw,6vw) scale(1.12); } }
+@keyframes v3-drift-b { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-7vw,-5vw) scale(1.1); } }
+@keyframes v3-drift-c { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(5vw,-7vw) scale(1.15); } }
+
+/* Film grain — fractal noise SVG, tiled, subtly animated. */
+.v3-grain {
+  position: fixed;
+  inset: -50%;
+  z-index: 1;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: v3-grain-shift 0.7s steps(3) infinite;
+}
+@keyframes v3-grain-shift {
+  0% { transform: translate(0,0); }
+  33% { transform: translate(-3%, 2%); }
+  66% { transform: translate(2%, -3%); }
+  100% { transform: translate(0,0); }
+}
+
+/* Keep page content above the atmosphere layers. */
+.v3 main { position: relative; z-index: 2; }
+
+/* ── Headline mask reveal (load) ── */
+.v3-line-mask { overflow: hidden; display: block; }
+.v3-line-mask > span {
+  display: inline-block;
+  transform: translateY(110%);
+  animation: v3-line-rise 0.9s cubic-bezier(0.22,1,0.36,1) forwards;
+}
+.v3-line-mask--2 > span { animation-delay: 0.12s; }
+@keyframes v3-line-rise { to { transform: translateY(0); } }
+
+/* ── Magnetic button (JS adds the translate; CSS smooths it) ── */
+.v3-magnetic { transition: transform 0.25s cubic-bezier(0.22,1,0.36,1); will-change: transform; }
+
+/* ── Hero product window (glass app frame showing the company) ── */
+.v3-window-wrap {
+  position: relative;
+  z-index: 4;
+  margin: -24px auto 0;
+  max-width: 860px;
+  perspective: 1600px;
+}
+.v3-window {
+  position: relative;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(20,17,34,0.92), rgba(10,9,18,0.92));
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow:
+    0 40px 120px -30px rgba(124,58,237,0.55),
+    0 10px 40px -10px rgba(0,0,0,0.8),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  overflow: hidden;
+  transform: rotateX(12deg);
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+  will-change: transform;
+}
+.v3-window-bar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 13px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  background: rgba(255,255,255,0.02);
+}
+.v3-window-dot { width: 11px; height: 11px; border-radius: 50%; }
+.v3-window-title {
+  margin-left: 12px;
+  font-family: var(--v3-pixel);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--v3-ink-mute);
+}
+.v3-window-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding: 16px;
+}
+@media (max-width: 720px) { .v3-window-grid { grid-template-columns: repeat(2, 1fr); } }
+.v3-mini {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border: 1px solid rgba(255,255,255,0.07);
+}
+.v3-mini img { width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; }
+.v3-mini::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 45%, rgba(7,6,12,0.82));
+}
+.v3-mini-tag {
+  position: absolute;
+  left: 8px; bottom: 7px;
+  z-index: 2;
+  font-family: var(--v3-pixel);
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 5px;
+  background: var(--mini);
+  box-shadow: 0 3px 10px -2px var(--mini);
+}
+/* soft reflection under the window */
+.v3-window-wrap::after {
+  content: '';
+  position: absolute;
+  left: 8%; right: 8%; bottom: -54px; height: 80px;
+  background: radial-gradient(ellipse at center, rgba(124,58,237,0.4), transparent 70%);
+  filter: blur(10px);
+  z-index: -1;
+}
+
+/* ── Marquee ── */
+.v3-marquee {
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  padding: 30px 0;
+  border-top: 1px solid var(--v3-line);
+  border-bottom: 1px solid var(--v3-line);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+.v3-marquee-track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: v3-marquee 28s linear infinite;
+}
+.v3-marquee:hover .v3-marquee-track { animation-play-state: paused; }
+/* When the scroll-reactive JS takes over (Marquee.tsx), drop the CSS loop so
+   the two don't fight over `transform`. */
+.v3-marquee--js .v3-marquee-track { animation: none !important; }
+.v3-marquee-item {
+  font-family: var(--v3-sans);
+  font-weight: 600;
+  font-size: clamp(20px, 3vw, 34px);
+  letter-spacing: -0.01em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(244,242,251,0.32);
+  padding: 0 26px;
+}
+.v3-marquee-item .star { -webkit-text-stroke: 0; color: var(--v3-accent-2); padding: 0 26px; }
+@keyframes v3-marquee { to { transform: translateX(-50%); } }
+
+/* ── Department cards: cover zoom on hover ── */
+.v3-dept-cover img {
+  transition: transform 0.6s cubic-bezier(0.22,1,0.36,1);
+}
+.v3-dept:hover .v3-dept-cover img { transform: scale(1.07); }
+
+/* ── Section heading kicker line ── */
+.v3-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 22px; height: 1px;
+  vertical-align: middle;
+  margin-right: 10px;
+  background: var(--v3-accent-2);
+  opacity: 0.7;
+}
+
+/* ── Showcase: large feature cover (editorial) ── */
+.v3-showcase {
+  position: relative;
+  border-radius: 22px;
+  overflow: hidden;
+  margin-top: 30px;
+  border: 1px solid var(--v3-line);
+  aspect-ratio: 16 / 9;
+}
+.v3-showcase img { width: 100%; height: 100%; object-fit: cover; object-position: center 42%; }
+.v3-showcase::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(7,6,12,0.1) 0%, transparent 30%, rgba(7,6,12,0.85) 100%);
+}
+.v3-showcase-cap {
+  position: absolute;
+  left: 28px; bottom: 26px; z-index: 2;
+  max-width: 520px;
+}
+.v3-showcase-cap h3 {
+  font-family: var(--v3-sans);
+  font-weight: 600;
+  font-size: clamp(22px, 3vw, 36px);
+  letter-spacing: -0.02em;
+  margin: 0 0 6px;
+}
+.v3-showcase-cap p { font-size: 14.5px; color: var(--v3-ink-soft); margin: 0; }
+
+/* ── Hero window: byte copilot panel ── */
+.v3-copilot { padding: 18px; display: flex; flex-direction: column; gap: 13px; }
+.v3-copilot-head { display: flex; align-items: center; gap: 11px; }
+.v3-copilot-avatar {
+  width: 34px; height: 34px; border-radius: 50%; flex: none;
+  background: radial-gradient(circle at 35% 30%, var(--v3-accent-2), var(--v3-accent));
+  box-shadow: 0 0 16px -2px var(--v3-accent);
+}
+.v3-copilot-name { font-family: var(--v3-sans); font-weight: 600; font-size: 14px; color: var(--v3-ink); }
+.v3-copilot-status { font-size: 11.5px; color: var(--v3-ink-mute); }
+.v3-copilot-msg {
+  font-size: 14px; line-height: 1.55; color: var(--v3-ink-soft);
+  background: var(--v3-glass); border: 1px solid var(--v3-line);
+  border-radius: 14px; border-top-left-radius: 4px; padding: 13px 15px; max-width: 92%;
+}
+.v3-copilot-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.v3-copilot-chip {
+  font-size: 12.5px; color: var(--v3-accent-2);
+  background: rgba(124,58,237,0.1); border: 1px solid rgba(167,139,250,0.28);
+  border-radius: 9999px; padding: 7px 13px;
+}
+.v3-copilot-input {
+  margin-top: 2px; font-size: 12.5px; color: var(--v3-ink-mute);
+  background: var(--v3-glass); border: 1px solid var(--v3-line);
+  border-radius: 10px; padding: 11px 14px;
+}
+
+/* ── Environment section: artistic per-capability "recommended setup" ── */
+.v3-env-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+@media (max-width: 880px) { .v3-env-grid { grid-template-columns: 1fr; gap: 36px; } }
+
+/* Glass panel with a gradient border (padding-box/border-box trick) and a
+   slow drifting aurora behind the content. */
+.v3-env-panel {
+  position: relative;
+  border-radius: 22px;
+  padding: 20px 20px 22px;
+  border: 1px solid transparent;
+  background:
+    linear-gradient(180deg, rgba(22,18,38,0.72), rgba(10,9,18,0.8)) padding-box,
+    linear-gradient(135deg, rgba(167,139,250,0.55), rgba(45,212,191,0.28), rgba(255,107,157,0.45)) border-box;
+  backdrop-filter: blur(16px) saturate(130%);
+  box-shadow: 0 34px 90px -44px rgba(124,58,237,0.55), inset 0 1px 0 rgba(255,255,255,0.05);
+  overflow: hidden;
+}
+.v3-env-aura {
+  position: absolute; inset: -30%;
+  z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(40% 40% at 24% 26%, rgba(59,130,246,0.20), transparent 70%),
+    radial-gradient(38% 38% at 80% 30%, rgba(168,85,247,0.20), transparent 70%),
+    radial-gradient(42% 42% at 58% 88%, rgba(255,107,157,0.18), transparent 70%);
+  filter: blur(10px);
+  animation: v3-env-drift 18s ease-in-out infinite alternate;
+}
+@keyframes v3-env-drift {
+  0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
+  100% { transform: translate(5%, -4%) rotate(9deg) scale(1.08); }
+}
+
+.v3-env-panel-title {
+  position: relative; z-index: 1;
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--v3-pixel);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--v3-accent-2);
+  margin: 4px 4px 16px;
+}
+.v3-env-live {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 10px 1px rgba(52,211,153,0.9);
+  animation: v3-env-blink 2s ease-in-out infinite;
+}
+@keyframes v3-env-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+.v3-env-rows {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; gap: 10px;
+}
+/* Each capability becomes a tinted glass info-card in its own hue (--c).
+   Hidden by default; the wire-up animation reveals each in sequence. Hover
+   changes only colour/glow (no transform) so the staggered entrance delay
+   can never lag the hover response. */
+.v3-env-row {
+  position: relative;
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  opacity: 0;
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--c) 13%, transparent),
+      color-mix(in srgb, var(--c) 5%, transparent));
+  border: 1px solid color-mix(in srgb, var(--c) 32%, transparent);
+  transition: box-shadow 0.35s ease, border-color 0.3s ease, background 0.3s ease;
+}
+.v3-env-row:hover {
+  border-color: color-mix(in srgb, var(--c) 64%, transparent);
+  box-shadow: 0 14px 42px -16px color-mix(in srgb, var(--c) 75%, transparent);
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--c) 20%, transparent),
+      color-mix(in srgb, var(--c) 8%, transparent));
+}
+.v3-env-node {
+  flex: none;
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--c);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--c) 18%, transparent), 0 0 14px 1px var(--c);
+}
+.v3-env-text { flex: 1; min-width: 0; }
+.v3-env-name { font-family: var(--v3-sans); font-weight: 600; font-size: 15px; color: var(--v3-ink); }
+.v3-env-desc { font-size: 13px; color: var(--v3-ink-soft); margin-top: 3px; }
+
+/* Large feature image band below the text + panel (editorial, like the
+   Departments showcase). The image is swappable via ENVIRONMENT.feature. */
+.v3-env-feature {
+  position: relative;
+  margin: clamp(48px, 7vw, 96px) 0 0;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid var(--v3-line);
+  aspect-ratio: 21 / 9;
+  background: var(--v3-bg-2);
+}
+.v3-env-feature img { width: 100%; height: 100%; object-fit: cover; object-position: center 42%; }
+.v3-env-feature::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(7,6,12,0.12) 0%, transparent 32%, rgba(7,6,12,0.85) 100%);
+}
+.v3-env-feature-cap { position: absolute; left: 28px; bottom: 26px; z-index: 2; max-width: 560px; margin: 0; }
+.v3-env-feature-cap h3 {
+  font-family: var(--v3-sans); font-weight: 600;
+  font-size: clamp(20px, 2.6vw, 32px); letter-spacing: -0.02em; margin: 0 0 6px; color: var(--v3-ink);
+}
+.v3-env-feature-cap p { font-size: 14.5px; color: var(--v3-ink-soft); margin: 0; }
+@media (max-width: 720px) {
+  .v3-env-feature { aspect-ratio: 4 / 3; }
+  .v3-env-feature-cap { left: 18px; bottom: 18px; }
+}
+
+/* ── Environment: alternating (zigzag) image ↔ option rows + FX ── */
+.v3-env-intro { max-width: 720px; }
+.v3-env-zigzag {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(44px, 6.5vw, 96px);
+  margin-top: clamp(48px, 7vw, 88px);
+}
+/* The zigzag rows do their own directional entrance, so neutralise the
+   generic depth-cascade on their reveal wrappers. */
+.v3-reveal.v3-env-zreveal { opacity: 1; transform: none; filter: none; transition: none; }
+
+.v3-env-zrow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+  transition: opacity 0.45s ease;
+}
+/* alternate: even rows put the image on the right. */
+.v3-env-zigzag > .v3-reveal:nth-child(even) .v3-env-zimg { order: 2; }
+
+/* Directional entrance: image slides in from its side, option from the other. */
+.v3-env-zimg, .v3-env-zbody { opacity: 0; }
+.v3-env-zimg { translate: -56px 0; }
+.v3-env-zbody { translate: 44px 0; }
+.v3-env-zigzag > .v3-reveal:nth-child(even) .v3-env-zimg { translate: 56px 0; }
+.v3-env-zigzag > .v3-reveal:nth-child(even) .v3-env-zbody { translate: -44px 0; }
+.v3-env-zigzag > .v3-reveal.is-in .v3-env-zimg,
+.v3-env-zigzag > .v3-reveal.is-in .v3-env-zbody { translate: 0 0; opacity: 1; }
+
+.v3-env-zimg {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--c) 28%, var(--v3-line));
+  box-shadow: 0 30px 70px -42px color-mix(in srgb, var(--c) 60%, transparent);
+  /* 3D cursor tilt (rx/ry set by JS) composes with the entrance translate. */
+  transform: perspective(950px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: translate 0.9s cubic-bezier(0.22,1,0.36,1), opacity 0.9s ease,
+              transform 0.25s ease, scale 0.45s ease, box-shadow 0.45s ease;
+}
+/* inner layer is slightly oversized so it can parallax-drift inside the frame */
+.v3-env-zimg-inner { position: absolute; inset: 0; scale: 1.12; will-change: transform; }
+.v3-env-zimg-inner img { object-fit: cover; }
+.v3-env-zimg::after { /* hue tint at the bottom */
+  content: ''; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg, transparent 45%, color-mix(in srgb, var(--c) 16%, transparent));
+}
+/* moving glare on cursor */
+.v3-env-zglare {
+  position: absolute; inset: 0; z-index: 2;
+  border-radius: inherit; pointer-events: none;
+  opacity: 0; transition: opacity 0.3s ease;
+  background: radial-gradient(circle at var(--gx, 50%) var(--gy, 50%), rgba(255,255,255,0.22), transparent 45%);
+  mix-blend-mode: screen;
+}
+.v3-env-zimg:hover .v3-env-zglare { opacity: 1; }
+/* slow animated gradient frame (conic angle via @property --v3a) */
+.v3-env-zimg::before {
+  content: ''; position: absolute; inset: 0; z-index: 3;
+  border-radius: inherit; padding: 1.5px;
+  background: conic-gradient(from var(--v3a), color-mix(in srgb, var(--c) 85%, #fff), var(--c), transparent 62%, color-mix(in srgb, var(--c) 85%, #fff));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: v3-spin 7s linear infinite;
+  pointer-events: none; opacity: 0.8;
+}
+
+.v3-env-zbody { position: relative; z-index: 0; max-width: 460px; }
+.v3-env-zbody .v3-env-node { display: inline-block; }
+/* ghost index numeral behind the option */
+.v3-env-znum {
+  position: absolute; top: -0.55em; left: -0.06em; z-index: -1;
+  font-family: var(--v3-sans); font-weight: 800; line-height: 1;
+  font-size: clamp(86px, 11vw, 150px);
+  color: transparent;
+  -webkit-text-stroke: 1.5px color-mix(in srgb, var(--c) 34%, transparent);
+  opacity: 0.55; pointer-events: none;
+}
+.v3-env-zname {
+  font-family: var(--v3-sans); font-weight: 600;
+  font-size: clamp(22px, 2.8vw, 34px); letter-spacing: -0.01em;
+  margin: 14px 0 8px; color: var(--v3-ink);
+}
+.v3-env-zdesc {
+  font-size: clamp(14px, 1.5vw, 16.5px); line-height: 1.55;
+  color: var(--v3-ink-soft); margin: 0 0 20px;
+}
+/* toggle latches ON once the row has been the active (focused) row. */
+.v3-env-zrow.was-active .v3-env-toggle {
+  background: linear-gradient(90deg, color-mix(in srgb, var(--c) 78%, #ffffff 22%), var(--c));
+  box-shadow: 0 0 16px -2px var(--c);
+}
+.v3-env-zrow.was-active .v3-env-toggle span { left: 21px; background: #fff; }
+
+/* active-row scroll focus: the centred row blooms; the others dim back. */
+.v3-env-zigzag.has-active .v3-env-zrow:not(.is-active) { opacity: 0.48; }
+.v3-env-zrow.is-active .v3-env-zimg {
+  scale: 1.035;
+  box-shadow: 0 38px 92px -38px color-mix(in srgb, var(--c) 85%, transparent);
+}
+
+@media (max-width: 760px) {
+  .v3-env-zrow { grid-template-columns: 1fr; gap: 18px; }
+  .v3-env-zigzag > .v3-reveal:nth-child(even) .v3-env-zimg { order: 0; }
+  .v3-env-zimg, .v3-env-zigzag > .v3-reveal:nth-child(even) .v3-env-zimg,
+  .v3-env-zbody, .v3-env-zigzag > .v3-reveal:nth-child(even) .v3-env-zbody { translate: 0 24px; }
+  .v3-env-zbody { max-width: none; }
+}
+
+/* Toggle: OFF by default, flips ON (in the item's hue) when the panel wires
+   up (.v3-env-panel.is-live). */
+.v3-env-toggle {
+  position: relative; flex: none;
+  width: 42px; height: 24px; border-radius: 9999px;
+  background: rgba(255,255,255,0.1);
+  box-shadow: none;
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+.v3-env-toggle span {
+  position: absolute; top: 3px; left: 3px;
+  width: 18px; height: 18px; border-radius: 50%; background: #9c96b3;
+  transition: left 0.45s cubic-bezier(0.34,1.56,0.64,1), background 0.4s ease;
+}
+
+/* ── Cursor-follow glow (ambiance) ── */
+.v3-cursor-glow {
+  position: fixed; top: 0; left: 0;
+  width: 460px; height: 460px;
+  margin: -230px 0 0 -230px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  background: radial-gradient(circle, rgba(124,58,237,0.13), transparent 62%);
+  mix-blend-mode: screen;
+}
+
+/* ── Spotlight cards: a soft light tracks the cursor across the card ── */
+.v3-spot { position: relative; }
+.v3-spot::after {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), rgba(167,139,250,0.18), transparent 60%);
+}
+.v3-spot:hover::after { opacity: 1; }
+
+/* ── Journey: scroll-scrubbed luminous path (--p set by Journey.tsx) ── */
+.v3-journey-rail {
+  position: absolute;
+  top: 9px; left: 10%; right: 10%;
+  height: 2px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.10);
+  z-index: 0;
+}
+@media (max-width: 820px) { .v3-journey-rail { display: none; } }
+/* The energy beam fills to the scroll progress, flowing continuously. */
+.v3-journey-beam {
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  transform: scaleX(var(--p, 0));
+  transform-origin: left center;
+  /* Static gradient — the beam's only motion is the scroll-driven fill. */
+  background: linear-gradient(90deg, var(--v3-accent), var(--v3-accent-2), #ff8cc8);
+  box-shadow: 0 0 12px 1px rgba(124,58,237,0.7), 0 0 30px 4px rgba(167,139,250,0.38);
+  transition: transform 0.12s linear;
+}
+/* A bright comet rides the leading edge of the beam. */
+.v3-journey-comet {
+  position: absolute; top: 50%;
+  left: calc(var(--p, 0) * 100%);
+  width: 15px; height: 15px;
+  margin: -7.5px 0 0 -7.5px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 10%, var(--v3-accent-2) 48%, transparent 72%);
+  box-shadow: 0 0 20px 6px rgba(167,139,250,0.85);
+  transition: left 0.16s linear;
+  pointer-events: none;
+}
+
+/* Phase nodes start dim; they "unlock" (pop + ring pulse) when reached. */
+.v3-phase-dot {
+  transform: scale(0.62);
+  opacity: 0.4;
+  transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1), opacity 0.4s ease, box-shadow 0.45s ease;
+}
+.v3-phase-dot i {
+  position: absolute; inset: -7px;
+  border-radius: 50%;
+  border: 1px solid var(--v3-accent-2);
+  opacity: 0;
+  pointer-events: none;
+}
+.v3-phase.is-on .v3-phase-dot {
+  transform: scale(1);
+  opacity: 1;
+  box-shadow: 0 0 0 4px rgba(124,58,237,0.20), 0 0 28px 4px rgba(124,58,237,0.9);
+}
+.v3-phase.is-on .v3-phase-dot i { animation: v3-ring 1.5s ease-out; }
+@keyframes v3-ring {
+  0%   { opacity: 0.85; transform: scale(0.5); }
+  100% { opacity: 0;    transform: scale(2.6); }
+}
+.v3-phase-label { color: var(--v3-ink-mute); transition: color 0.45s ease; }
+.v3-phase.is-on .v3-phase-label { color: var(--v3-ink); }
+.v3-phase-note { transition: color 0.45s ease; }
+.v3-phase.is-on .v3-phase-note { color: var(--v3-ink-soft); }
+
+/* Photo (non-pixel) department covers render smoothly, not pixelated. */
+.v3-dept-cover--photo img { image-rendering: auto; }
+
+/* ── Lenis smooth scroll (recommended base styles) ── */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* Velocity skew is applied per top-level section (not the whole page —
+   skewing one tall element would fling its bottom sideways). Each
+   section shears about its own centre, so the lean stays a few px. */
+.v3-skewer > * {
+  transform: skewY(var(--vskew, 0deg));
+  transform-origin: center center;
+}
+
+/* ── Kinetic typography: heading words rise + fade in sequence ── */
+.v3-split { display: inline; }
+.v3-word {
+  display: inline-block;
+  margin-right: 0.24em;
+  transform: translateY(0.45em);
+  opacity: 0;
+  transition: transform 0.7s cubic-bezier(0.22,1,0.36,1), opacity 0.7s ease;
+  transition-delay: calc(var(--wi, 0) * 0.05s);
+}
+.v3-split.is-in .v3-word { transform: none; opacity: 1; }
+
+/* ── Page-load intro: a panel that wipes up to reveal the hero ── */
+.v3-intro {
+  position: fixed; inset: 0; z-index: 200;
+  background: var(--v3-bg);
+  display: grid; place-items: center;
+  will-change: transform;
+  animation: v3-intro-out 1.15s cubic-bezier(0.76,0,0.24,1) 0.7s forwards;
+  /* Decorative, aria-hidden splash. It MUST never intercept pointer
+     events — otherwise if the wipe-out animation is paused/incomplete
+     (background tab throttling, some reduced-motion paths) this
+     full-screen z-index:200 layer silently swallows every click,
+     including the hero waitlist input. */
+  pointer-events: none;
+}
+.v3-intro-word {
+  font-family: var(--v3-pixel);
+  font-size: clamp(28px, 5vw, 56px);
+  letter-spacing: 0.04em;
+  color: var(--v3-ink);
+  opacity: 0;
+  animation: v3-intro-word 0.9s ease 0.1s forwards;
+}
+.v3-intro::after {
+  content: '';
+  position: absolute; left: 50%; bottom: 34%;
+  width: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--v3-accent-2), transparent);
+  transform: translateX(-50%);
+  animation: v3-intro-line 0.8s ease 0.2s forwards;
+}
+@keyframes v3-intro-out { to { transform: translateY(-100%); } }
+@keyframes v3-intro-word {
+  0%   { opacity: 0; transform: translateY(8px); letter-spacing: 0.2em; }
+  100% { opacity: 1; transform: none; letter-spacing: 0.04em; }
+}
+@keyframes v3-intro-line { to { width: 180px; } }
+
+/* ============================================================
+   IMMERSIVE BATCH 2 — WebGL hero, 3D tilt gallery, parallax
+   ============================================================ */
+
+/* ── WebGL aurora behind the constellation (screen-blended light) ── */
+.v3-hero-shader {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.6;
+  mix-blend-mode: screen;
+  /* Fade the bottom so the aurora doesn't cut off as a hard coloured line at
+     the hero/marquee boundary. */
+  -webkit-mask-image: linear-gradient(180deg, #000 80%, transparent 98%);
+  mask-image: linear-gradient(180deg, #000 80%, transparent 98%);
+}
+
+/* ── Departments → pinned horizontal gallery ──
+   Default (mobile / no-JS / reduced-motion): a plain responsive grid.
+   JS adds `.is-pinned` above 820px to switch on the sticky sideways scroll. */
+.v3-gallery { position: relative; margin-top: 56px; }
+.v3-gallery-sticky { position: static; }
+.v3-gallery-track {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+@media (max-width: 960px) { .v3-gallery-track { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .v3-gallery-track { grid-template-columns: 1fr; } }
+.v3-gallery-rail { display: none; }
+
+.v3-gallery.is-pinned {
+  width: 100vw;
+  margin-left: calc(50% - 50vw); /* full-bleed breakout from the section column */
+  /* height is set inline by JS to create the scroll distance */
+}
+.v3-gallery.is-pinned .v3-gallery-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* The pinned frame now holds the heading + cards + rail as one centred
+     stack, so it fills the height instead of leaving dead space. */
+  justify-content: center;
+  gap: clamp(22px, 3.5vh, 42px);
+  overflow: hidden;
+}
+/* Section heading lives inside the pinned frame (stays above the cards). */
+.v3-gallery-head {
+  flex: none;
+  text-align: center;
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.v3-gallery-head .v3-h2 { font-size: clamp(28px, 3.7vw, 48px); }
+.v3-gallery-head .v3-eyebrow { display: inline-block; }
+.v3-gallery-head .v3-sub { margin: 14px auto 0; text-align: center; }
+@media (max-width: 820px) {
+  /* Non-pinned: heading sits normally above the responsive grid. */
+  .v3-gallery-head { text-align: left; margin: 0 0 28px; padding: 0; }
+  .v3-gallery-head .v3-sub { margin-left: 0; text-align: left; }
+}
+.v3-gallery.is-pinned .v3-gallery-track {
+  display: flex;
+  flex-wrap: nowrap;
+  grid-template-columns: none;
+  gap: 22px;
+  width: max-content;
+  padding-inline: max(32px, calc((100vw - 1180px) / 2));
+  will-change: transform;
+}
+.v3-gallery.is-pinned .v3-dept { flex: 0 0 520px; width: 520px; }
+/* Pinned gallery now runs on mobile too — size cards to the viewport. */
+@media (max-width: 820px) {
+  .v3-gallery.is-pinned .v3-dept { flex: 0 0 84vw; width: 84vw; }
+}
+
+/* ── 3D tilt + moving glare on department cards ── */
+.v3-dept--tilt {
+  transform: perspective(950px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transform-style: preserve-3d;
+  transition: transform 0.18s ease, box-shadow 0.35s ease, border-color 0.3s ease;
+}
+.v3-dept--tilt:hover {
+  transform: perspective(950px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  border-color: color-mix(in srgb, var(--dept) 55%, transparent);
+  box-shadow: 0 28px 72px -24px color-mix(in srgb, var(--dept) 78%, transparent);
+}
+.v3-dept-glare {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(circle at var(--gx, 50%) var(--gy, 50%), rgba(255,255,255,0.18), transparent 46%);
+  mix-blend-mode: screen;
+}
+.v3-dept--tilt:hover .v3-dept-glare { opacity: 1; }
+
+/* ── Cinematic image mask-reveal: covers/showcase "draw" in on scroll ── */
+.v3-img-reveal { overflow: hidden; }
+.v3-img-reveal img {
+  clip-path: inset(0 0 0 100%);
+  transform: scale(1.12);
+  transition: clip-path 1.2s cubic-bezier(0.76,0,0.24,1), transform 1.5s cubic-bezier(0.22,1,0.36,1);
+}
+.v3-reveal.is-in .v3-img-reveal img { clip-path: inset(0 0 0 0); transform: scale(1); }
+
+/* Pinned departments must not inherit the velocity skew (it would shear
+   the sticky viewport). Higher specificity than `.v3-skewer > *`. */
+.v3-skewer > .v3-no-skew { transform: none !important; }
+
+/* ============================================================
+   PER-SECTION SIGNATURE EFFECTS (batch 3)
+   ============================================================ */
+
+/* ── Loop: living cycle ── */
+.v3-loop-grid { position: relative; }
+.v3-step { z-index: 1; }
+.v3-loop-thread {
+  position: absolute;
+  top: 50px; left: 16.66%; right: 16.66%;
+  height: 2px; z-index: 0;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, rgba(124,58,237,0.5), rgba(167,139,250,0.6), rgba(124,58,237,0.5), transparent);
+}
+@media (max-width: 820px) { .v3-loop-thread { display: none; } }
+.v3-loop-pulse {
+  position: absolute; top: 50%; left: 0;
+  width: 12px; height: 12px; margin: -6px 0 0 -6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 12%, var(--v3-accent-2) 50%, transparent 72%);
+  box-shadow: 0 0 16px 5px rgba(167,139,250,0.85);
+  animation: v3-loop-run 6.3s ease-in-out infinite;
+}
+@keyframes v3-loop-run {
+  0%   { left: 0%;   opacity: 0; }
+  8%   { opacity: 1; }
+  92%  { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+/* The highlight cycles through the steps so the loop visibly "runs". */
+.v3-step { transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease; }
+.v3-step.is-active {
+  transform: translateY(-6px);
+  border-color: rgba(167,139,250,0.5);
+  box-shadow: 0 24px 60px -26px rgba(124,58,237,0.85);
+}
+.v3-step.is-active .v3-step-num { color: #fff; text-shadow: 0 0 14px rgba(167,139,250,0.95); }
+/* Live log in the Execute card. */
+.v3-step-log {
+  margin-top: 15px;
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 11.5px;
+  color: var(--v3-accent-2);
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--v3-line);
+  border-radius: 8px;
+  padding: 9px 11px;
+  min-height: 34px;
+  display: flex; align-items: center;
+  white-space: nowrap; overflow: hidden;
+}
+.v3-step-log-caret {
+  display: inline-block; flex: none;
+  width: 6px; height: 13px; margin-left: 3px;
+  background: var(--v3-accent-2);
+  animation: v3-caret 1s steps(1) infinite;
+}
+@keyframes v3-caret { 50% { opacity: 0; } }
+
+/* ── Environment: wires itself up ── */
+.v3-env-panel { position: relative; overflow: hidden; }
+.v3-env-panel::after { /* sheen sweep on activate */
+  content: ''; position: absolute; top: 0; left: -60%;
+  width: 50%; height: 100%;
+  z-index: 4;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,0.1), transparent);
+  transform: skewX(-12deg);
+  opacity: 0; pointer-events: none;
+}
+.v3-env-panel.is-live::after { animation: v3-sheen 1.4s ease 0.25s 1; }
+@keyframes v3-sheen {
+  0% { left: -60%; opacity: 0; }
+  25% { opacity: 1; }
+  100% { left: 130%; opacity: 0; }
+}
+/* Rows reveal in sequence via an animation (forwards), so the persisted end
+   state never fights the hover colour transition. */
+.v3-env-panel.is-live .v3-env-row {
+  animation: v3-env-row-in 0.55s cubic-bezier(0.22,1,0.36,1) calc(var(--ri, 0) * 0.16s) forwards;
+}
+@keyframes v3-env-row-in {
+  0%   { opacity: 0; transform: translateX(16px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.v3-env-panel.is-live .v3-env-toggle {
+  background: linear-gradient(90deg, color-mix(in srgb, var(--c) 78%, #ffffff 22%), var(--c));
+  box-shadow: 0 0 16px -2px var(--c);
+  transition-delay: calc(var(--ri, 0) * 0.16s + 0.28s);
+  animation: v3-toggle-pop 0.7s ease calc(var(--ri, 0) * 0.16s + 0.32s) 1;
+}
+.v3-env-panel.is-live .v3-env-toggle span {
+  left: 21px; background: #fff;
+  transition-delay: calc(var(--ri, 0) * 0.16s + 0.28s);
+}
+@keyframes v3-toggle-pop {
+  0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--c) 55%, transparent); }
+  100% { box-shadow: 0 0 0 9px color-mix(in srgb, var(--c) 0%, transparent); }
+}
+
+/* ── Final CTA: byte arrival ── */
+.v3-final-canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  z-index: 0; pointer-events: none;
+}
+.v3-final-accent { display: inline-block; }
+.v3-reveal.is-in .v3-final-accent {
+  animation: v3-final-pop 0.9s cubic-bezier(0.22,1,0.36,1) 0.25s both;
+}
+@keyframes v3-final-pop {
+  0%   { opacity: 0; transform: translateY(0.18em) scale(0.96); filter: blur(6px); }
+  100% { opacity: 1; transform: none; filter: blur(0); }
+}
+/* Shimmering animated border on the primary CTA (angle animates the conic,
+   so the pill shape never distorts). */
+@property --v3a { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+.v3-btn--shimmer { position: relative; isolation: isolate; }
+.v3-btn--shimmer::before {
+  content: ''; position: absolute; inset: -2px;
+  border-radius: inherit; z-index: -1;
+  background: conic-gradient(from var(--v3a), var(--v3-accent-2), #ff8cc8, var(--v3-accent), #60a5fa, var(--v3-accent-2));
+  animation: v3-spin 3.2s linear infinite;
+  filter: blur(3px);
+}
+@keyframes v3-spin { to { --v3a: 360deg; } }
+
+/* ── Pixel pet companions — charming accents across the sections ──
+   Float via the `translate` property so positioning `transform`s (centering,
+   walking) compose cleanly with the bob. */
+.v3-pet, .v3-dept-pet {
+  pointer-events: none;
+  image-rendering: pixelated;
+  animation: v3-pet-float 4.6s ease-in-out infinite;
+}
+@keyframes v3-pet-float {
+  0%, 100% { translate: 0 0; }
+  50%      { translate: 0 -9px; }
+}
+
+/* Department-card companion: peeks from the cover's bottom-right, haloed in
+   the card's own hue. */
+/* `.v3-dept-cover img` forces 100%×cover; this more specific selector pins
+   the pet back to its real size. */
+.v3-dept-cover img.v3-dept-pet {
+  position: absolute;
+  right: 8px; bottom: -14px;
+  width: auto; height: 62px;
+  object-fit: contain;
+  z-index: 4;
+  filter:
+    drop-shadow(0 0 9px color-mix(in srgb, var(--dept) 55%, transparent))
+    drop-shadow(0 6px 9px rgba(0,0,0,0.55));
+}
+.v3-dept:hover .v3-dept-pet { animation-duration: 1.7s; }
+
+/* Section companions. */
+.v3-pet--loop, .v3-pet--env, .v3-pet--journey, .v3-pet--final {
+  position: absolute;
+  filter: drop-shadow(0 0 14px rgba(167,139,250,0.45)) drop-shadow(0 10px 14px rgba(0,0,0,0.5));
+}
+.v3-pet--loop   { bottom: 66px; right: 50px;  height: 122px; z-index: 5; }
+.v3-pet--env    { bottom: 74px; left: 42px;   height: 90px;  z-index: 5; }
+/* glitch walks the roadmap: rides the beam's leading edge (--p inherited). */
+.v3-pet--journey {
+  left: calc(var(--p, 0) * 100%);
+  bottom: 15px;
+  height: 54px; z-index: 6;
+  transform: translateX(-50%);
+  transition: left 0.16s linear;
+}
+/* byte arrives in the final bloom, behind the headline. */
+.v3-pet--final {
+  top: 26px; left: 50%;
+  height: 128px; z-index: 1;
+  transform: translateX(-50%);
+}
+@media (max-width: 820px) {
+  /* Bring the pixel-pet companions back on mobile — they're tiny sprites
+     with a transform-only bob (cheap, no blur/blend). Keep only the journey
+     pet hidden: it rides the roadmap beam via --p, which isn't set on the
+     mobile (non-pinned) roadmap, so it would pin to the left edge. */
+  .v3-pet--journey { display: none; }
+  /* Nudge the corner pets a touch smaller so they read as accents, not
+     obstacles, on the narrower stacked mobile sections. */
+  .v3-pet--loop { height: 86px; right: 16px; }
+  .v3-pet--env { height: 72px; left: 16px; }
+  .v3-pet--final { height: 100px; }
+}
+
+/* The full cast lined up in the glow band above the marquee. */
+.v3-petband {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-wrap: nowrap;
+  gap: clamp(10px, 2.3vw, 32px);
+  max-width: 1000px;
+  /* The band sits BEFORE the marquee; this bottom margin lifts the pets up
+     into the glow band above the banner's top line. */
+  margin: 0 auto 72px;
+  padding: 0 24px 0;
+}
+/* Clean, flat pixel pets — no glow, no bob. */
+.v3-petband-pet {
+  height: clamp(48px, 5.8vw, 76px);
+  width: auto;
+  filter: none;
+  animation: none;
+}
+@media (max-width: 560px) {
+  .v3-petband { gap: 8px; }
+  .v3-petband-pet { height: 40px; }
+}
+
+/* ── Hero glass window: depth entrance on load ── */
+.v3-window-wrap { animation: v3-window-in 1.25s cubic-bezier(0.22,1,0.36,1) 0.85s both; }
+@keyframes v3-window-in {
+  0%   { opacity: 0; transform: perspective(1600px) translate3d(0, 90px, -240px) rotateX(26deg); }
+  100% { opacity: 1; transform: none; }
+}
+
+/* ── Mobile-lite: strip the three effects that make iOS Safari crawl ──
+   Phones use native scroll (no Lenis — see SmoothScroll). The remaining
+   sluggishness on iOS comes from GPU-heavy COMPOSITING, not per-frame JS.
+   The three worst offenders on mobile Safari, all removed here:
+
+   1. mix-blend-mode film grain — a full-screen blend forces the whole page
+      into an offscreen buffer that recomposites every frame. Remove it.
+   2. backdrop-filter (frosted blur) — very expensive on iOS; kill it on
+      every element (each keeps its own translucent fill, so the look holds).
+   3. animated filter:blur(70px) nebulae — scaling a huge blur re-rasterises
+      it each frame. Keep the nebulae, but static.
+
+   Also: null the (now unused) velocity-skew transform, and drop the reveal
+   blur (a per-element GPU filter) — the opacity + slide entrance stays.
+   What remains is a clean, cheap dark-cinematic look: static nebula glow,
+   the hero constellation, gradients, and smooth native scrolling. */
+@media (max-width: 820px) {
+  .v3-grain { display: none !important; }
+  .v3 *,
+  .v3 *::before,
+  .v3 *::after {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+  /* Compensate for the lost frost with a more opaque nav/menu fill. */
+  .v3-nav { background: rgba(12, 10, 22, 0.9); }
+  /* THE big one (proven by an on-device Safari timeline: compositing was
+     ~1.2s PER FRAME): three position:fixed nebulae each carried
+     filter:blur(70px). At 3x DPR that's a ~210px-radius blur on ~2000px
+     layers, which iOS re-rasterises on scroll. The nebulae are already
+     radial-gradients fading to transparent — soft glows on their own — so
+     drop the blur entirely on mobile. Composite cost collapses to ~nothing. */
+  /* Nebula glow: keep the blur OFF (that was the 1.2s/frame killer) but let
+     the drift animation run again — animating a plain radial-gradient layer
+     is transform-only and essentially free, and it brings the ambient
+     "living aurora" motion back to mobile. */
+  .v3-nebula { filter: none !important; }
+  .v3-skewer > * { transform: none !important; }
+  .v3-reveal { filter: none !important; }
+
+  /* Hero canvas + WebGL aurora are disabled in JS on mobile; hide the
+     elements too so their screen-blend layers don't composite at all. */
+  .v3-hero-canvas,
+  .v3-hero-shader { display: none !important; }
+  /* Filter on the full-screen hero background image = a filtered full-screen
+     layer composited during scroll. Drop it (image reads fine as-is). */
+  .v3-hero-bg { filter: none !important; }
+  /* mix-blend-mode forces offscreen compositing per element and is
+     hover-only decoration anyway — kill the glares/spotlights on touch. */
+  .v3-dept-glare,
+  .v3-env-zglare,
+  .v3-env-glare { display: none !important; }
+  /* (The pinned tracks/cards keep their will-change hint now that the
+     scroll sequences run on mobile — they need the compositor layer.) */
+  .v3-env-zimg-inner { will-change: auto !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v3-nebula, .v3-grain, .v3-marquee-track { animation: none !important; }
+  .v3-line-mask > span { transform: none !important; animation: none !important; }
+  .v3-window { transform: none !important; }
+  .v3-cursor-glow { display: none !important; }
+  .v3-journey-beam { animation: none !important; }
+  .v3-phase-dot { transform: none !important; opacity: 1 !important; animation: none !important; }
+  .v3-phase-dot i { animation: none !important; }
+  .v3-skewer > * { transform: none !important; }
+  .v3-word { transform: none !important; opacity: 1 !important; }
+  .v3-intro { display: none !important; }
+  .v3-dept--tilt { transform: none !important; }
+  .v3-img-reveal img { clip-path: none !important; transform: none !important; transition: none !important; }
+  /* batch 3 */
+  .v3-loop-pulse, .v3-step-log-caret, .v3-env-panel::after,
+  .v3-btn--shimmer::before, .v3-final-accent { animation: none !important; }
+  .v3-step.is-active { transform: none !important; box-shadow: none !important; }
+  .v3-env-row { opacity: 1 !important; transform: none !important; animation: none !important; }
+  .v3-env-aura, .v3-env-live { animation: none !important; }
+  .v3-env-toggle { background: var(--c) !important; box-shadow: 0 0 16px -2px var(--c) !important; }
+  .v3-env-toggle span { left: 21px !important; background: #fff !important; }
+  .v3-env-panel.is-live .v3-env-toggle { animation: none !important; }
+  .v3-window-wrap { animation: none !important; }
+  .v3-pet, .v3-dept-pet { animation: none !important; translate: none !important; }
+  /* zigzag setup rows */
+  .v3-env-zimg, .v3-env-zbody { opacity: 1 !important; translate: none !important; }
+  .v3-env-zimg { transform: none !important; scale: none !important; }
+  .v3-env-zimg-inner { scale: 1 !important; transform: none !important; }
+  .v3-env-zimg::before { animation: none !important; }
+  .v3-env-zigzag.has-active .v3-env-zrow:not(.is-active) { opacity: 1 !important; }
+}

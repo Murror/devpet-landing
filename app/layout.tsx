@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { headers } from 'next/headers'
 import { Varela_Round } from 'next/font/google'
 import { LocaleProvider } from '@/lib/LocaleProvider'
+import { SITE_URL, GOOGLE_SITE_VERIFICATION, BING_SITE_VERIFICATION } from '@/lib/site'
 import './globals.css'
 
 const varelaRound = Varela_Round({ weight: '400', subsets: ['latin'], variable: '--font-varela' })
@@ -14,18 +15,41 @@ export const viewport = {
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover' as const,
+  // themeColor belongs in the viewport export in Next 16 (a metadata
+  // export warns). Drives the browser/PWA chrome color.
+  themeColor: '#1C40CF',
 }
 
 export const metadata: Metadata = {
-  title: 'Codepet — The AI coding school with your pet',
-  description: 'Learn to vibecode with your companion. 16 skills, 4 tiers, and a pet that grows as you do.',
+  // Base URL so URL-based metadata (canonical, hreflang alternates, OG
+  // images) in this segment and below can be authored as relative paths
+  // and resolved to absolute URLs at render time.
+  metadataBase: new URL(SITE_URL),
+  // Renders search-engine ownership meta tags only when a token is
+  // configured. Google → <meta name="google-site-verification">; Bing →
+  // <meta name="msvalidate.01"> (via the `other` map). Each is omitted
+  // when its token is empty, so no broken/empty tag ever ships.
+  ...((GOOGLE_SITE_VERIFICATION || BING_SITE_VERIFICATION)
+    ? {
+        verification: {
+          ...(GOOGLE_SITE_VERIFICATION
+            ? { google: GOOGLE_SITE_VERIFICATION }
+            : {}),
+          ...(BING_SITE_VERIFICATION
+            ? { other: { 'msvalidate.01': BING_SITE_VERIFICATION } }
+            : {}),
+        },
+      }
+    : {}),
+  title: 'Codepet — AI teaches you to become a founder',
+  description:
+    'Run your whole company with AI, department by department. byte drafts and builds with you, and you approve every move. A free macOS app.',
   // PWA manifest — installable on macOS / Windows / Android. When the
   // visitor adds Codepet to their dock or home screen, Chrome/Safari
   // open it in a standalone window with no tab bar or URL bar
   // (matches the "full website, no Google chrome" experience the
   // brand wants).
   manifest: '/manifest.json',
-  themeColor: '#1C40CF',
   icons: {
     icon: [
       { url: '/icons/favicon-32.png', sizes: '32x32', type: 'image/png' },
@@ -86,9 +110,39 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       ? '/fonts/dearpix/dearpix.woff2'
       : '/fonts/upheaval/upheavtt.woff2'
 
+  // Brand-entity structured data (site-wide). Establishes Codepet as an
+  // Organization and the site as a WebSite for Google's Knowledge Graph
+  // — strengthens entity recognition + E-E-A-T across every page.
+  const brandJsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      '@id': `${SITE_URL}/#organization`,
+      name: 'Codepet',
+      url: SITE_URL,
+      logo: `${SITE_URL}/icons/codepet-icon-512.png`,
+      description:
+        'Codepet is your AI cofounder — a free macOS app that helps you run your whole company with AI, department by department, with you approving every move.',
+      parentOrganization: { '@type': 'Organization', name: 'MURROR' },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      '@id': `${SITE_URL}/#website`,
+      name: 'Codepet',
+      url: SITE_URL,
+      inLanguage: ['en', 'vi'],
+      publisher: { '@id': `${SITE_URL}/#organization` },
+    },
+  ]
+
   return (
     <html lang={initialLocale}>
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(brandJsonLd) }}
+        />
         <link
           rel="preload"
           href={displayFontHref}
@@ -110,6 +164,44 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             src="https://plausible.io/js/script.js"
           />
         )}
+        {/* Google Analytics 4 — uses gtag.js directly (not the
+            Firebase SDK) to keep the payload small. The Measurement
+            ID is `G-6CBHLCG5LK` from the Codepet GA4 property in
+            Firebase; hard-coded here as a fallback so any
+            deployment of this codebase (Vercel project A, project
+            B, or self-hosted) ships GA tracking by default without
+            needing an env var configured on each platform.
+
+            `NEXT_PUBLIC_GA_MEASUREMENT_ID` still wins when set —
+            useful for: (a) overriding to a staging GA property,
+            (b) setting to "disabled" to opt a preview build out,
+            or (c) future re-branding without a code change. */}
+        {(() => {
+          const gaId =
+            process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-6CBHLCG5LK'
+          if (gaId === 'disabled') return null
+          return (
+            <>
+              <script
+                async
+                src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+              />
+              <script
+                dangerouslySetInnerHTML={{
+                  __html: `
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', '${gaId}', {
+                      anonymize_ip: true,
+                      cookie_flags: 'SameSite=None;Secure'
+                    });
+                  `,
+                }}
+              />
+            </>
+          )
+        })()}
       </head>
       <body className={varelaRound.variable}>
         <LocaleProvider initialLocale={initialLocale}>

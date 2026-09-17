@@ -33,7 +33,7 @@ import { useLocale } from '@/lib/LocaleProvider'
  * env webhook isn't set the route logs the payload and returns ok.
  */
 
-type SurveyState = 'idle' | 'submitting' | 'error'
+type SurveyState = 'idle' | 'submitting' | 'error' | 'mustComplete'
 
 type SignupFor = 'self' | 'family'
 
@@ -54,6 +54,8 @@ export default function ProfileSurvey({ email, onComplete }: Props) {
   const [sourceOther, setSourceOther] = useState('')
   const [signupFor, setSignupFor] = useState<SignupFor>('self')
   const [familyAge, setFamilyAge] = useState('')
+  const [computer, setComputer] = useState('')
+  const [computerOther, setComputerOther] = useState('')
   const [needs, setNeeds] = useState('')
   const [state, setState] = useState<SurveyState>('idle')
 
@@ -67,6 +69,17 @@ export default function ProfileSurvey({ email, onComplete }: Props) {
   const [mounted, setMounted] = useState(false)
   useEffect(() => {
     setMounted(true)
+  }, [])
+
+  // Green success banner auto-dismisses 1 s after the modal opens.
+  // The survey is now required, so we don't want the
+  // congratulations message to compete with the form copy for
+  // long — flashing it briefly is enough confirmation that the
+  // email was accepted before we hand attention to the fields.
+  const [bannerVisible, setBannerVisible] = useState(true)
+  useEffect(() => {
+    const timer = setTimeout(() => setBannerVisible(false), 1000)
+    return () => clearTimeout(timer)
   }, [])
 
   const submitting = state === 'submitting'
@@ -97,8 +110,15 @@ export default function ProfileSurvey({ email, onComplete }: Props) {
     document.body.style.width = '100%'
     document.body.style.overflow = 'hidden'
 
+    // ESC no longer exits — the survey is required, so we surface
+    // the same "must complete" warning the X button + backdrop
+    // click do. Visitors complete by hitting Submit; there is no
+    // bail-out path.
     function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape' && !submitting) onComplete()
+      if (e.key === 'Escape' && !submitting) {
+        e.preventDefault()
+        triggerMustComplete()
+      }
     }
     window.addEventListener('keydown', onKey)
     return () => {
@@ -130,6 +150,13 @@ export default function ProfileSurvey({ email, onComplete }: Props) {
           sourceOther: source === 'Other' || source === 'Khác' ? sourceOther : undefined,
           signupFor,
           familyAge: signupFor === 'family' ? familyAge || undefined : undefined,
+          computer: computer || undefined,
+          // Free-text only carried when the user picked the trailing
+          // "Other / Loại khác" option from the computer toggles.
+          computerOther:
+            computer === 'Other' || computer === 'Loại khác'
+              ? computerOther || undefined
+              : undefined,
           needs: needs.trim() || undefined,
         }),
       })
@@ -140,8 +167,17 @@ export default function ProfileSurvey({ email, onComplete }: Props) {
     }
   }
 
-  function handleSkip() {
-    onComplete()
+  // Trying to dismiss without submitting → flash a warning. The
+  // form is required (no skip path), so X / backdrop click / ESC
+  // all route here. Auto-clears after 3 s so a previously-shown
+  // warning doesn't linger if the visitor goes back to filling
+  // the form.
+  function triggerMustComplete() {
+    if (submitting) return
+    setState('mustComplete')
+    setTimeout(() => {
+      setState((prev) => (prev === 'mustComplete' ? 'idle' : prev))
+    }, 3000)
   }
 
   // Source "Other" is the LAST option in both vi.json and en.json.
@@ -150,10 +186,11 @@ export default function ProfileSurvey({ email, onComplete }: Props) {
 
   const fam = signupFor === 'family'
 
-  // Backdrop click → skip. Stop propagation on the modal panel so
-  // clicks inside the form don't bubble up and dismiss.
+  // Backdrop click no longer dismisses — same gate as the X
+  // button. Stop propagation on the modal panel so clicks inside
+  // the form don't bubble up and trigger the warning.
   function onBackdropClick() {
-    if (!submitting) onComplete()
+    triggerMustComplete()
   }
 
   // Don't render anything during SSR — portal target (document.body)
@@ -169,6 +206,21 @@ export default function ProfileSurvey({ email, onComplete }: Props) {
       onClick={onBackdropClick}
     >
       <div className="v2-survey-modal" onClick={(e) => e.stopPropagation()}>
+        {/* X close button — pinned to the modal's top-right corner so
+            it sits at the outer edge of the panel regardless of which
+            column it falls over (image on mobile, form on desktop).
+            The survey is required, so this still routes through
+            triggerMustComplete instead of dismissing. */}
+        <button
+          type="button"
+          className="v2-survey-close"
+          aria-label={survey.errorMustComplete}
+          onClick={triggerMustComplete}
+          disabled={submitting}
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+
         {/* ── Left column: animated forest scene ─────────────────────
             Forest backdrop with three companions strolling across the
             grass on a continuous loop. Background image lives at
@@ -211,23 +263,15 @@ export default function ProfileSurvey({ email, onComplete }: Props) {
 
         {/* ── Right column: form ─────────────────────────────────── */}
         <div className="v2-survey-pane">
-          <button
-            type="button"
-            className="v2-survey-close"
-            aria-label={survey.skip}
-            onClick={handleSkip}
-            disabled={submitting}
-          >
-            <span aria-hidden="true">×</span>
-          </button>
-
-          <div className="v2-survey-banner">
-            <span className="v2-survey-tick" aria-hidden="true">✓</span>
-            <div>
-              <p className="v2-survey-banner-title">{survey.title}</p>
-              <p className="v2-survey-banner-subtitle">{survey.subtitle}</p>
+          {bannerVisible && (
+            <div className="v2-survey-banner">
+              <span className="v2-survey-tick" aria-hidden="true">✓</span>
+              <div>
+                <p className="v2-survey-banner-title">{survey.title}</p>
+                <p className="v2-survey-banner-subtitle">{survey.subtitle}</p>
+              </div>
             </div>
-          </div>
+          )}
 
           <form className="v2-survey-form" onSubmit={handleSubmit}>
             <div className="v2-survey-field">
@@ -333,6 +377,44 @@ export default function ProfileSurvey({ email, onComplete }: Props) {
               </select>
             </div>
 
+            {/* Computer-type field — radio tile group (Mac / Windows /
+                Other) using the same .v2-survey-tile pattern as gender,
+                followed by an inline "Other" text input when the trailing
+                option is picked, and a small notice clarifying that the
+                first trial is MacBook-only. */}
+            <div className="v2-survey-field">
+              <label className="v2-survey-label">{survey.computerLabel}</label>
+              <div className="v2-survey-grid2">
+                {survey.computerOptions.map((opt) => (
+                  <label
+                    key={opt}
+                    className={`v2-survey-tile${computer === opt ? ' v2-survey-tile--on' : ''}`}
+                  >
+                    <input
+                      type="radio"
+                      name="survey-computer"
+                      value={opt}
+                      checked={computer === opt}
+                      onChange={() => setComputer(opt)}
+                      className="v2-survey-radio-input"
+                    />
+                    <span className="v2-survey-radio" aria-hidden="true" />
+                    <span>{opt}</span>
+                  </label>
+                ))}
+              </div>
+              {(computer === 'Other' || computer === 'Loại khác') && (
+                <input
+                  type="text"
+                  className="v2-survey-input v2-survey-input--inline"
+                  placeholder={survey.computerOtherPlaceholder}
+                  value={computerOther}
+                  onChange={(e) => setComputerOther(e.target.value)}
+                  maxLength={64}
+                />
+              )}
+            </div>
+
             <div className="v2-survey-field">
               <label className="v2-survey-label" htmlFor="survey-needs">{survey.needsLabel}</label>
               <textarea
@@ -349,16 +431,13 @@ export default function ProfileSurvey({ email, onComplete }: Props) {
             {state === 'error' && (
               <p className="v2-survey-error" role="alert">{survey.errorServer}</p>
             )}
+            {state === 'mustComplete' && (
+              <p className="v2-survey-error" role="alert">{survey.errorMustComplete}</p>
+            )}
 
+            {/* Skip button removed — survey is required. Submit is
+                the only path that dismisses the modal. */}
             <div className="v2-survey-actions">
-              <button
-                type="button"
-                className="v2-survey-skip"
-                onClick={handleSkip}
-                disabled={submitting}
-              >
-                {survey.skip}
-              </button>
               <button type="submit" className="v2-survey-submit" disabled={submitting}>
                 <span className="v2-survey-submit-body">{submitLabel}</span>
               </button>

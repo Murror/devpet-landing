@@ -130,6 +130,18 @@ export default function Testimonials() {
         <header className="v2-testimonials-heading v2-testimonials-reveal">
           <h2 className="v2-testimonials-title">{t.v2.testimonials.title}</h2>
           <p className="v2-testimonials-subtitle">{t.v2.testimonials.subtitle}</p>
+          {/* CTA placed inside the heading column so it sits in the
+              same left-column grid track as the title/subtitle,
+              directly underneath the subtitle. The .v2-testimonials-inner
+              uses a two-column grid (heading | cards) on desktop —
+              nesting the CTA here keeps it in the left track. */}
+          <a
+            href="#product"
+            className="v2-testimonials-cta v2-testimonials-cta--inHeader"
+            aria-label={t.v2.testimonials.ctaAria}
+          >
+            <span className="v2-testimonials-cta-body">{t.v2.testimonials.cta}</span>
+          </a>
         </header>
 
         <ul className="v2-testimonials-list">
@@ -138,7 +150,7 @@ export default function Testimonials() {
           {testimonials.map((item, i) => (
             <li
               key={i}
-              className="v2-testimonials-item v2-testimonials-reveal v2-testimonials-reveal--h"
+              className="v2-testimonials-item"
               data-stagger={i * 40}
             >
               <div className="v2-testimonials-pet">

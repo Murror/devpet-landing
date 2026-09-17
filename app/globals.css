@@ -133,6 +133,18 @@
   }
 }
 
+
+/* Cover-art SVG animation keyframes (CoverArt.tsx). The light "Build Log"
+   blog surface was replaced by the cinematic-dark design in
+   app/blog/blog.css, which binds these keyframes under the .blogx scope. */
+@keyframes cv-float   { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-24px) scale(1.05); } }
+@keyframes cv-sway    { 0% { transform: translate(0, 0) rotate(-4deg); } 50% { transform: translate(12px, -16px) rotate(5deg); } 100% { transform: translate(0, 0) rotate(-4deg); } }
+@keyframes cv-twinkle { 0%, 100% { opacity: 0.1; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.25); } }
+@keyframes cv-spin    { to { transform: rotate(360deg); } }
+/* Pixel-art friendly: translate / opacity only (no scale or rotate, which
+   would make the flat cells uneven and blur the crisp grid). */
+@keyframes cv-bob     { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+@keyframes cv-blink   { 0%, 100% { opacity: 0.15; } 50% { opacity: 1; } }
 /* ── Character SVG animations from DevPet showcase ── */
 
 /* Byte: gentle idle */

@@ -19,6 +19,15 @@ import { NextResponse } from 'next/server'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
+// Google Apps Script web app that appends signups to the Codepet signup
+// sheet. Hardcoded so every Vercel project deploying this repo (including
+// code-pet.com, which lives on a separate account) forwards to the SAME
+// sheet without per-project env config. Override with WAITLIST_WEBHOOK_URL.
+// This is a public endpoint (the form posts to it from the browser), so it
+// is not a secret.
+const WEBHOOK_URL =
+  'https://script.google.com/macros/s/AKfycbxhdr7j_8ki3LTBm-AD8KLhn5oQAj4uoSW15gAu8hR6CY__og2U1T0afVz59yoqZmNd/exec'
+
 export async function POST(req: Request) {
   let body: { email?: string; locale?: string }
   try {
@@ -34,14 +43,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Invalid email' }, { status: 400 })
   }
 
-  const webhookUrl = process.env.GOOGLE_SHEET_WEBHOOK_URL
-  if (!webhookUrl) {
-    console.error('GOOGLE_SHEET_WEBHOOK_URL is not set')
-    return NextResponse.json(
-      { error: 'Server misconfigured' },
-      { status: 500 }
-    )
-  }
+  const webhookUrl = process.env.WAITLIST_WEBHOOK_URL || WEBHOOK_URL
 
   const res = await fetch(webhookUrl, {
     method: 'POST',

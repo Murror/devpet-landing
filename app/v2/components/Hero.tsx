@@ -70,7 +70,13 @@ export default function Hero() {
 
       <h1 className="v2-hero-headline">
         <span className="line">{t.v2.hero.titleLine1}</span>
-        <span className="line">{t.v2.hero.titleLine2}</span>
+        {/* titleLine2 renders only when the locale provides a value.
+            Vietnamese collapses the whole headline onto titleLine1
+            ("Học cách lập trình agentic") and leaves titleLine2 as
+            "", so this gate prevents a stray empty line. */}
+        {t.v2.hero.titleLine2 && (
+          <span className="line">{t.v2.hero.titleLine2}</span>
+        )}
       </h1>
 
       <p className="v2-hero-subhead">{t.v2.hero.subhead}</p>
@@ -106,7 +112,7 @@ export default function Hero() {
           pill classes for the body styling — see fonts.css for the
           mobile-only show rules. */}
       <a
-        href="#waitlist"
+        href="#product"
         className="v2-hero-mobile-cta"
         aria-label={t.v2.nav.startJourney}
       >

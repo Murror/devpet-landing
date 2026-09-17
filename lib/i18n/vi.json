@@ -42,32 +42,6 @@
     "errorValidation": "Email không hợp lệ.",
     "errorServer": "Có lỗi. Thử lại nhé."
   },
-  "download": {
-    "metaTitle": "Tải Codepet cho macOS",
-    "metaDescription": "Codepet là ứng dụng macOS để bạn vận hành công ty của mình cùng một đội ngũ AI. Tải miễn phí, đã ký số và được Apple công chứng.",
-    "eyebrow": "macOS",
-    "title": "Vận hành công ty của bạn cùng một đội ngũ AI.",
-    "subtitle": "Bạn mô tả thứ mình đang xây. Codepet vạch lộ trình, chạy các đầu việc tạo ra sản phẩm thật, và triệu tập các phòng ban tranh luận để chốt quyết định.",
-    "cta": "Tải cho macOS",
-    "ctaMeta": "Miễn phí · cần macOS {version} trở lên · Apple Silicon và Intel",
-    "allVersions": "Tất cả phiên bản và ghi chú phát hành",
-    "installTitle": "Cài đặt",
-    "installSteps": [
-      "Mở **Codepet.dmg** rồi kéo **Codepet** vào thư mục **Applications**.",
-      "Mở **Applications**, chuột phải vào **Codepet** và chọn **Open**.",
-      "Bấm **Open** trong hộp thoại. Chỉ cần làm một lần duy nhất — từ lần sau app mở bình thường."
-    ],
-    "installNote": "Codepet được ký bằng Apple Developer ID và đã qua công chứng của Apple, nên macOS sẽ không báo là nhà phát triển lạ. Thao tác chuột phải ở lần mở đầu là điều macOS yêu cầu với mọi ứng dụng cài ngoài App Store.",
-    "gatekeeperTitle": "Nếu macOS báo không mở được",
-    "gatekeeperBody": "Vào **System Settings ▸ Privacy & Security**, kéo xuống dòng thông báo về Codepet rồi bấm **Open Anyway**.",
-    "requirementsTitle": "Trước khi bắt đầu",
-    "requirementsBody": "Codepet chạy phần AI trên **Claude Code của chính bạn**, không phải trên máy chủ của chúng tôi — code và dữ liệu công ty của bạn không rời khỏi máy, và chúng tôi không tính phí sử dụng. Đổi lại, bạn cần cài sẵn Claude Code đã đăng nhập, cùng với Node.js. Thiếu chúng thì app vẫn mở được và báo rõ đang thiếu gì, chứ không im lặng không làm gì cả.",
-    "requirementsLink": "Cài Claude Code",
-    "footerNote": "Tải về gặp trục trặc?",
-    "notYetTitle": "Chưa phát hành",
-    "notYetBody": "Bản dựng công khai đầu tiên đang được chuẩn bị. Để lại email và chúng tôi sẽ báo bạn ngay ngày nó lên.",
-    "notYetCta": "Đăng ký nhận tin"
-  },
   "whyVibeCode": {
     "title": "Có phải bạn cũng mắc lỗi?",
     "titleAccent": "",
@@ -711,6 +685,7 @@
       "product": "VỀ CODEPET",
       "getGood": "LÊN TRÌNH",
       "skillTree": "KỸ NĂNG",
+      "blog": "BLOG",
       "startJourney": "Bắt đầu hành trình",
       "homeAria": "Trang chủ Codepet",
       "primaryAria": "Chính",
@@ -720,8 +695,8 @@
       "home": "Trang chủ"
     },
     "hero": {
-      "titleLine1": "Học cách xây dựng",
-      "titleLine2": "agentic coding",
+      "titleLine1": "Học cách lập trình agentic",
+      "titleLine2": "",
       "subhead": "cùng những người bạn"
     },
     "product": {
@@ -762,6 +737,8 @@
     },
     "skillTrees": {
       "cornerLabel": "KỸ NĂNG",
+      "cta": "Lên trình ngay",
+      "ctaAria": "Lên trình ngay với Codepet",
       "introLead": "Một quy trình đơn giản và hiệu quả để biến ý tưởng của bạn thành hiện thực.",
       "introMuted": "Từ bước đầu tiên đến khi hình thành sản phẩm, mỗi giai đoạn đều được hướng dẫn rõ ràng và hiệu quả.",
       "tier1Title": "Nền tảng",
@@ -776,6 +753,8 @@
     "testimonials": {
       "title": "Kết quả thật bản beta.",
       "subtitle": "Đến từ câu chuyện người dùng",
+      "cta": "Đến lượt bạn",
+      "ctaAria": "Tham gia Codepet — đến lượt bạn",
       "item1Quote": "“40% prompt hỏng giảm còn 12%. Codepet đã giúp tôi kiên trì.”",
       "item1Name": "sarah k.",
       "item1Role": "designer học code",
@@ -790,7 +769,8 @@
       "titleLine1": "Cùng nói về",
       "titleLine2": "tương lai của lập trình.",
       "subtitleLine1": "Đừng suy nghĩ nữa.",
-      "subtitleLine2": "hãy bắt đầu phát triển."
+      "subtitleLine2": "Hãy bắt đầu hành động.",
+      "academyButton": "Tìm hiểu thêm về Codepet Academy"
     },
     "form": {
       "placeholder": "name@gmail.com",
@@ -802,28 +782,17 @@
       "duplicate": "Bạn đã ở trong danh sách!",
       "successSubtitle": "Chúng tôi sẽ gửi email khi Codepet ra mắt.",
       "errorValidation": "Vui lòng nhập địa chỉ email hợp lệ.",
-      "errorServer": "Có lỗi xảy ra. Thử lại sau ít phút nhé?"
+      "errorServer": "Có lỗi xảy ra. Thử lại sau ít phút nhé?",
+      "macTrialNotice": "Bản beta đầu tiên sẽ được thử nghiệm trên Mac."
     },
     "survey": {
       "title": "Cảm ơn — bạn đã vào danh sách!",
-      "subtitle": "Cho chúng tôi biết thêm một chút để Codepet phù hợp với bạn (không bắt buộc).",
+      "subtitle": "Cho chúng tôi biết thêm một chút để Codepet phù hợp với bạn.",
       "ageLabel": "Tuổi của bạn",
       "agePlaceholder": "Chọn nhóm tuổi",
-      "ageOptions": [
-        "Dưới 18",
-        "18 – 24",
-        "25 – 34",
-        "35 – 44",
-        "45 – 54",
-        "55 trở lên"
-      ],
+      "ageOptions": ["Dưới 18", "18 – 24", "25 – 34", "35 – 44", "45 – 54", "55 trở lên"],
       "genderLabel": "Giới tính",
-      "genderOptions": [
-        "Nam",
-        "Nữ",
-        "Khác",
-        "Không muốn trả lời"
-      ],
+      "genderOptions": ["Nam", "Nữ", "Khác", "Không muốn trả lời"],
       "sourceLabel": "Bạn biết Codepet từ đâu?",
       "sourcePlaceholder": "Chọn một",
       "sourceOptions": [
@@ -835,12 +804,16 @@
         "Newsletter",
         "Khác"
       ],
-      "sourceOtherPlaceholder": "Nguồn khác (tuỳ chọn)",
+      "sourceOtherPlaceholder": "Nguồn khác",
       "signupForLabel": "Bạn đăng ký cho ai?",
       "signupForSelf": "Cho chính mình",
       "signupForFamily": "Cho thành viên gia đình",
       "familyAgeLabel": "Tuổi của thành viên gia đình",
       "familyAgePlaceholder": "Chọn nhóm tuổi",
+      "computerLabel": "Bạn dùng loại máy tính nào?",
+      "computerOptions": ["Mac", "Windows", "Loại khác"],
+      "computerOtherPlaceholder": "Bạn dùng máy gì?",
+      "computerNotice": "Bản beta đầu tiên sẽ được thử nghiệm trên Mac.",
       "needsLabel": "Bạn muốn Codepet giúp gì cho mình?",
       "needsPlaceholder": "Ví dụ: học cách yêu cầu AI viết code đúng ý, làm dự án cá nhân, lên trình lập trình…",
       "skip": "Bỏ qua",
@@ -848,7 +821,8 @@
       "submitting": "Đang gửi…",
       "done": "Đã ghi nhận. Cảm ơn bạn!",
       "doneSubtitle": "Chúng tôi sẽ email khi Codepet ra mắt.",
-      "errorServer": "Có lỗi xảy ra. Thử lại sau nhé?"
+      "errorServer": "Có lỗi xảy ra. Thử lại sau nhé?",
+      "errorMustComplete": "Vui lòng điền đầy đủ thông tin trước khi đóng."
     },
     "footer": {
       "copyright": "© 2026 Mọi quyền đã được bảo lưu",

@@ -1,22 +1,15 @@
 import type { Metadata } from 'next'
-import en from '@/lib/i18n/en.json'
-import DownloadPage from './DownloadPage'
+// The v2 pixel-font cascade + .v2-root theme. Imported per-page because the
+// App Router scopes a segment's CSS to its own layout (see app/page.tsx).
+import '../v2/fonts.css'
+import DownloadContent from './DownloadContent'
 
-/**
- * Metadata is exported from a SERVER component, which is why the page is split in two: the
- * body needs `useLocale` and therefore has to be a client component, and a client component
- * cannot export `metadata`.
- *
- * English only, deliberately. Locale here is resolved per request from a Vercel geo header
- * (see the root layout) while `metadata` is evaluated when the route is rendered — so a
- * localized title would be a coin flip rather than a translation. The visible copy still
- * switches language; this is the tab title and the link preview.
- */
 export const metadata: Metadata = {
-  title: en.download.metaTitle,
-  description: en.download.metaDescription,
+  title: 'Download Codepet for macOS',
+  description:
+    'Download Codepet — your AI coding companion for macOS. Free, requires macOS 26.2 or later.',
 }
 
-export default function Page() {
-  return <DownloadPage />
+export default function DownloadPage() {
+  return <DownloadContent />
 }

@@ -27,18 +27,56 @@ const nextConfig: NextConfig = {
         destination: '/',
         permanent: false,
       },
-      // The macOS download. `murror.app/download/Codepet.dmg` is the URL we publish
-      // everywhere; this is the only place that knows it currently resolves to GitHub
-      // Releases, so the host can change without invalidating a single printed link.
+      // The v3 cinematic-dark design is now the canonical landing at `/`
+      // (see app/page.tsx). Canonicalize the old draft URL so any inbound
+      // links to /v3 land on `/`. 307 keeps it reversible.
+      {
+        source: '/v3',
+        destination: '/',
+        permanent: false,
+      },
+      // Stable, branded download URL → latest GitHub release asset. The
+      // website button points here (code-pet.com/download/Codepet.dmg) so it
+      // never changes per release; only the GitHub release gets updated.
+      // `permanent: false` (307) keeps the host swappable later.
       //
-      // `permanent: false` (307) on purpose, and it is not laziness. A 301 is cached by
-      // browsers indefinitely — if the asset ever moves off GitHub, every user who
-      // downloaded once would keep being sent to the old host by their own browser, with
-      // nothing we could deploy to fix it.
+      // The two values come from lib/download.ts, which the /download page imports too.
+      // They have to agree — a page whose button points somewhere this rule does not cover
+      // is a 404 while both files look individually correct.
       {
         source: DOWNLOAD_PATH,
         destination: DOWNLOAD_TARGET,
         permanent: false,
+      },
+    ]
+  },
+  // Mount the separate Codepet Academy deployment under /academy
+  // so visitors see code-pet.com/academy in the URL bar instead of
+  // bouncing to a different *.vercel.app domain. Vercel proxies the
+  // request server-side; the academy codebase (Murror/codepet-academy)
+  // stays untouched and continues to deploy independently.
+  async rewrites() {
+    return [
+      {
+        source: '/academy',
+        destination: 'https://codepet-academy.vercel.app',
+      },
+      {
+        source: '/academy/:path*',
+        destination: 'https://codepet-academy.vercel.app/:path*',
+      },
+      // Mount the Codepet v1.2 web app under /app so the v3 landing's
+      // "Open the web app" CTA keeps visitors on code-pet.com/app instead
+      // of bouncing to the *.vercel.app domain. Vercel proxies the request
+      // server-side; the app codebase (My-Outcasts/Codepet-ver-1.2) stays
+      // untouched and deploys independently.
+      {
+        source: '/app',
+        destination: 'https://codepet-v1-2.vercel.app',
+      },
+      {
+        source: '/app/:path*',
+        destination: 'https://codepet-v1-2.vercel.app/:path*',
       },
     ]
   },

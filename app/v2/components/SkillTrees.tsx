@@ -161,7 +161,7 @@ export default function SkillTrees() {
         {t.v2.skillTrees.cornerLabel}
       </span>
 
-      <p className="v2-skilltrees-intro v2-skilltrees-reveal">
+      <p className="v2-skilltrees-intro">
         {t.v2.skillTrees.introLead}
         <br />
         <span className="muted">{t.v2.skillTrees.introMuted}</span>
@@ -171,7 +171,7 @@ export default function SkillTrees() {
         {tiers.map((tier) => (
           <article
             key={tier.num}
-            className={`v2-skilltrees-card v2-skilltrees-reveal ${tier.modifier}`}
+            className={`v2-skilltrees-card ${tier.modifier}`}
           >
             <span className="v2-skilltrees-card-number" aria-hidden="true">
               {tier.num}
@@ -192,7 +192,7 @@ export default function SkillTrees() {
         {orbs.map((orb) => (
           <div
             key={orb.modifier}
-            className={`v2-skilltrees-orb v2-skilltrees-reveal ${orb.modifier}`}
+            className={`v2-skilltrees-orb ${orb.modifier}`}
             aria-hidden="true"
           >
             <Image
@@ -205,6 +205,26 @@ export default function SkillTrees() {
           </div>
         ))}
       </div>
+
+      {/* Codepet signup CTA — pixel-pill matching the Mindset /
+          Get Good pattern, but red-on-yellow to read against the
+          SkillTrees band. Points to #product (the only place on
+          this page that captures emails); FinalCta no longer
+          carries a form. */}
+      {/* Intentionally NOT given the `v2-skilltrees-reveal` class.
+          The reveal IntersectionObserver only picks up elements
+          present at mount; even when this CTA was in the list,
+          the observer's `is-revealed` toggle wasn't sticking and
+          left it stuck at opacity 0. The button sits below the
+          already-animated tier cards, so showing it without its
+          own slide-in is the simplest fix and reads fine. */}
+      <a
+        href="#product"
+        className="v2-skilltrees-cta"
+        aria-label={t.v2.skillTrees.ctaAria}
+      >
+        <span className="v2-skilltrees-cta-body">{t.v2.skillTrees.cta}</span>
+      </a>
     </section>
   )
 }

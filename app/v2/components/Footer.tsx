@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import { useLocale } from '@/lib/LocaleProvider'
 
 /**
@@ -22,15 +23,17 @@ import { useLocale } from '@/lib/LocaleProvider'
  */
 
 export default function Footer() {
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
 
   // Labels come from the same v2.nav namespace the top Nav reads from
-  // — keeps the footer link text in lockstep with the header.
+  // — keeps the footer link text in lockstep with the header. Blog is a
+  // real route (locale-matched); the rest are in-page anchors.
   const navLinks = [
     { label: t.v2.nav.home, href: '#top' },
     { label: t.v2.nav.product, href: '#product' },
     { label: t.v2.nav.getGood, href: '#get-good' },
     { label: t.v2.nav.skillTree, href: '#skill-trees' },
+    { label: t.v2.nav.blog, href: locale === 'vi' ? '/vi/blog' : '/blog' },
   ]
 
   return (
@@ -55,9 +58,9 @@ export default function Footer() {
           <ul className="v2-footer-links">
             {navLinks.map((link) => (
               <li key={link.label}>
-                <a href={link.href} className="v2-footer-link">
+                <Link href={link.href} className="v2-footer-link">
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

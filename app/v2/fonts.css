@@ -387,6 +387,11 @@ html {
 }
 
 .v2-survey-modal {
+  /* `position: relative` so the absolutely-positioned X close
+     button (now a direct child of .v2-survey-modal) anchors to
+     the modal's outer corner, not to the form pane on the
+     right. Required for the user-circled top-right placement. */
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 360px) minmax(0, 480px);
   background: #FFFFFF;
@@ -549,7 +554,9 @@ html {
    and scrolls internally if the form is taller than the modal. */
 .v2-survey-pane {
   position: relative;
-  padding: clamp(28px, 3vw, 40px) clamp(24px, 3vw, 36px);
+  /* Tightened vertical padding from clamp(28, 3vw, 40) — 32px
+     top/bottom on desktop gives room without feeling airy. */
+  padding: clamp(24px, 2.4vw, 32px) clamp(24px, 3vw, 36px);
   overflow-y: auto;
   /* Stop scroll from chaining to the document underneath when the
      pane hits its top/bottom — without this, mobile users who
@@ -561,7 +568,7 @@ html {
   height: 100%;
   /* Pad the bottom a touch more so the last field's focus ring
      doesn't sit flush against the scroll edge. */
-  padding-bottom: clamp(28px, 3vw, 40px);
+  padding-bottom: clamp(24px, 2.4vw, 32px);
   /* Custom scrollbar styling so it feels intentional rather than
      OS-default chunky. Falls back gracefully on Firefox. */
   scrollbar-width: thin;
@@ -579,13 +586,19 @@ html {
 }
 
 .v2-survey-close {
+  /* Pinned to the top-right corner of .v2-survey-modal (not the
+     form pane). On desktop this lands above the form (white
+     surface); on mobile/tablet-portrait the modal stacks
+     image-over-form, so the X overlays the forest banner. Use a
+     translucent white pill so it stays legible against either
+     surface without recoloring per breakpoint. */
   position: absolute;
-  top: 14px;
-  right: 14px;
+  top: 12px;
+  right: 12px;
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.92);
   border: 1px solid rgba(30, 24, 72, 0.16);
   color: #1E1848;
   font-size: 20px;
@@ -594,12 +607,15 @@ html {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 2;
+  /* Above the image, form pane, and banner — needs to clear
+     everything inside the modal grid. */
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(20, 16, 50, 0.18);
   transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
 }
 @media (hover: hover) {
   .v2-survey-close:hover {
-    background: rgba(30, 24, 72, 0.06);
+    background: #FFFFFF;
     border-color: rgba(30, 24, 72, 0.4);
   }
 }
@@ -893,7 +909,10 @@ html {
   color: #04342C;
   border-radius: 8px;
   padding: 10px 12px;
-  margin-bottom: clamp(16px, 1.6vw, 22px);
+  /* Tightened from clamp(16, 1.6vw, 22) — at 16px the banner
+     reads as the first item in the form group rather than a
+     floating header with a deep gap below. */
+  margin-bottom: clamp(12px, 1.2vw, 16px);
 }
 .v2-survey-tick {
   flex: 0 0 auto;
@@ -926,7 +945,11 @@ html {
 .v2-survey-form {
   display: flex;
   flex-direction: column;
-  gap: clamp(14px, 1.6vw, 20px);
+  /* Tightened from clamp(14, 1.6vw, 20) — at 18px between fields
+     the form reads as one cohesive group instead of feeling like
+     a stack of disconnected sections, and trims ~14px from the
+     overall modal height when all six fields are showing. */
+  gap: clamp(12px, 1.4vw, 18px);
 }
 
 .v2-survey-field {
@@ -934,9 +957,14 @@ html {
   flex-direction: column;
   gap: 6px;
 }
+/* Family-age field collapses entirely when signup mode is "self".
+   Earlier iteration just dimmed it (opacity 0.45) and disabled
+   pointer events, but leaving the empty greyed band visible
+   created an awkward dead zone in the form — most users sign up
+   for themselves, so most users were seeing wasted space. Now
+   it disappears outright until they toggle to "family". */
 .v2-survey-field--family.v2-survey-field--off {
-  opacity: 0.45;
-  pointer-events: none;
+  display: none;
 }
 
 .v2-survey-label {
@@ -1073,6 +1101,21 @@ html {
   border-radius: 6px;
   font-size: 15px;
   letter-spacing: 0;
+}
+
+/* MacBook trial heads-up below the computer-type field — plain
+   quiet helper text, no box. Lives on the white survey card so
+   the muted off-black gives just enough contrast without shouting. */
+.v2-survey-notice {
+  margin: 8px 0 0;
+  padding: 0;
+  background: none;
+  border: none;
+  color: #2D2B26;
+  opacity: 0.65;
+  font-size: 13px;
+  letter-spacing: 0;
+  line-height: 1.4;
 }
 
 .v2-survey-actions {
@@ -1696,6 +1739,17 @@ html {
   color: #FFFFFF;
 }
 
+/* Academy link gets the same fill-on-hover treatment as the
+   in-page anchors above — Codepet Purple background with white
+   text. Visually consistent with how Product / Get Good / Skill
+   Tree hover, even though the destination is a different site
+   rather than a section anchor. */
+.v2-nav-link[href*="codepet-academy"]:hover,
+.v2-nav-link[href*="codepet-academy"]:focus-visible {
+  background-color: #7B6BD8;
+  color: #FFFFFF;
+}
+
 .v2-nav-link:focus { outline: none; }  /* suppress default focus ring; ::after handles it */
 
 @media (prefers-reduced-motion: reduce) {
@@ -1770,7 +1824,11 @@ html {
 */
 .v2-hero-deco {
   position: absolute;
-  z-index: 0;                  /* behind headline/subhead */
+  /* Above the headline so wider locales (e.g. Vietnamese
+     "HỌC CÁCH LẬP TRÌNH AGENTIC") can't clip the sparkle or
+     heart with overflowing text. pointer-events:none keeps
+     them from blocking any interaction underneath. */
+  z-index: 3;
   pointer-events: none;
   user-select: none;
   /* Per-deco rotation exposed as a CSS variable so the drop-in
@@ -1812,23 +1870,22 @@ html {
    than "next to". */
 
 .v2-hero-deco--sparkle-tl {
-  /* Pulled in from the viewport's left flank toward the headline.
-     At a 1440px-wide canvas, 14% leaves the sparkle sitting just
-     outside the LEARN TO BUILD line's left edge instead of hugging
-     the page margin. */
-  left: 14%;
-  top: 18%;                              /* above/beside LEARN TO BUILD */
+  /* Pulled further into the left flank so even the wider Vietnamese
+     headline ("HỌC CÁCH LẬP TRÌNH AGENTIC") can't graze the sparkle.
+     Sits clearly above the first headline line at the left edge. */
+  left: 5%;
+  top: 16%;
   width: clamp(80px, 9.2vw, 133px);
   --r: 6deg;
   animation-delay: 0.4s;
 }
 
 .v2-hero-deco--heart-tr {
-  /* Mirror of sparkle-tl on the right flank — same 14% offset so
-     the two decorations sit symmetrically just outside the
-     headline edges. */
-  right: 14%;
-  top: 16%;                              /* mirror of sparkle-tl on the right flank */
+  /* Sits in the empty zone on the right flank, between the two
+     headline lines — clear of the wider Vietnamese headline and
+     well above the pets row. */
+  right: 5%;
+  top: 24%;
   width: clamp(36px, 4.2vw, 60px);
   --r: 12deg;
   animation-delay: 0.5s;
@@ -2406,7 +2463,11 @@ html {
   min-width: 0;
   height: 52px;
   padding: 0 18px;
-  font-family: var(--font-pixel);
+  /* Typed email reads in Open Sans — pixel font (used elsewhere
+     in the brand) made addresses hard to scan, especially long
+     domains. The pill silhouette stays pixel-styled via the
+     border + radius; only the input value text is humanist. */
+  font-family: 'Open Sans', system-ui, -apple-system, sans-serif;
   font-size: 16px;
   font-weight: 400;
   color: #000000;
@@ -2415,8 +2476,8 @@ html {
   border-radius: 999px;
   outline: none;
   transition: border-color 0.15s ease, background-color 0.15s ease;
-  -webkit-font-smoothing: none;
-  -moz-osx-font-smoothing: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .v2-product-input::placeholder {
@@ -2560,6 +2621,22 @@ html {
   opacity: 0.78;
   font-size: 14px;
   letter-spacing: 0.01em;
+}
+
+/* MacBook trial heads-up — plain quiet note shown before submit.
+   No box, no border — just slightly dimmed body copy that sits
+   under the CTA without competing for attention. Cream-toned so
+   it has enough contrast on the green Product section. */
+.v2-product-msg--notice {
+  margin: 6px 0 0;
+  padding: 0;
+  background: none;
+  border: none;
+  color: #F7F5FC;
+  opacity: 0.78;
+  font-size: 13px;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
 }
 
 /* ── Right column: decorative Byte + coin scatter ───────────── */
@@ -3142,6 +3219,178 @@ html {
 }
 
 .v2-mindset-cta:focus-visible { outline: none; }
+
+/* ── Skill Trees CTA ─────────────────────────────────────────
+   Pixel-pill that points to #product (the registration form).
+   Red-on-yellow so it carries weight against the yellow
+   SkillTrees band; inverts to yellow-on-red on hover. Shares
+   the .v2-mindset-cta clip-path / drop-shadow geometry —
+   identical pill silhouette, just a different fill. */
+.v2-skilltrees-cta {
+  /* `display: block` + `width: fit-content` + auto horizontal
+     margins self-center the pill regardless of whether the
+     parent is flex / grid / block. `margin-top` provides the
+     vertical breathing room from the section above (the orb
+     grid in SkillTrees, the quote cards in Testimonials). */
+  display: block;
+  width: fit-content;
+  margin: clamp(48px, 6vw, 88px) auto 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  text-decoration: none;
+  line-height: 0;
+  filter:
+    drop-shadow( 2px 0 0 #1E1848)
+    drop-shadow(-2px 0 0 #1E1848)
+    drop-shadow(0  2px 0 #1E1848)
+    drop-shadow(0 -2px 0 #1E1848);
+  transition: filter 0.15s ease, transform 0.1s ease;
+}
+.v2-skilltrees-cta:hover { transform: translateY(-1px); }
+.v2-skilltrees-cta:focus-visible { outline: none; }
+.v2-skilltrees-cta-body {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: var(--font-pixel);
+  font-size: clamp(18px, 1.85vw, 25px);
+  font-weight: 500;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 0.024em;
+  background: #E24B4A;
+  height: 52px;
+  padding: 0 36px;
+  box-sizing: border-box;
+  line-height: 1;
+  white-space: nowrap;
+  -webkit-font-smoothing: none;
+  box-shadow:
+    inset 0  4px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -4px 0 rgba(0, 0, 0, 0.35);
+  clip-path: polygon(
+    20px 0, calc(100% - 20px) 0,
+    calc(100% - 16px) 0,  calc(100% - 16px) 4px,
+    calc(100% - 12px) 4px, calc(100% - 12px) 8px,
+    calc(100% - 8px)  8px, calc(100% - 8px)  12px,
+    calc(100% - 4px)  12px, calc(100% - 4px) 16px,
+    100% 16px,
+    100% 36px,
+    calc(100% - 4px)  36px, calc(100% - 4px)  40px,
+    calc(100% - 8px)  40px, calc(100% - 8px)  44px,
+    calc(100% - 12px) 44px, calc(100% - 12px) 48px,
+    calc(100% - 16px) 48px, calc(100% - 16px) 52px,
+    calc(100% - 20px) 52px,
+    20px 52px,
+    16px 52px, 16px 48px,
+    12px 48px, 12px 44px,
+    8px  44px, 8px  40px,
+    4px  40px, 4px  36px,
+    0 36px,
+    0 16px,
+    4px  16px, 4px  12px,
+    8px  12px, 8px  8px,
+    12px 8px,  12px 4px,
+    16px 4px,  16px 0
+  );
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.v2-skilltrees-cta:hover .v2-skilltrees-cta-body,
+.v2-skilltrees-cta:focus-visible .v2-skilltrees-cta-body {
+  background: #FCBE1C;
+  color: #E24B4A;
+}
+
+/* ── Testimonials CTA ────────────────────────────────────────
+   Same pixel-pill, purple fill against the pink Testimonials
+   band. Hover inverts to pink-on-purple. */
+.v2-testimonials-cta {
+  /* `display: block` + `width: fit-content` + auto horizontal
+     margins self-center the pill regardless of whether the
+     parent is flex / grid / block. `margin-top` provides the
+     vertical breathing room from the section above (the orb
+     grid in SkillTrees, the quote cards in Testimonials). */
+  display: block;
+  width: fit-content;
+  margin: clamp(48px, 6vw, 88px) auto 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  text-decoration: none;
+  line-height: 0;
+  filter:
+    drop-shadow( 2px 0 0 #1E1848)
+    drop-shadow(-2px 0 0 #1E1848)
+    drop-shadow(0  2px 0 #1E1848)
+    drop-shadow(0 -2px 0 #1E1848);
+  transition: filter 0.15s ease, transform 0.1s ease;
+}
+.v2-testimonials-cta:hover { transform: translateY(-1px); }
+.v2-testimonials-cta:focus-visible { outline: none; }
+.v2-testimonials-cta-body {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: var(--font-pixel);
+  font-size: clamp(18px, 1.85vw, 25px);
+  font-weight: 500;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 0.024em;
+  background: #9538CF;
+  height: 52px;
+  padding: 0 36px;
+  box-sizing: border-box;
+  line-height: 1;
+  white-space: nowrap;
+  -webkit-font-smoothing: none;
+  box-shadow:
+    inset 0  4px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -4px 0 rgba(0, 0, 0, 0.35);
+  clip-path: polygon(
+    20px 0, calc(100% - 20px) 0,
+    calc(100% - 16px) 0,  calc(100% - 16px) 4px,
+    calc(100% - 12px) 4px, calc(100% - 12px) 8px,
+    calc(100% - 8px)  8px, calc(100% - 8px)  12px,
+    calc(100% - 4px)  12px, calc(100% - 4px) 16px,
+    100% 16px,
+    100% 36px,
+    calc(100% - 4px)  36px, calc(100% - 4px)  40px,
+    calc(100% - 8px)  40px, calc(100% - 8px)  44px,
+    calc(100% - 12px) 44px, calc(100% - 12px) 48px,
+    calc(100% - 16px) 48px, calc(100% - 16px) 52px,
+    calc(100% - 20px) 52px,
+    20px 52px,
+    16px 52px, 16px 48px,
+    12px 48px, 12px 44px,
+    8px  44px, 8px  40px,
+    4px  40px, 4px  36px,
+    0 36px,
+    0 16px,
+    4px  16px, 4px  12px,
+    8px  12px, 8px  8px,
+    12px 8px,  12px 4px,
+    16px 4px,  16px 0
+  );
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.v2-testimonials-cta:hover .v2-testimonials-cta-body,
+.v2-testimonials-cta:focus-visible .v2-testimonials-cta-body {
+  background: #FFFFFF;
+  color: #9538CF;
+}
+
+/* In-heading placement — the CTA lives inside the heading column
+   (next to title + subtitle), so it sits directly below the
+   subtitle line, left-aligned with the heading text. The base
+   rule centred the CTA via `margin: auto`; this overrides that
+   to keep it flush-left in the heading flow. */
+.v2-testimonials-cta--inHeader {
+  margin: clamp(20px, 2.4vw, 32px) 0 0;
+}
 
 /* Orbs — each positioned per the Framer composition. Sizes are
    fluid so they shrink proportionally with the viewport.
@@ -4465,18 +4714,19 @@ html {
   color: #000;
   border: none;
   outline: none;
-  /* Switched from PP Neue Montreal to Minecraft pixel font per
-     brief so the input ties in with the submit button's
-     typography. Size bumped slightly since pixel fonts read
-     smaller at matched px. */
-  font-family: var(--font-pixel);
+  /* Typed email value renders in Open Sans for readability —
+     long addresses (e.g. firstname.lastname@long-domain.com)
+     became cramped and squinty in the pixel font. The pill
+     silhouette and submit button stay pixel-styled; only the
+     input text is humanist. */
+  font-family: 'Open Sans', system-ui, -apple-system, sans-serif;
   font-weight: 500;
   font-size: clamp(16px, 1.5vw, 20px);
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   text-align: center;
   transition: box-shadow .15s ease;
-  -webkit-font-smoothing: none;
-  -moz-osx-font-smoothing: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .v2-finalcta-input::placeholder {
@@ -4695,17 +4945,19 @@ html {
 
 .v2-footer-copyright {
   margin: 0;
-  /* VT323 retro-terminal face — matches the rest of the footer
-     and the page's small captions / eyebrows. */
-  font-family: var(--font-pixel);
+  /* Open Sans for readability — the footer copyright reads as
+     legal/utility text and benefits from a clean sans-serif over
+     the pixel display face, especially for diacritics in
+     non-English locales (Vietnamese). */
+  font-family: 'Open Sans', system-ui, -apple-system, sans-serif;
   font-weight: 400;
-  font-size: clamp(11px, 1vw, 13px);
-  letter-spacing: -0.01em;
+  font-size: clamp(12px, 1vw, 14px);
+  letter-spacing: 0.01em;
   /* Black on white per design pass — was a translucent white
      when the footer ground was brand blue. */
   color: #000000;
-  -webkit-font-smoothing: none;
-  -moz-osx-font-smoothing: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .v2-footer-nav {
@@ -4735,15 +4987,17 @@ html {
      --v2-text-primary (white) when the footer ground was blue. */
   color: #000000;
   text-decoration: none;
-  /* VT323 retro-terminal face — matches the copyright + the rest
-     of the page's small captions / eyebrows. */
-  font-family: var(--font-pixel);
-  font-weight: 500;
-  font-size: clamp(14px, 1.3vw, 17px);
-  letter-spacing: -0.01em;
+  /* Open Sans for footer nav legibility (matches the copyright
+     line) — pixel face was hard to read at small sizes,
+     especially for Vietnamese tone marks. */
+  font-family: 'Open Sans', system-ui, -apple-system, sans-serif;
+  font-weight: 600;
+  font-size: clamp(13px, 1.1vw, 15px);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
   transition: opacity .15s ease;
-  -webkit-font-smoothing: none;
-  -moz-osx-font-smoothing: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .v2-footer-link:hover {

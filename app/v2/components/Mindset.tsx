@@ -125,7 +125,7 @@ export default function Mindset() {
             Chrome quirk where `filter` on a clipped element gets
             cropped by the clip-path. */}
         <a
-          href="#waitlist"
+          href="#product"
           className="v2-mindset-cta"
           aria-label={t.v2.mindset.ctaAria}
         >
