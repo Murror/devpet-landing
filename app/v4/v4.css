@@ -64,6 +64,9 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  /* They stand apart, not in a scrum. Overlapping them at all made the
+     smaller ones read as fragments however the stacking was ordered. */
+  gap: 20px;
   margin-bottom: 26px;
 }
 
@@ -77,21 +80,7 @@
   position: relative;
   width: auto;
   height: calc(184px - var(--d) * 26px);
-  /*
-   * Overlap SHRINKS toward the edges. The outer pets are the smallest,
-   * so a constant overlap eats a third of a penguin while barely
-   * grazing byte. -13px at the centre, -4px at the ends.
-   */
-  margin-inline: calc(-13px + var(--d) * 3px);
-  opacity: calc(1 - var(--d) * 0.12);
-  /*
-   * Stack by centrality, not by source order. Without this, pets paint
-   * left-to-right and each one covers its LEFT neighbour — which looks
-   * deliberate on the left half and backwards on the right, where the
-   * outermost pet ends up in front of everything it overlaps. Highest
-   * in the middle means inner always overlaps outer, symmetrically.
-   */
-  z-index: calc(10 - var(--d));
+  opacity: calc(1 - var(--d) * 0.1);
   image-rendering: pixelated;
   filter: drop-shadow(0 18px 26px rgba(0, 0, 0, 0.62));
   animation: v4-bob 6s ease-in-out infinite;
@@ -208,19 +197,38 @@
   color: var(--v3-ink-mute);
 }
 
-.v4-bridge {
-  margin-top: 22px;
-  font-size: 14px;
-  color: var(--v3-ink-soft);
-  text-decoration: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
-  padding-bottom: 2px;
-}
-.v4-bridge:hover { color: var(--v3-ink); }
-
-.v4-socials {
+/* Footer row: the bridge to the full site, then the socials. */
+.v4-foot {
   position: relative;
   z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px 24px;
+}
+
+/*
+ * Quieter than it was. It is a way out for the curious, not a second
+ * CTA — so it reads at the same weight as the social links beside it,
+ * with only the arrow marking it as the one that goes somewhere else.
+ */
+.v4-bridge {
+  font-size: 13px;
+  color: var(--v3-ink-soft);
+  text-decoration: none;
+}
+.v4-bridge::after {
+  content: '';
+  display: block;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.16);
+  transition: background 0.2s ease;
+}
+.v4-bridge:hover { color: var(--v3-ink); }
+.v4-bridge:hover::after { background: rgba(255, 255, 255, 0.4); }
+
+.v4-socials {
   display: flex;
   gap: 20px;
   margin: 0;
@@ -237,11 +245,8 @@
      compositing is what made mobile lag. Shrink the cast rather than
      dropping it — it is the point of the page. */
   .v4-screen { padding: 32px 16px 22px; }
-  .v4-huddle-pet {
-    height: calc(112px - var(--d) * 16px);
-    margin-inline: calc(-8px + var(--d) * 2px);
-  }
-  .v4-huddle { margin-bottom: 20px; }
+  .v4-huddle-pet { height: calc(112px - var(--d) * 16px); }
+  .v4-huddle { gap: 8px; margin-bottom: 20px; }
   .v4-socials { gap: 14px; }
 }
 

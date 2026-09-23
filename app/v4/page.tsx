@@ -36,21 +36,29 @@ export default function V4Page() {
         <WaitlistInline />
 
         <p className="v4-proof">{V4.proof}</p>
+      </div>
 
+      {/*
+        The bridge to the full site sits down here with the socials, not
+        under the email field. It has to exist — without it the marketing
+        site is unreachable from the root, which is the whole point of
+        keeping it — but in the centre column it read as a second call to
+        action competing with the one thing this page is for.
+      */}
+      <footer className="v4-foot">
         <a className="v4-bridge" href={V4.bridgeHref}>
           {V4.bridgeLabel} →
         </a>
-      </div>
-
-      <ul className="v4-socials">
-        {V4.socials.map((s) => (
-          <li key={s.label}>
-            <a href={s.href} target="_blank" rel="noopener noreferrer">
-              {s.label}
-            </a>
-          </li>
-        ))}
-      </ul>
+        <ul className="v4-socials">
+          {V4.socials.map((s) => (
+            <li key={s.label}>
+              <a href={s.href} target="_blank" rel="noopener noreferrer">
+                {s.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </footer>
     </main>
   )
 }
