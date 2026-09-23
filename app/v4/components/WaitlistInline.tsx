@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, type FormEvent } from 'react'
+import Magnetic from '../../v3/components/Magnetic'
 import { V4 } from '../content'
 
 /**
@@ -72,9 +73,13 @@ export default function WaitlistInline({ id = 'v4-email' }: { id?: string } = {}
         onChange={(e) => setEmail(e.target.value)}
         aria-invalid={invalid || undefined}
       />
-      <button type="submit" className="v4-btn" disabled={state === 'loading'}>
-        {V4.ctaLabel}
-      </button>
+      {/* Leans toward the cursor. The page's one action should feel
+          like it wants to be pressed. */}
+      <Magnetic strength={0.28}>
+        <button type="submit" className="v4-btn" disabled={state === 'loading'}>
+          {V4.ctaLabel}
+        </button>
+      </Magnetic>
       {invalid && (
         <p className="v4-msg v4-msg--err" role="alert">{V4.messages.invalid}</p>
       )}

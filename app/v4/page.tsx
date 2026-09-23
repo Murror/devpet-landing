@@ -4,6 +4,7 @@ import PetHuddle from './components/PetHuddle'
 import WaitlistInline from './components/WaitlistInline'
 import Stages from './components/Stages'
 import Faq from './components/Faq'
+import Reveal from '../v3/components/Reveal'
 
 /**
  * The pre-launch teaser. One job: collect an email address.
@@ -51,9 +52,11 @@ export default function V4Page() {
 
       {/* The same single action, offered once more at the end. */}
       <section className="v4-section v4-closing">
-        <h2 className="v4-h2">{V4.closingHeading}</h2>
-        <p className="v4-closing-sub">{V4.closingSub}</p>
-        <WaitlistInline id="v4-email-end" />
+        <Reveal>
+          <h2 className="v4-h2">{V4.closingHeading}</h2>
+          <p className="v4-closing-sub">{V4.closingSub}</p>
+          <WaitlistInline id="v4-email-end" />
+        </Reveal>
       </section>
 
       {/*
