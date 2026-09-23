@@ -119,7 +119,7 @@ app/pricing, /download, /privacy → unchanged
 | `app/v4/v4.css` | One-screen layout rules + the five motion rule-blocks copied from `v3-fx.css`. |
 | `app/v4/components/WaitlistInline.tsx` | `'use client'`. The email form. |
 | `app/v4/components/CompanyOrbit.tsx` | `'use client'`. The WebGL scene. |
-| `app/v4/components/OrbitPoster.tsx` | Static fallback image for mobile and reduced-motion. |
+| `app/v4/components/CompanyRing.tsx` | The eight companions on a CSS circle. Phase 1 hero; Phase 2 fallback. |
 
 **CSS strategy.** `layout.tsx` imports `../v3/v3.css` (tokens and base) and **not**
 `v3-fx.css` (1,104 lines of dept tilt, copilot, Lenis and other machinery this page does
@@ -127,14 +127,17 @@ not use). The five motion rules the page *does* want are copied into `v4.css` wi
 comment naming their source. This duplicates a little CSS; that is the right call here
 because the segment is designed to be deleted at launch, so isolation beats DRY.
 
-**Motion primitives reused from v3.** All four import only React — no library cost.
+**Motion primitives reused from v3.** All import only React — no library cost.
 
-| Component | Applied to | CSS block copied |
-|---|---|---|
-| `SplitText` | Headline — words rise in sequence, Playfair accent last | `.v3-split`, `.v3-word` |
-| `Magnetic` | CTA button — leans toward the cursor | `.v3-magnetic` |
-| `Reveal` | Sub, timing line, bridge link, socials — staggered fade-up | `.v3-reveal` |
-| `CursorGlow` | Page — soft purple light tracking the pointer | `.v3-cursor-glow` |
+| Component | Applied to | CSS block copied | Phase |
+|---|---|---|---|
+| `SplitText` | Headline — words rise in sequence, Playfair accent last | `.v3-split`, `.v3-word` | 1 |
+| `Magnetic` | CTA button — leans toward the cursor | `.v3-magnetic` | 2 |
+| `CursorGlow` | Page — soft purple light tracking the pointer | `.v3-cursor-glow` | 2 |
+| ~~`Reveal`~~ | **Dropped.** It fades content in on scroll-into-view; on a single-screen page everything is already in view at load, so it would fire on everything at once — a fade `SplitText` already provides where it matters. | — | — |
+
+`Magnetic` and `CursorGlow` land in Phase 2's motion pass alongside the orbit rather than
+being bolted onto a static page.
 
 ### 4.3 The scene — "the company orbit"
 
@@ -212,7 +215,7 @@ A 3D hero is only acceptable if it never stands between a visitor and the email 
    "mobile-lite" cut at ≤820px because GPU compositing is what made mobile lag before.
 2. `prefers-reduced-motion` is not `reduce`.
 
-When gating fails, `OrbitPoster` renders instead: a static rasterised frame of the orbit.
+When gating fails, `CompanyRing` renders instead: the same eight companions on a CSS circle (built in Phase 1).
 Same composition, no WebGL, no `three` in the bundle.
 
 ---
@@ -272,7 +275,7 @@ Phased so the domain is never waiting on WebGL.
 
 **Phase 1 — the page (shippable on its own)**
 
-1. `app/v4/` segment: layout, page, content, CSS, `WaitlistInline`, `OrbitPoster`.
+1. `app/v4/` segment: layout, page, content, CSS, `WaitlistInline`, `CompanyRing`.
 2. Tests (§10).
 3. `CLAUDE.md` positioning update (§11).
 4. Sitemap `/v3` entry + root metadata.
@@ -284,7 +287,7 @@ coherent page, not a placeholder.
 **Phase 2 — the scene**
 
 6. Add `three` + `@react-three/fiber`; build the sprite atlas.
-7. `CompanyOrbit.tsx` behind the gated dynamic import, with `OrbitPoster` as fallback.
+7. `CompanyOrbit.tsx` behind the gated dynamic import, with `CompanyRing` as fallback.
 8. Perf pass: DPR cap, visibility pause, measure on a real machine.
 
 **Verification.** Locally via `next dev` for both phases, then on production immediately
@@ -306,7 +309,7 @@ remains reachable until deliberately deleted.
 | `WaitlistInline` — duplicate | Duplicate state renders, and is not an error |
 | `WaitlistInline` — 502 | Error state renders; entered address is preserved |
 | `app/v4/page` | Headline, bridge link `href="/v3"`, and all five socials render |
-| Gating | Below 820px, or `prefers-reduced-motion: reduce`, renders `OrbitPoster` and does not attempt the dynamic import (`matchMedia` mocked) |
+| Gating | Below 820px, or `prefers-reduced-motion: reduce`, renders `CompanyRing` and does not attempt the dynamic import (`matchMedia` mocked) |
 | `sitemap` | Includes `/v3` |
 
 The scene itself is not unit-tested; it is verified by eye and by frame timing.
@@ -370,7 +373,7 @@ IDs assigned when the rows are written.
 | Flip root shim from v3 to v4 | Chore | P1 | 1 |
 | Build the companion sprite atlas + generator script | Chore | P2 | 2 |
 | Build the company-orbit WebGL hero | Feature | P2 | 2 |
-| Static orbit poster for mobile and reduced-motion | Feature | P2 | 2 |
+| Wire CompanyRing as the WebGL fallback below 820px / reduced-motion | Chore | P2 | 2 |
 | Consolidate the five waitlist form implementations | Chore | P3 | later |
 
 ---
