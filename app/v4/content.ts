@@ -18,9 +18,10 @@ export const V4 = {
   // (Playfair Display), matching the live hero's treatment exactly.
   headlineLead: 'Be the first to build your',
   headlineAccent: 'whole company',
-  // The value proposition. Leads with the cost of a team, because that
-  // is the thing a solo founder actually feels — not a feature list.
-  sub: 'Every company needs engineering, product and finance. Codepet is all three, on your Mac — without the payroll.',
+  // The value proposition. The parallel is the point: the same phrase
+  // returns for the cost, so the trade lands without explaining itself.
+  // One comma, no dashes — it should read in a single breath.
+  sub: "A whole team's work across engineering, product and finance, without a whole team's payroll.",
   emailPlaceholder: 'you@email.com',
   ctaLabel: 'Get early access',
   messages: {
