@@ -65,15 +65,17 @@ export default function V4Page() {
         but it is reachable by search or direct URL only — not from here.
       */}
       <footer className="v4-foot">
-        <ul className="v4-socials">
-          {V4.socials.map((s) => (
-            <li key={s.label}>
-              <a href={s.href} target="_blank" rel="noopener noreferrer">
-                {s.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+        <Reveal>
+          <ul className="v4-socials">
+            {V4.socials.map((s) => (
+              <li key={s.label}>
+                <a href={s.href} target="_blank" rel="noopener noreferrer">
+                  {s.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
       </footer>
     </main>
   )
