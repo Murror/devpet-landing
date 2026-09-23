@@ -897,19 +897,79 @@ Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>"
 
 ---
 
-### Task 5: Sitemap and root metadata
+### Task 5: Make /v3 reachable and indexed
 
-The highest-risk item in the whole change. Once the full site lives only at `/v3`, it needs a sitemap entry or it silently drops out of the search index — losing exactly the site this project exists to preserve.
+The highest-risk task in the whole change, and it has two halves.
+
+**`/v3` does not currently work as a URL.** `next.config.ts` 307-redirects `/v3` → `/`, with a comment explaining that v3 *is* the canonical landing so the old draft URL should funnel to the root. That is true today and inverts the moment Task 6 lands: `/v3` would redirect to the **teaser**, the full marketing site would become unreachable at any URL, and the bridge link on the teaser would loop back to itself. Verified live against `next dev`: `curl -s -o /dev/null -w "%{http_code}" http://localhost:3000/v3` returns `307` to `/`.
+
+The second half is the sitemap: once the full site lives only at `/v3`, it needs an entry or it silently drops out of the search index.
+
+Both halves must ship together. Either alone leaves the site broken — a sitemap entry pointing at a redirect, or a reachable URL nobody can find.
 
 **Files:**
+- Modify: `next.config.ts` — remove the `/v3` entry from `redirects()`.
 - Modify: `app/sitemap.ts` — the marketing-pages block near the top of the `entries` array.
+- Test: `__tests__/v3-route.test.ts`
 - Test: `__tests__/sitemap.test.ts`
 
 **Interfaces:**
 - Consumes: `absoluteUrl` and `SITE_URL` from `@/lib/site`, both already imported by `app/sitemap.ts`.
 - Produces: nothing importable.
 
-- [ ] **Step 1: Write the failing test**
+- [ ] **Step 1: Write the failing redirect test**
+
+Create `__tests__/v3-route.test.ts`:
+
+```ts
+import nextConfig from '@/next.config'
+
+/**
+ * /v3 is the full marketing site while the root serves the pre-launch
+ * teaser. A redirect from /v3 would send visitors — and the bridge link
+ * on the teaser itself — straight back to the teaser, leaving the real
+ * site unreachable at any URL.
+ */
+test('/v3 is not redirected away', async () => {
+  const redirects = await nextConfig.redirects!()
+  expect(redirects.find((r) => r.source === '/v3')).toBeUndefined()
+})
+
+test('the legacy /v2 redirect and the download alias are left alone', async () => {
+  const redirects = await nextConfig.redirects!()
+  expect(redirects.find((r) => r.source === '/v2')).toBeDefined()
+  expect(redirects.find((r) => r.source === '/download/Codepet.dmg')).toBeDefined()
+})
+```
+
+- [ ] **Step 2: Run it and confirm the first test fails**
+
+Run: `npx jest __tests__/v3-route.test.ts`
+Expected: FAIL on the first test — a redirect with `source: '/v3'` is currently defined. The second test should already pass.
+
+- [ ] **Step 3: Remove the /v3 redirect**
+
+In `next.config.ts`, delete this entry from the array returned by `redirects()`, along with the two comment lines above it that describe it:
+
+```ts
+      // The v3 cinematic-dark design is now the canonical landing at `/`
+      // (see app/page.tsx). Canonicalize the old draft URL so any inbound
+      // links to /v3 land on `/`. 307 keeps it reversible.
+      {
+        source: '/v3',
+        destination: '/',
+        permanent: false,
+      },
+```
+
+Leave the `/v2` redirect and the `/download/Codepet.dmg` redirect exactly as they are. Add a short comment in their place noting that `/v3` is deliberately not redirected because it serves the full marketing site while the root shows the pre-launch teaser.
+
+- [ ] **Step 4: Run it and confirm both tests pass**
+
+Run: `npx jest __tests__/v3-route.test.ts`
+Expected: PASS, 2 tests.
+
+- [ ] **Step 5: Write the failing sitemap test**
 
 Create `__tests__/sitemap.test.ts`:
 
@@ -937,12 +997,12 @@ test('ranks /v3 below the root but above the legal pages', () => {
 })
 ```
 
-- [ ] **Step 2: Run the test and confirm it fails**
+- [ ] **Step 6: Run the test and confirm it fails**
 
 Run: `npx jest __tests__/sitemap.test.ts`
 Expected: FAIL on the first test — the received array does not contain `https://code-pet.com/v3`.
 
-- [ ] **Step 3: Add the entry**
+- [ ] **Step 7: Add the entry**
 
 In `app/sitemap.ts`, immediately after the `/pricing` entry and before the `/privacy` entry, insert:
 
@@ -957,15 +1017,33 @@ In `app/sitemap.ts`, immediately after the `/pricing` entry and before the `/pri
   })
 ```
 
-- [ ] **Step 4: Run the test and confirm it passes**
+- [ ] **Step 8: Run the test and confirm it passes**
 
 Run: `npx jest __tests__/sitemap.test.ts`
 Expected: PASS, 3 tests.
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 9: Prove /v3 actually serves the full site now**
+
+A passing config test is not the same as a working URL. With a dev server running (`npm run dev` in another terminal, or reuse one already up):
 
 ```bash
-git add app/sitemap.ts __tests__/sitemap.test.ts
+curl -s -o /dev/null -w "status=%{http_code} redirect=%{redirect_url}\n" http://localhost:3000/v3
+```
+
+Expected: `status=200` with an empty `redirect=`. A `307` means the redirect is still in place.
+
+Then confirm it is the real site and not something else:
+
+```bash
+curl -s http://localhost:3000/v3 | grep -c "v3-dept"
+```
+
+Expected: a count well above zero (the departments section is v3-only markup).
+
+- [ ] **Step 10: Commit**
+
+```bash
+git add next.config.ts app/sitemap.ts __tests__/v3-route.test.ts __tests__/sitemap.test.ts
 git commit -m "Add /v3 to the sitemap before the root stops serving it
 
 Once the teaser owns /, this is the only crawlable URL for the full
