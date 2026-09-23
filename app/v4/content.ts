@@ -18,8 +18,9 @@ export const V4 = {
   // (Playfair Display), matching the live hero's treatment exactly.
   headlineLead: 'Be the first to build your',
   headlineAccent: 'whole company',
-  // The value proposition: what Codepet actually is, in one line.
-  sub: 'A macOS app where a team of AI specialists builds your product with you — engineering, product, finance.',
+  // The value proposition. Leads with the cost of a team, because that
+  // is the thing a solo founder actually feels — not a feature list.
+  sub: 'Every company needs engineering, product and finance. Codepet is all three, on your Mac — without the payroll.',
   emailPlaceholder: 'you@email.com',
   ctaLabel: 'Get early access',
   messages: {
