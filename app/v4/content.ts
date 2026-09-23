@@ -60,12 +60,30 @@ export const V4 = {
       a: 'Real work, not advice. A site, a post, a pull request, a plan. Each one arrives finished and waiting for your approval.',
     },
     {
+      // The page opens with seven characters and otherwise never says
+      // what they are. Without this they are decoration.
+      q: 'Who are the pets?',
+      a: 'Your team. Each one runs a department — engineering, marketing, design, finance, sales, support, legal and operations — and takes the work that belongs to it.',
+    },
+    {
       q: 'Do I need an idea already?',
       a: 'Not a finished one. The first stage is Find, where the work is shaping a rough notion into something worth building.',
     },
     {
+      // A real prerequisite, and the site says it plainly: "Codepet
+      // works inside Claude Code." Better here than at install time.
+      q: 'Do I need Claude Code?',
+      a: 'Yes. Codepet works inside Claude Code, and sets up the skills, connectors and agents with you on the first run.',
+    },
+    {
       q: 'Who owns what it makes?',
       a: 'You do. Codepet runs on your Mac and works inside your own project, so what it makes lands in your repo like anything else you write.',
+    },
+    {
+      // Last, immediately before the closing CTA: it answers the
+      // question being asked at the exact moment it is asked.
+      q: 'What happens after I sign up?',
+      a: 'You get one email when early access opens, and nothing else.',
     },
   ],
 

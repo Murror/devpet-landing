@@ -91,9 +91,9 @@ test('the stage copy matches the full site, word for word', () => {
   ])
 })
 
-test('answers the four questions a founder weighing an AI cofounder asks, with the answers in the DOM when collapsed', () => {
+test('answers every FAQ question, with the answers in the DOM when collapsed', () => {
   const { container } = render(<V4Page />)
-  expect(container.querySelectorAll('.v4-faq-item')).toHaveLength(4)
+  expect(container.querySelectorAll('.v4-faq-item')).toHaveLength(V4.faq.length)
   V4.faq.forEach((item) => {
     expect(screen.getByText(item.q)).toBeInTheDocument()
     // <details> keeps the answer rendered while closed, which is what
