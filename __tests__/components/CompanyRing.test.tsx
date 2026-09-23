@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import CompanyRing from '@/app/v4/components/CompanyRing'
 import { V4 } from '@/app/v4/content'
 
