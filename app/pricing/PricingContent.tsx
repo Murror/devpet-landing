@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useLocale } from '@/lib/LocaleProvider'
+import { SITE_HOME } from '@/lib/site'
 
 // Same stable branded URL the /download page uses — redirects (see
 // next.config.ts) to the latest GitHub release asset.
@@ -78,7 +79,7 @@ export default function PricingContent() {
             needs light type. The light Tailwind tokens (text-heading, text-text)
             are for the white card surfaces only; using them out here renders
             near-black on black, which is exactly the live defect on /download. */}
-        <Link href="/" className="mb-10 text-sm text-muted-light no-underline hover:text-white">
+        <Link href={SITE_HOME} className="mb-10 text-sm text-muted-light no-underline hover:text-white">
           ← {vi ? 'Trang chủ' : 'Home'}
         </Link>
 

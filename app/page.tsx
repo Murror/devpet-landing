@@ -8,8 +8,9 @@
 // (`./v3/v3.css`, `./v4/v4.css`) plus the `.v3 v4` wrapper class
 // wouldn't apply at `/`. So we replicate the v4 layout's behavior here.
 //
-// LAUNCH DAY: revert this commit to put the full marketing site
-// (app/v3) back at the root. Nothing else needs to change.
+// LAUNCH DAY: reverting this commit puts app/v3 back at the root, but it
+// is NOT sufficient on its own — see the launch-day checklist in
+// docs/superpowers/plans/2026-09-23-prelaunch-landing.md.
 import type { Metadata } from 'next'
 import { Google_Sans_Flex, Playfair_Display } from 'next/font/google'
 import './v3/v3.css'

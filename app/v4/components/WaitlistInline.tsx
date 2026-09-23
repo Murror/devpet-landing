@@ -11,8 +11,12 @@ import { V4 } from '../content'
  * is on the list either way. On error the entered address is kept so a
  * retry doesn't mean retyping it.
  *
- * Self-contained on purpose — the shared components/WaitlistForm.tsx
- * depends on LocaleProvider, which the English-only root doesn't mount.
+ * Self-contained on purpose — the shared components/WaitlistForm.tsx is
+ * bilingual (it reads the active locale from LocaleProvider, which IS
+ * mounted at the root, to pick EN/VI copy and pass the right locale to
+ * the API). This teaser is deliberately English-only and hardcodes
+ * `locale: 'en'`, so it duplicates the small amount of form logic here
+ * rather than pulling in a component built for two locales.
  */
 type FormState = 'idle' | 'loading' | 'success' | 'duplicate' | 'error'
 

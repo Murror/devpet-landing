@@ -1247,3 +1247,45 @@ Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>"
 Both remaining primitives need their CSS copied the same way `SplitText`'s is in Task 3 Step 5. Spec §4.2's table should be narrowed to `SplitText` for Phase 1, with the other three listed under Phase 2.
 
 **2. `OrbitPoster` → `CompanyRing`.** The spec's §4.2 and §9 named an `OrbitPoster` component — "a static rasterised frame of the orbit" — as Phase 1's hero. That is circular: the orbit does not exist until Phase 2, so there is nothing to rasterise. This plan replaces it with `CompanyRing`, a CSS ring built from the eight companion SVGs that already exist. It gives Phase 1 a real hero, and it becomes the Phase 2 fallback, which is what `OrbitPoster` was for. **`docs/superpowers/specs/2026-09-23-prelaunch-landing-design.md` should be updated to match** — rename `OrbitPoster` to `CompanyRing` in §4.2, §6 and §9, and in the §13 ticket list.
+
+---
+
+## Launch-day checklist
+
+Reverting the "Serve the pre-launch teaser at the root" commit only restores
+`app/page.tsx`, the two `__mocks__` files, `jest.config.ts` and
+`__tests__/components/root-page.test.tsx`. It does **not** undo the rest of
+what this branch changed to keep the marketing site alive at `/v3` in the
+meantime. Do all of the following, in order, on launch day — someone doing
+this under time pressure with no staging URL should be able to follow it
+top to bottom with nothing left implicit:
+
+1. **Revert the root-flip commit** ("Serve the pre-launch teaser at the
+   root"). This puts `app/v3` back behind `/` and restores the Jest
+   CSS/`next/font` mocks and the root-page test to their pre-teaser state.
+2. **Set `SITE_HOME` back to `'/'`** in `lib/site.ts`. Until this changes,
+   the blog nav, the pricing/download "back to home" links, and the setup
+   pages' brand + back links all still point at `/v3` instead of `/`.
+3. **Remove the `/v3` entry from `app/sitemap.ts`** (the `entries.push({
+   url: absoluteUrl('/v3'), ... })` block added just above `/privacy`).
+   Once `/` serves the full site again, `/v3` is a duplicate URL and
+   should not stay indexed.
+4. **Restore the `/v3` → `/` redirect in `next.config.ts`** — re-add the
+   entry removed from the `redirects()` array (`source: '/v3', destination:
+   '/', permanent: false`), replacing the comment that currently explains
+   why `/v3` is deliberately NOT redirected. Then **update
+   `__tests__/v3-route.test.ts`**, which currently asserts that no redirect
+   for `/v3` exists (`expect(redirects.find((r) => r.source === '/v3')).toBeUndefined()`)
+   — flip that assertion (or delete the test) so the suite matches the
+   restored redirect instead of failing against it.
+5. **Decide the fate of `app/v4/`** — either delete the segment entirely
+   (its job was to be the root; once `/` is `app/v3` again, `/v4` is a
+   stale, unlinked duplicate) or leave it in place with its existing
+   `robots: { index: false, follow: true }` in `app/v4/layout.tsx` keeping
+   it out of the index. If you leave it, note that its copy ("Launching
+   this autumn") will read as wrong post-launch, so deleting is the safer
+   default unless something still links to it for a reason.
+
+After all five steps, re-run `npx jest` and confirm the full-suite total
+matches (or exceeds, if `/v4` tests were removed) the pre-launch-day count,
+with no unexpected new failures.

@@ -21,7 +21,7 @@ export default function V4Page() {
         <p className="v4-eyebrow">{V4.eyebrow}</p>
 
         <h1 className="v4-headline">
-          <SplitText text={V4.headlineLead} />{' '}
+          <SplitText text={V4.headlineLead} />
           <em>{V4.headlineAccent}</em>.
         </h1>
 

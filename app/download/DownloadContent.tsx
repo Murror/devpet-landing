@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useLocale } from '@/lib/LocaleProvider'
+import { SITE_HOME } from '@/lib/site'
 
 // Stable branded URL — redirects (see next.config.ts) to the latest GitHub
 // release asset on Murror/CodePet-Clean. Resolves once the first release is
@@ -47,7 +48,7 @@ export default function DownloadContent() {
             text (app/v2/fonts.css). The light Tailwind tokens (text-heading,
             text-text) belong on the white card surfaces below, NOT out here:
             #1A1A2E on #000 is unreadable, which is how this page shipped. */}
-        <Link href="/" className="mb-10 text-sm text-muted-light no-underline hover:text-white">
+        <Link href={SITE_HOME} className="mb-10 text-sm text-muted-light no-underline hover:text-white">
           ← {vi ? 'Trang chủ' : 'Home'}
         </Link>
 

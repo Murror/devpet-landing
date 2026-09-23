@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import type { Locale } from '@/lib/site'
+import { SITE_HOME } from '@/lib/site'
 import { blogIndexPath } from '@/lib/blog/format'
 import { DISCORD_INVITE } from '../../v3/content'
 
@@ -19,11 +20,11 @@ import { DISCORD_INVITE } from '../../v3/content'
  * from any blog route. On ≤760px everything collapses into a frosted
  * drawer, same as the landing.
  */
-const SECTIONS = [
-  { label: 'How it works', href: '/#loop' },
-  { label: 'Setup', href: '/#environment' },
-  { label: 'Departments', href: '/#departments' },
-  { label: 'Journey', href: '/#journey' },
+export const SECTIONS = [
+  { label: 'How it works', href: `${SITE_HOME}#loop` },
+  { label: 'Setup', href: `${SITE_HOME}#environment` },
+  { label: 'Departments', href: `${SITE_HOME}#departments` },
+  { label: 'Journey', href: `${SITE_HOME}#journey` },
 ]
 
 export default function BlogNav({
@@ -70,7 +71,7 @@ export default function BlogNav({
   return (
     <div className={`v3-nav-wrap${open ? ' is-open' : ''}`}>
       <nav className="v3-nav" aria-label="Primary">
-        <Link href="/" className="v3-nav-brand" onClick={close}>
+        <Link href={SITE_HOME} className="v3-nav-brand" onClick={close}>
           Codepet
         </Link>
         <ul className="v3-nav-links">
