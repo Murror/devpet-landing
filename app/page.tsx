@@ -1,17 +1,20 @@
 // Canonical landing at `/`.
 //
-// The implementation lives in `app/v3/` (kept as a self-contained
-// segment so we can still mount it under `/v3` if needed). Because
+// The implementation lives in `app/v4/` (kept as a self-contained
+// segment so we can still mount it under `/v4` if needed). Because
 // Next.js App Router scopes layouts to their route segment, simply
-// re-exporting `./v3/page` is NOT enough — the v3 layout's font
+// re-exporting `./v4/page` is NOT enough — the v4 layout's font
 // variables (`--font-gsans`, `--font-playfair`) and CSS imports
-// (`./v3/v3.css`, `./v3/v3-fx.css`) plus the `.v3` wrapper class
-// wouldn't apply at `/`. So we replicate the v3 layout's behavior here.
+// (`./v3/v3.css`, `./v4/v4.css`) plus the `.v3 v4` wrapper class
+// wouldn't apply at `/`. So we replicate the v4 layout's behavior here.
+//
+// LAUNCH DAY: revert this commit to put the full marketing site
+// (app/v3) back at the root. Nothing else needs to change.
 import type { Metadata } from 'next'
 import { Google_Sans_Flex, Playfair_Display } from 'next/font/google'
 import './v3/v3.css'
-import './v3/v3-fx.css'
-import V3Page from './v3/page'
+import './v4/v4.css'
+import V4Page from './v4/page'
 
 // Main / body font (variable). Consumed by --v3-sans in v3.css.
 const gsans = Google_Sans_Flex({
@@ -20,9 +23,9 @@ const gsans = Google_Sans_Flex({
   display: 'swap',
 })
 
-// Italic accent for headline emphasis words. Consumed by --v3-italic.
+// Italic accent for the headline's emphasis words. Consumed by --v3-italic.
 const playfair = Playfair_Display({
-  weight: ['400', '500', '600'],
+  weight: ['400'],
   style: ['italic'],
   subsets: ['latin'],
   variable: '--font-playfair',
@@ -30,15 +33,15 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: 'Codepet — AI teaches you to become a founder',
+  title: "Codepet — Let's build your whole company",
   description:
-    'Run your whole company with AI, department by department. byte drafts and builds with you, and you approve every move. A free macOS app.',
+    'Codepet is the AI cofounder for founders building their own product and company. A macOS app, launching this autumn. Join the waitlist.',
 }
 
 export default function Home() {
   return (
-    <div className={`v3 ${gsans.variable} ${playfair.variable}`}>
-      <V3Page />
+    <div className={`v3 v4 ${gsans.variable} ${playfair.variable}`}>
+      <V4Page />
     </div>
   )
 }
