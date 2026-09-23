@@ -28,6 +28,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: 'monthly',
     priority: 0.9,
   })
+  // The full marketing site. While the root serves the pre-launch teaser,
+  // this is the only crawlable URL for the real site — without it, the
+  // whole thing drops out of the index.
+  entries.push({
+    url: absoluteUrl('/v3'),
+    changeFrequency: 'weekly',
+    priority: 0.8,
+  })
   entries.push({
     url: absoluteUrl('/privacy'),
     changeFrequency: 'yearly',
