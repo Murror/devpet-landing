@@ -46,7 +46,14 @@ export default function Stages() {
             preserveAspectRatio="none"
             aria-hidden="true"
           >
-            <path className="v4-rail-path" d={RAIL_PATH} />
+            {/*
+              pathLength="1000" normalises the geometry, so the dash
+              animations below work in 0-1000 units and do not have to
+              know the curve's real length. Change the curve freely.
+            */}
+            <path className="v4-rail-path" d={RAIL_PATH} pathLength={1000} />
+            {/* A light that runs the path, the way the site's Journey does. */}
+            <path className="v4-rail-spark" d={RAIL_PATH} pathLength={1000} />
           </svg>
 
           {V4.stages.map((s, i) => (

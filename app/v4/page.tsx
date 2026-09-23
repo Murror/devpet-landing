@@ -64,18 +64,24 @@ export default function V4Page() {
         exactly one action. /v3 stays live, indexed and in the sitemap,
         but it is reachable by search or direct URL only — not from here.
       */}
+      {/*
+        NOT wrapped in <Reveal>. Reveal only shows content once an
+        IntersectionObserver fires at 18% visibility inside a root
+        shrunk 8% from the bottom — and this row is 21px tall at the very
+        end of the page, so it can sit below that line even when you have
+        scrolled as far as the page goes. It stayed invisible. A footer
+        does not need an entrance; it needs to be there.
+      */}
       <footer className="v4-foot">
-        <Reveal>
-          <ul className="v4-socials">
-            {V4.socials.map((s) => (
-              <li key={s.label}>
-                <a href={s.href} target="_blank" rel="noopener noreferrer">
-                  {s.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
+        <ul className="v4-socials">
+          {V4.socials.map((s) => (
+            <li key={s.label}>
+              <a href={s.href} target="_blank" rel="noopener noreferrer">
+                {s.label}
+              </a>
+            </li>
+          ))}
+        </ul>
       </footer>
     </main>
   )
