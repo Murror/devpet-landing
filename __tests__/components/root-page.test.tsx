@@ -7,8 +7,8 @@ test('the root serves the pre-launch teaser', () => {
   expect(screen.getByPlaceholderText('you@email.com')).toBeInTheDocument()
 })
 
-test('the root still bridges to the full site', () => {
+test('the root offers one action and no way to wander off it', () => {
   render(<Home />)
-  expect(screen.getByRole('link', { name: /see what we're building/i }))
-    .toHaveAttribute('href', '/v3')
+  expect(screen.queryByRole('link', { name: /see what we're building/i })).toBeNull()
+  expect(screen.getAllByRole('button')).toHaveLength(1)
 })

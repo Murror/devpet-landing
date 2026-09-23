@@ -188,16 +188,10 @@
   white-space: nowrap;
 }
 
-/* --- proof, bridge, socials --------------------------------------- */
+/* --- socials -------------------------------------------------------- */
 
-.v4-proof {
-  margin: 16px 0 0;
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  color: var(--v3-ink-mute);
-}
-
-/* Footer row: the bridge to the full site, then the socials. */
+/* Footer row: socials only. No link back into the site — the page
+   offers exactly one action. */
 .v4-foot {
   position: relative;
   z-index: 2;
@@ -207,26 +201,6 @@
   justify-content: center;
   gap: 10px 24px;
 }
-
-/*
- * Quieter than it was. It is a way out for the curious, not a second
- * CTA — so it reads at the same weight as the social links beside it,
- * with only the arrow marking it as the one that goes somewhere else.
- */
-.v4-bridge {
-  font-size: 13px;
-  color: var(--v3-ink-soft);
-  text-decoration: none;
-}
-.v4-bridge::after {
-  content: '';
-  display: block;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.16);
-  transition: background 0.2s ease;
-}
-.v4-bridge:hover { color: var(--v3-ink); }
-.v4-bridge:hover::after { background: rgba(255, 255, 255, 0.4); }
 
 .v4-socials {
   display: flex;

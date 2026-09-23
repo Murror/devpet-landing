@@ -2,11 +2,10 @@
  * Every user-visible string on the pre-launch teaser, in one place —
  * mirroring the convention in app/v3/content.ts.
  *
- * Copy is built around the five things a converting landing page needs:
- * a clear value proposition (`sub`), one unmistakable call to action
- * (`ctaLabel`), nothing else competing for attention (no nav), a visual
- * that carries emotion (the pet huddle), and proof that this is real
- * (`proof`).
+ * The page is stripped to one job. It carries a clear value proposition
+ * (`sub`), one unmistakable call to action (`ctaLabel`), a visual that
+ * carries the emotion (the pet huddle), and nothing at all competing for
+ * attention — no nav, no proof line, and no link back into the site.
  *
  * Social URLs are copied from app/v3/content.ts so the teaser and the
  * full site point at the same accounts.
@@ -23,12 +22,6 @@ export const V4 = {
   sub: 'A macOS app where a team of AI specialists builds your product with you — engineering, product, finance.',
   emailPlaceholder: 'you@email.com',
   ctaLabel: 'Get early access',
-  // Proof. Counts come from the canonical positioning in CLAUDE.md.
-  // Deliberately NOT a signup count: we will not print a number we
-  // cannot read from the real list.
-  proof: '8 AI companions · 16 coding skills · Built by MURROR',
-  bridgeLabel: "See what we're building",
-  bridgeHref: '/v3',
   messages: {
     invalid: 'Please enter a valid email address.',
     success: "You're on the list. We'll be in touch.",

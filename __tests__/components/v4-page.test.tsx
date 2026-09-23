@@ -21,22 +21,19 @@ test('states the value proposition — what Codepet actually is', () => {
   expect(screen.getByText(V4.sub)).toBeInTheDocument()
 })
 
-test('shows proof beneath the form', () => {
-  render(<V4Page />)
-  expect(screen.getByText(V4.proof)).toBeInTheDocument()
-})
-
 test('shows the cast', () => {
   const { container } = render(<V4Page />)
   expect(container.querySelectorAll('.v4-huddle-pet')).toHaveLength(V4.pets.length)
 })
 
-test('bridges to the full site at /v3', () => {
+test('offers no route off the page except the socials', () => {
   render(<V4Page />)
-  expect(screen.getByRole('link', { name: /see what we're building/i })).toHaveAttribute(
-    'href',
-    '/v3',
-  )
+  // One screen, one action: deliberately no link to /v3 or anywhere
+  // else on the site. /v3 stays indexed and in the sitemap; it is just
+  // not reachable from here.
+  const links = screen.getAllByRole('link')
+  expect(links).toHaveLength(V4.socials.length)
+  links.forEach((a) => expect(a.getAttribute('href')).toMatch(/^https?:\/\//))
 })
 
 test('renders all five social links with their real URLs', () => {

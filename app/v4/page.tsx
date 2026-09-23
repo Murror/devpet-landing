@@ -10,7 +10,7 @@ import WaitlistInline from './components/WaitlistInline'
  * The composition deliberately mirrors the live hero at /v3 — centred
  * over the same code-art backdrop, same type scale, same italic accent
  * — so the teaser and the site read as one product. The full marketing
- * site stays reachable through the bridge link.
+ * site stays live at /v3, reachable by search or direct URL.
  *
  * SplitText takes a plain string, so the italic accent is a sibling
  * <em> rather than nested inside it, the same way v3's hero composes
@@ -34,21 +34,14 @@ export default function V4Page() {
         <p className="v4-sub">{V4.sub}</p>
 
         <WaitlistInline />
-
-        <p className="v4-proof">{V4.proof}</p>
       </div>
 
       {/*
-        The bridge to the full site sits down here with the socials, not
-        under the email field. It has to exist — without it the marketing
-        site is unreachable from the root, which is the whole point of
-        keeping it — but in the centre column it read as a second call to
-        action competing with the one thing this page is for.
+        No link to the full marketing site, by decision: the page offers
+        exactly one action. /v3 stays live, indexed and in the sitemap,
+        but it is reachable by search or direct URL only — not from here.
       */}
       <footer className="v4-foot">
-        <a className="v4-bridge" href={V4.bridgeHref}>
-          {V4.bridgeLabel} →
-        </a>
         <ul className="v4-socials">
           {V4.socials.map((s) => (
             <li key={s.label}>
