@@ -74,17 +74,29 @@
  */
 .v4-huddle-pet {
   display: block;
+  position: relative;
   width: auto;
-  height: calc(184px - var(--d) * 30px);
-  margin-inline: calc(var(--d) * -2px - 14px);
-  opacity: calc(1 - var(--d) * 0.16);
+  height: calc(184px - var(--d) * 26px);
+  /*
+   * Overlap SHRINKS toward the edges. The outer pets are the smallest,
+   * so a constant overlap eats a third of a penguin while barely
+   * grazing byte. -13px at the centre, -4px at the ends.
+   */
+  margin-inline: calc(-13px + var(--d) * 3px);
+  opacity: calc(1 - var(--d) * 0.12);
+  /*
+   * Stack by centrality, not by source order. Without this, pets paint
+   * left-to-right and each one covers its LEFT neighbour — which looks
+   * deliberate on the left half and backwards on the right, where the
+   * outermost pet ends up in front of everything it overlaps. Highest
+   * in the middle means inner always overlaps outer, symmetrically.
+   */
+  z-index: calc(10 - var(--d));
   image-rendering: pixelated;
   filter: drop-shadow(0 18px 26px rgba(0, 0, 0, 0.62));
   animation: v4-bob 6s ease-in-out infinite;
   animation-delay: calc(var(--d) * -0.7s);
 }
-/* byte stands in front of the neighbours he overlaps. */
-.v4-huddle-pet:nth-child(4) { z-index: 3; position: relative; }
 
 @keyframes v4-bob {
   0%, 100% { translate: 0 0; }
@@ -226,8 +238,8 @@
      dropping it — it is the point of the page. */
   .v4-screen { padding: 32px 16px 22px; }
   .v4-huddle-pet {
-    height: calc(112px - var(--d) * 20px);
-    margin-inline: calc(var(--d) * -1px - 9px);
+    height: calc(112px - var(--d) * 16px);
+    margin-inline: calc(-8px + var(--d) * 2px);
   }
   .v4-huddle { margin-bottom: 20px; }
   .v4-socials { gap: 14px; }
