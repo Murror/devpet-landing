@@ -119,7 +119,7 @@ app/pricing, /download, /privacy → unchanged
 | `app/v4/v4.css` | One-screen layout rules + the five motion rule-blocks copied from `v3-fx.css`. |
 | `app/v4/components/WaitlistInline.tsx` | `'use client'`. The email form. |
 | `app/v4/components/CompanyOrbit.tsx` | `'use client'`. The WebGL scene. |
-| `app/v4/components/CompanyRing.tsx` | The eight companions on a CSS circle. Phase 1 hero; Phase 2 fallback. |
+| `app/v4/components/PetHuddle.tsx` | The eight companions on a CSS circle. Phase 1 hero; Phase 2 fallback. |
 
 **CSS strategy.** `layout.tsx` imports `../v3/v3.css` (tokens and base) and **not**
 `v3-fx.css` (1,104 lines of dept tilt, copilot, Lenis and other machinery this page does
@@ -215,7 +215,7 @@ A 3D hero is only acceptable if it never stands between a visitor and the email 
    "mobile-lite" cut at ≤820px because GPU compositing is what made mobile lag before.
 2. `prefers-reduced-motion` is not `reduce`.
 
-When gating fails, `CompanyRing` renders instead: the same eight companions on a CSS circle (built in Phase 1).
+When gating fails, `PetHuddle` renders instead: the same eight companions on a CSS circle (built in Phase 1).
 Same composition, no WebGL, no `three` in the bundle.
 
 ---
@@ -275,7 +275,7 @@ Phased so the domain is never waiting on WebGL.
 
 **Phase 1 — the page (shippable on its own)**
 
-1. `app/v4/` segment: layout, page, content, CSS, `WaitlistInline`, `CompanyRing`.
+1. `app/v4/` segment: layout, page, content, CSS, `WaitlistInline`, `PetHuddle`.
 2. Tests (§10).
 3. `CLAUDE.md` positioning update (§11).
 4. Sitemap `/v3` entry + root metadata.
@@ -287,7 +287,7 @@ coherent page, not a placeholder.
 **Phase 2 — the scene**
 
 6. Add `three` + `@react-three/fiber`; build the sprite atlas.
-7. `CompanyOrbit.tsx` behind the gated dynamic import, with `CompanyRing` as fallback.
+7. `CompanyOrbit.tsx` behind the gated dynamic import, with `PetHuddle` as fallback.
 8. Perf pass: DPR cap, visibility pause, measure on a real machine.
 
 **Verification.** Locally via `next dev` for both phases, then on production immediately
@@ -309,7 +309,7 @@ remains reachable until deliberately deleted.
 | `WaitlistInline` — duplicate | Duplicate state renders, and is not an error |
 | `WaitlistInline` — 502 | Error state renders; entered address is preserved |
 | `app/v4/page` | Headline, bridge link `href="/v3"`, and all five socials render |
-| Gating | Below 820px, or `prefers-reduced-motion: reduce`, renders `CompanyRing` and does not attempt the dynamic import (`matchMedia` mocked) |
+| Gating | Below 820px, or `prefers-reduced-motion: reduce`, renders `PetHuddle` and does not attempt the dynamic import (`matchMedia` mocked) |
 | `sitemap` | Includes `/v3` |
 
 The scene itself is not unit-tested; it is verified by eye and by frame timing.
@@ -373,7 +373,7 @@ IDs assigned when the rows are written.
 | Flip root shim from v3 to v4 | Chore | P1 | 1 |
 | Build the companion sprite atlas + generator script | Chore | P2 | 2 |
 | Build the company-orbit WebGL hero | Feature | P2 | 2 |
-| Wire CompanyRing as the WebGL fallback below 820px / reduced-motion | Chore | P2 | 2 |
+| Wire PetHuddle as the WebGL fallback below 820px / reduced-motion | Chore | P2 | 2 |
 | Consolidate the five waitlist form implementations | Chore | P3 | later |
 
 ---
@@ -386,3 +386,46 @@ None blocking. Two worth a second look before launch day:
 2. Whether the teaser's collected emails want a distinct tag in the sheet to separate
    pre-launch signups from blog newsletter signups. The route already forwards a `locale`
    field but nothing that identifies the source.
+
+---
+
+## 15. Amendment — the teaser was redesigned (23 Sep, after review)
+
+The first build was rejected on sight: "the design is really ugly". Two causes, one
+of them a plain bug.
+
+**Wrong art.** The site's pets are `public/v2/pets/*.png` — the seven characters in
+the band on code-pet.com, rendered by `app/v3/components/PetBand.tsx`. This spec sent
+the work at `public/characters/*.svg`, a different and taller eight-character set.
+
+**Squashed art.** Those SVGs are 140×240 portraits and the ring rendered them into a
+64×64 box with no `object-fit`, so each pet was crushed to a fifth of its height and
+shrunk below legibility, then scattered round a 420px circle sitting half off the
+right edge.
+
+**What replaced it.** `PetHuddle` stands the whole cast shoulder to shoulder, byte
+tallest in the middle, each pet deriving height, opacity and overlap from its distance
+off centre so the group is symmetric by construction. The composition now mirrors the
+live hero rather than approximating it: centred over `/v3/hero-ascii.jpg` at the same
+crop, grade and mask, the same type scale, and the same Playfair italic accent with a
+vertical white→violet gradient.
+
+**Copy**, rebuilt against the five things a converting landing page needs:
+
+| Element | How the page answers it |
+|---|---|
+| Value proposition | The new `sub` — what Codepet actually is, in one line |
+| Call to action | One email field, one button, above the fold |
+| Maintain attention | One screen, no nav, no second action |
+| Visual | The huddle — the cast, carrying the emotion |
+| Social proof | `proof`: counts from the canonical positioning, never an invented signup number |
+
+Headline is now **"Be the first to build your whole company."** and the dated timing
+line is replaced by **"Coming soon"**.
+
+**A defect no test could catch.** `SplitText` reveals words only once an
+IntersectionObserver fires — correct on `/v3`, where it animates below-the-fold
+headings; wrong here, where the headline *is* the fold and the observer waits on a
+336KB backdrop. The headline rendered blank for seconds. The words now animate on load
+and never depend on the observer. This was found by screenshotting the running page:
+by the time a test could query the DOM, every word already reported `opacity: 1`.

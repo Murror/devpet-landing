@@ -271,26 +271,26 @@ Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>"
 The Phase 1 hero. Eight companion SVGs arranged in a static CSS ring. In Phase 2 this becomes the fallback shown below 820px and under `prefers-reduced-motion`, with WebGL replacing it elsewhere — so it is built now as a standalone component rather than as throwaway decoration.
 
 **Files:**
-- Create: `app/v4/components/CompanyRing.tsx`
-- Test: `__tests__/components/CompanyRing.test.tsx`
+- Create: `app/v4/components/PetHuddle.tsx`
+- Test: `__tests__/components/PetHuddle.test.tsx`
 
 **Interfaces:**
 - Consumes: `V4.companions` from Task 1 — a readonly array of eight lowercase name strings matching filenames in `public/characters/`.
-- Produces: `CompanyRing` (default export), a **server component** taking no props. Task 3 renders it.
+- Produces: `PetHuddle` (default export), a **server component** taking no props. Task 3 renders it.
 
 Uses a plain `<img>`, not `next/image`: the sources are SVGs (which `next/image` does not optimise anyway) and it keeps the component testable in jsdom without mocking the image loader.
 
 - [ ] **Step 1: Write the failing test**
 
-Create `__tests__/components/CompanyRing.test.tsx`:
+Create `__tests__/components/PetHuddle.test.tsx`:
 
 ```tsx
 import { render, screen } from '@testing-library/react'
-import CompanyRing from '@/app/v4/components/CompanyRing'
+import PetHuddle from '@/app/v4/components/PetHuddle'
 import { V4 } from '@/app/v4/content'
 
 test('renders one node per companion, pointing at the SVG files', () => {
-  const { container } = render(<CompanyRing />)
+  const { container } = render(<PetHuddle />)
   const imgs = container.querySelectorAll('img')
   expect(imgs).toHaveLength(8)
   expect(imgs).toHaveLength(V4.companions.length)
@@ -298,7 +298,7 @@ test('renders one node per companion, pointing at the SVG files', () => {
 })
 
 test('is decorative and hidden from assistive tech', () => {
-  const { container } = render(<CompanyRing />)
+  const { container } = render(<PetHuddle />)
   expect(container.firstChild).toHaveAttribute('aria-hidden', 'true')
   // No alt text — every image is presentational.
   container.querySelectorAll('img').forEach((img) => {
@@ -307,7 +307,7 @@ test('is decorative and hidden from assistive tech', () => {
 })
 
 test('gives each node its index so CSS can place it on the circle', () => {
-  const { container } = render(<CompanyRing />)
+  const { container } = render(<PetHuddle />)
   const nodes = container.querySelectorAll<HTMLElement>('.v4-ring-node')
   expect(nodes).toHaveLength(8)
   // Read the custom property rather than string-matching the style
@@ -319,19 +319,19 @@ test('gives each node its index so CSS can place it on the circle', () => {
 
 - [ ] **Step 2: Run the test and confirm it fails**
 
-Run: `npx jest __tests__/components/CompanyRing.test.tsx`
-Expected: FAIL — `Cannot find module '@/app/v4/components/CompanyRing'`.
+Run: `npx jest __tests__/components/PetHuddle.test.tsx`
+Expected: FAIL — `Cannot find module '@/app/v4/components/PetHuddle'`.
 
 - [ ] **Step 3: Implement the ring**
 
-Create `app/v4/components/CompanyRing.tsx`:
+Create `app/v4/components/PetHuddle.tsx`:
 
 ```tsx
 import type { CSSProperties } from 'react'
 import { V4 } from '../content'
 
 /**
- * CompanyRing — the eight companions arranged on a circle around the
+ * PetHuddle — the eight companions arranged on a circle around the
  * headline. One founder, a whole company around them.
  *
  * Purely decorative, so aria-hidden with empty alt text. Position is
@@ -341,7 +341,7 @@ import { V4 } from '../content'
  * Phase 2 replaces this with a WebGL orbit on capable devices and keeps
  * it as the fallback below 820px and under prefers-reduced-motion.
  */
-export default function CompanyRing() {
+export default function PetHuddle() {
   return (
     <div className="v4-ring" aria-hidden="true">
       {V4.companions.map((name, i) => (
@@ -360,13 +360,13 @@ export default function CompanyRing() {
 
 - [ ] **Step 4: Run the test and confirm it passes**
 
-Run: `npx jest __tests__/components/CompanyRing.test.tsx`
+Run: `npx jest __tests__/components/PetHuddle.test.tsx`
 Expected: PASS, 3 tests.
 
 - [ ] **Step 5: Commit**
 
 ```bash
-git add app/v4/components/CompanyRing.tsx __tests__/components/CompanyRing.test.tsx
+git add app/v4/components/PetHuddle.tsx __tests__/components/PetHuddle.test.tsx
 git commit -m "Add the companion ring — eight pets circling the headline
 
 Decorative and server-rendered; CSS does the placement from an --i
@@ -390,7 +390,7 @@ After this task `/v4` is a complete, reviewable page. The root is still v3.
 - Test: `__tests__/components/v4-page.test.tsx`
 
 **Interfaces:**
-- Consumes: `V4` (Task 1), `WaitlistInline` (Task 1), `CompanyRing` (Task 2), and `SplitText` from `app/v3/components/SplitText` — whose props are exactly `{ text: string; className?: string }`. **`SplitText` accepts a plain string only**, so the italic accent must be a sibling `<em>`, not nested inside it. This mirrors how v3's own hero composes lead + accent.
+- Consumes: `V4` (Task 1), `WaitlistInline` (Task 1), `PetHuddle` (Task 2), and `SplitText` from `app/v3/components/SplitText` — whose props are exactly `{ text: string; className?: string }`. **`SplitText` accepts a plain string only**, so the italic accent must be a sibling `<em>`, not nested inside it. This mirrors how v3's own hero composes lead + accent.
 - Produces: `V4Page` (default export of `app/v4/page.tsx`) and `V4Layout` (default export of `app/v4/layout.tsx`). Task 6 imports `V4Page`.
 
 - [ ] **Step 1: Add an IntersectionObserver stub to the Jest setup**
@@ -759,7 +759,7 @@ Create `app/v4/page.tsx`:
 ```tsx
 import SplitText from '../v3/components/SplitText'
 import { V4 } from './content'
-import CompanyRing from './components/CompanyRing'
+import PetHuddle from './components/PetHuddle'
 import WaitlistInline from './components/WaitlistInline'
 
 /**
@@ -774,7 +774,7 @@ import WaitlistInline from './components/WaitlistInline'
 export default function V4Page() {
   return (
     <main className="v4-screen">
-      <CompanyRing />
+      <PetHuddle />
 
       <div className="v4-stack">
         <p className="v4-eyebrow">{V4.eyebrow}</p>
@@ -1235,7 +1235,7 @@ Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>"
 
 **Do not merge without a human deciding to.** Merging to `main` publishes to `code-pet.com` immediately, and PR previews on that project are 401-gated so there is no staging URL to check first. Open the PR, let it be reviewed, and verify production within minutes of the merge.
 
-**Phase 2** — the company-orbit WebGL hero — gets its own spec section and its own plan, written once Phase 1 is on screen. It adds `three` and `@react-three/fiber`, a sprite-atlas generator, and a gated dynamic import that never downloads `three` below 820px or under `prefers-reduced-motion`, with `CompanyRing` (Task 2) as the fallback.
+**Phase 2** — the company-orbit WebGL hero — gets its own spec section and its own plan, written once Phase 1 is on screen. It adds `three` and `@react-three/fiber`, a sprite-atlas generator, and a gated dynamic import that never downloads `three` below 820px or under `prefers-reduced-motion`, with `PetHuddle` (Task 2) as the fallback.
 
 ## Spec amendments made by this plan
 
@@ -1246,7 +1246,7 @@ Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>"
 
 Both remaining primitives need their CSS copied the same way `SplitText`'s is in Task 3 Step 5. Spec §4.2's table should be narrowed to `SplitText` for Phase 1, with the other three listed under Phase 2.
 
-**2. `OrbitPoster` → `CompanyRing`.** The spec's §4.2 and §9 named an `OrbitPoster` component — "a static rasterised frame of the orbit" — as Phase 1's hero. That is circular: the orbit does not exist until Phase 2, so there is nothing to rasterise. This plan replaces it with `CompanyRing`, a CSS ring built from the eight companion SVGs that already exist. It gives Phase 1 a real hero, and it becomes the Phase 2 fallback, which is what `OrbitPoster` was for. **`docs/superpowers/specs/2026-09-23-prelaunch-landing-design.md` should be updated to match** — rename `OrbitPoster` to `CompanyRing` in §4.2, §6 and §9, and in the §13 ticket list.
+**2. `OrbitPoster` → `PetHuddle`.** The spec's §4.2 and §9 named an `OrbitPoster` component — "a static rasterised frame of the orbit" — as Phase 1's hero. That is circular: the orbit does not exist until Phase 2, so there is nothing to rasterise. This plan replaces it with `PetHuddle`, a CSS ring built from the eight companion SVGs that already exist. It gives Phase 1 a real hero, and it becomes the Phase 2 fallback, which is what `OrbitPoster` was for. **`docs/superpowers/specs/2026-09-23-prelaunch-landing-design.md` should be updated to match** — rename `OrbitPoster` to `PetHuddle` in §4.2, §6 and §9, and in the §13 ticket list.
 
 ---
 
