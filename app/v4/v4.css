@@ -72,15 +72,19 @@
 
 /*
  * Each pet carries its distance from the centre as --d (0 for byte,
- * rising to 3 at the edges). Height, fade and overlap are derived from
- * it, so the huddle is symmetric by construction.
+ * rising to 3 at the edges), and its height is derived from it, so the
+ * huddle is symmetric by construction.
+ *
+ * No opacity taper. Fading the outer pets was meant to read as depth
+ * and instead read as the artwork washing out toward both edges — they
+ * looked half-finished rather than further away. Height alone gives the
+ * group its shape; every pet is drawn at full strength.
  */
 .v4-huddle-pet {
   display: block;
   position: relative;
   width: auto;
   height: calc(184px - var(--d) * 26px);
-  opacity: calc(1 - var(--d) * 0.1);
   image-rendering: pixelated;
   filter: drop-shadow(0 18px 26px rgba(0, 0, 0, 0.62));
   animation: v4-bob 6s ease-in-out infinite;
