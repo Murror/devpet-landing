@@ -91,7 +91,7 @@ test('the stage copy matches the full site, word for word', () => {
   ])
 })
 
-test('answers the four pre-launch objections, and the answers are in the DOM when collapsed', () => {
+test('answers the four questions a founder weighing an AI cofounder asks, with the answers in the DOM when collapsed', () => {
   const { container } = render(<V4Page />)
   expect(container.querySelectorAll('.v4-faq-item')).toHaveLength(4)
   V4.faq.forEach((item) => {

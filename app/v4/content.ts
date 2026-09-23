@@ -46,26 +46,26 @@ export const V4 = {
     { n: '05', label: 'Run & grow', note: 'Distribute & scale' },
   ],
 
-  // The objections a pre-launch page cannot dodge. Pricing figures come
-  // from the locked spec already published on /pricing, so this states
-  // nothing new.
+  // What a founder weighing an "AI cofounder" actually wants to know.
+  // The first question is the one the rest of the page dodges: everyone
+  // reading this is already comparing it to a tool they use.
   faqHeading: 'Before you sign up',
   faq: [
     {
-      q: 'When does it launch?',
-      a: "Soon. Everyone on this list hears first, before it goes public.",
+      q: 'How is this different from ChatGPT or Cursor?',
+      a: 'Those help you write code. Codepet runs the company around it: a roadmap from finding an idea to growing the thing, a specialist for each department, and every step shown in plain language for you to approve before it goes live.',
     },
     {
-      q: 'What will it cost?',
-      a: 'A 7-day trial to start, then $20 a month. Credits cover the work your team does, and extra credits are $0.05 each.',
+      q: 'What can it actually build for me?',
+      a: 'Real work, not advice. A site, a post, a pull request, a plan. Each one arrives finished and waiting for your approval.',
     },
     {
-      q: 'Do I need to know how to code?',
-      a: 'No. Codepet does the work and shows you every step in plain language, so you approve it rather than write it.',
+      q: 'Do I need an idea already?',
+      a: 'Not a finished one. The first stage is Find, where the work is shaping a rough notion into something worth building.',
     },
     {
-      q: 'Do I need a Mac?',
-      a: 'Yes, for now. Codepet is a macOS app.',
+      q: 'Who owns what it makes?',
+      a: 'You do. Codepet runs on your Mac and works inside your own project, so what it makes lands in your repo like anything else you write.',
     },
   ],
 
