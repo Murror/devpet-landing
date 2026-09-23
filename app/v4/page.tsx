@@ -2,7 +2,7 @@ import SplitText from '../v3/components/SplitText'
 import { V4 } from './content'
 import PetHuddle from './components/PetHuddle'
 import WaitlistInline from './components/WaitlistInline'
-import Departments from './components/Departments'
+import Stages from './components/Stages'
 import Faq from './components/Faq'
 
 /**
@@ -29,7 +29,7 @@ export default function V4Page() {
       <section className="v4-screen">
         <div className="v4-bg" aria-hidden="true" />
 
-        <div className="v4-stage">
+        <div className="v4-hero-stage">
           <PetHuddle />
 
           <p className="v4-eyebrow">{V4.eyebrow}</p>
@@ -45,7 +45,7 @@ export default function V4Page() {
         </div>
       </section>
 
-      <Departments />
+      <Stages />
 
       <Faq />
 

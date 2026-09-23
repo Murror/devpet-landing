@@ -31,16 +31,20 @@ export const V4 = {
     duplicate: "You're already on the list.",
     error: 'Something went wrong. Try again?',
   },
-  // Three of the eight departments, using their real names and their
-  // real one-liners from app/v3/content.ts — not invented copy. Each
-  // carries the same pet the full site gives that department.
-  departments: [
-    { name: 'Engineering', need: 'Ship the work and verify every change.', pet: '/v2/pets/4-purple-byte.png' },
-    { name: 'Marketing', need: 'Find the words and the launch sequence.', pet: '/v2/pets/3-orange-fox.png' },
-    { name: 'Finance', need: 'Model the numbers, price with confidence.', pet: '/v2/pets/5-yellow-bear.png' },
+  // The five stages, lifted verbatim from JOURNEY.phases in
+  // app/v3/content.ts so the teaser and the site tell the same story.
+  // Stages rather than departments: they show where a founder is going,
+  // not just who is along for the ride.
+  stagesHeadingLead: 'From the first spark',
+  stagesHeadingAccent: 'to a company that runs.',
+  stagesSub: 'Codepet maps the whole path and walks it beside you, one unlocked step at a time.',
+  stages: [
+    { n: '01', label: 'Find', note: 'Validate the idea' },
+    { n: '02', label: 'Build', note: 'Shape the product' },
+    { n: '03', label: 'Ship', note: 'Make it shippable' },
+    { n: '04', label: 'Launch', note: 'Run the closed beta' },
+    { n: '05', label: 'Run & grow', note: 'Distribute & scale' },
   ],
-  departmentsHeading: 'Eight departments, one founder.',
-  departmentsFootnote: 'Plus design, sales, support, legal and operations.',
 
   // The objections a pre-launch page cannot dodge. Pricing figures come
   // from the locked spec already published on /pricing, so this states

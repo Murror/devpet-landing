@@ -63,16 +63,32 @@ test('the two email fields have distinct ids', () => {
   ids.forEach((id) => expect(id).toBeTruthy())
 })
 
-test('names three departments with their real work and their pets', () => {
+test('lays out the five stages, in order, as an ordered list', () => {
   const { container } = render(<V4Page />)
-  V4.departments.forEach((d) => {
-    expect(screen.getByText(d.name)).toBeInTheDocument()
-    expect(screen.getByText(d.need)).toBeInTheDocument()
-  })
-  const pets = container.querySelectorAll('.v4-dept-pet')
-  expect(pets).toHaveLength(3)
-  pets.forEach((img) => expect(img.getAttribute('src')).toMatch(/^\/v2\/pets\//))
-  expect(screen.getByText(V4.departmentsFootnote)).toBeInTheDocument()
+  const items = container.querySelectorAll('.v4-stages > li')
+  expect(items).toHaveLength(5)
+  // The order IS the meaning, so assert the sequence rather than just
+  // that each stage appears somewhere.
+  const labels = [...container.querySelectorAll('.v4-stage-label')].map((h) => h.textContent)
+  expect(labels).toEqual(V4.stages.map((s) => s.label))
+  const nums = [...container.querySelectorAll('.v4-stage-num')].map((n) => n.textContent)
+  expect(nums).toEqual(['01', '02', '03', '04', '05'])
+  V4.stages.forEach((s) => expect(screen.getByText(s.note)).toBeInTheDocument())
+  // An <ol>, not a <ul> — the numbering is semantic, not decoration.
+  expect(container.querySelector('.v4-stages')?.tagName).toBe('OL')
+})
+
+test('the stage copy matches the full site, word for word', () => {
+  render(<V4Page />)
+  // These five notes are lifted from JOURNEY.phases in app/v3/content.ts.
+  // If the site rewrites them, this should be updated deliberately.
+  expect(V4.stages.map((s) => `${s.label}: ${s.note}`)).toEqual([
+    'Find: Validate the idea',
+    'Build: Shape the product',
+    'Ship: Make it shippable',
+    'Launch: Run the closed beta',
+    'Run & grow: Distribute & scale',
+  ])
 })
 
 test('answers the four pre-launch objections, and the answers are in the DOM when collapsed', () => {
