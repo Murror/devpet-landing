@@ -3,7 +3,7 @@ import Home from '@/app/page'
 
 test('the root serves the pre-launch teaser', () => {
   render(<Home />)
-  expect(screen.getByText('Launching this autumn')).toBeInTheDocument()
+  expect(screen.getByText('Coming soon')).toBeInTheDocument()
   expect(screen.getByPlaceholderText('you@email.com')).toBeInTheDocument()
 })
 

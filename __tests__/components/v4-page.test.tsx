@@ -4,24 +4,39 @@ import { V4 } from '@/app/v4/content'
 
 test('renders the full headline with the accent as a separate element', () => {
   const { container } = render(<V4Page />)
-  // SplitText breaks the lead into per-word spans with NO text node
-  // between them (the gap is CSS margin-right on .v3-word, not a
-  // literal space character) — the same technique Journey.tsx,
-  // DeptGallery.tsx and Loop.tsx already rely on. So a literal spaced
-  // substring never appears in textContent; assert word-by-word on the
-  // rendered .v3-word spans instead.
-  const words = Array.from(container.querySelectorAll('.v4-headline .v3-word')).map(
-    (w) => w.textContent,
-  )
-  expect(words).toEqual(["Let's", 'build', 'your'])
-  const accent = container.querySelector('.v4-headline em')
-  expect(accent).toHaveTextContent('whole company')
+  // SplitText breaks the lead into per-word spans with no text node
+  // between them, so assert word by word rather than on the phrase.
+  const words = [...container.querySelectorAll('.v4-headline .v3-word')].map((w) => w.textContent)
+  expect(words).toEqual(V4.headlineLead.split(' '))
+  expect(container.querySelector('.v4-headline em')).toHaveTextContent(V4.headlineAccent)
+})
+
+test('leads with the coming-soon label', () => {
+  render(<V4Page />)
+  expect(screen.getByText('Coming soon')).toBeInTheDocument()
+})
+
+test('states the value proposition — what Codepet actually is', () => {
+  render(<V4Page />)
+  expect(screen.getByText(V4.sub)).toBeInTheDocument()
+})
+
+test('shows proof beneath the form', () => {
+  render(<V4Page />)
+  expect(screen.getByText(V4.proof)).toBeInTheDocument()
+})
+
+test('shows the cast', () => {
+  const { container } = render(<V4Page />)
+  expect(container.querySelectorAll('.v4-huddle-pet')).toHaveLength(V4.pets.length)
 })
 
 test('bridges to the full site at /v3', () => {
   render(<V4Page />)
-  const bridge = screen.getByRole('link', { name: /see what we're building/i })
-  expect(bridge).toHaveAttribute('href', '/v3')
+  expect(screen.getByRole('link', { name: /see what we're building/i })).toHaveAttribute(
+    'href',
+    '/v3',
+  )
 })
 
 test('renders all five social links with their real URLs', () => {
@@ -31,10 +46,11 @@ test('renders all five social links with their real URLs', () => {
   })
 })
 
-test('shows the timing line and the waitlist field', () => {
+test('offers exactly one action: the email field', () => {
   render(<V4Page />)
-  expect(screen.getByText('Launching this autumn')).toBeInTheDocument()
-  expect(screen.getByPlaceholderText('you@email.com')).toBeInTheDocument()
+  expect(screen.getByPlaceholderText(V4.emailPlaceholder)).toBeInTheDocument()
+  // One screen, one job — a second button would be a second decision.
+  expect(screen.getAllByRole('button')).toHaveLength(1)
 })
 
 test('has exactly one h1', () => {

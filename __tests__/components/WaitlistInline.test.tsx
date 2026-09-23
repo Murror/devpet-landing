@@ -9,7 +9,7 @@ function fill(value: string) {
   return userEvent.setup().type(screen.getByPlaceholderText('you@email.com'), value)
 }
 function submit() {
-  fireEvent.click(screen.getByRole('button', { name: /join the waitlist/i }))
+  fireEvent.click(screen.getByRole('button', { name: /get early access/i }))
 }
 
 test('rejects a malformed address without calling the API', async () => {

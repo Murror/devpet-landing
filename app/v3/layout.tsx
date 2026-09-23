@@ -22,10 +22,14 @@ const playfair = Playfair_Display({
 // Headings use the self-hosted pixel font (Minecraft), declared via
 // @font-face in v3.css — no Google fetch needed.
 
+// This is the full marketing site, not the pre-launch teaser — it must
+// describe the product itself. Wording follows the canonical
+// positioning in CLAUDE.md; it deliberately carries no "coming soon"
+// or waitlist framing, which belongs only to the teaser at `/`.
 export const metadata: Metadata = {
-  title: "Codepet — Let's build your whole company",
+  title: 'Codepet — Build your product and your company with AI',
   description:
-    'Codepet is the AI cofounder for founders building their own product and company. A macOS app, launching this autumn. Join the waitlist.',
+    'Codepet is a macOS application for founders building their own product and company. An AI cofounder and a team of specialists — engineering, product, finance — carry the work with you, from first line of code to a shipped product.',
 }
 
 export default function V3Layout({ children }: { children: React.ReactNode }) {

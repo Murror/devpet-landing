@@ -20,9 +20,9 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: "Codepet — Let's build your whole company",
+  title: "Codepet — Be the first to build your whole company",
   description:
-    'Codepet is the AI cofounder for founders building their own product and company. A macOS app, launching this autumn. Join the waitlist.',
+    'A macOS app where a team of AI specialists builds your product with you — engineering, product, finance. Coming soon — get early access.',
   // /v4 and / render the same page while the teaser is live. Keep the
   // segment reachable for review but out of the index, so it can't
   // compete with the root or linger as a stale "Launching this autumn"

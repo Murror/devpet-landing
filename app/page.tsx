@@ -34,9 +34,9 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: "Codepet — Let's build your whole company",
+  title: "Codepet — Be the first to build your whole company",
   description:
-    'Codepet is the AI cofounder for founders building their own product and company. A macOS app, launching this autumn. Join the waitlist.',
+    'A macOS app where a team of AI specialists builds your product with you — engineering, product, finance. Coming soon — get early access.',
 }
 
 export default function Home() {
