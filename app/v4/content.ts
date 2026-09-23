@@ -31,6 +31,43 @@ export const V4 = {
     duplicate: "You're already on the list.",
     error: 'Something went wrong. Try again?',
   },
+  // Three of the eight departments, using their real names and their
+  // real one-liners from app/v3/content.ts — not invented copy. Each
+  // carries the same pet the full site gives that department.
+  departments: [
+    { name: 'Engineering', need: 'Ship the work and verify every change.', pet: '/v2/pets/4-purple-byte.png' },
+    { name: 'Marketing', need: 'Find the words and the launch sequence.', pet: '/v2/pets/3-orange-fox.png' },
+    { name: 'Finance', need: 'Model the numbers, price with confidence.', pet: '/v2/pets/5-yellow-bear.png' },
+  ],
+  departmentsHeading: 'Eight departments, one founder.',
+  departmentsFootnote: 'Plus design, sales, support, legal and operations.',
+
+  // The objections a pre-launch page cannot dodge. Pricing figures come
+  // from the locked spec already published on /pricing, so this states
+  // nothing new.
+  faqHeading: 'Before you sign up',
+  faq: [
+    {
+      q: 'When does it launch?',
+      a: "Soon. Everyone on this list hears first, before it goes public.",
+    },
+    {
+      q: 'What will it cost?',
+      a: 'A 7-day trial to start, then $20 a month. Credits cover the work your team does, and extra credits are $0.05 each.',
+    },
+    {
+      q: 'Do I need to know how to code?',
+      a: 'No. Codepet does the work and shows you every step in plain language, so you approve it rather than write it.',
+    },
+    {
+      q: 'Do I need a Mac?',
+      a: 'Yes, for now. Codepet is a macOS app.',
+    },
+  ],
+
+  closingHeading: 'Be first in line.',
+  closingSub: 'Leave your email and you will hear the moment it opens.',
+
   socials: [
     { label: 'X', href: 'https://x.com/codepetapp' },
     { label: 'Instagram', href: 'https://www.instagram.com/codepetapp/' },

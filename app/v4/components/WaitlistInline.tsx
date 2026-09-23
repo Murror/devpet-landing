@@ -22,7 +22,7 @@ type FormState = 'idle' | 'loading' | 'success' | 'duplicate' | 'error'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-export default function WaitlistInline() {
+export default function WaitlistInline({ id = 'v4-email' }: { id?: string } = {}) {
   const [email, setEmail] = useState('')
   const [state, setState] = useState<FormState>('idle')
   const [invalid, setInvalid] = useState(false)
@@ -62,9 +62,9 @@ export default function WaitlistInline() {
 
   return (
     <form className="v4-form" onSubmit={handleSubmit} noValidate>
-      <label className="v4-sr" htmlFor="v4-email">Email address</label>
+      <label className="v4-sr" htmlFor={id}>Email address</label>
       <input
-        id="v4-email"
+        id={id}
         type="email"
         className="v4-input"
         placeholder={V4.emailPlaceholder}

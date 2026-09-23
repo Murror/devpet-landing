@@ -2,15 +2,22 @@ import SplitText from '../v3/components/SplitText'
 import { V4 } from './content'
 import PetHuddle from './components/PetHuddle'
 import WaitlistInline from './components/WaitlistInline'
+import Departments from './components/Departments'
+import Faq from './components/Faq'
 
 /**
- * The pre-launch teaser. One screen, no scroll, one job: collect an
- * email address.
+ * The pre-launch teaser. One job: collect an email address.
  *
- * The composition deliberately mirrors the live hero at /v3 — centred
- * over the same code-art backdrop, same type scale, same italic accent
- * — so the teaser and the site read as one product. The full marketing
- * site stays live at /v3, reachable by search or direct URL.
+ * It scrolls now, but it is still a landing page rather than a site —
+ * there is exactly one action on it, offered twice, and no navigation
+ * anywhere. Focus here means limiting choices, not length: Netflix's
+ * own signup page runs to nearly four screens with no nav and a single
+ * repeated CTA, which is the shape this follows.
+ *
+ * The hero mirrors the live hero at /v3 — centred over the same
+ * code-art backdrop, same type scale, same italic accent — so the
+ * teaser and the site read as one product. The full marketing site
+ * stays live at /v3, reachable by search or direct URL.
  *
  * SplitText takes a plain string, so the italic accent is a sibling
  * <em> rather than nested inside it, the same way v3's hero composes
@@ -18,23 +25,36 @@ import WaitlistInline from './components/WaitlistInline'
  */
 export default function V4Page() {
   return (
-    <main className="v4-screen">
-      <div className="v4-bg" aria-hidden="true" />
+    <main className="v4-main">
+      <section className="v4-screen">
+        <div className="v4-bg" aria-hidden="true" />
 
-      <div className="v4-stage">
-        <PetHuddle />
+        <div className="v4-stage">
+          <PetHuddle />
 
-        <p className="v4-eyebrow">{V4.eyebrow}</p>
+          <p className="v4-eyebrow">{V4.eyebrow}</p>
 
-        <h1 className="v4-headline">
-          <SplitText text={V4.headlineLead} />
-          <em>{V4.headlineAccent}</em>
-        </h1>
+          <h1 className="v4-headline">
+            <SplitText text={V4.headlineLead} />
+            <em>{V4.headlineAccent}</em>
+          </h1>
 
-        <p className="v4-sub">{V4.sub}</p>
+          <p className="v4-sub">{V4.sub}</p>
 
-        <WaitlistInline />
-      </div>
+          <WaitlistInline />
+        </div>
+      </section>
+
+      <Departments />
+
+      <Faq />
+
+      {/* The same single action, offered once more at the end. */}
+      <section className="v4-section v4-closing">
+        <h2 className="v4-h2">{V4.closingHeading}</h2>
+        <p className="v4-closing-sub">{V4.closingSub}</p>
+        <WaitlistInline id="v4-email-end" />
+      </section>
 
       {/*
         No link to the full marketing site, by decision: the page offers
