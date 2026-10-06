@@ -7,6 +7,7 @@ import type { Metadata } from 'next'
 import type { CSSProperties } from 'react'
 import { notFound } from 'next/navigation'
 import { Google_Sans_Flex, Playfair_Display } from 'next/font/google'
+import { SITE_HOME } from '@/lib/site'
 import '../../v3/v3.css'
 import '../../v3/v3-fx.css'
 import '../setup.css'
@@ -73,8 +74,8 @@ export default async function SetupPage({ params }: { params: Promise<{ slug: st
       <Atmosphere />
 
       <div className="sp-top">
-        <a href="/" className="sp-top-brand">Codepet</a>
-        <a href="/#environment" className="sp-top-back">Back to setup</a>
+        <a href={SITE_HOME} className="sp-top-brand">Codepet</a>
+        <a href={`${SITE_HOME}#environment`} className="sp-top-back">Back to setup</a>
       </div>
 
       <main className="sp">
@@ -113,7 +114,7 @@ export default async function SetupPage({ params }: { params: Promise<{ slug: st
                 {nextName}
               </a>
             </div>
-            <a href="/#environment" className="sp-foot-home">← All of setup</a>
+            <a href={`${SITE_HOME}#environment`} className="sp-foot-home">← All of setup</a>
           </nav>
         </Reveal>
       </main>

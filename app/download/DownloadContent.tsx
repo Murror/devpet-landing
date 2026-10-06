@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useLocale } from '@/lib/LocaleProvider'
 import { DOWNLOAD_PATH, MIN_MACOS } from '@/lib/download'
 import { useRelease } from '@/lib/ReleaseProvider'
+import { SITE_HOME } from '@/lib/site'
 
 // The comment that used to sit here named Murror/CodePet-Clean as the release host. That
 // repo is not the source of truth for this project and nothing deploys from it — the
@@ -49,7 +50,7 @@ export default function DownloadContent() {
   return (
     <div className={'v2-root min-h-screen' + (vi ? ' v2-root--vi' : '')}>
       <main className="mx-auto flex max-w-2xl flex-col items-center px-6 py-20 text-center">
-        <Link href="/" className="mb-10 text-sm text-muted no-underline hover:text-heading">
+        <Link href={SITE_HOME} className="mb-10 text-sm text-muted no-underline hover:text-heading">
           ← {vi ? 'Trang chủ' : 'Home'}
         </Link>
 

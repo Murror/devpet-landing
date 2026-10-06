@@ -60,6 +60,19 @@ export function localePrefix(locale: Locale): string {
   return locale === 'en' ? '' : `/${locale}`
 }
 
+/**
+ * Where "home" points for internal navigation.
+ *
+ * While the root serves the pre-launch teaser, the full marketing site
+ * lives at /v3, so nav links, brand logos and "back to home" links must
+ * target it — otherwise every blog post, the pricing page and the
+ * download page dead-end on a one-screen waitlist form.
+ *
+ * LAUNCH DAY: set this back to '/' when the root returns to serving the
+ * full site.
+ */
+export const SITE_HOME = '/v3'
+
 /** Absolute URL helper — joins SITE_URL with a root-relative path. */
 export function absoluteUrl(path: string): string {
   if (/^https?:\/\//.test(path)) return path

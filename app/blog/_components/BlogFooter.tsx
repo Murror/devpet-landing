@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import type { Locale } from '@/lib/site'
+import { SITE_HOME, type Locale } from '@/lib/site'
 import { blogIndexPath } from '@/lib/blog/format'
 
 /**
@@ -15,7 +15,7 @@ export default function BlogFooter({ locale }: { locale: Locale }) {
       : 'Field notes from building with AI, in the open.'
 
   const links = [
-    { label: locale === 'vi' ? 'Trang chủ' : 'Home', href: '/' },
+    { label: locale === 'vi' ? 'Trang chủ' : 'Home', href: SITE_HOME },
     { label: locale === 'vi' ? 'Cách hoạt động' : 'How it works', href: '/#loop' },
     { label: 'Blog', href: blogIndexPath(locale) },
   ]
