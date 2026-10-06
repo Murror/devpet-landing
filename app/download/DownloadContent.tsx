@@ -58,7 +58,7 @@ export default function DownloadContent() {
         </span>
 
         <h1 className="text-4xl font-bold tracking-tight text-heading sm:text-5xl">
-          {vi ? 'Tải Codepet' : 'Download Codepet'}
+          {released ? (vi ? 'Tải Codepet' : 'Download Codepet') : 'Codepet'}
         </h1>
         <p className="mt-4 max-w-md text-lg text-text">
           {vi
@@ -88,12 +88,12 @@ export default function DownloadContent() {
                an honest one plus somewhere to go. */
             <div className="w-full max-w-md rounded-2xl border border-border bg-surface p-6 text-left">
               <p className="font-semibold text-heading">
-                {vi ? 'Chưa phát hành' : 'Not released yet'}
+                {vi ? 'Sắp ra mắt' : 'Coming soon'}
               </p>
               <p className="mt-2 text-sm text-text">
                 {vi
-                  ? 'Bản dựng công khai đầu tiên đang được chuẩn bị. Để lại email và chúng tôi sẽ báo bạn ngay ngày nó lên.'
-                  : 'The first public build is being prepared. Join the waitlist and we will tell you the day it lands.'}
+                  ? 'Để lại email và chúng tôi sẽ báo bạn ngay ngày Codepet ra mắt.'
+                  : 'Join the waitlist and we will tell you the day Codepet launches.'}
               </p>
               <Link
                 href="/#waitlist"
@@ -103,7 +103,7 @@ export default function DownloadContent() {
               </Link>
             </div>
           )}
-          {!isMac && (
+          {released && !isMac && (
             <p className="text-sm font-medium text-primary">
               {vi ? 'Codepet hiện chỉ có trên macOS.' : 'Codepet is currently available for macOS only.'}
             </p>
@@ -150,6 +150,10 @@ export default function DownloadContent() {
           </p>
         )}
 
+        {/* Install steps, prerequisites and platform notes only once there is something to
+            install. Before launch they describe an unreleased product to the public — the
+            "coming soon" card above is the whole page. */}
+        {released && (<>
         <section className="mt-14 w-full rounded-2xl border border-border bg-surface p-6 text-left">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-muted">
             {vi ? 'Sau khi tải về' : 'After you download'}
@@ -198,6 +202,7 @@ export default function DownloadContent() {
             ? 'Codepet hiện chỉ hỗ trợ macOS. Windows và các nền tảng khác sẽ có trong tương lai.'
             : 'Codepet is currently available for macOS only. Windows and other platforms are on the roadmap.'}
         </p>
+        </>)}
       </main>
     </div>
   )

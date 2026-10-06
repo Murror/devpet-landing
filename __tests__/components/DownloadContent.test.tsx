@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import { LocaleProvider } from '@/lib/LocaleProvider'
-import { DOWNLOAD_PATH, DOWNLOAD_TARGET, MIN_MACOS } from '@/lib/download'
+import { DOWNLOAD_PATH, DOWNLOAD_TARGET, MIN_MACOS, PUBLIC_DOWNLOAD_ENABLED } from '@/lib/download'
 import { ReleaseProvider } from '@/lib/ReleaseProvider'
 import type { ReleaseState } from '@/lib/releaseServer'
 import DownloadContent from '@/app/download/DownloadContent'
@@ -60,14 +60,29 @@ describe('the redirect behind that path', () => {
   // The page and next.config.ts must agree about the URL, or the button 404s while both
   // files look individually correct. They import the same constant; this proves the
   // redirect uses it rather than a hardcoded copy that drifted.
-  test('next.config forwards DOWNLOAD_PATH to the release asset', async () => {
+  test('the public site is not offering the app yet', () => {
+    // Flipping this is the launch. It should take a deliberate PR, and this test failing is
+    // the reviewer's prompt to ask whether it was meant.
+    expect(PUBLIC_DOWNLOAD_ENABLED).toBe(false)
+  })
+
+  test('before launch DOWNLOAD_PATH does not redirect anywhere', async () => {
+    // Hiding the button is not enough: the .dmg URL had already been shared.
+    const redirects = await nextConfig.redirects!()
+    expect(redirects.find((r) => r.source === DOWNLOAD_PATH)).toBeUndefined()
+  })
+
+  // The two below describe the redirect once launched; skipped while it is switched off.
+  const whenLaunched = PUBLIC_DOWNLOAD_ENABLED ? test : test.skip
+
+  whenLaunched('next.config forwards DOWNLOAD_PATH to the release asset', async () => {
     const redirects = await nextConfig.redirects!()
     const rule = redirects.find((r) => r.source === DOWNLOAD_PATH)
     expect(rule).toBeDefined()
     expect(rule!.destination).toBe(DOWNLOAD_TARGET)
   })
 
-  test('is a 307, so a future host change is not cached forever', async () => {
+  whenLaunched('is a 307, so a future host change is not cached forever', async () => {
     // A 301 is cached by the browser indefinitely. If the asset moves off GitHub, every
     // past downloader keeps being sent to the old host by their own browser, and no deploy
     // of ours can reach them.
@@ -89,13 +104,23 @@ describe('when no release has been published', () => {
     release = { released: false, version: null, internal: null }
     renderPage()
     await waitFor(() => {
-      expect(screen.getByText(/Not released yet/i)).toBeInTheDocument()
+      expect(screen.getByText(/Coming soon/i)).toBeInTheDocument()
     })
     expect(screen.queryByRole('link', { name: /Download for macOS/i })).toBeNull()
     expect(screen.getByRole('link', { name: /Join the waitlist/i })).toHaveAttribute(
       'href',
       '/#waitlist',
     )
+  })
+
+  test('reveals nothing beyond "coming soon": no steps, requirements or prerequisites', () => {
+    release = { released: false, version: null, internal: null }
+    renderPage()
+    expect(screen.queryByText(/right-click/i)).toBeNull()
+    expect(screen.queryByText(/Open Anyway/i)).toBeNull()
+    expect(screen.queryByText(new RegExp(MIN_MACOS.replace('.', '\\.')))).toBeNull()
+    expect(screen.queryByRole('link', { name: /Claude Code/i })).toBeNull()
+    expect(screen.queryByText(/\.dmg/)).toBeNull()
   })
 
   test('an unknown version still shows the button', async () => {
@@ -107,7 +132,7 @@ describe('when no release has been published', () => {
     await waitFor(() => {
       expect(screen.getByRole('link', { name: /Download for macOS/i })).toBeInTheDocument()
     })
-    expect(screen.queryByText(/Not released yet/i)).toBeNull()
+    expect(screen.queryByText(/Coming soon/i)).toBeNull()
   })
 
 
@@ -150,7 +175,7 @@ describe('Vietnamese', () => {
     release = { released: false, version: null, internal: null }
     renderPage('vi')
     await waitFor(() => {
-      expect(screen.getByText(/Chưa phát hành/)).toBeInTheDocument()
+      expect(screen.getByText(/Sắp ra mắt/)).toBeInTheDocument()
     })
   })
 

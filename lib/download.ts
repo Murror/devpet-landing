@@ -22,6 +22,22 @@
  * app repo is the check, not this file.
  */
 
+/**
+ * Whether the public site offers the app AT ALL. Off, the whole site says "coming soon":
+ * no download button anywhere, no `/download/Codepet.dmg` redirect, no install steps,
+ * version, requirements or internal-build link — and the GitHub releases list is not even
+ * asked, so nothing the app repo publishes can flip it back on.
+ *
+ * Off since 2026-10-06. The release-driven flip below was working as designed: build 8 was
+ * published as a normal (non-prerelease) GitHub release so the team could install it, and
+ * the site read that as "launched" and put a Download button in front of the world. The
+ * product is not public. Publishing a release must not be the same act as launching, so
+ * launching is now this one deliberate line, in this repo, in a reviewed PR.
+ *
+ * The team's download moved to a private, unlisted link — see `app/d/[token]/route.ts`.
+ */
+export const PUBLIC_DOWNLOAD_ENABLED = false
+
 /** The public URL the button points at. Ours, stable, never changes. */
 export const DOWNLOAD_PATH = '/download/Codepet.dmg'
 

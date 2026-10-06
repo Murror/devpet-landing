@@ -1,5 +1,5 @@
 import type { NextConfig } from "next";
-import { DOWNLOAD_PATH, DOWNLOAD_TARGET } from "./lib/download";
+import { DOWNLOAD_PATH, DOWNLOAD_TARGET, PUBLIC_DOWNLOAD_ENABLED } from "./lib/download";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
@@ -43,11 +43,12 @@ const nextConfig: NextConfig = {
       // The two values come from lib/download.ts, which the /download page imports too.
       // They have to agree — a page whose button points somewhere this rule does not cover
       // is a 404 while both files look individually correct.
-      {
-        source: DOWNLOAD_PATH,
-        destination: DOWNLOAD_TARGET,
-        permanent: false,
-      },
+      //
+      // Only while PUBLIC_DOWNLOAD_ENABLED. Off, the path 404s like any other — hiding the
+      // button is not enough when the URL has already been pasted around.
+      ...(PUBLIC_DOWNLOAD_ENABLED
+        ? [{ source: DOWNLOAD_PATH, destination: DOWNLOAD_TARGET, permanent: false }]
+        : []),
     ]
   },
   // Mount the separate Codepet Academy deployment under /academy
