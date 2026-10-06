@@ -6,10 +6,9 @@ test('lists the full marketing site at /v3 so it stays indexed', () => {
   expect(urls).toContain(absoluteUrl('/v3'))
 })
 
-test('still lists the root and pricing', () => {
+test('still lists the root', () => {
   const urls = sitemap().map((e) => e.url)
   expect(urls).toContain(SITE_URL)
-  expect(urls).toContain(absoluteUrl('/pricing'))
 })
 
 test('ranks /v3 below the root but above the legal pages', () => {

@@ -3,7 +3,7 @@ import { SECTIONS } from '@/app/blog/_components/BlogNav'
 
 /**
  * Pins the fix for the finding that repointing `/` to the pre-launch
- * teaser silently severed the blog, pricing, download and setup pages
+ * teaser silently severed the blog, download and setup pages
  * from the full marketing site (which now lives at /v3). A single
  * constant, SITE_HOME, controls where all of those "back to home" links
  * and nav brands point — this test asserts on the constant's value and

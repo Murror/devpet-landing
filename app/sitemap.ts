@@ -21,13 +21,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: 'weekly',
     priority: 1,
   })
-  // Pricing sits just under the home page: it is the last thing someone reads
-  // before deciding, and "codepet pricing" is a query people type directly.
-  entries.push({
-    url: absoluteUrl('/pricing'),
-    changeFrequency: 'monthly',
-    priority: 0.9,
-  })
   // The full marketing site. While the root serves the pre-launch teaser,
   // this is the only crawlable URL for the real site — without it, the
   // whole thing drops out of the index.

@@ -65,7 +65,7 @@ export function localePrefix(locale: Locale): string {
  *
  * While the root serves the pre-launch teaser, the full marketing site
  * lives at /v3, so nav links, brand logos and "back to home" links must
- * target it — otherwise every blog post, the pricing page and the
+ * target it — otherwise every blog post and the
  * download page dead-end on a one-screen waitlist form.
  *
  * LAUNCH DAY: set this back to '/' when the root returns to serving the
