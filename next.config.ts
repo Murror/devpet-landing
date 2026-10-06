@@ -27,14 +27,8 @@ const nextConfig: NextConfig = {
         destination: '/',
         permanent: false,
       },
-      // The v3 cinematic-dark design is now the canonical landing at `/`
-      // (see app/page.tsx). Canonicalize the old draft URL so any inbound
-      // links to /v3 land on `/`. 307 keeps it reversible.
-      {
-        source: '/v3',
-        destination: '/',
-        permanent: false,
-      },
+      // `/v3` is deliberately NOT redirected here: it serves the full
+      // marketing site while the root shows the pre-launch teaser.
       // Stable, branded download URL → latest GitHub release asset. The
       // website button points here (code-pet.com/download/Codepet.dmg) so it
       // never changes per release; only the GitHub release gets updated.

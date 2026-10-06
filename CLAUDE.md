@@ -10,10 +10,10 @@ This version of Next.js has breaking changes — APIs, conventions, and file str
 
 All marketing, landing page, and deck copy should reflect the current positioning. Do not revert to earlier "learn to code via lessons" framing.
 
-- **One-liner.** Codepet is a macOS application that helps people develop their thinking and ship products of their own. Guided agentic coding, adaptive feedback, and a daily-practice loop turn early exposure to programming into durable skill. Built and maintained by MURROR.
-- **Mission.** Train people to build real software with AI. Go beyond tutorials — coach every learner through project work, from first line of code to a shipped product.
-- **Vision.** The most intelligent and engaging AI for building apps. The go-to AI training platform for people who want to develop their thinking and ship intelligent, original products.
-- **Aim.** Ship real products. Learn from every build. Users build and deliver their own products, with lessons personalized to the project in front of them.
+- **One-liner.** Codepet is a macOS application for founders building their own product and company. An AI cofounder and a team of specialists — engineering, product, finance — carry the work with you, from first line of code to a shipped product. Built and maintained by MURROR.
+- **Mission.** Let one founder operate like a whole company. Go beyond tutorials and beyond code completion — carry the founder through real product work, in every department a company needs.
+- **Vision.** The most intelligent and engaging AI for building companies of one. The go-to platform for founders who want to ship intelligent, original products without waiting for a team.
+- **Aim.** Ship real products, build a real company. Founders deliver their own products, with guidance personalised to the company in front of them.
 - **Voice pillars.** Playful · Encouraging · Open-minded · Knowledgeable.
 - **At a glance.** 8 AI companions · 16 coding skills · 4 learning domains · 1 macOS application.
 
