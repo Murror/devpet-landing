@@ -25,7 +25,7 @@ const ok = (body: unknown) => async () => ({ status: 200, ok: true, json: async 
 
 test('no releases at all means nothing is published', async () => {
   mockFetch(ok([]))
-  await expect(getReleaseState()).resolves.toEqual({
+  await expect(getReleaseState(true)).resolves.toEqual({
     released: false,
     version: null,
     internal: null,
@@ -38,7 +38,7 @@ test('a prerelease alone does NOT count as published', async () => {
   // registered Macs and says "damaged" on every other. Verified against the live API after
   // publishing it: /releases/latest still answered 404.
   mockFetch(ok([rel('v1.0-build2-internal', true)]))
-  const state = await getReleaseState()
+  const state = await getReleaseState(true)
   expect(state.released).toBe(false)
   expect(state.internal).toEqual({
     tag: 'v1.0-build2-internal',
@@ -48,7 +48,7 @@ test('a prerelease alone does NOT count as published', async () => {
 
 test('a draft does not count either', async () => {
   mockFetch(ok([rel('v9.9', false, true)]))
-  await expect(getReleaseState()).resolves.toMatchObject({ released: false })
+  await expect(getReleaseState(true)).resolves.toMatchObject({ released: false })
 })
 
 test('a stable release wins even when a newer prerelease exists', async () => {
@@ -56,7 +56,7 @@ test('a stable release wins even when a newer prerelease exists', async () => {
   // through. Computing it differently here would let the page and the button disagree
   // about which build is current.
   mockFetch(ok([rel('v1.1-rc1', true), rel('v1.0-build2')]))
-  await expect(getReleaseState()).resolves.toEqual({
+  await expect(getReleaseState(true)).resolves.toEqual({
     released: true,
     version: '1.0-build2',
     internal: null,
@@ -67,7 +67,7 @@ test('the internal build disappears once a public one exists', async () => {
   // At that point it is strictly worse for everyone — four Macs, not notarized — so
   // leaving it on the page would be offering a downgrade next to the real thing.
   mockFetch(ok([rel('v1.0-build2-internal', true), rel('v1.0-build2')]))
-  await expect(getReleaseState()).resolves.toMatchObject({ released: true, internal: null })
+  await expect(getReleaseState(true)).resolves.toMatchObject({ released: true, internal: null })
 })
 
 test('a rate limit leaves the download live', async () => {
@@ -75,7 +75,7 @@ test('a rate limit leaves the download live', async () => {
   // download because GitHub throttled one request loses a user who wanted the product; a
   // button that 404s is recoverable by reloading.
   mockFetch(async () => ({ status: 403, ok: false, json: async () => ({}) }))
-  await expect(getReleaseState()).resolves.toEqual({
+  await expect(getReleaseState(true)).resolves.toEqual({
     released: true,
     version: null,
     internal: null,
@@ -84,32 +84,32 @@ test('a rate limit leaves the download live', async () => {
 
 test('a server error leaves it live too', async () => {
   mockFetch(async () => ({ status: 502, ok: false, json: async () => ({}) }))
-  await expect(getReleaseState()).resolves.toEqual({ released: true, version: null, internal: null })
+  await expect(getReleaseState(true)).resolves.toEqual({ released: true, version: null, internal: null })
 })
 
 test('a network failure leaves it live', async () => {
   mockFetch(async () => {
     throw new Error('offline')
   })
-  await expect(getReleaseState()).resolves.toEqual({ released: true, version: null, internal: null })
+  await expect(getReleaseState(true)).resolves.toEqual({ released: true, version: null, internal: null })
 })
 
 test('reads the version and strips the leading v', async () => {
   // The page prints this. A stray `v` would render "Version v1.0-build2".
   mockFetch(ok([rel('v1.0-build2')]))
-  await expect(getReleaseState()).resolves.toEqual({ released: true, version: '1.0-build2', internal: null })
+  await expect(getReleaseState(true)).resolves.toEqual({ released: true, version: '1.0-build2', internal: null })
 })
 
 test('falls back to the release name when there is no tag', async () => {
   mockFetch(ok([{ name: '2.0', prerelease: false, draft: false }]))
-  await expect(getReleaseState()).resolves.toEqual({ released: true, version: '2.0', internal: null })
+  await expect(getReleaseState(true)).resolves.toEqual({ released: true, version: '2.0', internal: null })
 })
 
 test('a release with no usable version is still a release', async () => {
   // released and version are separate answers: an unnamed release still means there is
   // something to download, and the page simply omits the version line.
   mockFetch(ok([{ prerelease: false, draft: false }]))
-  await expect(getReleaseState()).resolves.toEqual({ released: true, version: null, internal: null })
+  await expect(getReleaseState(true)).resolves.toEqual({ released: true, version: null, internal: null })
 })
 
 test('a malformed body does not take the page down', async () => {
@@ -120,7 +120,7 @@ test('a malformed body does not take the page down', async () => {
       throw new SyntaxError('Unexpected token')
     },
   }))
-  await expect(getReleaseState()).resolves.toEqual({ released: true, version: null, internal: null })
+  await expect(getReleaseState(true)).resolves.toEqual({ released: true, version: null, internal: null })
 })
 
 test('asks for the answer to be reused rather than re-fetched per visitor', async () => {
@@ -134,9 +134,21 @@ test('asks for the answer to be reused rather than re-fetched per visitor', asyn
     return { status: 200, ok: true, json: async () => [] }
   }) as never
 
-  await getReleaseState()
+  await getReleaseState(true)
 
   const [url, init] = seen[0]
   expect(url).toBe(RELEASES_API)
   expect((init as { next?: { revalidate?: number } }).next?.revalidate).toBeGreaterThan(0)
+})
+
+test('before launch the answer is "coming soon" and GitHub is never asked', async () => {
+  // Build 8 went out as a normal GitHub release for the team, and the site read it as a
+  // launch. With the switch off, no release — stable or internal — may reach the page.
+  mockFetch(ok([rel('v1.0-build8'), rel('v1.0-build2-internal', true)]))
+  await expect(getReleaseState()).resolves.toEqual({
+    released: false,
+    version: null,
+    internal: null,
+  })
+  expect(global.fetch).not.toHaveBeenCalled()
 })

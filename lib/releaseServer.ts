@@ -1,4 +1,4 @@
-import { RELEASES_API, RELEASES_PAGE } from './download'
+import { PUBLIC_DOWNLOAD_ENABLED, RELEASES_API, RELEASES_PAGE } from './download'
 
 export interface InternalBuild {
   /** The prerelease's tag, e.g. `v1.0-build2-internal`. */
@@ -60,7 +60,13 @@ const REVALIDATE_SECONDS = 300
  * live, because hiding a working download costs a user who wanted the product, while a
  * button that 404s is recoverable by reloading.
  */
-export async function getReleaseState(): Promise<ReleaseState> {
+export async function getReleaseState(
+  enabled: boolean = PUBLIC_DOWNLOAD_ENABLED,
+): Promise<ReleaseState> {
+  // Not launched: "coming soon" regardless of what GitHub says, and GitHub is not asked —
+  // the internal-build link would otherwise put a release page in front of the public.
+  if (!enabled) return { released: false, version: null, internal: null }
+
   // Fails open on anything that is not a clear answer — see the note above.
   const unknown: ReleaseState = { released: true, version: null, internal: null }
   try {
