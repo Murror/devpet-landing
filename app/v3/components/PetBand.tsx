@@ -10,6 +10,7 @@ const PETS = [
   '/v2/pets/2-green-owl.png',
   '/v2/pets/3-orange-fox.png',
   '/v2/pets/4-purple-byte.png',
+  '/v2/pets/8-green-vega.png',
   '/v2/pets/5-yellow-bear.png',
   '/v2/pets/6-red-bear.png',
   '/v2/pets/7-blue-penguin.png',

@@ -96,7 +96,7 @@ export const DEPARTMENTS = {
     { key: 'fin',     name: 'Finance',     need: 'Model the numbers, price with confidence.',      color: '#FDB022', cover: '/v3/covers/code-chess.jpg',      photo: true, pet: '/v2/pets/5-yellow-bear.png'  },
     { key: 'legal',   name: 'Legal',       need: 'Cover the basics from sensible templates.',      color: '#9333EA', cover: '/v3/covers/code-observatory.jpg', photo: true, pet: '/v2/pets/7-blue-penguin.png' },
     { key: 'design',  name: 'Design',      need: 'Make the first run feel like magic.',            color: '#A855F7', cover: '/v3/covers/code-book.jpg',       photo: true, pet: '/v2/pets/1-pink-bear.png'    },
-    { key: 'sales',   name: 'Sales',       need: 'Land your first real users, personally.',        color: '#7C3AED', cover: '/v3/covers/code-guitar.jpg',     photo: true, pet: '/v2/pets/6-red-bear.png'     },
+    { key: 'sales',   name: 'Sales',       need: 'Land your first real users, personally.',        color: '#7C3AED', cover: '/v3/covers/code-guitar.jpg',     photo: true, pet: '/v2/pets/8-green-vega.png'   },
     { key: 'support', name: 'Support',     need: 'Answer once, then keep triage running quietly.', color: '#FF6B9D', cover: '/v3/covers/code-ghibli.jpg',     photo: true, pet: '/v2/pets/1-pink-bear.png'    },
   ],
 }
