@@ -574,6 +574,14 @@
   .v4-rail { display: none; }
 }
 
+@media (max-width: 480px) {
+  /* Phones: eight pets at the tablet size ran off both edges. Scale the
+     row with the viewport so the whole cast fits from 320px up — the
+     centre pair tops out at 64px, the edges shrink to half that. */
+  .v4-huddle-pet { height: calc(min(64px, 17vw) * (1 - var(--d) / 8)); }
+  .v4-huddle { gap: 4px; margin-bottom: 18px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .v4-huddle-pet { animation: none; }
 }
