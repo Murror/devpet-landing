@@ -60,10 +60,10 @@ export const V4 = {
       a: 'Real work, not advice. A site, a post, a pull request, a plan. Each one arrives finished and waiting for your approval.',
     },
     {
-      // The page opens with seven characters and otherwise never says
+      // The page opens with eight characters and otherwise never says
       // what they are. Without this they are decoration.
       q: 'Who are the pets?',
-      a: 'Your team. Each one runs a department — engineering, marketing, design, finance, sales, support, legal and operations — and takes the work that belongs to it.',
+      a: 'Your team. Each one runs a department — engineering, marketing, design, finance, sales, support, legal and operations — and takes the work that belongs to it. The newest is Vega, a frog who runs sales: finding your first real users and talking to them one by one.',
     },
     {
       q: 'Do I need an idea already?',
@@ -98,7 +98,7 @@ export const V4 = {
     { label: 'Discord', href: 'https://discord.gg/k6N2TdyTb' },
   ],
   /**
-   * The cast, ordered for the huddle: smallest at the edges, byte in
+   * The cast, ordered for the huddle: smallest at the edges, byte and vega in
    * the middle. These are the same sprites the live site's pet band
    * uses (public/v2/pets), NOT the taller public/characters set.
    */
@@ -107,6 +107,7 @@ export const V4 = {
     { src: '/v2/pets/2-green-owl.png', name: 'owl' },
     { src: '/v2/pets/3-orange-fox.png', name: 'fox' },
     { src: '/v2/pets/4-purple-byte.png', name: 'byte' },
+    { src: '/v2/pets/8-green-vega.png', name: 'vega' },
     { src: '/v2/pets/1-pink-bear.png', name: 'pink bear' },
     { src: '/v2/pets/5-yellow-bear.png', name: 'yellow bear' },
     { src: '/v2/pets/6-red-bear.png', name: 'red bear' },
