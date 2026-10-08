@@ -70,12 +70,6 @@ export const V4 = {
       a: 'Not a finished one. The first stage is Find, where the work is shaping a rough notion into something worth building.',
     },
     {
-      // A real prerequisite, and the site says it plainly: "Codepet
-      // works inside Claude Code." Better here than at install time.
-      q: 'Do I need Claude Code?',
-      a: 'Yes. Codepet works inside Claude Code, and sets up the skills, connectors and agents with you on the first run.',
-    },
-    {
       q: 'Who owns what it makes?',
       a: 'You do. Codepet runs on your Mac and works inside your own project, so what it makes lands in your repo like anything else you write.',
     },
